@@ -6,3 +6,4 @@ playwright
 requests
 bs4
 openai
+dotenv

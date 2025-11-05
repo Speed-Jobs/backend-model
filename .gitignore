@@ -205,3 +205,34 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# 데이터 파일 무시 (CSV, Excel, Word, PDF, JSON)
+*.csv
+*.CSV
+*.tsv
+*.TSV
+*.xls
+*.xlsx
+*.XLS
+*.XLSX
+*.xlsm
+*.XLSM
+*.ods
+*.ODS
+*.pdf
+*.PDF
+*.doc
+*.docx
+*.DOC
+*.DOCX
+*.json
+*.JSON
+
+# data 폴더 안 모든 파일/폴더 무시
+data/
+# 또는 하위 폴더까지 모두 커버하려면:
+# data/**
+
+# 이미 Git에 추가된 대용량 파일이나 무시 대상 파일은
+# git rm --cached <파일명> 명령어로 인덱스에서 제거해야 .gitignore가 동작합니다.
+# 즉, 이미 트래킹 중인 data/toss_jobs.json이나 대용량 파일은 git에서 먼저 untrack하세요.
