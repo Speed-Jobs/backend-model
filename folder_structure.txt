@@ -1,0 +1,81 @@
+# 프로젝트 폴더 구조 및 역할
+
+## 프로젝트 개요
+채용 인텔리전스 AI - FastAPI 기반 백엔드 서버
+- 업계 및 경쟁사 채용공고 실시간 모니터링 및 분석
+- 직무 수요 예측 및 트렌드 분석
+- 채용공고 품질 자동 비교 및 개선점 제안
+
+## 폴더 구조
+
+```
+backend-model/
+├── app/                          # FastAPI 애플리케이션 메인 디렉토리
+│   ├── config/                   # 애플리케이션 설정 관리
+│   ├── core/                     # 핵심 비즈니스 로직 및 알고리즘
+│   ├── db/                       # 데이터베이스 관련 코드
+│   ├── internal/                 # 외부로 노출되지 않는 내부 로직
+│   ├── models/                   # 데이터 모델 및 도메인 객체
+│   ├── routers/                  # FastAPI 라우터 (API 엔드포인트)
+│   ├── schemas/                  # Pydantic 스키마 (API 요청/응답 검증)
+│   ├── services/                 # 비즈니스 로직 서비스 레이어
+│   ├── utils/                    # 유틸리티 함수 및 헬퍼 함수
+│   ├── dependencies.py           # FastAPI 의존성 주입 정의
+│   └── main.py                   # FastAPI 애플리케이션 진입점
+├── k8s/                          # Kubernetes 배포 설정 파일
+└── tests/                        # 테스트 코드
+```
+
+## 폴더 역할 상세
+
+### app/config/
+- 환경 변수, 데이터베이스 설정, API 키 등 관리
+- 채용공고 수집 소스 설정, 모델 설정
+
+### app/core/
+- 채용공고 수집 에이전트 핵심 로직
+- 직무 매칭 알고리즘
+- 트렌드 분석 핵심 로직
+- 공고 품질 비교 알고리즘
+
+### app/db/
+- 데이터베이스 연결 설정
+- ORM 모델 정의 (SQLAlchemy 등)
+- 데이터베이스 마이그레이션
+
+### app/internal/
+- 외부로 노출되지 않는 내부 로직
+- 비밀번호 처리 등 민감한 기능
+- 관리자 API (admin.py 등)
+
+### app/models/
+- 채용공고 모델
+- 직무기술서 모델
+- 트렌드 분석 결과 모델
+- 스킬셋 모델
+
+### app/routers/
+- RESTful API 엔드포인트 정의
+- 각 기능별로 분리된 라우터 모듈
+
+### app/schemas/
+- API 요청 스키마 (Request Models)
+- API 응답 스키마 (Response Models)
+
+### app/services/
+- 채용공고 수집 서비스
+- 직무 매칭 서비스
+- 트렌드 분석 서비스
+- 공고 품질 비교 서비스
+- 스킬셋 분석 서비스
+
+### app/utils/
+- 공통 유틸리티 함수
+- 텍스트 처리, 데이터 파싱, 형식 변환
+- 로깅, 에러 핸들링 유틸리티
+
+### k8s/
+- Kubernetes Deployment, Service, Ingress, Secret 설정
+
+### tests/
+- 유닛 테스트, 통합 테스트, API 테스트
