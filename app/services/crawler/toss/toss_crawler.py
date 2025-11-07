@@ -7,9 +7,22 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from dotenv import load_dotenv
+try:
+    from dotenv import find_dotenv  # type: ignore
+except Exception:
+    find_dotenv = None  # type: ignore
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from playwright.sync_api import sync_playwright, Browser, Page, BrowserContext
+try:
+    from app.services import resolve_dir, get_output_dir, get_img_dir
+except ModuleNotFoundError:
+    import sys
+    _p = Path(__file__).resolve().parents[4]
+    if str(_p) not in sys.path:
+        sys.path.append(str(_p))
+    from app.services import resolve_dir, get_output_dir, get_img_dir
+from app.services import resolve_dir, get_output_dir, get_img_dir
 import concurrent.futures
 from threading import Lock
 
@@ -18,6 +31,36 @@ try:
 except Exception:
     OpenAI = None  # type: ignore
 
+
+def load_env() -> None:
+    """Load environment variables from .env with fallbacks.
+
+    Order: nearest discoverable .env from CWD → fproject/.env → backend-model/.env
+    """
+    try:
+        if find_dotenv is not None:
+            found = find_dotenv(usecwd=True)
+            if found:
+                load_dotenv(found, override=False)
+    except Exception:
+        pass
+
+    try:
+        proj_env = Path(__file__).resolve().parents[5] / ".env"
+        if proj_env.exists():
+            load_dotenv(dotenv_path=proj_env, override=False)
+    except Exception:
+        pass
+
+    try:
+        backend_env = Path(__file__).resolve().parents[4] / ".env"
+        if backend_env.exists():
+            load_dotenv(dotenv_path=backend_env, override=False)
+    except Exception:
+        pass
+
+
+load_env()
 # 분리된 프롬프트 로드
 try:
     from .new_prompt import SYSTEM_PROMPT
@@ -160,10 +203,12 @@ def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Pa
 
 def run_scrape(
     keyword: str = "",
-    out_dir: Path = Path("../../output"),
-    screenshot_dir: Path = Path("../../img"),
+    out_dir: Path = None,
+    screenshot_dir: Path = None,
     fast: bool = False
 ) -> Dict[str, Path]:
+    out_dir = resolve_dir(out_dir, get_output_dir())
+    screenshot_dir = resolve_dir(screenshot_dir, get_img_dir())
     ensure_dir(out_dir)
     ensure_dir(screenshot_dir)
 
@@ -357,3 +402,13 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+import sys as _sys
+from pathlib import Path as _P
+_backend_root = _P(__file__).resolve().parents[4]
+if str(_backend_root) not in _sys.path:
+    _sys.path.append(str(_backend_root))
+import sys as _sys
+from pathlib import Path as _P
+_backend_root = _P(__file__).resolve().parents[4]
+if str(_backend_root) not in _sys.path:
+    _sys.path.insert(0, str(_backend_root))

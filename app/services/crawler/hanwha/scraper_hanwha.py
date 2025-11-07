@@ -8,9 +8,21 @@ from typing import Any, Dict, List, Optional
 
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+try:
+    from dotenv import find_dotenv  # type: ignore
+except Exception:
+    find_dotenv = None  # type: ignore
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from playwright.sync_api import sync_playwright, Browser, Page, BrowserContext
+try:
+    from app.services import resolve_dir, get_output_dir, get_img_dir
+except ModuleNotFoundError:
+    import sys
+    _p = Path(__file__).resolve().parents[4]
+    if str(_p) not in sys.path:
+        sys.path.append(str(_p))
+    from app.services import resolve_dir, get_output_dir, get_img_dir
 import concurrent.futures
 from threading import Lock
 
@@ -20,8 +32,45 @@ except Exception:
     OpenAI = None  # type: ignore
 
 
+def load_env() -> None:
+    """Load environment variables from a nearby .env with fallbacks.
+
+    Order:
+    1) Nearest discoverable .env from CWD (if available)
+    2) fproject/.env (five levels up from this file)
+    3) backend-model/.env (legacy; four levels up)
+    """
+    # 1) Try discovery from current working directory
+    try:
+        if find_dotenv is not None:
+            found = find_dotenv(usecwd=True)
+            if found:
+                load_dotenv(found, override=False)
+    except Exception:
+        pass
+
+    # 2) fproject/.env
+    try:
+        proj_env = Path(__file__).resolve().parents[5] / ".env"
+        if proj_env.exists():
+            load_dotenv(dotenv_path=proj_env, override=False)
+    except Exception:
+        pass
+
+    # 3) backend-model/.env (legacy)
+    try:
+        legacy_env = Path(__file__).resolve().parents[4] / ".env"
+        if legacy_env.exists():
+            load_dotenv(dotenv_path=legacy_env, override=False)
+    except Exception:
+        pass
+
+
 def ensure_dir(path: Path) -> None:
     path.mkdir(parents=True, exist_ok=True)
+
+# Eagerly load .env so environment is available even if main() isn't called
+load_env()
 
 
 def clean_text_from_html(html: str) -> str:
@@ -277,10 +326,12 @@ def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Pa
 
 
 def run_scrape(
-    out_dir: Path = Path("../../output"),
-    screenshot_dir: Path = Path("../../img"),
+    out_dir: Path = None,
+    screenshot_dir: Path = None,
     fast: bool = False
 ) -> Dict[str, Path]:
+    out_dir = resolve_dir(out_dir, get_output_dir())
+    screenshot_dir = resolve_dir(screenshot_dir, get_img_dir())
     ensure_dir(out_dir)
     ensure_dir(screenshot_dir)
 
@@ -416,3 +467,13 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+import sys as _sys
+from pathlib import Path as _P2
+_backend_root = _P2(__file__).resolve().parents[4]
+if str(_backend_root) not in _sys.path:
+    _sys.path.append(str(_backend_root))
+import sys as _sys
+from pathlib import Path as _P
+_backend_root = _P(__file__).resolve().parents[4]
+if str(_backend_root) not in _sys.path:
+    _sys.path.insert(0, str(_backend_root))

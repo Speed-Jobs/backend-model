@@ -14,14 +14,52 @@ from datetime import datetime
 
 import requests
 from dotenv import load_dotenv
+try:
+    from dotenv import find_dotenv  # type: ignore
+except Exception:
+    find_dotenv = None  # type: ignore
 from playwright.async_api import async_playwright, BrowserContext, Page
 from tenacity import retry, stop_after_attempt, wait_exponential
+try:
+    from app.services import resolve_dir, get_output_dir, get_img_dir
+except ModuleNotFoundError:
+    import sys
+    _p = Path(__file__).resolve().parents[4]
+    if str(_p) not in sys.path:
+        sys.path.append(str(_p))
+    from app.services import resolve_dir, get_output_dir, get_img_dir
 
 try:
     from openai import AsyncOpenAI
 except Exception:
     AsyncOpenAI = None
 
+
+def load_env() -> None:
+    try:
+        if find_dotenv is not None:
+            found = find_dotenv(usecwd=True)
+            if found:
+                load_dotenv(found, override=False)
+    except Exception:
+        pass
+
+    try:
+        proj_env = Path(__file__).resolve().parents[5] / ".env"
+        if proj_env.exists():
+            load_dotenv(dotenv_path=proj_env, override=False)
+    except Exception:
+        pass
+
+    try:
+        backend_env = Path(__file__).resolve().parents[4] / ".env"
+        if backend_env.exists():
+            load_dotenv(dotenv_path=backend_env, override=False)
+    except Exception:
+        pass
+
+
+load_env()
 
 def get_openai_client() -> Optional[Any]:
     """OpenAI 비동기 클라이언트 초기화"""
@@ -110,23 +148,21 @@ async def summarize_with_llm(raw_text: str, url: str, model: str = "gpt-4o-mini"
         return {}
 
 
-async def crawl_single_job(context: BrowserContext, job: Dict, index: int, total: int, semaphore: asyncio.Semaphore) -> Optional[Dict[str, Any]]:
+async def crawl_single_job(context: BrowserContext, job: Dict, index: int, total: int, semaphore: asyncio.Semaphore, screenshot_dir: Path = None) -> Optional[Dict[str, Any]]:
     """개별 채용공고 크롤링 (비동기) - context 공유, 각자 page 생성, semaphore로 동시 실행 제한"""
     # Semaphore로 동시 실행 개수 제한
     async with semaphore:
         page = None
         try:
             job_url = job['url']
-            
+
             # 새 페이지 생성 (context는 공유)
             page = await context.new_page()
-            
+
             print(f"  [{index}/{total}] 상세 페이지 로딩 중...")
             await page.goto(job_url, timeout=30000)
             await page.wait_for_timeout(2000)
 
-            # 전체 HTML 수집
-            full_html = await page.content()
             today = datetime.now().strftime('%Y-%m-%d')
 
             # 기본 정보 설정
@@ -140,9 +176,9 @@ async def crawl_single_job(context: BrowserContext, job: Dict, index: int, total
                 "posted_date": None,
                 "expired_date": None,
                 "description": None,
-                "html": full_html,
                 "url": job_url,
                 "meta_data": {},
+                "screenshots": {},  # 스크린샷 경로 저장용
             }
 
             # description 추출 - 두 개의 CSS Selector를 순서대로 합치기
@@ -174,6 +210,23 @@ async def crawl_single_job(context: BrowserContext, job: Dict, index: int, total
             except Exception as e:
                 print(f"  [{index}/{total}] description 추출 실패, body 전체 사용: {e}")
                 job_info["description"] = await page.inner_text("body")
+
+            # 전체 페이지 스크린샷 저장
+            if screenshot_dir:
+                try:
+                    # URL에서 job ID 추출하여 파일명에 사용
+                    job_id = job.get('id', f"job_{index}")
+
+                    screenshot_filename = f"lg_job_{job_id}.png"
+                    screenshot_path = screenshot_dir / screenshot_filename
+
+                    # 전체 페이지 스크린샷
+                    await page.screenshot(path=str(screenshot_path), full_page=True)
+
+                    job_info["screenshots"]["combined"] = str(screenshot_path)
+                    print(f"  [{index}/{total}] 전체 페이지 스크린샷 저장: {screenshot_filename}")
+                except Exception as e:
+                    print(f"  [{index}/{total}] 스크린샷 저장 실패: {e}")
 
             # LLM으로 나머지 필드 파싱 (company, description, html, url 제외)
             # div.MuiBox-root.css-fflez4에서 텍스트 추출하여 LLM에 전달
@@ -295,52 +348,52 @@ class LGCareerCrawler:
             return []
     
     # ==================== 2단계: 비동기 병렬 크롤링 ====================
-    
-    async def crawl_details_async(self, jobs: List[Dict]) -> List[Dict]:
+
+    async def crawl_details_async(self, jobs: List[Dict], screenshot_dir: Path = None) -> List[Dict]:
         """비동기로 모든 공고의 상세 정보 크롤링 (단일 브라우저 + 여러 페이지 + Semaphore)"""
         if not jobs:
             return []
-        
+
         print(f"\n🔍 [2/3] 비동기 병렬 크롤링 시작 ({len(jobs)}개, 최대 동시 {self.max_concurrent}개)\n")
-        
+
         async with async_playwright() as p:
             # 단일 브라우저 인스턴스
             browser = await p.chromium.launch(headless=True)
             # 단일 context
             context = await browser.new_context()
-            
+
             # Semaphore 생성 (최대 동시 실행 수 제한)
             semaphore = asyncio.Semaphore(self.max_concurrent)
-            
+
             # 모든 작업을 asyncio.gather로 동시 실행 (Semaphore가 제어)
             tasks = [
-                crawl_single_job(context, job, idx + 1, len(jobs), semaphore)
+                crawl_single_job(context, job, idx + 1, len(jobs), semaphore, screenshot_dir)
                 for idx, job in enumerate(jobs)
             ]
-            
+
             # 모든 작업 실행
             results = await asyncio.gather(*tasks)
-            
+
             # None이 아닌 결과만 필터링
             detailed_jobs = [job for job in results if job is not None]
-            
+
             await context.close()
             await browser.close()
-        
+
         print(f"\n✅ [2/3] 비동기 크롤링 완료: {len(detailed_jobs)}/{len(jobs)}개 성공")
         return detailed_jobs
-    
-    def crawl_details(self, jobs: List[Dict]) -> List[Dict]:
+
+    def crawl_details(self, jobs: List[Dict], screenshot_dir: Path = None) -> List[Dict]:
         """동기 래퍼: 비동기 크롤링 실행"""
-        return asyncio.run(self.crawl_details_async(jobs))
-    
+        return asyncio.run(self.crawl_details_async(jobs, screenshot_dir))
+
     # ==================== 3단계: 결과 저장 ====================
     
     def save_results(self, jobs: List[Dict], output_dir: str = "../../output"):
         """결과를 JSON과 CSV로 저장"""
         print(f"\n💾 [3/3] 결과 저장 중...")
         
-        output_path = Path(output_dir)
+        output_path = resolve_dir(Path(output_dir), get_output_dir())
         output_path.mkdir(parents=True, exist_ok=True)
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -355,15 +408,20 @@ class LGCareerCrawler:
         try:
             import csv
             csv_file = output_path / f"lg_jobs_{timestamp}.csv"
-            
+
             if jobs:
-                # 모든 필드를 CSV에 포함 (html, description 포함)
+                # CSV에 필요한 필드만 포함 (html 제외)
                 simple_jobs = []
                 for job in jobs:
                     simple_job = job.copy()
+                    # html 필드 제거
+                    simple_job.pop('html', None)
                     # meta_data를 문자열로 변환
                     if 'meta_data' in simple_job:
                         simple_job['meta_data'] = json.dumps(simple_job['meta_data'], ensure_ascii=False)
+                    # screenshots를 문자열로 변환
+                    if 'screenshots' in simple_job:
+                        simple_job['screenshots'] = json.dumps(simple_job['screenshots'], ensure_ascii=False)
                     simple_jobs.append(simple_job)
                 
                 all_keys = set()
@@ -387,39 +445,44 @@ class LGCareerCrawler:
 def main():
     """메인 실행 함수"""
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="LG 채용공고 크롤러 (Async)")
     parser.add_argument("--max-jobs", type=int, help="최대 크롤링 개수 (테스트용)")
     parser.add_argument("--max-concurrent", type=int, default=30, help="최대 동시 크롤링 개수 (기본: 30)")
     parser.add_argument("--output-dir", default="../../output", help="출력 폴더 (기본: ../../output)")
+    parser.add_argument("--screenshot-dir", default="../../img", help="스크린샷 폴더 (기본: ../../img)")
     args = parser.parse_args()
-    
+
     print("="*80)
     print("🚀 LG 채용공고 크롤러 시작 (Async Playwright)")
     print("="*80 + "\n")
-    
+
     # 크롤러 초기화
     crawler = LGCareerCrawler(max_concurrent=args.max_concurrent)
-    
+
     # 1단계: API로 URL 수집
     basic_jobs = crawler.get_job_list_from_api()
-    
+
     if not basic_jobs:
         print("❌ 채용공고 목록을 가져오지 못했습니다.")
         return
-    
+
     # 최대 개수 제한 (테스트용)
     if args.max_jobs:
         basic_jobs = basic_jobs[:args.max_jobs]
         print(f"📊 테스트: 최대 {args.max_jobs}개로 제한\n")
-    
+
+    # 스크린샷 디렉토리 준비
+    screenshot_dir = resolve_dir(Path(args.screenshot_dir), get_img_dir())
+    screenshot_dir.mkdir(parents=True, exist_ok=True)
+
     # 2단계: 비동기 병렬 크롤링으로 상세 정보 수집
-    detailed_jobs = crawler.crawl_details(basic_jobs)
-    
+    detailed_jobs = crawler.crawl_details(basic_jobs, screenshot_dir=screenshot_dir)
+
     if not detailed_jobs:
         print("❌ 상세 정보를 수집하지 못했습니다.")
         return
-    
+
     # 3단계: 결과 저장
     crawler.save_results(detailed_jobs, output_dir=args.output_dir)
     
@@ -444,3 +507,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+import sys as _sys
+from pathlib import Path as _P0
+_backend_root = _P0(__file__).resolve().parents[4]
+if str(_backend_root) not in _sys.path:
+    _sys.path.append(str(_backend_root))
+import sys as _sys
+from pathlib import Path as _PX
+_backend_root = _PX(__file__).resolve().parents[4]
+if str(_backend_root) not in _sys.path:
+    _sys.path.insert(0, str(_backend_root))
