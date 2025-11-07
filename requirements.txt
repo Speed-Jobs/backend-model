@@ -7,3 +7,6 @@ requests
 bs4
 openai
 dotenv
+pymupdf
+jupyter
+langchain_openai
