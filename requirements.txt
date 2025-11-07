@@ -10,3 +10,5 @@ dotenv
 pymupdf
 jupyter
 langchain_openai
+chromadb
+rank_bm25
