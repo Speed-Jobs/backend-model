@@ -2,6 +2,8 @@ import argparse
 import json
 import os
 import re
+import time
+import random
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -156,15 +158,50 @@ def summarize_with_llm(raw_text: str, model: str = "gpt-4o-mini") -> List[Dict[s
 def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Path = None) -> Dict[str, Any]:
     """URL로 직접 접속하여 상세 정보 추출 (병렬 처리용 - 독립 브라우저)"""
     try:
+        # 요청 간격 랜덤화 (robots.txt crawl-delay 준수: 1-2초)
+        time.sleep(random.uniform(1.0, 2.5))
+
         # 각 스레드에서 독립적인 playwright와 브라우저 인스턴스 생성
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
-            context = browser.new_context()
+            browser = p.chromium.launch(
+                headless=False,
+                args=[
+                    '--disable-blink-features=AutomationControlled',
+                    '--disable-dev-shm-usage',
+                    '--no-sandbox',
+                ]
+            )
+            context = browser.new_context(
+                user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+                viewport={'width': 1920, 'height': 1080},
+                locale='ko-KR',
+                timezone_id='Asia/Seoul',
+            )
             page = context.new_page()
 
+            # 자동화 감지 방지 스크립트 추가
+            page.add_init_script("""
+                Object.defineProperty(navigator, 'webdriver', {
+                    get: () => undefined
+                });
+                window.chrome = {
+                    runtime: {},
+                    loadTimes: function() {},
+                    csi: function() {},
+                    app: {}
+                };
+            """)
+
             print(f"  [{job_index}] 상세 페이지 로딩...")
-            page.goto(job_url, timeout=30000)
-            page.wait_for_timeout(1500)
+            page.goto(job_url, timeout=60000, wait_until="domcontentloaded")
+
+            # Cloudflare Challenge 대기
+            try:
+                page.wait_for_load_state("networkidle", timeout=20000)
+            except Exception:
+                pass
+
+            page.wait_for_timeout(3000)
 
             today = datetime.now().strftime('%Y-%m-%d')
 
@@ -183,50 +220,36 @@ def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Pa
                 "screenshots": {},  # 스크린샷 경로 저장용
             }
 
-            # description 추출 - 3개의 div 클래스에서 순서대로 시도
+            # description 추출 - 우선순위에 따라 시도
             full_text = page.inner_text("body")
-            description_extracted = False
+            description_text = None
 
-            try:
-                # 첫 번째 시도: div.col-lg-8.main-col
-                selector = page.query_selector("div.col-lg-8.main-col")
-                if selector:
-                    description_text = selector.inner_text()
-                    if description_text:
-                        job_info["description"] = description_text
-                        description_extracted = True
-                        print(f"  [{job_index}] description 추출 성공 (div.col-lg-8.main-col)")
-            except Exception as e:
-                print(f"  [{job_index}] div.col-lg-8.main-col 추출 실패: {e}")
+            # 우선순위 셀렉터 목록 (가장 정확한 것부터)
+            selectors = [
+                ("article.cms-content", "article.cms-content"),
+                ("article", "article"),
+                ("div.main-col article", "div.main-col > article"),
+                ("main", "main"),
+                ("div[class*='detail']", "div containing 'detail'"),
+            ]
 
-            if not description_extracted:
+            for selector, name in selectors:
                 try:
-                    # 두 번째 시도: div.job_table
-                    selector = page.query_selector("div.job_table")
-                    if selector:
-                        description_text = selector.inner_text()
-                        if description_text:
-                            job_info["description"] = description_text
-                            description_extracted = True
-                            print(f"  [{job_index}] description 추출 성공 (div.job_table)")
+                    elem = page.query_selector(selector)
+                    if elem:
+                        text = elem.inner_text()
+                        if text and len(text) > 100:  # 최소 100글자 이상
+                            description_text = text
+                            print(f"  [{job_index}] description 추출 성공 ({name}): {len(text)} 글자")
+                            break
                 except Exception as e:
-                    print(f"  [{job_index}] div.job_table 추출 실패: {e}")
+                    print(f"  [{job_index}] {name} 추출 실패: {e}")
 
-            if not description_extracted:
-                try:
-                    # 세 번째 시도: div.main-col
-                    selector = page.query_selector("div.main-col")
-                    if selector:
-                        description_text = selector.inner_text()
-                        if description_text:
-                            job_info["description"] = description_text
-                            description_extracted = True
-                            print(f"  [{job_index}] description 추출 성공 (div.main-col)")
-                except Exception as e:
-                    print(f"  [{job_index}] div.main-col 추출 실패: {e}")
-
-            # 모든 시도 실패 시 body 전체 사용
-            if not description_extracted:
+            # description 설정
+            if description_text:
+                job_info["description"] = description_text
+            else:
+                # 모든 시도 실패 시 body 전체 사용
                 job_info["description"] = full_text
                 print(f"  [{job_index}] 모든 selector 실패, body 전체 사용")
 
@@ -295,14 +318,111 @@ def run_scrape(
 
     with sync_playwright() as p:
         print("[1/10] 브라우저 실행 중...")
-        browser: Browser = p.chromium.launch(headless=True)
-        context = browser.new_context()
+        browser: Browser = p.chromium.launch(
+            headless=False,  # Cloudflare 우회: headless 모드 비활성화
+            args=[
+                '--disable-blink-features=AutomationControlled',
+                '--disable-dev-shm-usage',
+                '--no-sandbox',
+                '--disable-web-security',
+                '--disable-features=IsolateOrigins,site-per-process',
+                '--disable-site-isolation-trials',
+            ]
+        )
+
+        # Cloudflare 우회를 위한 컨텍스트 설정 (강화)
+        context = browser.new_context(
+            user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+            viewport={'width': 1920, 'height': 1080},
+            locale='ko-KR',
+            timezone_id='Asia/Seoul',
+            permissions=['geolocation'],
+            geolocation={'latitude': 37.5665, 'longitude': 126.9780},  # Seoul
+            color_scheme='light',
+            extra_http_headers={
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+                'Accept-Encoding': 'gzip, deflate, br, zstd',
+                'DNT': '1',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Sec-Fetch-User': '?1',
+                'Sec-Ch-Ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+                'Sec-Ch-Ua-Mobile': '?0',
+                'Sec-Ch-Ua-Platform': '"Windows"',
+                'Cache-Control': 'max-age=0',
+            }
+        )
+
         if fast:
             try:
                 context.set_default_timeout(5000)
             except Exception:
                 pass
+
         page: Page = context.new_page()
+
+        # 자동화 감지 방지 (강화)
+        page.add_init_script("""
+            // webdriver 숨기기
+            Object.defineProperty(navigator, 'webdriver', {
+                get: () => undefined
+            });
+
+            // plugins 설정
+            Object.defineProperty(navigator, 'plugins', {
+                get: () => [1, 2, 3, 4, 5]
+            });
+
+            // languages 설정
+            Object.defineProperty(navigator, 'languages', {
+                get: () => ['ko-KR', 'ko', 'en-US', 'en']
+            });
+
+            // chrome 객체 설정
+            window.chrome = {
+                runtime: {},
+                loadTimes: function() {},
+                csi: function() {},
+                app: {}
+            };
+
+            // permissions 설정
+            const originalQuery = window.navigator.permissions.query;
+            window.navigator.permissions.query = (parameters) => (
+                parameters.name === 'notifications' ?
+                    Promise.resolve({ state: Notification.permission }) :
+                    originalQuery(parameters)
+            );
+
+            // 추가 fingerprint 우회
+            Object.defineProperty(navigator, 'hardwareConcurrency', {
+                get: () => 8
+            });
+
+            Object.defineProperty(navigator, 'deviceMemory', {
+                get: () => 8
+            });
+
+            Object.defineProperty(navigator, 'platform', {
+                get: () => 'Win32'
+            });
+
+            // WebGL vendor 정보
+            const getParameter = WebGLRenderingContext.prototype.getParameter;
+            WebGLRenderingContext.prototype.getParameter = function(parameter) {
+                if (parameter === 37445) {
+                    return 'Intel Inc.';
+                }
+                if (parameter === 37446) {
+                    return 'Intel Iris OpenGL Engine';
+                }
+                return getParameter(parameter);
+            };
+        """)
 
         # 여러 페이지 크롤링
         page_num = 1
@@ -318,23 +438,69 @@ def run_scrape(
             url = base_url + params + "#results"
 
             print(f"[2/10] 페이지 {page_num} 접속: {url}")
-            page.goto(url, timeout=60000)
-            page.wait_for_load_state("domcontentloaded")
 
-            # 추가 대기 (JavaScript 렌더링)
-            page.wait_for_timeout(2000)
+            # 랜덤 대기 (사람처럼 보이기)
+            time.sleep(random.uniform(1.5, 3.5))
 
-            # 스크롤을 여러 번 내려서 모든 콘텐츠 로드
+            page.goto(url, timeout=60000, wait_until="domcontentloaded")
+
+            # Cloudflare Challenge 대기 (강화 - 최대 30초)
+            print(f"[3/10] Cloudflare Challenge 대기 중...")
+            try:
+                # Cloudflare Challenge가 있으면 통과될 때까지 대기
+                page.wait_for_load_state("networkidle", timeout=30000)
+            except Exception:
+                pass
+
+            # 추가 대기 (JavaScript 렌더링) - 더 길게
+            page.wait_for_timeout(5000)
+
+            # 사람처럼 마우스 움직임 시뮬레이션
+            try:
+                page.mouse.move(random.randint(100, 500), random.randint(100, 500))
+                time.sleep(random.uniform(0.5, 1.5))
+            except Exception:
+                pass
+
+            # 스크롤을 여러 번 내려서 모든 콘텐츠 로드 (사람처럼 천천히)
             print(f"[4/10] 페이지 {page_num} 스크롤하여 전체 콘텐츠 로드 중...")
-            for _ in range(3):
+            for i in range(3):
                 try:
-                    page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-                    page.wait_for_timeout(800)
+                    # 점진적으로 스크롤 (사람처럼)
+                    scroll_height = page.evaluate("document.body.scrollHeight")
+                    current_position = 0
+                    step = scroll_height // 5
+
+                    while current_position < scroll_height:
+                        current_position += step
+                        page.evaluate(f"window.scrollTo(0, {current_position})")
+                        time.sleep(random.uniform(0.3, 0.7))
+
+                    page.wait_for_timeout(1500)
                 except Exception:
                     pass
 
             # 채용 공고 카드 찾기
             print(f"[5/10] 페이지 {page_num} 채용 공고 카드 찾는 중...")
+
+            # 디버그: 페이지에 어떤 요소들이 있는지 확인
+            try:
+                # 페이지 HTML 일부 저장하여 구조 파악
+                html = page.content()
+                debug_html_path = out_dir / f"coupang_debug_page{page_num}.html"
+                debug_html_path.write_text(html, encoding="utf-8")
+                print(f"[DEBUG] 페이지 HTML 저장: {debug_html_path}")
+
+                # 몇 가지 일반적인 요소들 체크
+                div_grid_count = page.locator("div.grid").count()
+                div_job_listing_count = page.locator("div.job-listing").count()
+                all_links_count = page.locator("a").count()
+                print(f"[DEBUG] div.grid 요소: {div_grid_count}개")
+                print(f"[DEBUG] div.job-listing 요소: {div_job_listing_count}개")
+                print(f"[DEBUG] 전체 링크 수: {all_links_count}개")
+            except Exception as e:
+                print(f"[DEBUG] 디버그 정보 수집 실패: {e}")
+
             try:
                 # 쿠팡 채용 페이지의 카드 셀렉터
                 card_selectors = [
@@ -350,7 +516,9 @@ def run_scrape(
                 selector = None
                 for sel in card_selectors:
                     cards = page.locator(sel)
-                    if cards.count() > 0:
+                    count = cards.count()
+                    print(f"[DEBUG] 셀렉터 '{sel}': {count}개 매치")
+                    if count > 0:
                         selector = sel
                         print(f"[5/10] 페이지 {page_num}: {cards.count()}개의 카드를 찾았습니다 (셀렉터: {selector})")
                         break
@@ -406,8 +574,9 @@ def run_scrape(
         print(f"[7/10] 병렬로 {len(all_job_urls)}개 공고 상세 정보 크롤링 시작...")
 
         # 병렬로 각 URL의 상세 정보 크롤링 (ThreadPoolExecutor 사용)
+        # Cloudflare 우회: 병렬 워커 수 감소 (20 → 3)
         if all_job_urls:
-            with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
                 futures = []
                 for idx, job_url in enumerate(all_job_urls, 1):
                     future = executor.submit(extract_job_detail_from_url, job_url, idx, screenshot_dir)
