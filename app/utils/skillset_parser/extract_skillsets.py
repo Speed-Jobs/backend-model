@@ -267,11 +267,8 @@ def main():
     description_path = backend_model_dir / 'data' / 'description.json'
   
     
-    # backend-model/data/SKAX_Jobdescription.pdf 경로 설정
-    description_path = backend_model_dir / 'data' / 'description.json'
-    
-    # backend-model/data 디렉토리 경로 설정
-    data_dir = backend_model_dir / 'data' / 'output'
+    # data 디렉토리 경로 (jobs 파일들이 있는 곳)
+    data_dir = backend_model_dir / 'data'
 
     print("\n" + "=" * 60)
     print(":로켓: LLM 기반 Skill Set 추출 시작")
