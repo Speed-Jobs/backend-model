@@ -1,0 +1,2163 @@
+====================================================================================================
+직무기술서 - 채용공고 매칭 결과
+생성일시: 2025-11-07 17:15:39
+총 직무기술서 수: 49개
+총 채용공고 수: 45개
+====================================================================================================
+
+
+====================================================================================================
+[1] 직무: Software Development
+====================================================================================================
+Industry: Front-end Development
+Skill Set (샘플): ['Java', 'node.js', 'Python', 'C / C++', 'Go']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 보이스톡 / 페이스톡 Server 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 2년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14172?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. 카카오디벨로퍼스 프론트/서버 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14122?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[2] 직무: Software Development
+====================================================================================================
+Industry: Back-end Development
+Skill Set (샘플): ['Java', 'node.js', 'Python', 'C / C++', 'Go']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 보이스톡 / 페이스톡 Server 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 2년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14172?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. 카카오디벨로퍼스 프론트/서버 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14122?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[3] 직무: Software Development
+====================================================================================================
+Industry: Mobile Development
+Skill Set (샘플): ['Java', 'node.js', 'Python', 'C / C++', 'Go']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 비즈앱 iOS 개발자(경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14169?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. 보이스톡 / 페이스톡 Server 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 2년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14172?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. iOS개발(푸드서비스)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 8년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2505012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. 로보틱스 S/W 엔지니어링(SLAM 개발)
+   회사: 우아한형제들
+   업무분야: 로보틱스
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2508018/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[4] 직무: Factory AX Engineering
+====================================================================================================
+Industry: Simulation
+Skill Set (샘플): ['제조공정', '공정/반송장비자동화/지능화 Concept Design', 'Digital Factory 구축', 'AI Literacy / Collaboration', '제조대외']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. QA(Test 자동화)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2507012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[5] 직무: Factory AX Engineering
+====================================================================================================
+Industry: 기구설계
+Skill Set (샘플): ['제조공정', '공정/반송장비자동화/지능화 Concept Design', 'Digital Factory 구축', 'AI Literacy / Collaboration', '제조대외']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. QA(Test 자동화)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2507012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[6] 직무: Factory AX Engineering
+====================================================================================================
+Industry: 전장/제어
+Skill Set (샘플): ['제조공정', '공정/반송장비자동화/지능화 Concept Design', 'Digital Factory 구축', 'AI Literacy / Collaboration', '제조대외']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. QA(Test 자동화)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2507012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[7] 직무: Solution Development
+====================================================================================================
+Industry: ERP_FCM (Financial Chain Management)
+Skill Set (샘플): ['고객요구사항분석', 'Solution별기능', '솔루션Architecture 설계방법론', 'Solution 별 정책', '프로그래밍(ABAP, Java, node.js, C#, BTP)']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. Server(정산플랫폼)
+   회사: 배달의민족
+   업무분야: IT/개발
+   경력: 경력 7년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2509036/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 로보틱스 S/W 엔지니어링(Motion Planner 개발)
+   회사: 우아한형제들
+   업무분야: 로보틱스
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2507031/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[8] 직무: Solution Development
+====================================================================================================
+Industry: ERP_SCM (Supply Chain Management)
+Skill Set (샘플): ['고객요구사항분석', 'Solution별기능', '솔루션Architecture 설계방법론', 'Solution 별 정책', '프로그래밍(ABAP, Java, node.js, C#, BTP)']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. Server(정산플랫폼)
+   회사: 배달의민족
+   업무분야: IT/개발
+   경력: 경력 7년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2509036/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 로보틱스 S/W 엔지니어링(SLAM 개발)
+   회사: 우아한형제들
+   업무분야: 로보틱스
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2508018/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[9] 직무: Solution Development
+====================================================================================================
+Industry: ERP_HCM (Human Capital Management)
+Skill Set (샘플): ['고객요구사항분석', 'Solution별기능', '솔루션Architecture 설계방법론', 'Solution 별 정책', '프로그래밍(ABAP, Java, node.js, C#, BTP)']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[10] 직무: Solution Development
+====================================================================================================
+Industry: Biz. Solution
+Skill Set (샘플): ['Cloud', 'SaaS', 'PaaS', 'IaaS', 'SAP']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. Server(그로스프로덕트)
+   회사: 배달의민족
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509015/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. Server(정산플랫폼)
+   회사: 배달의민족
+   업무분야: IT/개발
+   경력: 경력 7년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509036/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[11] 직무: Solution Development
+====================================================================================================
+Industry: Tech. Solution
+Skill Set (샘플): ['Cloud', 'SaaS', 'PaaS', 'IaaS', 'SAP']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. Server(그로스프로덕트)
+   회사: 배달의민족
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509015/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[12] 직무: Solution Development
+====================================================================================================
+Industry: Solution Architecture
+Skill Set (샘플): ['Cloud', 'SaaS', 'PaaS', 'IaaS', 'SAP']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. Server(그로스프로덕트)
+   회사: 배달의민족
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509015/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. Server(정산플랫폼)
+   회사: 배달의민족
+   업무분야: IT/개발
+   경력: 경력 7년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509036/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[13] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: System/Network Engineering
+Skill Set (샘플): ['Infra / Cloud Architecture', 'Cost Simulation', 'Business Writing', 'Communication', 'Presentation']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[14] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: Middleware/Database Engineering
+Skill Set (샘플): ['Infra / Cloud Architecture', 'Cost Simulation', 'Business Writing', 'Communication', 'Presentation']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[15] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: Data Center Engineering
+Skill Set (샘플): ['Infra / Cloud Architecture', 'Cost Simulation', 'Business Writing', 'Communication', 'Presentation']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. Data Analytics Engineer (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14276?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. Data Engineer (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14271?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[16] 직무: Software Architect
+====================================================================================================
+Industry: Software Development
+Skill Set (샘플): ['아키텍처전략및기술표준수립/관리', '아키텍처설계검토/기술리스크관리', '이해관계자와의협력및아키텍처역량확산', 'AI 활용', 'IndustryKnowledge']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[17] 직무: Data Architect
+====================================================================================================
+Industry: Software Development
+Skill Set (샘플): ['아키텍처전략및기술표준수립/관리', '아키텍처설계검토/기술리스크관리', '이해관계자와의협력및아키텍처역량확산', 'AI 활용', 'IndustryKnowledge']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[18] 직무: Infra Architect
+====================================================================================================
+Industry: Software Development
+Skill Set (샘플): ['아키텍처전략및기술표준수립/관리', '아키텍처설계검토/기술리스크관리', '이해관계자와의협력및아키텍처역량확산', 'AI 활용', 'IndustryKnowledge']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[19] 직무: AI Architect
+====================================================================================================
+Industry: AI Architecture
+Skill Set (샘플): ['Document Structuring', 'Data Chunking', 'Metadata Management', 'Workflow Framework', 'Prompt Engineering']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[20] 직무: Automation Architect
+====================================================================================================
+Industry: Automation Architecture
+Skill Set (샘플): ['CAD/CAE', 'Digital Twin Platform', '시뮬레이션', '최적화 알고리즘', '데이터 분석']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. QA(Test 자동화)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2507012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 로보틱스 S/W 엔지니어링(Motion Planner 개발)
+   회사: 우아한형제들
+   업무분야: 로보틱스
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2507031/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[21] 직무: AI PM
+====================================================================================================
+Industry: AI Project Management
+Skill Set (샘플): ['AI 기술', '프로젝트 관리 역량', '리스크 관리', '최신 기술 트렌드 분석', 'AI 적용 방식의 장단점 파악']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[22] 직무: Project Management
+====================================================================================================
+Industry: Application PM
+Skill Set (샘플): ['개발/관리방법론', '프로젝트계획수립', '프로젝트실행및통제', '위험및이슈관리', '안전인증']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[23] 직무: Project Management
+====================================================================================================
+Industry: Infra PM
+Skill Set (샘플): ['개발/관리방법론', '프로젝트계획수립', '프로젝트실행및통제', '위험및이슈관리', '안전인증']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[24] 직무: Project Management
+====================================================================================================
+Industry: Solution PM
+Skill Set (샘플): ['개발/관리방법론', '프로젝트계획수립', '프로젝트실행및통제', '위험및이슈관리', '안전인증']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[25] 직무: Quality Management
+====================================================================================================
+Industry: PMO
+Skill Set (샘플): ['Business Writing', 'Communication', 'Presentation', 'Coordination', 'Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. QA(Test 자동화)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2507012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[26] 직무: Quality Management
+====================================================================================================
+Industry: Quality Engineering
+Skill Set (샘플): ['Business Writing', 'Communication', 'Presentation', 'Coordination', 'Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. QA(Test 자동화)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2507012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. QA Engineer
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2509023/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[27] 직무: Quality Management
+====================================================================================================
+Industry: Offshoring Service Professional
+Skill Set (샘플): ['Business Writing', 'Communication', 'Presentation', 'Coordination', 'Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[28] 직무: AI
+====================================================================================================
+Industry: AI/Data Development
+Skill Set (샘플): ['AI 기반 서비스 기획 및 구조 설계', 'Cloud / Container 기반 AI Infra 아키텍처 설계', '개발 환경 및 프레임워크 구성']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[29] 직무: AI
+====================================================================================================
+Industry: Generative AI Development
+Skill Set (샘플): ['AI 기반 서비스 기획 및 구조 설계', 'Cloud / Container 기반 AI Infra 아키텍처 설계', '개발 환경 및 프레임워크 구성']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. MLOps Engineer (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14039?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[30] 직무: AI
+====================================================================================================
+Industry: Physical AI Development
+Skill Set (샘플): ['AI 기반 서비스 기획 및 구조 설계', 'Cloud / Container 기반 AI Infra 아키텍처 설계', '개발 환경 및 프레임워크 구성']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. MLOps Engineer (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14039?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[31] 직무: Software Development
+====================================================================================================
+Industry: Physical AI Development
+Skill Set (샘플): ['PyTorch', 'TensorFlow', 'C/C++', 'Python', 'ROS']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. Machine Learning Engineer (Search/ML/LLM) (경력)
+   회사: 카카오
+   업무분야: AI/머신러닝
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14231?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[32] 직무: Software Development
+====================================================================================================
+Industry: Information Security
+Skill Set (샘플): ['AI Literacy / Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. Machine Learning Engineer (Search/ML/LLM) (경력)
+   회사: 카카오
+   업무분야: AI/머신러닝
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14231?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[33] 직무: 정보보호
+====================================================================================================
+Industry: 보안Governance/Compliance
+Skill Set (샘플): ['시스템보안', 'AI 보안', 'Cloud 보안', 'OT 보안', '시큐어코딩']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 네트워크 보안 담당자 (보안)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~10년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14247?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 서비스보안 및 취약점 진단 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14245?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 서버보안 및 침해대응 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14248?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[34] 직무: 정보보호
+====================================================================================================
+Industry: 보안진단/Consulting
+Skill Set (샘플): ['시스템보안', 'AI 보안', 'Cloud 보안', 'OT 보안', '시큐어코딩']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 서비스보안 및 취약점 진단 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14245?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 네트워크 보안 담당자 (보안)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~10년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14247?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 서버보안 및 침해대응 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14248?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[35] 직무: 정보보호
+====================================================================================================
+Industry: 보안Solution Service
+Skill Set (샘플): ['시스템보안', 'AI 보안', 'Cloud 보안', 'OT 보안', '시큐어코딩']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 네트워크 보안 담당자 (보안)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~10년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14247?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 서비스보안 및 취약점 진단 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14245?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 서버보안 및 침해대응 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14248?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[36] 직무: Domain Expert
+====================================================================================================
+Industry: 제1 금융
+Skill Set (샘플): ['제1 금융', '제2 금융', '통신', '유통/물류/서비스', '미디어/콘텐츠']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Server(정산플랫폼)
+   회사: 배달의민족
+   업무분야: IT/개발
+   경력: 경력 7년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509036/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. QA(Test 자동화)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2507012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 보이스톡 / 페이스톡 Server 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 2년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14172?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. iOS개발(푸드서비스)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 8년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2505012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[37] 직무: Domain Expert
+====================================================================================================
+Industry: 제2 금융
+Skill Set (샘플): ['제1 금융', '제2 금융', '통신', '유통/물류/서비스', '미디어/콘텐츠']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Server(정산플랫폼)
+   회사: 배달의민족
+   업무분야: IT/개발
+   경력: 경력 7년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509036/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. 보이스톡 / 페이스톡 Server 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 2년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14172?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. QA(Test 자동화)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2507012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. iOS개발(푸드서비스)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 8년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2505012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[38] 직무: Domain Expert
+====================================================================================================
+Industry: 제조
+Skill Set (샘플): ['제1 금융', '제2 금융', '통신', '유통/물류/서비스', '미디어/콘텐츠']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Server(정산플랫폼)
+   회사: 배달의민족
+   업무분야: IT/개발
+   경력: 경력 7년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509036/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. QA(Test 자동화)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2507012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 보이스톡 / 페이스톡 Server 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 2년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14172?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. iOS개발(푸드서비스)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 8년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2505012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[39] 직무: Consulting
+====================================================================================================
+Industry: ESG
+Skill Set (샘플): ['IT 기술', '기술동향', '트렌드분석', 'IT 서비스의 Value Chain', 'IT 서비스/솔루션/제품의 특장점']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[40] 직무: Consulting
+====================================================================================================
+Industry: SHE
+Skill Set (샘플): ['IT 기술', '기술동향', '트렌드분석', 'IT 서비스의 Value Chain', 'IT 서비스/솔루션/제품의 특장점']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 데이터과학(ML프로덕트)
+   회사: 우아한형제들
+   업무분야: 데이터 과학
+   경력: 경력 7년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2508006/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[41] 직무: Consulting
+====================================================================================================
+Industry: ERP
+Skill Set (샘플): ['IT 기술', '기술동향', '트렌드분석', 'IT 서비스의 Value Chain', 'IT 서비스/솔루션/제품의 특장점']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. Server(CS프로덕트)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2411018/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[42] 직무: Consulting
+====================================================================================================
+Industry: AI
+Skill Set (샘플): ['기초통계', 'NLP', 'Vision', 'Machine Learning', 'Deep Learning']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터엔지니어링(AI프로덕트&플랫폼)
+   회사: 우아한형제들
+   업무분야: 데이터 엔지니어링
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2505004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. 데이터엔지니어링(데이터서비스 AI)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2506002/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. Machine Learning Engineer (Search/ML/LLM) (신입)
+   회사: 카카오
+   업무분야: AI/ML
+   경력: 신입
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14286?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[43] 직무: Biz. Supporting
+====================================================================================================
+Industry: Strategy Planning
+Skill Set (샘플): ['경영목표 달성 지원', '전략 수립', '경영층 의사결정 지원', '효율적인 자원 활용', '구성원 성장 지원']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 테크 직군 성장 및 협력 담당자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 7년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14217?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. 로보틱스 S/W 엔지니어링(Motion Planner 개발)
+   회사: 우아한형제들
+   업무분야: 로보틱스
+   경력: 경력 5년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2507031/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[44] 직무: Biz. Supporting
+====================================================================================================
+Industry: New Biz. Development
+Skill Set (샘플): ['경영목표 달성 지원', '전략 수립', '경영층 의사결정 지원', '효율적인 자원 활용', '구성원 성장 지원']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 테크 직군 성장 및 협력 담당자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 7년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14217?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+4. iOS개발(푸드서비스)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 8년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2505012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 데이터엔지니어링(데이터플랫폼)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2511004/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[45] 직무: Software Development
+====================================================================================================
+Industry: Front-end Development
+Skill Set (샘플): ['IT 서비스의 Value Chain', '사업/수익구조', '사업유형별 PJT 프로세스', '사업별/조직별 주요 이슈 파악', '재무제표']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 보이스톡 / 페이스톡 Server 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 2년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14172?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[46] 직무: Software Development
+====================================================================================================
+Industry: Back-end Development
+Skill Set (샘플): ['IT 서비스의 Value Chain', '사업/수익구조', '사업유형별 PJT 프로세스', '사업별/조직별 주요 이슈 파악', '재무제표']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[47] 직무: Software Development
+====================================================================================================
+Industry: Mobile Development
+Skill Set (샘플): ['IT 서비스의 Value Chain', '사업/수익구조', '사업유형별 PJT 프로세스', '사업별/조직별 주요 이슈 파악', '재무제표']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. iOS개발(푸드서비스)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 8년 이상
+   매칭점수: 0.60
+   URL: https://career.woowahan.com/recruitment/R2505012/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+
+====================================================================================================
+[48] 직무: Software Development
+====================================================================================================
+Industry: Governance Management
+Skill Set (샘플): ['정보수집', '분석', 'CR 전략수립', '대외이슈대응', '감사']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+2. 서비스보안 및 취약점 진단 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14245?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 서버보안 및 침해대응 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14248?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. TPM(Salesforce)
+   회사: 우아한형제들
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2509025/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 0.60
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[49] 직무: Software Development
+====================================================================================================
+Industry: Public Management
+Skill Set (샘플): ['PR 전략수립', '미디어커뮤니케이션', '마케팅전략수립', '브랜드마케팅', '콘텐츠마케팅']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 데이터분석(Business Intelligence)
+   회사: 비즈니스 인텔리전스 팀
+   업무분야: 데이터 분석
+   경력: 경력 4년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2510020/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+3. 광고추천 데이터 사이언스, 머신러닝 전문가 (경력)
+   회사: 카카오
+   업무분야: 데이터 사이언스/머신러닝
+   경력: 경력
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14148?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. Server(배민공통서비스)
+   회사: 배달의민족
+   업무분야: 
+   경력: 경력 7년 이상
+   매칭점수: 1.00
+   URL: https://career.woowahan.com/recruitment/R2510000/detail?jobCodes=&employmentTypeCodes=&serviceSectionCodes=&careerPeriod=&keyword=&category=jobGroupCodes%3ABA005001
+
+5. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   매칭점수: 1.00
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
