@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: speedjobs-mysql
+  namespace: skala-practice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: speedjobs-mysql
+  serviceName: speedjobs-mysql
+  template:
+    metadata:
+      labels:
+        app: speedjobs-mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0.30
+        ports:
+        - containerPort: 3306
+          name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-mysql-secret
+              key: root-password
+        - name: MYSQL_DATABASE
+          value: mysql
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-mysql-secret
+              key: username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-mysql-secret
+              key: password
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
+            cpu: "1"
+            memory: 2Gi
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi

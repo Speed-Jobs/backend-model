@@ -16,3 +16,7 @@ chromadb
 rank_bm25
 reportlab 
 dotenv
+lxml
+mysql-connector-python
+database_manager
+sqlalchemy
