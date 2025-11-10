@@ -8,5 +8,12 @@ bs4
 openai
 apscheduler
 celery
-asyncio
-logging
+python-dotenv
+pymupdf
+jupyter
+langchain
+langchain_openai
+langchain-core
+chromadb
+rank_bm25
+reportlab
