@@ -1,0 +1,1262 @@
+<!DOCTYPE html><html lang="ko" class="linux chrome transition transform backgroundsize rgba pointerevents opacity canvas placeholder"><head>
+<meta charset="utf-8">
+<meta name="google-site-verification" content="h4AsQ3hnd2kL-h4tPiN89yfcpFUTdXxUPtlW3y2fXb8">
+<meta name="viewport" content="width=1004">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>채용공고 -  한화인 채용사이트</title>
+<link rel="apple-touch-icon" href="/web/images/favicon/icon57.jpg" sizes="57x57">
+<link rel="apple-touch-icon" href="/web/images/favicon/icon72.jpg" sizes="72x72">
+<link rel="apple-touch-icon" href="/web/images/favicon/icon76.jpg" sizes="76x76">
+<link rel="apple-touch-icon" href="/web/images/favicon/icon114.jpg" sizes="114x114">
+<link rel="apple-touch-icon" href="/web/images/favicon/icon120.jpg" sizes="120x120">
+<link rel="apple-touch-icon" href="/web/images/favicon/icon144.jpg" sizes="144x144">
+<link rel="apple-touch-icon" href="/web/images/favicon/icon152.jpg" sizes="152x152">
+<meta name="msapplication-TileImage" content="/web/images/favicon/win8-144.jpg">
+<meta name="msapplication-TileColor" content="#f17330">
+<meta name="application-name" content="Hanwhain">
+<meta name="msapplication-square70x70logo" content="/web/images/favicon/ie11-70.jpg">
+<meta name="msapplication-square150x150logo" content="/web/images/favicon/ie11-150.jpg">
+<meta name="msapplication-wide310x150logo" content="/web/images/favicon/ie11-310-wide.jpg">
+<meta name="msapplication-square310x310logo" content="/web/images/favicon/ie11-310-square.jpg">
+
+<link rel="stylesheet" href="/web/css/style.css">
+<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-GHX9RK550G&amp;cx=c&amp;gtm=4e5b50"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-VCVP2X7888&amp;cx=c&amp;gtm=4e5b50"></script><script src="https://connect.facebook.net/en_US/sdk.js?hash=3a44867ecdd5dd95cb2e92f594dad17b" async="" crossorigin="anonymous"></script><script id="facebook-jssdk" src="https://connect.facebook.net/en_US/sdk.js"></script><script src="/web/js/jquery-1.11.2.min.js"></script>
+<script src="/web/js/jquery-d.js"></script>
+<script src="/web/js/jquery-fakeform-0.5.js"></script>
+<script src="/web/js/hanwhain.js"></script>
+<script src="/web/js/common.js"></script>
+<script src="/web/js/jquery.common.js"></script>
+<script src="/web/js/bookmark.js"></script>
+<script src="/web/js/facebook.js"></script>
+<script src="/web/js/libs.js"></script>
+<!--[if lt IE 9]>
+<script src="/web/js/html5.js"></script>
+<![endif]-->
+
+
+	<meta name="title" lang="ko" content="한화인 - 채용 공고">
+	<meta name="description" lang="ko" content="한화인 채용공고 목록입니다.">
+	<meta name="keywords" lang="ko" content="인턴,채용공고,신입,공채,경력,지원서작성,한화인,한화,채용,리크루트,hanwha,hanwhain,recruit">
+	<meta property="og:url" content="https://www.hanwhain.com/web/apply/notification/list.do">
+	<meta property="og:title" content="한화인 - 채용 공고">
+	<meta property="og:description" content="한화인 채용공고 목록입니다.">
+<script type="text/javascript" src="/web/js/jquery.form.js"></script>
+<script type="text/javascript">
+
+	var schTp = "";
+	var schNm = "";
+
+	var schSdSeqs = [];
+	var schRjSeqs = [];
+	var schRtRegularYn = [];
+
+	var schSdSeqsParam = "215";
+	var schRjSeqsParam = "29";
+	var schRtRegularYnParam = "";
+
+    $(document).ready(function() {
+		var liEle;
+
+		$("input[name='schSdSeqs']").each(function() {
+			liEle = $(this).closest('li');
+			if (schSdSeqsParam.includes($(this).val()) || $(this).is(":checked")) {
+				if (schSdSeqs.indexOf($(this).val()) == -1) {
+					schSdSeqs.push($(this).val());
+				}
+				liEle.addClass("on");
+			} else {
+				liEle.removeClass("on");
+			}
+		});
+		$("input[name='schRjSeqs']").each(function() {
+			liEle = $(this).closest('li');
+			if (schRjSeqsParam.includes($(this).val()) || $(this).is(":checked")) {
+				if (schRjSeqs.indexOf($(this).val()) == -1) {
+					schRjSeqs.push($(this).val());
+				}
+				liEle.addClass("on");
+			} else {
+				liEle.removeClass("on");
+			}
+		});
+		$("input[name='schRtRegularYn']").each(function() {
+			liEle = $(this).closest('li');
+			if (schRtRegularYnParam.includes($(this).val()) || $(this).is(":checked")) {
+				if (schRtRegularYn.indexOf($(this).val() == -1)) {
+					schRtRegularYn.push($(this).val());
+				}
+				liEle.addClass("on");
+			} else {
+				liEle.removeClass("on");
+			}
+		});
+
+		$("input[name='schSdSeqs']").change(function() {
+			liEle = $(this).closest('li');
+			if ($(this).is(":checked")) {
+				if (schSdSeqs.indexOf($(this).val()) == -1) {
+					schSdSeqs.push($(this).val());
+				}
+				liEle.addClass("on");
+			} else {
+				let index = schSdSeqs.indexOf($(this).val());
+				if (index != -1) {
+					schSdSeqs.splice(index,1);
+				}
+			}
+		});
+
+		$("input[name='schRjSeqs']").change(function() {
+			liEle = $(this).closest('li');
+			if ($(this).is(":checked")) {
+				if (schRjSeqs.indexOf($(this).val()) == -1) {
+					schRjSeqs.push($(this).val());
+				}
+				liEle.addClass("on");
+			} else {
+				let index = schRjSeqs.indexOf($(this).val());
+				if (index != -1) {
+					schRjSeqs.splice(index,1);
+				}
+			}
+		});
+
+		$("input[name='schRtRegularYn']").change(function() {
+			liEle = $(this).closest('li');
+			if ($(this).is(":checked")) {
+				if (schRtRegularYn.indexOf($(this).val() == -1)) {
+					schRtRegularYn.push($(this).val());
+				}
+				liEle.addClass("on");
+			} else {
+				let index = schRtRegularYn.indexOf($(this).val());
+				if (index != -1) {
+					schRtRegularYn.splice(index,1);
+				}
+			}
+		});
+
+		var
+				box = $('div.tab-zone ul.tab-type'),
+				tabList = box.find('> li'),
+				tabs = tabList.find('> a');
+
+		tabList.removeClass('on');
+
+		if (schTp == null || schTp === "") {
+			tabList.eq(0).addClass('on');
+		} else if (schTp === "nrcrt") {
+			tabList.eq(1).addClass('on');
+		} else if (schTp === "carr") {
+			tabList.eq(2).addClass('on');
+		} else {
+			tabList.eq(3).addClass('on');
+		}
+
+	});
+
+
+		function goSearch() {
+		if (schSdSeqs.length > 0) {
+			$("#schSdSeqsParam").val(schSdSeqs.join(","));
+		}
+		if (schRjSeqs.length > 0) {
+			$("#schRjSeqsParam").val(schRjSeqs.join(","));
+		}
+		if (schRtRegularYn.length == 1) {
+			$("#schRtRegularYnParam").val(schRtRegularYn);
+		}
+
+		if  (schTp != null){
+			$("#schTp").val(schTp);
+		}
+
+		$("#mainForm").attr("action", "./list.do");
+		$("#mainForm").submit();
+
+	}
+
+	function initialize() {
+		schSdSeqs = [];
+		schRjSeqs = [];
+		schRtRegularYn = [];
+		schTp = '';
+		goSearch();
+	}
+    
+	    function goSearchType() {
+		$("input[name='schSdSeqs']").prop("checked", false);
+		$("input[name='schRjSeqs']").prop("checked", false);
+		$("input[name='schRtRegularYn']").prop("checked", false);
+    }
+
+	function goView(seq) {
+		parent.location.href = "/web/apply/notification/view.do?rtSeq=" + seq;
+	}
+</script>
+
+<meta property="article:author" content="https://www.facebook.com/hanwhadays">
+<meta property="article:publisher" content="https://www.facebook.com/hanwhadays">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hanwhain">
+<meta property="og:image" content="http://www.hanwhain.com/web/images/favicon/social.jpg"><!-- full url -->
+<link rel="shortcut icon" type="image/x-icon" href="/web/images/favicon/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="Hanwhain">
+<script type="text/javascript">
+    /**
+    미제출 지원서
+    */
+    function fnIndexViewApplyDetail(param) {
+        var keys = ['rtSeq'],
+        values = [param],
+        params = keys.reduce(function (previous, key, index) {
+            previous[key] = values[index];
+            return previous
+        }, {})
+        postLink("/web/apply/resume/personal_info.do", params, "_self");
+    }
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics (start) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-223861662-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-223861662-1');
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics (end)-->
+<style type="text/css" data-fbcssmodules="css:fb.css.base css:fb.css.dialog css:fb.css.iframewidget">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0px;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:lucida grande,tahoma,verdana,arial,sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:400;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{0%{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+
+.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0px;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:lucida grande,tahoma,verdana,arial,sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:400;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{0%{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+
+.fb_dialog{background:#525252b3;position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://connect.facebook.net/rsrc.php/v4/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://connect.facebook.net/rsrc.php/v4/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://connect.facebook.net/rsrc.php/v4/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:700;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://connect.facebook.net/rsrc.php/v4/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://connect.facebook.net/rsrc.php/v4/ya/r/3rhSv5V8j3o.gif) #fff no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:#0006;inset:0;min-height:100%;position:absolute;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba),to(#2c4987));border-bottom:1px solid;border-color:#043b87;box-shadow:#fff 0 1px 1px -1px inset;color:#fff;font:700 14px Helvetica,sans-serif;text-overflow:ellipsis;text-shadow:rgba(0,30,84,.296875) 0px -1px 0px;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2),to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:700 12px Helvetica,sans-serif;margin:2px -12px;padding:2px 6px 3px;text-shadow:rgba(0,30,84,.296875) 0px -1px 0px}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:700;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://connect.facebook.net/rsrc.php/v4/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4A4A4A;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4A4A4A;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://connect.facebook.net/rsrc.php/v4/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}
+</style></head>
+<body data-nav-current="5-3-0" class="depth2">
+<div id="wrap">
+	<!-- Header -->
+	<header style="left: 0px;"><div class="blockover"></div>
+		<script src="/web/js/grayscale.js"></script>
+<script src="/web/js/hanwhain.js"></script>
+
+<span id="skipNav">
+    <a href="#contents">본문바로가기</a>
+    <a href="#gnb">대메뉴바로가기</a>
+</span>
+
+<h1><a href="/web/index.do"><img src="/web/images/common/hanwha.png" alt="Hanwha in"><img src="https://www.hanwhain.com/web/images/common/hanwhaani2x2.gif" alt=""></a></h1>
+
+<span class="blind">주메뉴</span>
+<section id="gnb">
+    <ul class="nav">
+        <li data-index="0">
+            <a href="/web/hanwha/business/business.do" data-index="0" style="color: rgb(0, 0, 0);">한화</a>
+            <div class="lay-sub" style="z-index: 0; opacity: 0; visibility: hidden;">
+                <section class="sectionNew">
+                    <p>한화가<br>
+                    궁금하신가요?</p>
+                    <ul>
+                        <li><a href="/web/hanwha/business/business.do" data-index="0" data-parent-index="0">사업 영역<span style="opacity: 0;"></span></a></li>
+                        <li><a href="/web/hanwha/history/history.do" data-index="1" data-parent-index="0">걸어온 길<span style="opacity: 0;"></span></a></li>
+						<li><a href="/web/meet/subsidiary/list.do" data-index="2" data-parent-index="0">계열사 소개<span style="opacity: 0;"></span></a></li>
+                        <li><a href="/web/hanwha/main_value/main_value.do" data-index="3" data-parent-index="0">핵심가치<span style="opacity: 0;"></span></a></li>
+						<li><a href="/web/hanwha/brand_vision/brand_vision.do" data-index="4" data-parent-index="0">브랜드 비전<span style="opacity: 0;"></span></a></li>
+                        <!-- <li><a href="/web/hanwha/personal_system/personal.do">한화의 제도</a></li> -->
+                    </ul>
+			<!-- 2015-05-18 수정 [s] -->
+						<!-- 											<aside>
+						<h3 style="position:absolute;top:-20px;left:23px;z-index:20">한화 역사 웹툰</h3>
+						<figure>
+														<img src="/web/images/common/webtoon_02.gif" alt="웹툰 이미지 2화" />
+							<figcaption>
+							불꽃처럼 <br />한화처럼<br />
+							<a href="/web/hanwha/history/history.do?webToonNo=1" title="페이지 이동" >웹툰 보기</a>
+							</figcaption>
+						</figure>
+											</aside>
+						
+											 -->
+			<!-- 2015-05-18 수정 [e] -->
+                </section>
+            </div>
+        </li>
+        <li data-index="1">
+            <a href="/web/culture/company.do" data-index="1" style="color: rgb(0, 0, 0);">문화</a>
+            <div class="lay-sub" style="z-index: 0; opacity: 0; visibility: hidden;">
+                <section>
+                    <p>한화의<br>
+                    다양한 문화를<br>
+                    소개합니다.</p>
+                    <ul>
+						<li><a href="/web/culture/company.do" data-index="0" data-parent-index="1">조직문화<span style="opacity: 0;"></span></a></li>
+						<li><a href="/web/culture/welfare.do" data-index="1" data-parent-index="1">복지제도<span style="opacity: 0;"></span></a></li>
+						<li><a href="/web/culture/personal_management.do" data-index="2" data-parent-index="1">교육제도<span style="opacity: 0;"></span></a></li>
+						<li><a href="/web/culture/life.do" data-index="3" data-parent-index="1">한화인이야기<span style="opacity: 0;"></span></a></li>
+                        <!-- <li><a href="/web/dream/dream_tune/dream_tune.do">Dream Tunes</a></li> -->
+                        
+                    </ul>
+                </section>
+            </div>
+        </li>
+        <li data-index="2">
+            <a href="/web/meet/detail_job/list.do" data-index="2" style="color: rgb(0, 0, 0);">커리어</a>
+            <div class="lay-sub" style="z-index: 0; opacity: 0; visibility: hidden;">
+                <section>
+                    <p>한화인의<br>
+                    커리어를<br>
+                    만나보세요.</p>
+                    <ul>
+                        <li><a href="/web/meet/detail_job/list.do" data-index="0" data-parent-index="2">직무 소개<span style="opacity: 0;"></span></a></li>
+                        <li><a href="/web/meet/employment_tip/list.do" data-index="1" data-parent-index="2">한화인사이드<span style="opacity: 0;"></span></a></li>
+						<li><a href="/web/meet/meet_hanwhain/list.do" data-index="2" data-parent-index="2">한화인 인터뷰<span style="opacity: 0;"></span></a></li>
+						<li><a href="/web/dream/membership_program/list.do" data-index="3" data-parent-index="2">멤버십 프로그램<span style="opacity: 0;"></span></a></li>
+
+                    </ul>
+<!-- 										<aside>
+					                        <h3>Meet 한화인</h3>
+					                        <figure>
+					                            <img src="/web/upfile/others/contents/jobInterview/142563203033042889.jpg" alt="한화인 고평문 사진" />
+					                            <figcaption>
+					                                <strong>고평문</strong><br>
+					                                (주)한화 건설부문 / 플랜트<br>
+					                                <a href="/web/meet/meet_hanwhain/list.do" title="meet한화인 페이지 이동">인터뷰 보기</a>
+					                            </figcaption>
+					                        </figure>
+					                    </aside>
+					 -->
+                </section>
+            </div>
+        </li>
+		<li data-index="3">
+            <a href="/web/media/webtoon/list.do" data-index="3" style="color: rgb(0, 0, 0);">미디어룸</a>		
+			<div class="lay-sub" style="z-index: 0; opacity: 0; visibility: hidden;">
+                <section>
+                    <p>한화가 전하는<br>다양한 이야기를<br>들어보세요.</p>
+                    <ul>
+						<li><a href="/web/media/webtoon/list.do" data-index="0" data-parent-index="3">역사웹툰<span style="opacity: 0;"></span></a></li>
+                        <li><a class="link" href="https://www.hanwha.co.kr/media/news/news_list.do" target="_blank" data-index="1" data-parent-index="3">보도자료<span style="opacity: 0;"></span></a></li>
+                        <li><a class="link" href="https://www.hanwha.co.kr/media/hanwhajournal/list.do" target="_blank" data-index="2" data-parent-index="3">한화저널<span style="opacity: 0;"></span></a></li>
+                        <li><a class="link" href="https://www.hanwha.co.kr/media/sns/list.do" target="_blank" data-index="3" data-parent-index="3">소셜미디어<span style="opacity: 0;"></span></a></li>
+                        <li><a class="link" href="https://www.youtube.com/user/hanwhadays" target="_blank" data-index="4" data-parent-index="3">한화TV<span style="opacity: 0;"></span></a></li>
+                    </ul>
+                </section>
+            </div>
+		</li>
+        <li data-index="4" class="on">
+            <a href="/web/apply/procedure/procedure.do" data-index="4" style="color: rgb(243, 115, 33);">지원하기</a>
+            <div class="lay-sub" style="z-index: 1; visibility: hidden; opacity: 1;">
+                <section>
+                    <p>한화와 함께<br>
+                    꿈을 실현하세요.</p>
+                    <ul>
+                        <li><a href="/web/apply/procedure/procedure.do" data-index="0" data-parent-index="4">채용 절차<span style="opacity: 0;"></span></a></li>
+                        <li><a href="/web/apply/faq/list.do" data-index="1" data-parent-index="4">FAQ<span style="opacity: 0;"></span></a></li>
+                        <li><a href="/web/apply/notification/list.do" data-index="2" data-parent-index="4">채용 공고<span style="opacity: 0;"></span></a></li>
+                        <li><a href="/web/apply/notification/personDb.do" data-index="3" data-parent-index="4">인재 DB<span style="opacity: 0;"></span></a></li>
+                    </ul>
+                </section>
+            </div>
+        <div class="sub" style="opacity: 1; left: 0px;"><ul>
+                        <li><a href="/web/apply/procedure/procedure.do" data-index="0" data-parent-index="4">채용 절차<span style="opacity: 0;"></span></a></li>
+                        <li><a href="/web/apply/faq/list.do" data-index="1" data-parent-index="4">FAQ<span style="opacity: 0;"></span></a></li>
+                        <li class="on"><a href="/web/apply/notification/list.do" data-index="2" data-parent-index="4">채용 공고<span style="opacity: 0;"></span></a></li>
+                        <li><a href="/web/apply/notification/personDb.do" data-index="3" data-parent-index="4">인재 DB<span style="opacity: 0;"></span></a></li>
+                    </ul></div></li>
+		
+    </ul>
+<div class="line"></div></section>
+		<ul id="util">
+            <li class="first-child">
+    <!-- 로그인 후 -->
+
+    <span class="photo">
+		<img src="/web/images/common/img_blank.png" alt="">
+	</span>
+    <a href="https://resume.hanwhain.com/resume/view/login" target="_blank" class="login" onclick="window.open(this.href, 'targetWindow'); return false;">로그인</a>
+</li>
+<script type="text/javascript">
+   /* $(document).ready(function() {
+        var recruitCnt = "77";
+        $("#menuRecruit").text(recruitCnt+"건");
+    });
+    
+    function topBookmarkReload() {
+        jQuery.getJSON("/web/common/bookmark/top_list.do", function(data) {
+            $(".bookmark").empty();
+            
+            var html = '';
+            var size = 0;
+            
+            for (var i = 0; i < data.bookmarkRecruitList.length; i++) {
+                var bookmark = data.bookmarkRecruitList[i];
+                
+                html += '<li>';
+                html += '   <a href="/web/apply/notification/view.do?rtSeq=' + bookmark.recruit.seq + '">';
+                html += '       채용공고 ';
+                html += '       <strong>';
+                html += '           ' + bookmark.recruit.subsidiary.nm;
+                if (bookmark.recruit.stat2 == "1") {
+                    html += '       <small>예정</small>';
+                } else if (bookmark.recruit.stat2 == "2") {
+                    html += '       <small>진행중</small>';
+                } else if (bookmark.recruit.stat2 == "3") {
+                    html += '       <small class="close">마감</small>';
+                }
+                html += '       </strong>';
+                html += '   </a>';
+                html += '</li>';
+                
+                size++;
+            }
+            
+            for (var i = 0; i < data.bookmarkList.length; i++) {
+                var bookmark = data.bookmarkList[i];
+                
+                html += '<li>';
+                
+                if (bookmark.tp == "1") {
+                    html += '<a href="/web/meet/subsidiary/view.do?seq=' + bookmark.sdSeq + '">' + bookmark.topLayerTtl + '</a>';
+                } else if (bookmark.tp == "2") {
+                    html += '<a href="/web/meet/detail_job/view.do?sdSeq=' + bookmark.sdSeq + '&djSeq=' + bookmark.djSeq + '" onclick="HANWHAIN.layer.open(this, 742);return false;">';
+                    html += '   ' + bookmark.topLayerTtl;
+                    html += '</a>';
+                } else if (bookmark.tp == "3") {
+                    html += '<a href="/web' + bookmark.url + '">' + bookmark.topLayerTtl + '</a>';
+                } else if (bookmark.tp == "4") {
+                    html += '<a href="/web/meet/job_interview/view_iframe.do?seq=' + bookmark.jiSeq + '" title="팝업띄움" onclick="HANWHAIN.layer.open(this, 918);return false;">';
+                    html += '   ' + bookmark.topLayerTtl;
+                    html += '</a>';
+                }
+                html += '</li>';
+                
+                size++;
+            }
+            
+            $(".bookmark").append(html);
+            
+            $(".bookmark").prev().find("span").text(size);
+        });
+    }
+    
+    function fnTopEndViewApplyDetail(){
+        alert("해당 공고는 접수가 종료되었습니다.");
+    }*/
+</script>
+
+			<!-- <li><a href="https://english.hanwhain.com/" class="eng">english</a></li> -->
+			<li class="last-child"><a href="#" class="menu">한화in 이용 가이드(팝업띄움)</a><span class="ment" style="margin-top: -5px; opacity: 0; display: none;"></span></li>
+		</ul>
+	</header>
+	<!-- // Header -->
+    <!-- <div class="sticky-icon">
+              <a href="/web/etc/newsletter.do" class="newsletter" onclick="parent.HANWHAIN.layer.open(this, 600);return false;">뉴스레터 신청</a>         
+    	</div> -->
+	<!-- Container -->
+	<div id="container" class="wide">
+		
+		<section id="contents">
+			<span class="blind">본문</span>
+                
+	
+<!-- Contents -->
+
+<div class="visual recruit">
+	<img src="/web/images/banner/top_recruit_city.jpg" alt="">
+	<h2 class="blind">지원하기</h2>
+	<h3 class="blind">채용 공고</h3>
+	<p class="details">
+		<strong>지속가능한 내일을 여는 <img src="/web/images/apply/tx_hanwhain.png" alt="한화인">을 기다립니다.</strong>
+		한화는 적극적인 변신과 도전으로 새로움 꿈을 실현시켜 나가는<br>
+		패기에 찬 인재를 찾고 있습니다.
+	</p>
+</div>
+
+<div class="tab-zone" style="z-index:11">
+	<ul class="tab-type">
+		<li class="on"><a onclick="selectSchTp('');">전체</a></li>
+		<li><a onclick="selectSchTp('nrcrt');">신입</a></li>
+		<li><a onclick="selectSchTp('carr');">경력</a></li>
+		<li><a onclick="selectSchTp('intn');">인턴</a></li>
+			</ul>
+</div>
+
+<div id="lay-affiliates" style="display:block">
+	<section class="column-2">
+		<div class="fl">
+			<h3>채용진행 중 계열사</h3>
+			<ul>
+												<li><input type="checkbox" name="schSdSeqs" id="rec1-1" value="193" data-fakeform-index="0" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="0"></span> <label for="rec1-1">(주)한화 글로벌부문</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-2" value="192" data-fakeform-index="1" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="1"></span> <label for="rec1-2">한화모멘텀㈜</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-3" value="365" data-fakeform-index="2" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="2"></span> <label for="rec1-3">한화에어로스페이스</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-4" value="362" data-fakeform-index="3" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="3"></span> <label for="rec1-4">한화파워시스템</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-5" value="328" data-fakeform-index="4" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="4"></span> <label for="rec1-5">한화시스템/방산</label></li>
+													<li class="on"><input type="checkbox" name="schSdSeqs" id="rec1-6" value="215" data-fakeform-index="5" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="5"></span> <label for="rec1-6">한화시스템/ICT</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-7" value="197" data-fakeform-index="6" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="6"></span> <label for="rec1-7">한화솔루션/케미칼</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-8" value="198" data-fakeform-index="7" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="7"></span> <label for="rec1-8">한화솔루션/큐셀</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-9" value="196" data-fakeform-index="8" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="8"></span> <label for="rec1-9">한화첨단소재</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-10" value="195" data-fakeform-index="9" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="9"></span> <label for="rec1-10">한화에너지</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-11" value="326" data-fakeform-index="10" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="10"></span> <label for="rec1-11">한화토탈에너지스</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-12" value="216" data-fakeform-index="11" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="11"></span> <label for="rec1-12">한화솔루션/인사이트</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-13" value="201" data-fakeform-index="12" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="12"></span> <label for="rec1-13">한화생명</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-14" value="202" data-fakeform-index="13" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="13"></span> <label for="rec1-14">한화손해보험</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-15" value="208" data-fakeform-index="14" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="14"></span> <label for="rec1-15">한화투자증권</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-16" value="207" data-fakeform-index="15" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="15"></span> <label for="rec1-16">한화자산운용</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-17" value="486" data-fakeform-index="16" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="16"></span> <label for="rec1-17">한화엔엑스엠디</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-18" value="507" data-fakeform-index="17" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="17"></span> <label for="rec1-18">한화생명금융서비스</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-19" value="526" data-fakeform-index="18" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="18"></span> <label for="rec1-19">한화이센셜</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-20" value="586" data-fakeform-index="19" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="19"></span> <label for="rec1-20">한화오션(주)</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-21" value="607" data-fakeform-index="20" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="20"></span> <label for="rec1-21">㈜에프지코리아</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-22" value="706" data-fakeform-index="21" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="21"></span> <label for="rec1-22">한화엔진</label></li>
+													<li><input type="checkbox" name="schSdSeqs" id="rec1-23" value="366" data-fakeform-index="22" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="22"></span> <label for="rec1-23">한화솔루션/전략부문</label></li>
+								<li><input type="checkbox" name="schSdSeqs" id="rec1-24" value="386" data-fakeform-index="23" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="23"></span> <label for="rec1-24">(주)한화 전략부문</label></li>
+								<li><input type="checkbox" name="schSdSeqs" id="rec1-25" value="364" data-fakeform-index="24" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="24"></span> <label for="rec1-25">(주)한화</label></li>
+			</ul>
+		</div>
+		<div class="fr">
+			<h3>채용진행 중 직무</h3>
+			<ul>
+												<li><input type="checkbox" name="schRjSeqs" id="rec2-1" value="34" data-fakeform-index="25" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="25"></span> <label for="rec2-1">경영지원</label></li>
+													<li><input type="checkbox" name="schRjSeqs" id="rec2-2" value="33" data-fakeform-index="26" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="26"></span> <label for="rec2-2">영업/마케팅</label></li>
+													<li><input type="checkbox" name="schRjSeqs" id="rec2-3" value="32" data-fakeform-index="27" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="27"></span> <label for="rec2-3">금융/자산운용</label></li>
+													<li><input type="checkbox" name="schRjSeqs" id="rec2-4" value="31" data-fakeform-index="28" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="28"></span> <label for="rec2-4">기술/엔지니어</label></li>
+													<li><input type="checkbox" name="schRjSeqs" id="rec2-5" value="30" data-fakeform-index="29" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="29"></span> <label for="rec2-5">R&amp;D</label></li>
+													<li class="on"><input type="checkbox" name="schRjSeqs" id="rec2-6" value="29" data-fakeform-index="30" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="30"></span> <label for="rec2-6">IT</label></li>
+													<li><input type="checkbox" name="schRjSeqs" id="rec2-7" value="28" data-fakeform-index="31" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="31"></span> <label for="rec2-7">기타</label></li>
+												</ul>
+		</div>
+		<div class="fr">
+			<h3>공고 구분</h3>
+			<ul>
+				<li><input type="checkbox" name="schRtRegularYn" id="rec3-1" value="N" data-fakeform-index="32" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="32"></span> <label for="rec3-1">일반 공고</label></li>
+				<li><input type="checkbox" name="schRtRegularYn" id="rec3-2" value="Y" data-fakeform-index="33" style="position: absolute; left: -999em;"><span class="checkbox" data-fakeform-index="33"></span> <label for="rec3-2">상시 공고</label></li>
+			</ul>
+		</div>
+		<div style="display: inline-flex; justify-content: center" class="btn-area">
+			<a onclick="goSearch()" style="cursor: pointer; font-size: 17px; margin-right:10px;" class="btn2 small search"><span>검색하기</span></a>
+			<a onclick="initialize()" style="cursor: pointer; font-size: 17px;" class="btn2 small"><span>전체 해제</span></a>
+		</div>
+	</section>
+
+</div>
+
+<script>
+// 탭 선택 예시
+// 탭별로 페이지 이동이면 삭제
+function selectSchTp(category) {
+		$("#schTp").val(category);
+		$("#schSdSeqsParam").val('');
+		$("#schRjSeqsParam").val('');
+		$("#mainForm").attr("action", "./list.do");
+		$("#mainForm").submit();
+}
+// 카테고리 선택 예시
+(function() {
+
+	var box = $('#lay-affiliates');
+
+	box.find('input').change(change);
+
+	function change() {
+
+		var affiliates = [],
+			duties = [];
+
+		box.find('.fl input').each(function() {
+			this.checked && affiliates.push(this.value);
+		});
+
+		box.find('.fr input').each(function() {
+			this.checked && duties.push(this.value);
+		});
+	}
+
+})();
+</script>
+
+<!-- 채용 공고 목록 -->
+<div class="block-list">
+	<ul>
+									<li>
+					<a href="javascript:goView(17228);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								방산 SCM 모듈 운영 담당자 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17228" value="17228">
+				</li>
+												<li>
+					<a href="javascript:goView(17227);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								한화손해보험 시스템 운영 관리 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17227" value="17227">
+				</li>
+												<li>
+					<a href="javascript:goView(17286);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								Vision AI 전문가 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.06 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17286" value="17286">
+				</li>
+												<li>
+					<a href="javascript:goView(17226);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								선박 엔진 제조 PLM/CAD 운영 담당자
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17226" value="17226">
+				</li>
+												<li>
+					<a href="javascript:goView(17232);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								조선업 IT 시스템 PI 및 구축 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17232" value="17232">
+				</li>
+												<li>
+					<a href="javascript:goView(17220);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								LLM Engineer(AI 서비스 개발) 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17220" value="17220">
+				</li>
+												<li>
+					<a href="javascript:goView(17221);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								System Engineer 제조서비스분야 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17221" value="17221">
+				</li>
+												<li>
+					<a href="javascript:goView(17222);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								Cloud 운영/개발 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17222" value="17222">
+				</li>
+												<li>
+					<a href="javascript:goView(17225);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								SAP MM 운영/개발 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17225" value="17225">
+				</li>
+												<li>
+					<a href="javascript:goView(17229);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17229" value="17229">
+				</li>
+												<li>
+					<a href="javascript:goView(17223);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								SAP ERP PS 모듈 운영/개발 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17223" value="17223">
+				</li>
+												<li>
+					<a href="javascript:goView(17233);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								ESG 컨설팅 및 수행 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17233" value="17233">
+				</li>
+												<li>
+					<a href="javascript:goView(17287);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								네트워크 인프라운영 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.06 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17287" value="17287">
+				</li>
+												<li>
+					<a href="javascript:goView(17224);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								SAP CO(관리회계/원가) 운영/개발 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.03 - 2025.11.30</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>20</strong>
+						            </span>
+										<input type="hidden" id="recruit17224" value="17224">
+				</li>
+												<li>
+					<a href="javascript:goView(17280);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								WEB 시스템 운영/개발 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.06 - 2025.12.05</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>25</strong>
+						            </span>
+										<input type="hidden" id="recruit17280" value="17280">
+				</li>
+												<li>
+					<a href="javascript:goView(17283);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								클라우드 사업 기획 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.11.06 - 2025.12.06</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>26</strong>
+						            </span>
+										<input type="hidden" id="recruit17283" value="17283">
+				</li>
+												<li>
+					<a href="javascript:goView(16806);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								Data Governance 전문가 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.09.01 - 2025.12.31</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>51</strong>
+						            </span>
+										<input type="hidden" id="recruit16806" value="16806">
+				</li>
+												<li>
+					<a href="javascript:goView(16803);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								물류 자동화 구축 담당 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.09.01 - 2025.12.31</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>51</strong>
+						            </span>
+										<input type="hidden" id="recruit16803" value="16803">
+				</li>
+												<li>
+					<a href="javascript:goView(16344);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								물류 솔루션(WMS/WCS) 개발 경력사원 채용 
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.07.02 - 2025.12.31</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>51</strong>
+						            </span>
+										<input type="hidden" id="recruit16344" value="16344">
+				</li>
+												<li>
+					<a href="javascript:goView(16801);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								Smart Factory 경력사원 상시채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.09.01 - 2025.12.31</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>51</strong>
+						            </span>
+										<input type="hidden" id="recruit16801" value="16801">
+				</li>
+												<li>
+					<a href="javascript:goView(16808);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								MES 개발/프로젝트 경력사원 채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.09.01 - 2025.12.31</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>51</strong>
+						            </span>
+										<input type="hidden" id="recruit16808" value="16808">
+				</li>
+												<li>
+					<a href="javascript:goView(16807);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								SAP ERP 컨설턴트 경력사원 상시채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.09.01 - 2025.12.31</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>51</strong>
+						            </span>
+										<input type="hidden" id="recruit16807" value="16807">
+				</li>
+												<li>
+					<a href="javascript:goView(16802);" class="block">
+						<p>
+							<small>
+																									<strong>경력</strong>
+																							</small>
+							<strong class="subsidiary">
+								<span>한화시스템/ICT</span>
+								Smart Yard 경력사원 상시채용
+							</strong>
+						</p>
+					</a>
+					<em class="subPeriod">2025.09.01 - 2025.12.31</em>
+					<span class="d-day"><em class="blind">D-day</em>
+													<strong>51</strong>
+						            </span>
+										<input type="hidden" id="recruit16802" value="16802">
+				</li>
+															<li class="on">
+																								<a href="javascript:fnPersonDbAgreement();" class="block" title="새창열림">
+								<dl class="guide type3">
+					<dt>인재 DB 등록</dt>
+					<dd>찾으시는 채용 공고가 없다면<br>
+						인재 DB를 등록해보세요.</dd>
+				</dl>
+			</a>
+			<img src="/web/images/main/img_affiliate3.png" alt="" class="affiliate">
+		</li>
+																					</ul>
+</div>
+<!-- // 채용 공고 목록 -->
+<form id="mainForm" name="mainForm" method="get">
+	<input type="hidden" name="schTp" id="schTp">
+	<input type="hidden" name="schNm" id="schNm">
+	<input type="hidden" name="schSdSeqsParam" id="schSdSeqsParam">
+	<input type="hidden" name="schRjSeqsParam" id="schRjSeqsParam">
+	<input type="hidden" name="schRtRegularYnParam" id="schRtRegularYnParam">
+</form>
+
+<!-- // Contents -->
+
+        </section>
+	</div>
+    <!-- Footer -->
+<footer>
+<!-- 계열사 바로가기 -->
+<div id="lay-family" style="display: none;">
+	<div class="lay-family">
+		<div class="container">
+			<dl>
+				<dt>제조·건설</dt>
+				<dd>
+					<ul>
+											<li><a href="http://www.hanwhacorp.co.kr/global/index.jsp" target="_blank" title="새창열림">(주)한화 글로벌부문</a></li>
+											<li><a href="http://www.hanwhamomentum.com" target="_blank" title="새창열림">한화모멘텀㈜</a></li>
+											<li><a href="http://www.hanwhaaerospace.co.kr" target="_blank" title="새창열림">한화에어로스페이스</a></li>
+											<li><a href="http://www.hanwhavision.com/ko" target="_blank" title="새창열림">한화비전</a></li>
+											<li><a href="http://www.hanwhasemitech.com" target="_blank" title="새창열림">한화세미텍</a></li>
+											<li><a href="http://www.hanwhapowersystems.co.kr" target="_blank" title="새창열림">한화파워시스템</a></li>
+											<li><a href="http://www.hanwhasystems.com" target="_blank" title="새창열림">한화시스템/방산</a></li>
+											<li><a href="http://www.hanwhasystems.com" target="_blank" title="새창열림">한화시스템/ICT</a></li>
+											<li><a href="http://hcc.hanwha.co.kr" target="_blank" title="새창열림">한화솔루션/케미칼</a></li>
+											<li><a href="http://www.hanwhasolutions.com" target="_blank" title="새창열림">한화솔루션/큐셀</a></li>
+											<li><a href="http://hwam.co.kr" target="_blank" title="새창열림">한화첨단소재</a></li>
+											<li><a href="http://www.hanwhacompound.co.kr" target="_blank" title="새창열림">한화컴파운드</a></li>
+											<li><a href="http://hec.hanwha.co.kr" target="_blank" title="새창열림">한화에너지</a></li>
+											<li><a href="http://www.hanwhaimpact.com" target="_blank" title="새창열림">한화임팩트</a></li>
+											<li><a href="http://www.htpchem.com" target="_blank" title="새창열림">한화토탈에너지스</a></li>
+											<li><a href="http://www.hwenc.co.kr" target="_blank" title="새창열림">(주)한화 건설부문</a></li>
+											<li><a href="http://www.hanwhasolutions.com" target="_blank" title="새창열림">한화솔루션/인사이트</a></li>
+											<li><a href="http://visionext.ai" target="_blank" title="새창열림">비전넥스트</a></li>
+											<li><a href="http://www.hanwhanxmd.com/ko" target="_blank" title="새창열림">한화엔엑스엠디</a></li>
+											<li><a href="http://www.hanwhae-ssential.com" target="_blank" title="새창열림">한화이센셜</a></li>
+											<li><a href="http://www.hanwhaocean.com" target="_blank" title="새창열림">한화오션(주)</a></li>
+											<li><a href="http://www.hngchemical.com" target="_blank" title="새창열림">에이치앤지케미칼㈜</a></li>
+											<li><a href="http://hanwhaconvergence.com" target="_blank" title="새창열림">한화에너지/컨버전스부문</a></li>
+											<li><a href="http://www.hanwharobotics.co.kr" target="_blank" title="새창열림">한화로보틱스(주)</a></li>
+											<li><a href="http://www.hanwhaoceanecotech.com" target="_blank" title="새창열림">한화오션에코텍(주)</a></li>
+											<li><a href="http://www.hanwha-engine.com" target="_blank" title="새창열림">한화엔진</a></li>
+											<li><a href="http://www.growdle.com" target="_blank" title="새창열림">그로들</a></li>
+										</ul>
+				</dd>
+			</dl>
+			<dl>
+				<dt>금융</dt>
+				<dd>
+					<ul>
+											<li><a href="http://www.hanwhalife.com" target="_blank" title="새창열림">한화생명</a></li>
+											<li><a href="http://www.hwgeneralins.com" target="_blank" title="새창열림">한화손해보험</a></li>
+											<li><a href="http://www.hanwhawm.com" target="_blank" title="새창열림">한화투자증권</a></li>
+											<li><a href="http://www.hanwhafund.co.kr" target="_blank" title="새창열림">한화자산운용</a></li>
+											<li><a href="http://www.hanwhasbank.com" target="_blank" title="새창열림">한화저축은행</a></li>
+											<li><a href="http://www.hanwhalifefs.com" target="_blank" title="새창열림">한화생명금융서비스</a></li>
+											<li><a href="http://www.hanwhalifelab.co.kr/index.asp" target="_blank" title="새창열림">한화라이프랩㈜</a></li>
+										</ul>
+				</dd>
+			</dl>
+			<dl>
+				<dt>서비스·레저</dt>
+				<dd>
+					<ul>
+											<li><a href="http://www.hanwhaconnect.co.kr" target="_blank" title="새창열림">한화커넥트</a></li>
+											<li><a href="http://www.hanwhaestate.com/" target="_blank" title="새창열림">한화호텔&amp;리조트/에스테이트</a></li>
+											<li><a href="http://www.hanwhaeagles.co.kr" target="_blank" title="새창열림">한화이글스</a></li>
+											<li><a href="http://www.63realty.co.kr" target="_blank" title="새창열림">한화63시티</a></li>
+											<li><a href="http://www.hanwhafoodtech.com" target="_blank" title="새창열림">한화푸드테크</a></li>
+											<li><a href="http://추후 홈페이지 개설 시 등록 예정" target="_blank" title="새창열림">㈜에프지코리아</a></li>
+											<li><a href="http://www.hanwhafoundation.org" target="_blank" title="새창열림">(재)한화문화재단</a></li>
+										</ul>
+				</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+<!-- //계열사 바로가기 -->
+	<span class="blind">바닥글</span>
+	<section>
+		<div>
+			<p>한화시스템(주) 대표이사 손재일 | 주소 : 경상북도 구미시 1공단로 244(공단동, 사서함50호) | 사업자등록번호 : 513-81-17175</p>
+		</div>
+		<div>
+			<img src="/web/images/common/hanwha2.png" alt="Hanwha" class="bi">
+			<ul class="util">
+				<li><a href="http://www.hanwha.co.kr/" target="_blank" title="새창열림">한화그룹</a></li>
+				<li><a href="/web/etc/clause.do" title="새창열림">이용약관</a></li>
+				<!-- <li><a href="/web/etc/newsletter.do"  onclick="parent.HANWHAIN.layer.open(this, 600);return false;" title="팝업열림">한화그룹 뉴스레터 신청</a></li> -->
+				<li><a style="font-weight: bold" href="/web/etc/privacy.do" title="새창열림">개인정보처리방침</a></li>
+				<li><address>Hanwha Group. All rights reserved</address></li>
+			</ul>
+			<ul class="share">
+				<li><a href="https://www.facebook.com/hanwhadays" target="_blank" class="facebook" title="새창열림">한화데이즈 페이스북</a></li>
+				<li><a href="https://www.instagram.com/hanwhadays" target="_blank" class="instagram" title="새창열림">한화데이즈 인스타그램</a></li>
+				<li><a href="http://blog.hanwhadays.com/" target="_blank" class="blog" title="새창열림">한화데이즈 블로그</a></li>
+				<li>
+					<a href="#none" class="family" title="레이어열림">계열사 바로가기</a>
+				</li>
+			</ul>
+		</div>
+	</section>
+</footer>
+
+</div>
+
+<!-- 전체 메뉴 -->
+<section id="allmenu" class="menu"><a href="#" class="close hidden">팝업닫기</a><div class="space"></div>
+	<div class="container">
+		<h1 class="blind">전체메뉴</h1>
+		<ul class="tabs">
+			<li class="on">
+				<a href="#" data-index="0">
+					가슴 속에 불꽃을<br>
+					품고있는 당신<br>
+					<strong>한화인 <em>전체</em></strong>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-index="1">
+					신입의 패기로 미래가<br>
+					되고 싶은<br>
+					<strong>예비 불꽃인 <em>추천</em></strong>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-index="2">
+					본인의 꿈과 진로에<br> 
+					대해 고민하는<br>
+					<strong>이 시대의 청년 <em>추천</em></strong>
+				</a>
+			</li>
+			<li>
+				<a href="#" data-index="3">
+					완숙한 노련미로<br>
+					꿈을 펼치고 싶은<br>
+					<strong>경력 지원자 <em>추천</em></strong>
+				</a>
+			</li>
+		</ul>
+		<div class="tab-contents">
+			<ul>
+				<li>
+					<h2>한화</h2>
+					<ul>
+						<li data-index="0" data-sub-index="0"><a href="/web/hanwha/business/business.do">사업 영역</a></li>
+                        <li data-index="0" data-sub-index="1"><a href="/web/hanwha/history/history.do">걸어온 길</a></li>
+						<li data-index="0" data-sub-index="2"><a href="/web/meet/subsidiary/list.do">계열사 소개</a></li>
+                        <li data-index="0" data-sub-index="3"><a href="/web/hanwha/main_value/main_value.do">핵심가치</a></li>
+						<li data-index="0" data-sub-index="4"><a href="/web/hanwha/brand_vision/brand_vision.do">브랜드 비전</a></li>
+					</ul>
+					<figure>
+						<a href="/web/hanwha/history/history.do">
+							<img src="/web/images/main/img_menu.png" alt="">
+							<figcaption>
+								<em>한화그룹</em>
+								<p>걸어온 길</p>
+								1952년 10월, 한화인의 꿈이 시작되었습니다.
+							</figcaption>
+						</a>
+					</figure>
+				</li>
+				<li>
+					<h2>문화</h2>
+					<ul>
+						<li data-index="1" data-sub-index="0"><a href="/web/culture/company.do">조직문화</a></li>
+						<li data-index="1" data-sub-index="1"><a href="/web/culture/welfare.do">복지제도</a></li>
+						<li data-index="1" data-sub-index="2"><a href="/web/culture/personal_management.do">교육제도</a></li>
+						<li data-index="1" data-sub-index="3"><a href="/web/culture/life.do">한화인이야기</a></li>
+					</ul>
+					<figure>
+						<a href="/web/culture/welfare.do">
+    						<img src="/web/images/main/img_menu2.png" alt="">
+    						<figcaption>
+    							한화의 문화
+    							<p>복지제도</p>
+    							한화만의 다양한 문화를 소개합니다.
+    						</figcaption>
+						</a>
+					</figure>
+				</li>
+				<li>
+					<h2>커리어</h2>
+					<ul>
+						<li data-index="2" data-sub-index="0"><a href="/web/meet/detail_job/list.do">직무 소개</a></li>
+                        <li data-index="2" data-sub-index="1"><a href="/web/meet/employment_tip/list.do">한화인사이드</a></li>
+						<li data-index="2" data-sub-index="2"><a href="/web/meet/meet_hanwhain/list.do">한화인 인터뷰</a></li>
+						<li data-index="2" data-sub-index="3"><a href="/web/dream/membership_program/list.do">멤버십 프로그램</a></li>
+					</ul>
+					<figure>
+						<a href="/web/meet/detail_job/list.do">
+    						<img src="/web/images/main/img_menu3.png" alt="">
+    						<figcaption>
+    							<em>직무별 담당자의 생생</em>
+    							<p>직무 인터뷰</p>
+    							한화인이 들려주는 이야기에 귀 기울여 보세요.
+    						</figcaption>
+						</a>
+					</figure>
+				</li>
+				<li>
+					<h2>미디어룸</h2>
+					<ul>
+						<li data-index="3" data-sub-index="0"><a href="/web/media/webtoon/list.do">역사웹툰</a></li>
+                        <li data-index="3" data-sub-index="1"><a href="https://www.hanwha.co.kr/media/news/news_list.do" target="_blank">보도자료</a></li>
+                        <li data-index="3" data-sub-index="2"><a href="https://www.hanwha.co.kr/media/hanwhajournal/list.do" target="_blank">한화저널</a></li>
+                        <li data-index="3" data-sub-index="3"><a href="https://www.hanwha.co.kr/media/sns/list.do" target="_blank">소셜미디어</a></li>
+                        <li data-index="3" data-sub-index="4"><a href="https://www.youtube.com/user/hanwhadays" target="_blank">한화TV</a></li>
+					</ul>
+					<figure>
+						<a href="/web/media/webtoon/list.do">
+							<img src="/web/images/main/img_menu_webtoon.png" alt="">
+							<figcaption>
+								한화그룹
+								<p>History Webtoon</p>
+								새로운 역사를 함께 만들어 갈 당신을 기다립니다.
+							</figcaption>
+						</a>
+					</figure>
+				</li>
+				<li>
+					<h2>지원하기</h2>
+					<ul>
+						<li data-index="4" data-sub-index="0"><a href="/web/apply/procedure/procedure.do">채용 절차</a></li>
+                        <li data-index="4" data-sub-index="1"><a href="/web/apply/faq/list.do">FAQ</a></li>
+                        <li data-index="4" data-sub-index="2"><a href="/web/apply/notification/list.do">채용 공고</a></li>
+                        <li data-index="4" data-sub-index="3"><a href="/web/apply/notification/personDb.do">인재 DB</a></li>
+					</ul>
+					<figure>
+						<a href="/web/apply/notification/list.do">
+    						<img src="/web/images/main/img_menu4.png" alt="">
+    						<figcaption>
+    							<em>채용 공고</em>
+    							<p>현재 <strong id="menuRecruit">15건</strong>의 채용 공고가 있습니다.</p>
+    							한화인에 지원해 보세요.
+    						</figcaption>
+						</a>
+					</figure>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<a href="#" class="close">팝업닫기</a>
+<div class="space"></div></section>
+<!-- // 전체 메뉴 -->
+
+
+
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div></div></div></div></body></html>
