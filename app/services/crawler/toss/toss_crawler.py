@@ -7,9 +7,22 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from dotenv import load_dotenv
+try:
+    from dotenv import find_dotenv  # type: ignore
+except Exception:
+    find_dotenv = None  # type: ignore
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from playwright.sync_api import sync_playwright, Browser, Page, BrowserContext
+try:
+    from app.services import resolve_dir, get_output_dir, get_img_dir
+except ModuleNotFoundError:
+    import sys
+    _p = Path(__file__).resolve().parents[4]
+    if str(_p) not in sys.path:
+        sys.path.append(str(_p))
+    from app.services import resolve_dir, get_output_dir, get_img_dir
+from app.services import resolve_dir, get_output_dir, get_img_dir
 import concurrent.futures
 from threading import Lock
 
@@ -18,6 +31,36 @@ try:
 except Exception:
     OpenAI = None  # type: ignore
 
+
+def load_env() -> None:
+    """Load environment variables from .env with fallbacks.
+
+    Order: nearest discoverable .env from CWD → fproject/.env → backend-model/.env
+    """
+    try:
+        if find_dotenv is not None:
+            found = find_dotenv(usecwd=True)
+            if found:
+                load_dotenv(found, override=False)
+    except Exception:
+        pass
+
+    try:
+        proj_env = Path(__file__).resolve().parents[5] / ".env"
+        if proj_env.exists():
+            load_dotenv(dotenv_path=proj_env, override=False)
+    except Exception:
+        pass
+
+    try:
+        backend_env = Path(__file__).resolve().parents[4] / ".env"
+        if backend_env.exists():
+            load_dotenv(dotenv_path=backend_env, override=False)
+    except Exception:
+        pass
+
+
+load_env()
 # 분리된 프롬프트 로드
 try:
     from .new_prompt import SYSTEM_PROMPT
@@ -72,7 +115,7 @@ def summarize_with_llm(raw_text: str, model: str = "gpt-4o-mini") -> List[Dict[s
         pass
     return []
 
-def extract_job_detail_from_url(job_url: str, job_index: int) -> Dict[str, Any]:
+def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Path = None) -> Dict[str, Any]:
     """URL로 직접 접속하여 상세 정보 추출 (병렬 처리용 - 독립 브라우저)"""
     try:
         # 각 스레드에서 독립적인 playwright와 브라우저 인스턴스 생성
@@ -85,8 +128,6 @@ def extract_job_detail_from_url(job_url: str, job_index: int) -> Dict[str, Any]:
             page.goto(job_url, timeout=30000)
             page.wait_for_timeout(1500)
 
-            # 전체 HTML 수집
-            full_html = page.content()
             today = datetime.now().strftime('%Y-%m-%d')
 
             job_info = {
@@ -99,12 +140,12 @@ def extract_job_detail_from_url(job_url: str, job_index: int) -> Dict[str, Any]:
                 "posted_date": None,
                 "expired_date": None,
                 "description": None,
-                "html": full_html,
                 "url": job_url,
                 "meta_data": "{}",
+                "screenshots": {},  # 스크린샷 경로 저장용
             }
 
-            # description 추출 - div.area_cont에서 직접 가져오기 (수동)
+            # description 추출 - div.css-gv536u에서 직접 가져오기 (수동)
             full_text = page.inner_text("body")
             try:
                 area_cont = page.query_selector("div.css-gv536u")
@@ -116,6 +157,25 @@ def extract_job_detail_from_url(job_url: str, job_index: int) -> Dict[str, Any]:
                 else:
                     # 백업: body 전체 사용
                     job_info["description"] = full_text
+
+                # 전체 페이지 스크린샷 저장
+                if screenshot_dir:
+                    try:
+                        # URL에서 job_id 추출하여 파일명에 사용
+                        job_id_match = re.search(r'job_id=([^&]+)', job_url)
+                        job_id = job_id_match.group(1) if job_id_match else f"job_{job_index}"
+
+                        screenshot_filename = f"toss_job_{job_id}.png"
+                        screenshot_path = screenshot_dir / screenshot_filename
+
+                        # 전체 페이지 스크린샷
+                        page.screenshot(path=str(screenshot_path), full_page=True)
+
+                        job_info["screenshots"]["combined"] = str(screenshot_path)
+                        print(f"  [{job_index}] 전체 페이지 스크린샷 저장: {screenshot_filename}")
+                    except Exception as e:
+                        print(f"  [{job_index}] 스크린샷 저장 실패: {e}")
+
             except Exception as e:
                 print(f"  [{job_index}] area_cont 추출 실패, body 전체 사용: {e}")
                 job_info["description"] = full_text
@@ -130,9 +190,6 @@ def extract_job_detail_from_url(job_url: str, job_index: int) -> Dict[str, Any]:
                                "posted_date", "expired_date", "meta_data"]:
                         if key in parsed_data and parsed_data[key]:
                             job_info[key] = parsed_data[key]
-                    # html과 url은 유지
-                    job_info["html"] = full_html
-                    job_info["url"] = job_url
             except Exception as e:
                 print(f"  [{job_index}] LLM 파싱 실패 (description은 저장됨): {e}")
 
@@ -146,14 +203,20 @@ def extract_job_detail_from_url(job_url: str, job_index: int) -> Dict[str, Any]:
 
 def run_scrape(
     keyword: str = "",
-    out_dir: Path = Path("data"),
+    out_dir: Path = None,
+    screenshot_dir: Path = None,
     fast: bool = False
 ) -> Dict[str, Path]:
+    out_dir = resolve_dir(out_dir, get_output_dir())
+    screenshot_dir = resolve_dir(screenshot_dir, get_img_dir())
     ensure_dir(out_dir)
+    ensure_dir(screenshot_dir)
+
     outputs = {
         "raw_html": out_dir / "toss_raw.html",
         "clean_txt": out_dir / "toss_clean.txt",
         "json": out_dir / "toss_jobs.json",
+        "screenshots": screenshot_dir,
     }
 
     all_job_urls = []  # 모든 페이지에서 수집한 URL 저장
@@ -271,7 +334,7 @@ def run_scrape(
             with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
                 futures = []
                 for idx, job_url in enumerate(all_job_urls, 1):
-                    future = executor.submit(extract_job_detail_from_url, job_url, idx)
+                    future = executor.submit(extract_job_detail_from_url, job_url, idx, screenshot_dir)
                     futures.append(future)
 
                 # 결과 수집
@@ -302,20 +365,25 @@ def run_scrape(
 
 
 def main() -> None:
-    load_dotenv()
+    # .env 파일 경로: backend-model 디렉토리
+    env_path = Path(__file__).parent.parent.parent.parent / ".env"
+    load_dotenv(dotenv_path=env_path)
 
     parser = argparse.ArgumentParser(description="Toss Careers 스크래핑")
     parser.add_argument("--keyword", default="", help="검색 키워드")
-    parser.add_argument("--out-dir", default="data", help="출력 폴더 (기본: data)")
+    parser.add_argument("--out-dir", default="../../output", help="출력 폴더 (기본: ../../output)")
+    parser.add_argument("--screenshot-dir", default="../../img", help="스크린샷 폴더 (기본: ../../img)")
     parser.add_argument("--fast", action="store_true", help="빠른 모드: 대기시간 단축")
     args = parser.parse_args()
 
     out_dir = Path(args.out_dir)
+    screenshot_dir = Path(args.screenshot_dir)
     print("[0/10] 작업 시작")
 
     paths, items = run_scrape(
         keyword=args.keyword,
         out_dir=out_dir,
+        screenshot_dir=screenshot_dir,
         fast=args.fast
     )
 
@@ -334,3 +402,13 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+import sys as _sys
+from pathlib import Path as _P
+_backend_root = _P(__file__).resolve().parents[4]
+if str(_backend_root) not in _sys.path:
+    _sys.path.append(str(_backend_root))
+import sys as _sys
+from pathlib import Path as _P
+_backend_root = _P(__file__).resolve().parents[4]
+if str(_backend_root) not in _sys.path:
+    _sys.path.insert(0, str(_backend_root))
