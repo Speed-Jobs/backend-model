@@ -26,6 +26,8 @@ tmp/
 cache/
 *.db
 *.sqlite3
+output/*.html
+output/*.json
 
 # IDE/OS
 .vscode/

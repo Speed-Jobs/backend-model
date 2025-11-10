@@ -6,3 +6,7 @@ playwright
 requests
 bs4
 openai
+apscheduler
+celery
+asyncio
+logging
