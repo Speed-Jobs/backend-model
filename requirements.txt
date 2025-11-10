@@ -20,3 +20,7 @@ lxml
 mysql-connector-python
 database_manager
 sqlalchemy
+apscheduler
+celery
+asyncio
+logging
