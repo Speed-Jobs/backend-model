@@ -6,9 +6,7 @@ playwright
 requests
 bs4
 openai
-apscheduler
-celery
-python-dotenv
+dotenv
 pymupdf
 jupyter
 langchain
@@ -16,4 +14,12 @@ langchain_openai
 langchain-core
 chromadb
 rank_bm25
-reportlab
+reportlab 
+dotenv
+lxml
+mysql-connector-python
+sqlalchemy
+apscheduler
+celery
+asyncio
+logging
