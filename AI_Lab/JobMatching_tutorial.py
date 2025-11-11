@@ -11,7 +11,7 @@ if openai_api_key is None:
 os.environ["OPENAI_API_KEY"] = openai_api_key
 
 # 직무기술서 데이터 로드 (JSON → DataFrame)
-json_path = "C:/workspace/Final_project/backend-model/AI_Lab/data/job_description.json"
+json_path = "C:/workspace/fproject/backend-model/AI_Lab/data/job_description.json"
 with open(json_path, encoding="utf-8") as f:
     data = json.load(f)
 df = pd.DataFrame(data)
@@ -19,7 +19,7 @@ df.head()
 
 # 채용공고 데이터 로드 (회사별 JSON → DataFrame)
 company_name = "kakao"
-jobs_json_path = f"C:/workspace/Final_project/backend-model/AI_Lab/data/{company_name}_jobs.json"
+jobs_json_path = f"C:/workspace/fproject/backend-model/AI_Lab/data/{company_name}_jobs.json"
 with open(jobs_json_path, encoding="utf-8") as f:
     jobs_data = json.load(f)
 jobs_df = pd.DataFrame(jobs_data)
@@ -38,8 +38,8 @@ from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from typing import List
 
 # 카카오, 우아한형제들 채용공고 전체 로드 (데이터 결합)
-kakao_path = "C:/workspace/Final_project/backend-model/AI_Lab/data/kakao_jobs.json"
-woowahan_path = "C:/workspace/Final_project/backend-model/AI_Lab/data/woowahan_jobs.json"
+kakao_path = "C:/workspace/fproject/backend-model/AI_Lab/data/kakao_jobs.json"
+woowahan_path = "C:/workspace/fproject/backend-model/AI_Lab/data/woowahan_jobs.json"
 job_postings = []
 with open(kakao_path, 'r', encoding='utf-8') as f:
     kakao_jobs = json.load(f)
