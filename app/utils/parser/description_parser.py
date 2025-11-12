@@ -247,6 +247,72 @@ def parse_llm_response(response):
     return parsed_items
 
 
+STRING_COMMON_FIELDS = ["직무 정의", "공통_skill_set_description"]
+LIST_COMMON_FIELDS = ["공통_skill_set"]
+
+
+def normalize_skill_list(value):
+    """스킬 리스트를 정규화하여 리스트 형태로 반환"""
+    items = set()
+    if isinstance(value, list):
+        for item in value:
+            if isinstance(item, str):
+                normalized = item.strip()
+                if normalized:
+                    items.add(normalized)
+    elif isinstance(value, str):
+        candidates = re.split(r'[,\\n]+', value)
+        for candidate in candidates:
+            normalized = candidate.strip()
+            if normalized:
+                items.add(normalized)
+    return sorted(items)
+
+
+def select_preferred_string(values):
+    """여러 문자열 중 가장 정보가 많은 값을 선택"""
+    cleaned = [
+        v.strip()
+        for v in values
+        if isinstance(v, str) and v.strip()
+    ]
+    if not cleaned:
+        return ""
+    cleaned.sort(key=len, reverse=True)
+    return cleaned[0]
+
+
+def ensure_job_common_fields(all_results, job_title):
+    """같은 직무에 대해 공통 필드가 동일하게 유지되도록 조정"""
+    job_items = [
+        item for item in all_results
+        if item.get('직무') == job_title
+    ]
+    if not job_items:
+        return
+
+    # 공통 문자열 필드 선택
+    canonical_strings = {}
+    for field in STRING_COMMON_FIELDS:
+        field_values = [item.get(field, "") for item in job_items]
+        canonical_strings[field] = select_preferred_string(field_values)
+
+    # 공통 리스트 필드 병합
+    canonical_lists = {}
+    for field in LIST_COMMON_FIELDS:
+        merged_items = set()
+        for item in job_items:
+            merged_items.update(normalize_skill_list(item.get(field, [])))
+        canonical_lists[field] = sorted(merged_items)
+
+    # 모든 항목에 canonical 값 적용
+    for item in job_items:
+        for field, value in canonical_strings.items():
+            item[field] = value
+        for field, value in canonical_lists.items():
+            item[field] = value[:]
+
+
 def merge_duplicate_items(all_results, new_item):
     """중복 항목을 병합하는 함수"""
     직무 = new_item.get('직무', '')
@@ -278,11 +344,13 @@ def merge_duplicate_items(all_results, new_item):
                 existing['skill_set'] = list(existing_skill | new_skill)
             
             print(f"  🔄 중복 항목 업데이트: 직무={직무}, industry={industry}")
+            ensure_job_common_fields(all_results, 직무)
             return True
     
     # 중복 아님 - 새로 추가
     all_results.append(new_item)
     print(f"  ✅ 항목 추가: 직무={직무}, industry={industry}")
+    ensure_job_common_fields(all_results, 직무)
     return True
 
 
