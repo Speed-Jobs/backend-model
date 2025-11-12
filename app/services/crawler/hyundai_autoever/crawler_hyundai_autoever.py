@@ -370,7 +370,7 @@ class HyundaiAutoeverCrawler:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         
         # JSON 저장
-        json_file = output_path / f"hyundai_autoever_jobs_{timestamp}.json"
+        json_file = output_path / f"hyundai_autoever_jobs.json"
         with open(json_file, 'w', encoding='utf-8') as f:
             json.dump(jobs, f, ensure_ascii=False, indent=2)
         print(f"  ✅ JSON 저장: {json_file}")
@@ -378,7 +378,7 @@ class HyundaiAutoeverCrawler:
         # CSV 저장
         try:
             import csv
-            csv_file = output_path / f"hyundai_autoever_jobs_{timestamp}.csv"
+            csv_file = output_path / f"hyundai_autoever_jobs.csv"
 
             if jobs:
                 simple_jobs = []

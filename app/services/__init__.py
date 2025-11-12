@@ -14,7 +14,7 @@ def backend_root() -> Path:
 
 
 def get_output_dir() -> Path:
-    return backend_root() / "output"
+    return backend_root() / "data" / "output"
 
 
 def get_img_dir() -> Path:
