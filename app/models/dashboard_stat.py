@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer
-from app.db.base import Base
+from app.db.config.base import Base
 
 
 class DashboardStat(Base):

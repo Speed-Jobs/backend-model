@@ -192,8 +192,19 @@ __marimo__/
 
 # data 폴더 안 모든 파일/폴더 무시
 data/
+<<<<<<< HEAD
 # 또는 하위 폴더까지 모두 커버하려면:
 # data/**
+=======
+outputs/
+artifacts/
+tmp/
+cache/
+*.db
+*.sqlite3
+output/*.html
+output/*.json
+>>>>>>> origin/gwang-text
 
 # 이미 Git에 추가된 대용량 파일이나 무시 대상 파일은
 # git rm --cached <파일명> 명령어로 인덱스에서 제거해야 .gitignore가 동작합니다.

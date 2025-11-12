@@ -1,5 +1,5 @@
 # test_db_connection.py
-from app.db.db_connection import DatabaseManager
+from app.db.config.db_connection import DatabaseManager
 
 def test_connection():
     """기본 연결 테스트"""

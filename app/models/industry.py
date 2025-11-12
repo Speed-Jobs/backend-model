@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
-from app.db.base import Base
+from app.db.config.base import Base
 
 
 class Industry(Base):

@@ -1,7 +1,12 @@
 """
-현대오토에버 채용공고 크롤러
+현대오토에버 채용공고 크롤러 (리팩토링)
 1. HTML 파싱으로 공고 URL 리스트 수집
 2. Async Playwright로 병렬 크롤링 (단일 브라우저 + 여러 페이지)
+
+주요 개선사항:
+- AsyncOpenAI context manager 사용으로 확실한 cleanup
+- Playwright 리소스 관리 강화
+- 에러 핸들링 개선
 """
 
 import json
@@ -34,10 +39,7 @@ except Exception:
 
 
 def load_env() -> None:
-    """Load environment variables from .env with fallbacks.
-
-    Order: nearest discoverable .env from CWD → fproject/.env → backend-model/.env
-    """
+    """Load environment variables from .env with fallbacks."""
     try:
         from dotenv import find_dotenv
         found = find_dotenv(usecwd=True)
@@ -64,21 +66,11 @@ def load_env() -> None:
 load_env()
 
 
-def get_openai_client() -> Optional[Any]:
-    """OpenAI 비동기 클라이언트 초기화"""
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        return None
-    if AsyncOpenAI is None:
-        return None
-    return AsyncOpenAI(api_key=api_key)
-
-
 @retry(wait=wait_exponential(multiplier=1, min=2, max=10), stop=stop_after_attempt(3))
 async def summarize_with_llm(raw_text: str, url: str, model: str = "gpt-4o-mini") -> Dict[str, Any]:
-    """LLM을 사용하여 채용공고에서 정보 추출 (description 제외) - 비동기"""
-    client = get_openai_client()
-    if client is None:
+    """LLM을 사용하여 채용공고에서 정보 추출 - AsyncOpenAI context manager 사용"""
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key or AsyncOpenAI is None:
         return {}
 
     system_prompt = """
@@ -128,34 +120,44 @@ async def summarize_with_llm(raw_text: str, url: str, model: str = "gpt-4o-mini"
         f"아래 텍스트에서 정보를 추출해줘:\n\n{raw_text[:8000]}"
     )
 
-    response = await client.chat.completions.create(
-        model=model,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ],
-        temperature=0.2,
-        max_tokens=3000,
-    )
-    
-    content = response.choices[0].message.content if response and response.choices else "{}"
-    
-    # JSON만 남도록 추출
-    json_match = re.search(r'\{.*\}', content, re.DOTALL)
-    json_text = json_match.group(0) if json_match else content
-    
-    try:
-        data = json.loads(json_text)
-        return data
-    except Exception:
-        return {}
+    # AsyncOpenAI를 async with로 사용하여 확실한 cleanup
+    async with AsyncOpenAI(api_key=api_key) as client:
+        response = await client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.2,
+            max_tokens=3000,
+        )
+        
+        content = response.choices[0].message.content if response and response.choices else "{}"
+        
+        # JSON만 남도록 추출
+        json_match = re.search(r'\{.*\}', content, re.DOTALL)
+        json_text = json_match.group(0) if json_match else content
+        
+        try:
+            data = json.loads(json_text)
+            return data
+        except Exception:
+            return {}
 
 
-async def crawl_single_job(context: BrowserContext, job: Dict, index: int, total: int, semaphore: asyncio.Semaphore, screenshot_dir: Path = None) -> Optional[Dict[str, Any]]:
+async def crawl_single_job(
+    context: BrowserContext, 
+    job: Dict, 
+    index: int, 
+    total: int, 
+    semaphore: asyncio.Semaphore, 
+    screenshot_dir: Path = None
+) -> Optional[Dict[str, Any]]:
     """개별 채용공고 크롤링 (비동기) - context 공유, 각자 page 생성, semaphore로 동시 실행 제한"""
+    page = None
+    
     # Semaphore로 동시 실행 개수 제한
     async with semaphore:
-        page = None
         try:
             job_url = job['url']
 
@@ -181,7 +183,7 @@ async def crawl_single_job(context: BrowserContext, job: Dict, index: int, total
                 "description": None,
                 "url": job_url,
                 "meta_data": {},
-                "screenshots": {},  # 스크린샷 경로 저장용
+                "screenshots": {},
             }
 
             # description 추출 - CSS Selector 사용
@@ -193,7 +195,6 @@ async def crawl_single_job(context: BrowserContext, job: Dict, index: int, total
                         job_info["description"] = description_text
                         print(f"  [{index}/{total}] description 추출 완료")
                 else:
-                    # 백업: body 전체 사용
                     print(f"  [{index}/{total}] description selector를 찾지 못함, body 전체 사용")
                     job_info["description"] = await page.inner_text("body")
             except Exception as e:
@@ -203,17 +204,13 @@ async def crawl_single_job(context: BrowserContext, job: Dict, index: int, total
             # 전체 페이지 스크린샷 저장
             if screenshot_dir:
                 try:
-                    # URL에서 job ID 추출하여 파일명에 사용
                     job_id = job.get('id', f"job_{index}")
-
                     screenshot_filename = f"hyundai_autoever_job_{job_id}.png"
                     screenshot_path = screenshot_dir / screenshot_filename
 
-                    # 전체 페이지 스크린샷
                     await page.screenshot(path=str(screenshot_path), full_page=True)
-
                     job_info["screenshots"]["combined"] = str(screenshot_path)
-                    print(f"  [{index}/{total}] 전체 페이지 스크린샷 저장: {screenshot_filename}")
+                    print(f"  [{index}/{total}] 스크린샷 저장: {screenshot_filename}")
                 except Exception as e:
                     print(f"  [{index}/{total}] 스크린샷 저장 실패: {e}")
 
@@ -223,7 +220,6 @@ async def crawl_single_job(context: BrowserContext, job: Dict, index: int, total
                 parsed_data = await summarize_with_llm(full_text, job_url)
                 
                 if parsed_data:
-                    # description을 제외한 필드만 업데이트
                     for key in ["title", "location", "employment_type", "experience",
                                "posted_date", "expired_date", "meta_data"]:
                         if key in parsed_data and parsed_data[key] is not None:
@@ -232,21 +228,20 @@ async def crawl_single_job(context: BrowserContext, job: Dict, index: int, total
             except Exception as e:
                 print(f"  [{index}/{total}] LLM 파싱 실패 (description은 저장됨): {e}")
 
-            # 페이지 닫기
-            await page.close()
-            
             print(f"  [{index}/{total}] ✅ 완료: {job_info.get('title', 'N/A')}")
             return job_info
 
         except Exception as e:
             print(f"  [{index}/{total}] ❌ 상세 정보 추출 실패: {e}")
-            # 페이지가 열려있으면 닫기
+            return None
+            
+        finally:
+            # 페이지 확실하게 닫기
             if page:
                 try:
                     await page.close()
-                except:
-                    pass
-            return None
+                except Exception as e:
+                    print(f"  [{index}/{total}] 페이지 닫기 실패: {e}")
 
 
 class HyundaiAutoeverCrawler:
@@ -259,21 +254,16 @@ class HyundaiAutoeverCrawler:
         """
         load_dotenv()
         
-        # 기본 URL 설정
         self.base_url = "https://career.hyundai-autoever.com"
         self.list_url = f"{self.base_url}/ko/apply"
         
-        # 헤더 설정
         self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
         }
         
-        # 동시 실행 제어
         self.max_concurrent = max_concurrent
-    
-    # ==================== 1단계: HTML 파싱으로 URL 수집 ====================
     
     def get_job_list(self) -> List[Dict]:
         """HTML 파싱으로 채용공고 URL 리스트 가져오기"""
@@ -284,11 +274,8 @@ class HyundaiAutoeverCrawler:
             response.raise_for_status()
             
             soup = BeautifulSoup(response.content, 'html.parser')
-            
-            # CSS 선택자로 /ko/o/로 시작하는 모든 링크 선택
             job_links = soup.select('a[href^="/ko/o/"]')
             
-            # URL 중복 제거를 위한 set
             seen_urls = set()
             jobs = []
             
@@ -296,74 +283,82 @@ class HyundaiAutoeverCrawler:
                 href = link.get('href')
                 full_url = self.base_url + href
                 
-                # 중복 제거
                 if full_url not in seen_urls:
                     seen_urls.add(full_url)
-                    
-                    # URL에서 ID 추출
                     job_id = href.split('/')[-1]
-                    
-                    # 링크 텍스트에서 제목 추출 (있으면)
                     title = link.get_text(strip=True) or f"공고_{job_id}"
                     
-                    job_info = {
+                    jobs.append({
                         'id': job_id,
                         'title': title,
                         'url': full_url
-                    }
-                    jobs.append(job_info)
+                    })
             
             print(f"✅ {len(jobs)}개 채용공고 URL 수집 완료")
             return jobs
             
-        except requests.exceptions.RequestException as e:
-            print(f"❌ 요청 중 오류 발생: {e}")
-            return []
         except Exception as e:
-            print(f"❌ 파싱 중 오류 발생: {e}")
+            print(f"❌ 채용공고 목록 수집 실패: {e}")
             return []
-    
-    # ==================== 2단계: 비동기 병렬 크롤링 ====================
 
     async def crawl_details_async(self, jobs: List[Dict], screenshot_dir: Path = None) -> List[Dict]:
-        """비동기로 모든 공고의 상세 정보 크롤링 (단일 브라우저 + 여러 페이지 + Semaphore)"""
+        """비동기로 모든 공고의 상세 정보 크롤링"""
         if not jobs:
             return []
 
         print(f"\n🔍 [2/3] 비동기 병렬 크롤링 시작 ({len(jobs)}개, 최대 동시 {self.max_concurrent}개)\n")
 
-        async with async_playwright() as p:
-            # 단일 브라우저 인스턴스
-            browser = await p.chromium.launch(headless=True)
-            # 단일 context
-            context = await browser.new_context()
+        browser = None
+        context = None
+        
+        try:
+            async with async_playwright() as p:
+                # 단일 브라우저 인스턴스
+                browser = await p.chromium.launch(headless=True)
+                context = await browser.new_context()
 
-            # Semaphore 생성 (최대 동시 실행 수 제한)
-            semaphore = asyncio.Semaphore(self.max_concurrent)
+                # Semaphore 생성 (최대 동시 실행 수 제한)
+                semaphore = asyncio.Semaphore(self.max_concurrent)
 
-            # 모든 작업을 asyncio.gather로 동시 실행 (Semaphore가 제어)
-            tasks = [
-                crawl_single_job(context, job, idx + 1, len(jobs), semaphore, screenshot_dir)
-                for idx, job in enumerate(jobs)
-            ]
+                # 모든 작업을 asyncio.gather로 동시 실행
+                tasks = [
+                    crawl_single_job(context, job, idx + 1, len(jobs), semaphore, screenshot_dir)
+                    for idx, job in enumerate(jobs)
+                ]
 
-            # 모든 작업 실행
-            results = await asyncio.gather(*tasks)
+                # 모든 작업 실행
+                results = await asyncio.gather(*tasks, return_exceptions=True)
 
-            # None이 아닌 결과만 필터링
-            detailed_jobs = [job for job in results if job is not None]
+                # 성공한 결과만 필터링 (예외 제외)
+                detailed_jobs = [
+                    job for job in results 
+                    if job is not None and not isinstance(job, Exception)
+                ]
 
-            await context.close()
-            await browser.close()
-
-        print(f"\n✅ [2/3] 비동기 크롤링 완료: {len(detailed_jobs)}/{len(jobs)}개 성공")
-        return detailed_jobs
+                print(f"\n✅ [2/3] 비동기 크롤링 완료: {len(detailed_jobs)}/{len(jobs)}개 성공")
+                return detailed_jobs
+                
+        except Exception as e:
+            print(f"❌ 크롤링 중 에러 발생: {e}")
+            return []
+            
+        finally:
+            # 리소스 확실하게 정리
+            if context:
+                try:
+                    await context.close()
+                except Exception as e:
+                    print(f"⚠️ Context 닫기 실패: {e}")
+            
+            if browser:
+                try:
+                    await browser.close()
+                except Exception as e:
+                    print(f"⚠️ Browser 닫기 실패: {e}")
 
     def crawl_details(self, jobs: List[Dict], screenshot_dir: Path = None) -> List[Dict]:
         """동기 래퍼: 비동기 크롤링 실행"""
         return asyncio.run(self.crawl_details_async(jobs, screenshot_dir))
-    
-    # ==================== 3단계: 결과 저장 ====================
     
     def save_results(self, jobs: List[Dict], output_dir: str = "output"):
         """결과를 JSON과 CSV로 저장"""
@@ -375,7 +370,7 @@ class HyundaiAutoeverCrawler:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         
         # JSON 저장
-        json_file = output_path / f"hyundai_autoever_jobs_{timestamp}.json"
+        json_file = output_path / f"hyundai_autoever_jobs.json"
         with open(json_file, 'w', encoding='utf-8') as f:
             json.dump(jobs, f, ensure_ascii=False, indent=2)
         print(f"  ✅ JSON 저장: {json_file}")
@@ -383,21 +378,19 @@ class HyundaiAutoeverCrawler:
         # CSV 저장
         try:
             import csv
-            csv_file = output_path / f"hyundai_autoever_jobs_{timestamp}.csv"
+            csv_file = output_path / f"hyundai_autoever_jobs.csv"
 
             if jobs:
-                # CSV에 필요한 필드만 포함 (html 제외)
                 simple_jobs = []
                 for job in jobs:
                     simple_job = job.copy()
-                    # html 필드 제거
                     simple_job.pop('html', None)
-                    # meta_data를 문자열로 변환
+                    
                     if 'meta_data' in simple_job:
                         simple_job['meta_data'] = json.dumps(simple_job['meta_data'], ensure_ascii=False)
-                    # screenshots를 문자열로 변환
                     if 'screenshots' in simple_job:
                         simple_job['screenshots'] = json.dumps(simple_job['screenshots'], ensure_ascii=False)
+                    
                     simple_jobs.append(simple_job)
                 
                 all_keys = set()
@@ -414,15 +407,14 @@ class HyundaiAutoeverCrawler:
             print(f"  ⚠️ CSV 저장 실패: {e}")
         
         print("\n" + "="*80)
-        print(f"🎉 모든 작업 완료! (비동기 동시 처리: 최대 {self.max_concurrent}개)")
+        print(f"🎉 현대오토에버 크롤링 완료! (비동기 동시 처리: 최대 {self.max_concurrent}개)")
         print("="*80)
-
 
 def main():
     """메인 실행 함수"""
     import argparse
     
-    parser = argparse.ArgumentParser(description="현대오토에버 채용공고 크롤러 (Async)")
+    parser = argparse.ArgumentParser(description="현대오토에버 채용공고 크롤러 (Refactored)")
     parser.add_argument("--max-jobs", type=int, help="최대 크롤링 개수 (테스트용)")
     parser.add_argument("--max-concurrent", type=int, default=30, help="최대 동시 크롤링 개수 (기본: 30)")
     parser.add_argument("--output-dir", default="../../output", help="출력 폴더 (기본: ../../output)")
@@ -430,10 +422,9 @@ def main():
     args = parser.parse_args()
     
     print("="*80)
-    print("🚀 현대오토에버 채용공고 크롤러 시작 (Async Playwright)")
+    print("🚀 현대오토에버 채용공고 크롤러 시작 (Refactored)")
     print("="*80 + "\n")
     
-    # 크롤러 초기화
     crawler = HyundaiAutoeverCrawler(max_concurrent=args.max_concurrent)
     
     # 1단계: URL 수집
@@ -452,7 +443,7 @@ def main():
     screenshot_dir = resolve_dir(Path(args.screenshot_dir), get_img_dir())
     screenshot_dir.mkdir(parents=True, exist_ok=True)
 
-    # 2단계: 비동기 병렬 크롤링으로 상세 정보 수집
+    # 2단계: 비동기 병렬 크롤링
     detailed_jobs = crawler.crawl_details(basic_jobs, screenshot_dir=screenshot_dir)
     
     if not detailed_jobs:
@@ -483,13 +474,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-import sys as _sys
-from pathlib import Path as _P0
-_backend_root = _P0(__file__).resolve().parents[4]
-if str(_backend_root) not in _sys.path:
-    _sys.path.append(str(_backend_root))
-import sys as _sys
-from pathlib import Path as _PX
-_backend_root = _PX(__file__).resolve().parents[4]
-if str(_backend_root) not in _sys.path:
-    _sys.path.insert(0, str(_backend_root))
