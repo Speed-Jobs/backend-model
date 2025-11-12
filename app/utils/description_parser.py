@@ -12,7 +12,7 @@ from langchain_core.output_parsers import StrOutputParser
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
-pdf_path = r"data\SKAX_Jobdescription (2).pdf"
+pdf_path = r"data\SKAX_Jobdescription.pdf"
 
 # ChatOpenAI 사용
 llm = ChatOpenAI(model="gpt-4o", temperature=0, openai_api_key=openai_api_key)
