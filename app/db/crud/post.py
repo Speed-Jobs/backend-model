@@ -48,6 +48,7 @@ def get_post_by_id(db: Session, post_id: int) -> Optional[Post]:
     Returns:
         Post object or None if not found
     """
+
     return db.query(Post)\
         .options(joinedload(Post.company))\
         .filter(Post.id == post_id)\
@@ -124,6 +125,7 @@ def count_posts(db: Session) -> int:
         Total count of posts
     """
     return db.query(Post).count()
+
 
 
 def get_posts_by_skill_name(
