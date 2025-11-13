@@ -1,6 +1,14 @@
 """
 Example usage of Post CRUD operations
 """
+import sys
+from pathlib import Path
+
+# Ensure project root is on PYTHONPATH when executed as a script
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.append(str(PROJECT_ROOT))
+
 from app.db.config.base import SessionLocal
 from app.db.crud.post import (
     get_posts,
@@ -14,7 +22,7 @@ from app.db.crud.post import (
 
 def main():
     """Demonstrate Post CRUD operations"""
-    db = SessionLocal()
+    db = SessionLocal() # SQLAlchemy의 SessionLocal 객체를 사용하여 데이터베이스 세션을 생성.
 
     try:
         print("="*80)
