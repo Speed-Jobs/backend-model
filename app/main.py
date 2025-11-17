@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import user
+
+from app.routers import skill_match, user
 
 app = FastAPI()
 
@@ -9,3 +10,4 @@ app.add_middleware(
 )
 
 app.include_router(user.router)
+app.include_router(skill_match.router)
