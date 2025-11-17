@@ -12,11 +12,11 @@ Transformer 기반 스킬 의미 분석 결과
    - Blender                        (등장:    7회)
    - Mendix                         (등장:    5회)
    - Hive                           (등장:    5회)
-   - Raspberry Pi                   (등장:    4회)
    - Snowflake                      (등장:    4회)
+   - Raspberry Pi                   (등장:    4회)
+   - CocoaPods                      (등장:    2회)
    - TanStack Query                 (등장:    2회)
    - Vanilla-extract                (등장:    2회)
-   - CocoaPods                      (등장:    2회)
 
 [클러스터 1] (1821개 스킬)
    - Python                         (등장: 2537회)
