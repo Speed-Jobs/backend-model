@@ -1,0 +1,4124 @@
+====================================================================================================
+직무기술서 - 채용공고 매칭 결과 (멀티쿼리 + 스킬매칭 강화)
+생성일시: 2025-11-11 16:32:51
+총 직무기술서 수: 49개
+총 채용공고 수: 197개
+스코어링 가중치: BM25=0.35, Chroma=0.25, Skill=0.4
+====================================================================================================
+
+
+====================================================================================================
+[1] 직무: Software Development
+====================================================================================================
+Industry: Front-end Development
+핵심 Skill Set: Perl, Adobe, 통신, AI Literacy / Collaboration, 공공, Go, Less, XD, Ruby, Vue.js, Sass/Scss/Less, Adobe XD, Notion, node.js, 대외제조, 대내Hi-Tech, C#, Slack, 1/2금융, 미디어/콘텐츠, Sass, Bitbucket, ASP.NET, Git, jQuery, Angular, CSS, C / C++, Scss, 대내Process, Sketch, Teams, Material UI, SVN, UI, 유통/물류/서비스, Figma, Global, Next.js, Visual Basic, Nuxt.js, Google Docs, Bootstrap, Java, React, UX, Github, Confluence, Python, Material, HTML, Jira, PHP
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Front End Engineer
+   회사: LINE Taiwan
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   필요 skill_set: CSS, CSS Preprocessors, HTML, Java, JavaScript, Perl, React, SPA, UI, UX
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.624076
+   - 스킬 매칭 점수 (0.4): 0.127123
+   - BM25 정규화 (0.35): 0.975690
+   - ChromaDB 코사인 (0.25): 0.926940
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2888/
+
+2. Web Front-end Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   필요 skill_set: Git, JavaScript, Node.js, React, TypeScript
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.247681
+   - 스킬 매칭 점수 (0.4): 0.055163
+   - BM25 정규화 (0.35): 0.009642
+   - ChromaDB 코사인 (0.25): 0.888965
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2836/
+
+3. Frontend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   필요 skill_set: AWS, Git, Java, React, Typescript
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.239456
+   - 스킬 매칭 점수 (0.4): 0.055163
+   - BM25 정규화 (0.35): 0.000040
+   - ChromaDB 코사인 (0.25): 0.869506
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2838/
+
+4. Web Front-end Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.221912
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000040
+   - ChromaDB 코사인 (0.25): 0.887594
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2836/
+
+5. Frontend Engineer
+   회사: LINE VIETNAM
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   필요 skill_set: AngularJS, CSS3, HTML5, JavaScript, RESTful API, React, git
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.200593
+   - 스킬 매칭 점수 (0.4): 0.035459
+   - BM25 정규화 (0.35): 0.000040
+   - ChromaDB 코사인 (0.25): 0.745581
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2254/
+
+
+====================================================================================================
+[2] 직무: Software Development
+====================================================================================================
+Industry: Back-end Development
+핵심 Skill Set: SOAP, Perl, Altibase, 통신, Oracle, AI Literacy / Collaboration, Spring, 공공, Go, REST, API: REST, MSMQ, Ruby, Boot, Nexcore, Entity, J2EE, Notion, Cassandra, node.js, JPA, ibatis, Spring Cloud, RPC, 대외제조, 대내Hi-Tech, MongoDB, C#, Slack, mybatis, Django, 1/2금융, 미디어/콘텐츠, Flask, Bitbucket, ASP.NET, Git, PostgreSQL, Entity Framework, C / C++, WebSocket, 대내Process, Rabbit, MS_SQL, Teams, SVN, WebSocket; 메시징: Kafka, MySQL, API, Cloud, 유통/물류/서비스, Global, Visual Basic, MariaDB, Google Docs, Kafka, Net, Framework, Spring Boot, Java, Github, Confluence, Python, Redis, JDBC, Nexcore J2EE/.Net, Jira, PHP
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 글로벌 서비스 Back-End 개발 (경력)
+   회사: NAVER WEBTOON
+   업무분야: Tech/Backend
+   경력: 경력
+   필요 skill_set: AWS, Docker, Java, Kafka, Kubernetes, NoSQL, RESTful API, Redis, Spring Boot, Tomcat, Vue
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.301829
+   - 스킬 매칭 점수 (0.4): 0.054980
+   - BM25 정규화 (0.35): 0.377079
+   - ChromaDB 코사인 (0.25): 0.591435
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004070&lang=ko
+
+2. LINE Messaging Server Engineer
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   필요 skill_set: C, C++, Elasticsearch, Erlang, Hadoop, Java, Kafka, Kotlin, MySQL, Python, Redis, Spark
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.221234
+   - 스킬 매칭 점수 (0.4): 0.068725
+   - BM25 정규화 (0.35): 0.010049
+   - ChromaDB 코사인 (0.25): 0.760908
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2209/
+
+3. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   필요 skill_set: AI, AWS, Cloud, Data Analysis, Database, DevOps, Docker, Kafka, Kubernetes, Linux, Python, Redis, SQL, Spark, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.216752
+   - 스킬 매칭 점수 (0.4): 0.066363
+   - BM25 정규화 (0.35): 0.001220
+   - ChromaDB 코사인 (0.25): 0.759119
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. Backend Engineer_Corporate Business
+   회사: LINE Taiwan
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   필요 skill_set: AWS, Cloud, Database, Golang, Java, Kotlin, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.211341
+   - 스킬 매칭 점수 (0.4): 0.042402
+   - BM25 정규화 (0.35): 0.000567
+   - ChromaDB 코사인 (0.25): 0.776729
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2781/
+
+5. Backend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   필요 skill_set: AWS, Apache Kafka, CI/CD, Confluence, ELK, Git, Grafana, Java, Jenkins, Jira, Kubernetes, MongoDB, Python, RAG, Sentry, Slack, Spring Boot
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.195523
+   - 스킬 매칭 점수 (0.4): 0.108021
+   - BM25 정규화 (0.35): 0.020980
+   - ChromaDB 코사인 (0.25): 0.579884
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2837/
+
+
+====================================================================================================
+[3] 직무: Software Development
+====================================================================================================
+Industry: Mobile Development
+핵심 Skill Set: Perl, 통신, AI Literacy / Collaboration, 공공, Go, Flutter, Ruby, Xamarin, 휴먼 인터페이스 지침, Notion, node.js, RESTful, 대외제조, 대내Hi-Tech, C#, Slack, 1/2금융, 미디어/콘텐츠, Bitbucket, ASP.NET, Git, Swift, Xcode, C / C++, 대내Process, Teams, SVN, Android, API, Kotlin, 유통/물류/서비스, Global, Visual Basic, TestFlight, Google Docs, Studio, 머티리얼 디자인, Objective-C, SDK, SQLite, Native, XML, Firebase, Java, React, Github, Confluence, Python, Jira, PHP
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. None
+   회사: Line
+   업무분야: 
+   경력: None
+   필요 skill_set: AWS, C#, Cloud, Data Engineering, Deep Learning, Git, Java, Machine Learning, Node.js, Python, RPA, Ruby, SAP, TensorFlow, VR/AR 시각화
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.358683
+   - 스킬 매칭 점수 (0.4): 0.107186
+   - BM25 정규화 (0.35): 0.902309
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+
+2. 글로벌 서비스 Android 개발 (경력)
+   회사: NAVER WEBTOON
+   업무분야: Tech
+   경력: 경력 5년 이상
+   필요 skill_set: Android, Git, Kotlin
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.239906
+   - 스킬 매칭 점수 (0.4): 0.060000
+   - BM25 정규화 (0.35): 0.000101
+   - ChromaDB 코사인 (0.25): 0.863484
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004071&lang=ko
+
+3. Frontend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   필요 skill_set: AWS, Git, Java, React, Typescript
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.216242
+   - 스킬 매칭 점수 (0.4): 0.058385
+   - BM25 정규화 (0.35): 0.000101
+   - ChromaDB 코사인 (0.25): 0.771412
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2838/
+
+4. Front End Engineer
+   회사: LINE Taiwan
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   필요 skill_set: CSS, CSS Preprocessors, HTML, Java, JavaScript, Perl, React, SPA, UI, UX
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.214554
+   - 스킬 매칭 점수 (0.4): 0.054842
+   - BM25 정규화 (0.35): 0.000101
+   - ChromaDB 코사인 (0.25): 0.770327
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2888/
+
+5. LINE Messaging Server Engineer
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   필요 skill_set: C, C++, Elasticsearch, Erlang, Hadoop, Java, Kafka, Kotlin, MySQL, Python, Redis, Spark
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.213814
+   - 스킬 매칭 점수 (0.4): 0.053593
+   - BM25 정규화 (0.35): 0.000345
+   - ChromaDB 코사인 (0.25): 0.769024
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2209/
+
+
+====================================================================================================
+[4] 직무: Factory AX Engineering
+====================================================================================================
+Industry: Simulation
+핵심 Skill Set: 제조공정, Digital Factory 구축, 제조대내 Process, AI Literacy / Collaboration, 제조대외, 제조대내 Hi-Tech, 공정/반송장비자동화/지능화 Concept Design, IoT, Global
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.591344
+   - 스킬 매칭 점수 (0.4): 0.058333
+   - BM25 정규화 (0.35): 0.999048
+   - ChromaDB 코사인 (0.25): 0.873377
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+2. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.214594
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.858372
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+3. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.206682
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.826724
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+4. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   필요 skill_set: AGV/AMR, AS/RS, AutoCad, Data Analysis, MES, WMS
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.205641
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000005
+   - ChromaDB 코사인 (0.25): 0.822556
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+5. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: AI, AI Evaluation, Deep Learning, Machine Learning, PyTorch, TensorFlow, Vision AI
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.181937
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000004
+   - ChromaDB 코사인 (0.25): 0.727743
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+
+====================================================================================================
+[5] 직무: Factory AX Engineering
+====================================================================================================
+Industry: 기구설계
+핵심 Skill Set: 제조공정, Digital Factory 구축, 제조대내 Process, AI Literacy / Collaboration, SCADA, DCS, 제조대외, 제조대내 Hi-Tech, PLC, 공정/반송장비자동화/지능화 Concept Design, Global
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.590531
+   - 스킬 매칭 점수 (0.4): 0.050606
+   - BM25 정규화 (0.35): 0.998161
+   - ChromaDB 코사인 (0.25): 0.883727
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+2. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.217882
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.871526
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+3. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   필요 skill_set: AGV/AMR, AS/RS, AutoCad, Data Analysis, MES, WMS
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.213444
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000005
+   - ChromaDB 코사인 (0.25): 0.853770
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.211967
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.847864
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+5. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.211801
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.847199
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+
+====================================================================================================
+[6] 직무: Factory AX Engineering
+====================================================================================================
+Industry: 전장/제어
+핵심 Skill Set: 제조공정, HMI, Digital Factory 구축, 제조대내 Process, AI Literacy / Collaboration, SCADA, DCS, 제조대외, 제조대내 Hi-Tech, PLC, 공정/반송장비자동화/지능화 Concept Design, IoT, Global
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.592433
+   - 스킬 매칭 점수 (0.4): 0.044952
+   - BM25 정규화 (0.35): 0.998108
+   - ChromaDB 코사인 (0.25): 0.900460
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+2. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Cloud, Digital Twin, IoT, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.239920
+   - 스킬 매칭 점수 (0.4): 0.064253
+   - BM25 정규화 (0.35): 0.001501
+   - ChromaDB 코사인 (0.25): 0.854773
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+3. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.225141
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.900559
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+4. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   필요 skill_set: AGV/AMR, AS/RS, AutoCad, Data Analysis, MES, WMS
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.220372
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000014
+   - ChromaDB 코사인 (0.25): 0.881469
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+5. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.217789
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.871154
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+
+====================================================================================================
+[7] 직무: Solution Development
+====================================================================================================
+Industry: ERP_FCM (Financial Chain Management)
+핵심 Skill Set: Asset, 통신, TR, AI Literacy / Collaboration, 공공, 솔루션Architecture 설계방법론, Configuration, TaxCode, As-Is 분석, 고객요구사항분석, IM, CO, ERPFI, ERP, 대외제조, 대내Hi-Tech, Process, Cost, Company, 1/2금융, 미디어/콘텐츠, 테스트/ 검증, Data, CoA, 대내Process, PS, Biz, Program, 프로그래밍(ABAP, Java, node.js, C#, BTP), Solution별기능, 유통/물류/서비스, Global, Cut-Over 수행방법론, Financial, Center, 시스템구현, Solution 별 정책, Area, To-Be 설계
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   필요 skill_set: AWS, CI/CD, Docker, Git, Java, JavaScript, NoSQL, Node.js, PostgreSQL, RDBMS, Redis, Testing
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.311287
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.889392
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+
+2. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.213003
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000186
+   - ChromaDB 코사인 (0.25): 0.851752
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+3. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.211372
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000115
+   - ChromaDB 코사인 (0.25): 0.845326
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+4. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AWS, C#, Java, Python, SCM
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.210914
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.001002
+   - ChromaDB 코사인 (0.25): 0.842253
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+5. SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: ABAP, SAP, SAP ERP, SAP LE, SAP SD
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.209797
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000227
+   - ChromaDB 코사인 (0.25): 0.838868
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17229
+
+
+====================================================================================================
+[8] 직무: Solution Development
+====================================================================================================
+Industry: ERP_SCM (Supply Chain Management)
+핵심 Skill Set: Sales, 통신, AI Literacy / Collaboration, 공공, 솔루션Architecture 설계방법론, WM, SD, PP, Configuration, Vendor, QM, As-Is 분석, 고객요구사항분석, Supply, End, Plant, 대외제조, 대내Hi-Tech, Process, SC, 1/2금융, 미디어/콘텐츠, 테스트/ 검증, Data, Plan, Customer, PM, Storage, 대내Process, BOM, Program, 프로그래밍(ABAP, Java, node.js, C#, BTP), Product, Solution별기능, 유통/물류/서비스, Purchase, Global, Cut-Over 수행방법론, ERPMM, TD, Org, 시스템구현, Procure, Solution 별 정책, Chain, Order, Material, To-Be 설계
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   필요 skill_set: AWS, CI/CD, Docker, Git, Java, JavaScript, NoSQL, Node.js, PostgreSQL, RDBMS, Redis, Testing
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.312644
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.893269
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+
+2. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AWS, C#, Java, Python, SCM
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.222831
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.005135
+   - ChromaDB 코사인 (0.25): 0.884135
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.221831
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000107
+   - ChromaDB 코사인 (0.25): 0.887172
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+4. SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: ABAP, SAP, SAP ERP, SAP LE, SAP SD
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.220402
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000107
+   - ChromaDB 코사인 (0.25): 0.881459
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17229
+
+5. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.197559
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000107
+   - ChromaDB 코사인 (0.25): 0.790087
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+
+====================================================================================================
+[9] 직무: Solution Development
+====================================================================================================
+Industry: ERP_HCM (Human Capital Management)
+핵심 Skill Set: 통신, AI Literacy / Collaboration, 공공, 솔루션Architecture 설계방법론, Hire, Workday, As-Is 분석, 고객요구사항분석, Success, Factor, 대외제조, 대내Hi-Tech, 1/2금융, 미디어/콘텐츠, 테스트/ 검증, Data, 대내Process, 프로그래밍(ABAP, Java, node.js, C#, BTP), Cloud, Solution별기능, 유통/물류/서비스, Global, Retire, Cut-Over 수행방법론, HR, Web, SAPHR, 시스템구현, Solution 별 정책, To-Be 설계, System, Onboarding
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. AML 데이터 분석 담당자 (경력)
+   회사: 카카오
+   업무분야: Statistics/Analysis
+   경력: 경력 5년 이상
+   필요 skill_set: Database, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.251815
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.719470
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.kakao.com/jobs/P-14273?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.235769
+   - 스킬 매칭 점수 (0.4): 0.023100
+   - BM25 정규화 (0.35): 0.000045
+   - ChromaDB 코사인 (0.25): 0.906053
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Cloud, Digital Twin, IoT, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.212440
+   - 스킬 매칭 점수 (0.4): 0.028819
+   - BM25 정규화 (0.35): 0.000033
+   - ChromaDB 코사인 (0.25): 0.803604
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.208639
+   - 스킬 매칭 점수 (0.4): 0.023661
+   - BM25 정규화 (0.35): 0.000579
+   - ChromaDB 코사인 (0.25): 0.795888
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: ABAP, SAP, SAP ERP, SAP LE, SAP SD
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.200868
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000033
+   - ChromaDB 코사인 (0.25): 0.803426
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17229
+
+
+====================================================================================================
+[10] 직무: Solution Development
+====================================================================================================
+Industry: Biz. Solution
+핵심 Skill Set: Salesforce, AI Literacy / Collaboration, Database, IaaS, BI, Middleware, RPA, 모바일앱 등, 메일, SaaS, SCM, M365, PaaS, BI Tableau 포함, Cloud, SRM, SAP, 결재, CRM, OKTA, AD, Tableau, OnWorkplace
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   필요 skill_set: AWS, CI/CD, Docker, Git, Java, JavaScript, NoSQL, Node.js, PostgreSQL, RDBMS, Redis, Testing
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.330279
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.943655
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+
+2. BI Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   필요 skill_set: AWS, Airflow, Data Analysis, Database, Machine Learning, MySQL, NoSQL, Oracle, PostgreSQL, Python, Tableau, TensorFlow
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.243837
+   - 스킬 매칭 점수 (0.4): 0.068511
+   - BM25 정규화 (0.35): 0.001500
+   - ChromaDB 코사인 (0.25): 0.863629
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2577/
+
+3. Senior Data Insight Analyst
+   회사: LINE Taiwan
+   업무분야: Planning
+   경력: 경력 5년 이상
+   필요 skill_set: AI, AWS, BigQuery, Cloud, Hadoop, Machine Learning, Python, SQL, Spark, Tableau
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.239545
+   - 스킬 매칭 점수 (0.4): 0.071248
+   - BM25 정규화 (0.35): 0.000034
+   - ChromaDB 코사인 (0.25): 0.844134
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2738/
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.212892
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000010
+   - ChromaDB 코사인 (0.25): 0.851554
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   필요 skill_set: AI, AWS, Cloud, Data Analysis, Database, DevOps, Docker, Kafka, Kubernetes, Linux, Python, Redis, SQL, Spark, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.211190
+   - 스킬 매칭 점수 (0.4): 0.063925
+   - BM25 정규화 (0.35): 0.000010
+   - ChromaDB 코사인 (0.25): 0.742466
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[11] 직무: Solution Development
+====================================================================================================
+Industry: Tech. Solution
+핵심 Skill Set: SRM, PaaS, SaaS, AI Literacy / Collaboration, SAP, SCM, CRM, Database, IaaS, Middleware, Cloud, Features, Features 도출, RPA
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.330626
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.752551
+   - ChromaDB 코사인 (0.25): 0.268932
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+
+2. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.284391
+   - 스킬 매칭 점수 (0.4): 0.179048
+   - BM25 정규화 (0.35): 0.000276
+   - ChromaDB 코사인 (0.25): 0.850700
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+3. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AWS, C#, Java, Python, SCM
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.233864
+   - 스킬 매칭 점수 (0.4): 0.060317
+   - BM25 정규화 (0.35): 0.000080
+   - ChromaDB 코사인 (0.25): 0.838835
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+4. SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: ABAP, SAP, SAP ERP, SAP LE, SAP SD
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.230521
+   - 스킬 매칭 점수 (0.4): 0.060317
+   - BM25 정규화 (0.35): 0.000119
+   - ChromaDB 코사인 (0.25): 0.825410
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17229
+
+5. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   필요 skill_set: AI, AWS, Cloud, Data Analysis, Database, DevOps, Docker, Kafka, Kubernetes, Linux, Python, Redis, SQL, Spark, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.229778
+   - 스킬 매칭 점수 (0.4): 0.092857
+   - BM25 정규화 (0.35): 0.000164
+   - ChromaDB 코사인 (0.25): 0.770311
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[12] 직무: Solution Development
+====================================================================================================
+Industry: Solution Architecture
+핵심 Skill Set: SRM, PaaS, PoC, SaaS, AI Literacy / Collaboration, SAP, SCM, CRM, Premise, Database, IaaS, Middleware, Cloud, RPA
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   필요 skill_set: AWS, CI/CD, Docker, Git, Java, JavaScript, NoSQL, Node.js, PostgreSQL, RDBMS, Redis, Testing
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.357470
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.848854
+   - ChromaDB 코사인 (0.25): 0.241485
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+
+2. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AWS, C#, Java, Python, SCM
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.226693
+   - 스킬 매칭 점수 (0.4): 0.060317
+   - BM25 정규화 (0.35): 0.000090
+   - ChromaDB 코사인 (0.25): 0.810138
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.221000
+   - 스킬 매칭 점수 (0.4): 0.044009
+   - BM25 정규화 (0.35): 0.000123
+   - ChromaDB 코사인 (0.25): 0.813411
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.213583
+   - 스킬 매칭 점수 (0.4): 0.179048
+   - BM25 정규화 (0.35): 0.000192
+   - ChromaDB 코사인 (0.25): 0.567587
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+5. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.208116
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000090
+   - ChromaDB 코사인 (0.25): 0.832338
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+
+====================================================================================================
+[13] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: System/Network Engineering
+핵심 Skill Set: Presentation, 통신, AI Literacy / Collaboration, 공공, Risk 관리, On-Prem., Communication, On-Prem, MSA 등, Business Writing, CD, 대외제조, 대내Hi-Tech, CI, 1/2금융, 미디어/콘텐츠, Infra / Cloud Architecture, 협업, 데이터분석, 대내Process, Cloud, 구축/운영, 유통/물류/서비스, 배포Pipeline, Global, MSA, Cost Simulation, 테스트자동화, Monolithic, Governance, CI/CD, 조정
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. None
+   회사: Line
+   업무분야: 
+   경력: None
+   필요 skill_set: AWS, C#, Cloud, Data Engineering, Deep Learning, Git, Java, Machine Learning, Node.js, Python, RPA, Ruby, SAP, TensorFlow, VR/AR 시각화
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.294525
+   - 스킬 매칭 점수 (0.4): 0.024592
+   - BM25 정규화 (0.35): 0.813395
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+
+2. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AWS, Azure, Cloud, Cloud Native, DevOps, Git, Kubernetes, Linux, Terraform, Virtualization
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.235794
+   - 스킬 매칭 점수 (0.4): 0.026448
+   - BM25 정규화 (0.35): 0.000013
+   - ChromaDB 코사인 (0.25): 0.900841
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+3. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   필요 skill_set: AWS, Cloud, Database, Git, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.232426
+   - 스킬 매칭 점수 (0.4): 0.028819
+   - BM25 정규화 (0.35): 0.000028
+   - ChromaDB 코사인 (0.25): 0.883552
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.232235
+   - 스킬 매칭 점수 (0.4): 0.023661
+   - BM25 정규화 (0.35): 0.000020
+   - ChromaDB 코사인 (0.25): 0.891056
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.224751
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000008
+   - ChromaDB 코사인 (0.25): 0.898991
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+
+====================================================================================================
+[14] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: Middleware/Database Engineering
+핵심 Skill Set: Presentation, 통신, AI Literacy / Collaboration, 공공, Risk 관리, Middleware, Communication, Business Writing, 대외제조, 대내Hi-Tech, Cluster, 1/2금융, 미디어/콘텐츠, Infra / Cloud Architecture, 협업, 데이터분석, 대내Process, DBMS, Performance, DB, 유통/물류/서비스, Global, Cost Simulation, HA, Tuning, SQL, 조정
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.270583
+   - 스킬 매칭 점수 (0.4): 0.031699
+   - BM25 정규화 (0.35): 0.736866
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+2. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   필요 skill_set: AWS, Cloud, Database, Git, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.232423
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000058
+   - ChromaDB 코사인 (0.25): 0.929611
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+3. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AWS, Azure, Cloud, Cloud Native, DevOps, Git, Kubernetes, Linux, Terraform, Virtualization
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.201276
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000054
+   - ChromaDB 코사인 (0.25): 0.805029
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+4. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   필요 skill_set: AWS, Cloud, Firewall, TCP/IP, 네트워크 보안, 클라우드 보안, 클라우드 보안 솔루션, 트러블 슈팅
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.191464
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000033
+   - ChromaDB 코사인 (0.25): 0.765811
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+
+5. Data Engineer (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 5년 이상
+   필요 skill_set: AWS, Cloud, Data Ingestion Pipeline, Database, Java, Python, Spark
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.190118
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000033
+   - ChromaDB 코사인 (0.25): 0.760425
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.kakao.com/jobs/P-14271?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[15] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: Data Center Engineering
+핵심 Skill Set: DataCenter, Presentation, 통신, AI Literacy / Collaboration, 공공, Risk 관리, Communication, Business Writing, 대외제조, 대내Hi-Tech, Planning, 1/2금융, 미디어/콘텐츠, Infra / Cloud Architecture, 협업, 데이터분석, Capacity, 대내Process, 유통/물류/서비스, Global, Cost Simulation, 조정
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. ML/Data Scientist – LINE Recommendation Platform
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   필요 skill_set: AI 기술, Deep Learning, Machine Learning, Python, 데이터 분석, 데이터 파이프라인, 모델링, 전처리, 추천 시스템, 통계적 분석
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.264291
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.755117
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2869/
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.227651
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000101
+   - ChromaDB 코사인 (0.25): 0.910463
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. Data Engineer (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 5년 이상
+   필요 skill_set: AWS, Cloud, Data Ingestion Pipeline, Database, Java, Python, Spark
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.203723
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000034
+   - ChromaDB 코사인 (0.25): 0.814842
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14271?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AWS, Azure, Cloud, Cloud Native, DevOps, Git, Kubernetes, Linux, Terraform, Virtualization
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.201315
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000058
+   - ChromaDB 코사인 (0.25): 0.805179
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+5. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   필요 skill_set: AWS, Cloud, Database, Git, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.200549
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000070
+   - ChromaDB 코사인 (0.25): 0.802100
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+
+====================================================================================================
+[16] 직무: Software Architect
+====================================================================================================
+Industry: Software Development
+핵심 Skill Set: AI 활용, 이해관계자와의협력및아키텍처역량확산, 아키텍처설계검토/기술리스크관리, 아키텍처전략및기술표준수립/관리, IndustryKnowledge
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 카카오디벨로퍼스 프론트/서버 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: Docker, Kubernetes, MongoDB, Node.js, React, TypeScript
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.329101
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.940289
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.kakao.com/jobs/P-14122?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.232927
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000043
+   - ChromaDB 코사인 (0.25): 0.931650
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+3. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: AI, AI Evaluation, Deep Learning, Machine Learning, PyTorch, TensorFlow, Vision AI
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.229596
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000279
+   - ChromaDB 코사인 (0.25): 0.917992
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.228146
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000043
+   - ChromaDB 코사인 (0.25): 0.912523
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.224107
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000126
+   - ChromaDB 코사인 (0.25): 0.896250
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+
+====================================================================================================
+[17] 직무: Data Architect
+====================================================================================================
+Industry: Software Development
+핵심 Skill Set: AI 활용, 이해관계자와의협력및아키텍처역량확산, DB, 아키텍처설계검토/기술리스크관리, 아키텍처전략및기술표준수립/관리, IndustryKnowledge
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Data Engineer (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 5년 이상
+   필요 skill_set: AWS, Cloud, Data Ingestion Pipeline, Database, Java, Python, Spark
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.400683
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.487394
+   - ChromaDB 코사인 (0.25): 0.920378
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14271?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.394030
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.487394
+   - ChromaDB 코사인 (0.25): 0.893767
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+3. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.238336
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000528
+   - ChromaDB 코사인 (0.25): 0.952604
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+4. Data Engineer (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 5년 이상
+   필요 skill_set: Java, Python, 분석, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.233011
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000084
+   - ChromaDB 코사인 (0.25): 0.931927
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14271?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.232487
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000084
+   - ChromaDB 코사인 (0.25): 0.929830
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+
+====================================================================================================
+[18] 직무: Infra Architect
+====================================================================================================
+Industry: Software Development
+핵심 Skill Set: AI 활용, Native, 이해관계자와의협력및아키텍처역량확산, Infra, Cloud, 아키텍처설계검토/기술리스크관리, SRE, 아키텍처전략및기술표준수립/관리, IndustryKnowledge
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.377415
+   - 스킬 매칭 점수 (0.4): 0.060256
+   - BM25 정규화 (0.35): 0.368611
+   - ChromaDB 코사인 (0.25): 0.897194
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+2. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   필요 skill_set: AWS, Cloud, Database, Docker, Elasticsearch, Kafka, Kubernetes, Linux, Python, Redis, Shell, System Administration, System Design, System Optimization, Troubleshooting, Virtualization
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.253605
+   - 스킬 매칭 점수 (0.4): 0.062500
+   - BM25 정규화 (0.35): 0.000705
+   - ChromaDB 코사인 (0.25): 0.913435
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.224918
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000705
+   - ChromaDB 코사인 (0.25): 0.898686
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.224254
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000705
+   - ChromaDB 코사인 (0.25): 0.896030
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. Site Reliability Engineer
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   필요 skill_set: C/C++, Java, Python, SaaS, TensorFlow, node.js
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.201974
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000705
+   - ChromaDB 코사인 (0.25): 0.806911
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2709/
+
+
+====================================================================================================
+[19] 직무: AI Architect
+====================================================================================================
+Industry: AI Architecture
+핵심 Skill Set: Prompting, Autonomous Workflow Management, Explainable AI, Agent 및 자동화, Fine-tuning, QLoRA 등, HPO, 콘텐츠 Moderation, XAI, ElasticSearch, Few-shot, AI, Data Preprocessing, Faiss, Data Chunking, Semantic Search Engine, 개인정보 보호기술, TensorRT, Prompt Engineering, Safety 관리기술, Model Serving & Deployment, Prompt 지속적 개선기술, 템플릿 관리기술, Workflow Framework, AutoGPT, Bias Detection, Planning 및 Action 자동화 기술, vLLM, P-Tuning, Prompt 설계방법론, Few-shot Prompting 등, Embedding 관리 및 최적화기술, Retrieval-Augmented, 차등 프라이버시 등, Retrieval-Augmented Generation, Chain-of-Thought, RAG, VectorDB 설계 및 운영, AI Search 등, Multi Agent 설계 기술, AI 윤리 및 신뢰성, TGI, Milvus, LoRA, Search, Metadata Management, TGI 등, GPU, 프롬프트 엔지니어링 등, Pinecone, Agentic AI Platform 설계 기술, AI Evaluation, Generation, Parallel Processing, GPU 자원 관리, Faiss 등, Human in the loop, TaskWeaver, QLoRA, OpenSearch, Prompt 자동화, LangChain, Data Ingestion Pipeline, Optimization, 분산 훈련 및 추론, AutoGPT 등, Document Structuring, Human, Triton, 토큰화
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   필요 skill_set: AI, AI 기술, Deep Learning, GPU 자원 관리, Java, Machine Learning, Node.js, Python, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.393356
+   - 스킬 매칭 점수 (0.4): 0.026520
+   - BM25 정규화 (0.35): 0.894856
+   - ChromaDB 코사인 (0.25): 0.278195
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+2. LINE AI Product Manager
+   회사: LINE Plus
+   업무분야: Planning
+   경력: 경력 7년 이상
+   필요 skill_set: AI, Data, Deep Learning, Machine Learning, Prompt Engineering, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.263158
+   - 스킬 매칭 점수 (0.4): 0.027490
+   - BM25 정규화 (0.35): 0.102514
+   - ChromaDB 코사인 (0.25): 0.865130
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2720/
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.228582
+   - 스킬 매칭 점수 (0.4): 0.037563
+   - BM25 정규화 (0.35): 0.000128
+   - ChromaDB 코사인 (0.25): 0.854046
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: AI, AI Evaluation, Deep Learning, Machine Learning, PyTorch, TensorFlow, Vision AI
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.225094
+   - 스킬 매칭 점수 (0.4): 0.027238
+   - BM25 정규화 (0.35): 0.000317
+   - ChromaDB 코사인 (0.25): 0.856351
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+5. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.215229
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000018
+   - ChromaDB 코사인 (0.25): 0.860893
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+
+====================================================================================================
+[20] 직무: Automation Architect
+====================================================================================================
+Industry: Automation Architecture
+핵심 Skill Set: AnyLogic 등, 동선, VR/AR 시각화, 협업 도구, CAD/CAE, VR, AR, Lean Manufacturing 원칙 이해, Tecnomatix, CAD, FlexSim, CATIA, AutoCAD, AnyLogic, BIM, 시뮬레이션, Digital Twin Platform, SolidWorks, 3D 모델링, 설비 배치 자동화, 데이터 분석, 공간, CAE, 설계 검토 및 공간 커뮤니케이션, CATIA 등, 최적화 알고리즘
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   필요 skill_set: AGV/AMR, AS/RS, AutoCad, Data Analysis, MES, WMS
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.541353
+   - 스킬 매칭 점수 (0.4): 0.034119
+   - BM25 정규화 (0.35): 0.884086
+   - ChromaDB 코사인 (0.25): 0.873100
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+2. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.235386
+   - 스킬 매칭 점수 (0.4): 0.027094
+   - BM25 정규화 (0.35): 0.058922
+   - ChromaDB 코사인 (0.25): 0.815700
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+3. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.216020
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000089
+   - ChromaDB 코사인 (0.25): 0.863954
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.210134
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000089
+   - ChromaDB 코사인 (0.25): 0.840414
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+5. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.204848
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000089
+   - ChromaDB 코사인 (0.25): 0.819266
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+
+====================================================================================================
+[21] 직무: AI PM
+====================================================================================================
+Industry: AI Project Management
+핵심 Skill Set: 최신 기술 트렌드 분석, AI 적용 방식의 장단점 파악, 리스크 관리, 프로젝트 관리 역량, AI, AI 기술
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   필요 skill_set: AI, AI 기술, Deep Learning, GPU 자원 관리, Java, Machine Learning, Node.js, Python, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.426852
+   - 스킬 매칭 점수 (0.4): 0.200000
+   - BM25 정규화 (0.35): 0.991005
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+2. LINE AI Product Manager
+   회사: LINE Plus
+   업무분야: Planning
+   경력: 경력 7년 이상
+   필요 skill_set: AI, Data, Deep Learning, Machine Learning, Prompt Engineering, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.265093
+   - 스킬 매칭 점수 (0.4): 0.113636
+   - BM25 정규화 (0.35): 0.000072
+   - ChromaDB 코사인 (0.25): 0.878454
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2720/
+
+3. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: AI, AI Evaluation, Deep Learning, Machine Learning, PyTorch, TensorFlow, Vision AI
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.259537
+   - 스킬 매칭 점수 (0.4): 0.108333
+   - BM25 정규화 (0.35): 0.001721
+   - ChromaDB 코사인 (0.25): 0.862406
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+4. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   필요 skill_set: AI 기술, Java, Node.js, Python, React, TensorFlow, WebSocket, gRPC
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.253951
+   - 스킬 매칭 점수 (0.4): 0.103846
+   - BM25 정규화 (0.35): 0.000583
+   - ChromaDB 코사인 (0.25): 0.848834
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.249980
+   - 스킬 매칭 점수 (0.4): 0.080435
+   - BM25 정규화 (0.35): 0.000119
+   - ChromaDB 코사인 (0.25): 0.871059
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+
+====================================================================================================
+[22] 직무: Project Management
+====================================================================================================
+Industry: Application PM
+핵심 Skill Set: 프로젝트실행및통제, AI 활용, SDLC, 프로젝트품질관리, Prototype, Industry Knowledge, 안전인증, Iterative, 개발/관리방법론, Agile, Waterfall, Soft Skill, 위험및이슈관리, 프로젝트계획수립, Agile 프로세스
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Technical Project Manager
+   회사: LINE Company Thailand
+   업무분야: Engineering/Project Management
+   경력: 경력 5년 이상
+   필요 skill_set: Agile, SQL
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.425290
+   - 스킬 매칭 점수 (0.4): 0.063750
+   - BM25 정규화 (0.35): 0.940398
+   - ChromaDB 코사인 (0.25): 0.282601
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2851/
+
+2. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.221275
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000087
+   - ChromaDB 코사인 (0.25): 0.884977
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+3. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.218130
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000087
+   - ChromaDB 코사인 (0.25): 0.872399
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+4. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Cloud, Digital Twin, IoT, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.217937
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000087
+   - ChromaDB 코사인 (0.25): 0.871625
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+5. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.217921
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000087
+   - ChromaDB 코사인 (0.25): 0.871563
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+
+====================================================================================================
+[23] 직무: Project Management
+====================================================================================================
+Industry: Infra PM
+핵심 Skill Set: 프로젝트실행및통제, AI 활용, 프로젝트품질관리, Industry Knowledge, 안전인증, Container, 개발/관리방법론, Computing, Infra, Cloud, Soft Skill, 위험및이슈관리, Platform, 프로젝트계획수립
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. None
+   회사: Line
+   업무분야: 
+   경력: None
+   필요 skill_set: AWS, C#, Cloud, Data Engineering, Deep Learning, Git, Java, Machine Learning, Node.js, Python, RPA, Ruby, SAP, TensorFlow, VR/AR 시각화
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.365741
+   - 스킬 매칭 점수 (0.4): 0.046429
+   - BM25 정규화 (0.35): 0.991913
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+
+2. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Cloud, Digital Twin, IoT, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.243544
+   - 스킬 매칭 점수 (0.4): 0.060317
+   - BM25 정규화 (0.35): 0.000029
+   - ChromaDB 코사인 (0.25): 0.877627
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.237574
+   - 스킬 매칭 점수 (0.4): 0.044009
+   - BM25 정규화 (0.35): 0.000083
+   - ChromaDB 코사인 (0.25): 0.879765
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.220640
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000020
+   - ChromaDB 코사인 (0.25): 0.882534
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: 법규, 분석, 전략 수립, 커뮤니케이션, 통신, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.220471
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000020
+   - ChromaDB 코사인 (0.25): 0.881856
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[24] 직무: Project Management
+====================================================================================================
+Industry: Solution PM
+핵심 Skill Set: 프로젝트실행및통제, AI 활용, 프로젝트품질관리, ERP, 제품/서비스 기획, PLM, Industry Knowledge, CRM, 안전인증, 상품화, 개발/관리방법론, Groupware, 마케팅 기획, Soft Skill, 위험및이슈관리, 프로젝트계획수립, HRSolution
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.226562
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000321
+   - ChromaDB 코사인 (0.25): 0.905799
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+2. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.225301
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000321
+   - ChromaDB 코사인 (0.25): 0.900756
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+3. SAP ERP PS 모듈 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: ABAP, SAP
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.200934
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000321
+   - ChromaDB 코사인 (0.25): 0.803286
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17223
+
+4. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: HTML5, Java, Oracle, RDBMS, SCM, SRM, Spring, myBatis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.199127
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000321
+   - ChromaDB 코사인 (0.25): 0.796061
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+5. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Cloud, Digital Twin, IoT, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.196177
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000321
+   - ChromaDB 코사인 (0.25): 0.784258
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+
+====================================================================================================
+[25] 직무: Quality Management
+====================================================================================================
+Industry: PMO
+핵심 Skill Set: Presentation, 통신, AI Literacy / Collaboration, 공공, Risk 관리, RM, Communication, 유통/물류, Business Writing, 대외제조, 대내Hi-Tech, 1/2금융, 미디어/콘텐츠, 데이터분석, 대내Process, Collaboration, Global, Coordination, Risk
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Fintech Risk & Business Reporting Manager
+   회사: LINE Financial Corp.
+   업무분야: Corporate/Risk Management
+   경력: 경력 2년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.284725
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.813501
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2778/
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.192135
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000008
+   - ChromaDB 코사인 (0.25): 0.768528
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.182307
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000008
+   - ChromaDB 코사인 (0.25): 0.729216
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+4. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Cloud, Digital Twin, IoT, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.179512
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000008
+   - ChromaDB 코사인 (0.25): 0.718038
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+5. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   필요 skill_set: Git, JIRA, Java, Python, Selenium, Test Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.167017
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000008
+   - ChromaDB 코사인 (0.25): 0.668056
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[26] 직무: Quality Management
+====================================================================================================
+Industry: Quality Engineering
+핵심 Skill Set: Presentation, 통신, AI Literacy / Collaboration, 공공, Risk 관리, Communication, IT, Audit, 유통/물류, Business Writing, SW, 대외제조, 대내Hi-Tech, 1/2금융, 미디어/콘텐츠, 데이터분석, 대내Process, Collaboration, Global, Coordination, Governance, Delivery
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: 법규, 분석, 전략 수립, 커뮤니케이션, 통신, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.231524
+   - 스킬 매칭 점수 (0.4): 0.039562
+   - BM25 정규화 (0.35): 0.000241
+   - ChromaDB 코사인 (0.25): 0.862458
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.216921
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000241
+   - ChromaDB 코사인 (0.25): 0.867347
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.215711
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.001054
+   - ChromaDB 코사인 (0.25): 0.861368
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+4. Internal Communications & Culture Coordinator
+   회사: LINE Plus
+   업무분야: 인사/조직문화
+   경력: 경력 2년 이상
+   필요 skill_set: Collaboration, Communication, Confluence, Git, Jira, MS Office, Slack, Teams
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.210717
+   - 스킬 매칭 점수 (0.4): 0.077273
+   - BM25 정규화 (0.35): 0.513738
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2892/
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: BCP, Compliance, IT 거버넌스, 장애 관리
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.188728
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000241
+   - ChromaDB 코사인 (0.25): 0.754575
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[27] 직무: Quality Management
+====================================================================================================
+Industry: Offshoring Service Professional
+핵심 Skill Set: 대내Process, Presentation, 통신, AI Literacy / Collaboration, 대외제조, 대내Hi-Tech, 공공, 데이터분석, Risk 관리, 1/2금융, 미디어/콘텐츠, Collaboration, Communication, Global, 유통/물류, Offshoring, Business Writing, Coordination
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Internal Communications & Culture Coordinator
+   회사: LINE Plus
+   업무분야: 인사/조직문화
+   경력: 경력 2년 이상
+   필요 skill_set: Collaboration, Communication, Confluence, Git, Jira, MS Office, Slack, Teams
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.370596
+   - 스킬 매칭 점수 (0.4): 0.091667
+   - BM25 정규화 (0.35): 0.682319
+   - ChromaDB 코사인 (0.25): 0.380470
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2892/
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.219666
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000123
+   - ChromaDB 코사인 (0.25): 0.878491
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.218416
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000291
+   - ChromaDB 코사인 (0.25): 0.873255
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+4. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.212729
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000123
+   - ChromaDB 코사인 (0.25): 0.850743
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: BCP, Compliance, IT 거버넌스, 장애 관리
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.190823
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000123
+   - ChromaDB 코사인 (0.25): 0.763120
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[28] 직무: AI
+====================================================================================================
+Industry: AI/Data Development
+핵심 Skill Set: Ops, Cloud / Container 기반 AI Infra 아키텍처 설계, AI 기반 서비스 기획 및 구조 설계, AI, 개발 환경 및 프레임워크 구성, MLOps
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.655779
+   - 스킬 매칭 점수 (0.4): 0.163636
+   - BM25 정규화 (0.35): 0.999246
+   - ChromaDB 코사인 (0.25): 0.962353
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+2. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   필요 skill_set: AI, AI 기술, Deep Learning, GPU 자원 관리, Java, Machine Learning, Node.js, Python, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.264000
+   - 스킬 매칭 점수 (0.4): 0.096667
+   - BM25 정규화 (0.35): 0.000172
+   - ChromaDB 코사인 (0.25): 0.901092
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.232992
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.931965
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. MLOps Engineer (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: CI/CD, LLM, MySQL, Python, 커뮤니케이션, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.231684
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.926733
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14039?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. MLOps Engineer (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: AWS, CI/CD, Git, Golang, Kubernetes, MySQL, PostgreSQL, Python, TensorFlow
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.229951
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000011
+   - ChromaDB 코사인 (0.25): 0.919787
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14039?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[29] 직무: AI
+====================================================================================================
+Industry: Generative AI Development
+핵심 Skill Set: Cloud / Container 기반 AI Infra 아키텍처 설계, Pipeline, Agent, AI 기반 서비스 기획 및 구조 설계, VectorDB, LLM, 개발 환경 및 프레임워크 구성
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   필요 skill_set: .NET, DDD, Data Ingestion Pipeline, Deep Learning, Docker, GraphQL, Machine Learning, MongoDB, NoSQL, Python, Redis, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.544665
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.918459
+   - ChromaDB 코사인 (0.25): 0.892816
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+
+2. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.258948
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.073326
+   - ChromaDB 코사인 (0.25): 0.933135
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+3. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   필요 skill_set: AI, AI 기술, Deep Learning, GPU 자원 관리, Java, Machine Learning, Node.js, Python, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.232304
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.004080
+   - ChromaDB 코사인 (0.25): 0.923505
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+4. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.228504
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000037
+   - ChromaDB 코사인 (0.25): 0.913965
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+5. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.224125
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000037
+   - ChromaDB 코사인 (0.25): 0.896447
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+
+====================================================================================================
+[30] 직무: AI
+====================================================================================================
+Industry: Physical AI Development
+핵심 Skill Set: AI, Simulation, Cloud / Container 기반 AI Infra 아키텍처 설계, AI 기반 서비스 기획 및 구조 설계, Digital, Learning, 개발 환경 및 프레임워크 구성, Task
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.566459
+   - 스킬 매칭 점수 (0.4): 0.065500
+   - BM25 정규화 (0.35): 0.894826
+   - ChromaDB 코사인 (0.25): 0.908278
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+2. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   필요 skill_set: AI, AI 기술, Deep Learning, GPU 자원 관리, Java, Machine Learning, Node.js, Python, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.291513
+   - 스킬 매칭 점수 (0.4): 0.078676
+   - BM25 정규화 (0.35): 0.102510
+   - ChromaDB 코사인 (0.25): 0.896657
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+3. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: AI, AI Evaluation, Deep Learning, Machine Learning, PyTorch, TensorFlow, Vision AI
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.249319
+   - 스킬 매칭 점수 (0.4): 0.087500
+   - BM25 정규화 (0.35): 0.000199
+   - ChromaDB 코사인 (0.25): 0.856998
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.223514
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000018
+   - ChromaDB 코사인 (0.25): 0.894032
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.223341
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000018
+   - ChromaDB 코사인 (0.25): 0.893341
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+
+====================================================================================================
+[31] 직무: Software Development
+====================================================================================================
+Industry: Physical AI Development
+핵심 Skill Set: SW, PyTorch, AI Literacy / Collaboration, Python, TensorFlow, C/C++, ROS, AI, HW
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: AI, AI Evaluation, Deep Learning, Machine Learning, PyTorch, TensorFlow, Vision AI
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.660115
+   - 스킬 매칭 점수 (0.4): 0.261538
+   - BM25 정규화 (0.35): 0.969936
+   - ChromaDB 코사인 (0.25): 0.864088
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+2. 추천 시스템 연구/개발 (경력)
+   회사: 카카오
+   업무분야: Algorithm/ML
+   경력: 경력 3년 이상
+   필요 skill_set: C++, Machine Learning, PyTorch, Python, TensorFlow
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.311506
+   - 스킬 매칭 점수 (0.4): 0.290909
+   - BM25 정규화 (0.35): 0.000019
+   - ChromaDB 코사인 (0.25): 0.780543
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14287?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.286027
+   - 스킬 매칭 점수 (0.4): 0.187500
+   - BM25 정규화 (0.35): 0.000639
+   - ChromaDB 코사인 (0.25): 0.843214
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   필요 skill_set: AI 기술, Java, Node.js, Python, React, TensorFlow, WebSocket, gRPC
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.279608
+   - 스킬 매칭 점수 (0.4): 0.160000
+   - BM25 정규화 (0.35): 0.000130
+   - ChromaDB 코사인 (0.25): 0.862248
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   필요 skill_set: AI 기술, Java, LLM, Next.js, node.js, Python, RAG, React, Spring, TensorFlow, 통신, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.268798
+   - 스킬 매칭 점수 (0.4): 0.140351
+   - BM25 정규화 (0.35): 0.000019
+   - ChromaDB 코사인 (0.25): 0.850604
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[32] 직무: Software Development
+====================================================================================================
+Industry: Information Security
+핵심 Skill Set: AI Literacy / Collaboration
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Information Security Engineer
+   회사: LINE Pay Taiwan
+   업무분야: Engineering/Security Engineering
+   경력: 경력 5년 이상
+   필요 skill_set: AWS, Python, Risk Management, Security, Software Installation, User Access Review
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.315314
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.900898
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.linecorp.com/ko/jobs/1941/
+
+2. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   필요 skill_set: AI, AI 기술, Deep Learning, GPU 자원 관리, Java, Machine Learning, Node.js, Python, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.220588
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.027205
+   - ChromaDB 코사인 (0.25): 0.844266
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.216416
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000041
+   - ChromaDB 코사인 (0.25): 0.865606
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.214709
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000125
+   - ChromaDB 코사인 (0.25): 0.858660
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   필요 skill_set: AI 기술, Java, Node.js, Python, React, TensorFlow, WebSocket, gRPC
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.213437
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000179
+   - ChromaDB 코사인 (0.25): 0.853498
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[33] 직무: 정보보호
+====================================================================================================
+Industry: 보안Governance/Compliance
+핵심 Skill Set: Presentation, 통신, 공공, 법규, 암호화, 인증, Business Writing, 대외제조, 대내Hi-Tech, Cloud 보안, 1/2금융, 미디어/콘텐츠, 협업, Risk 평가, AI 보안, 데이터분석, 커뮤니케이션, OT 보안, 대내Process, 유통/물류/서비스, 시스템보안, Global, Coordination, AI 활용, 표준Framework, 시큐어코딩, 신기술Trend 분석
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   필요 skill_set: AWS, Cloud, Firewall, TCP/IP, 네트워크 보안, 클라우드 보안, 클라우드 보안 솔루션, 트러블 슈팅
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.349542
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.998690
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+
+2. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: 법규, 분석, 전략 수립, 커뮤니케이션, 통신, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.275146
+   - 스킬 매칭 점수 (0.4): 0.140996
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.874987
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 네트워크 보안 담당자 (보안)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~10년
+   필요 skill_set: 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.232114
+   - 스킬 매칭 점수 (0.4): 0.037037
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.869195
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14247?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 네트워크 보안 담당자 (보안)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~10년
+   필요 skill_set: Compliance, Network Security, SOAR, Zerotrust
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.217716
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.870860
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14247?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.215750
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.862997
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+
+====================================================================================================
+[34] 직무: 정보보호
+====================================================================================================
+Industry: 보안진단/Consulting
+핵심 Skill Set: Presentation, 통신, 공공, 법규, 암호화, 인증, Business Writing, 대외제조, 대내Hi-Tech, Cloud 보안, 1/2금융, 미디어/콘텐츠, 협업, Risk 평가, AI 보안, 데이터분석, 커뮤니케이션, OT 보안, 대내Process, Biz, 유통/물류/서비스, 시스템보안, Global, Coordination, AI 활용, 표준Framework, Risk, 시큐어코딩, 신기술Trend 분석
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   필요 skill_set: AWS, Cloud, Firewall, TCP/IP, 네트워크 보안, 클라우드 보안, 클라우드 보안 솔루션, 트러블 슈팅
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.497961
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.998195
+   - ChromaDB 코사인 (0.25): 0.594373
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+
+2. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: 법규, 분석, 전략 수립, 커뮤니케이션, 통신, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.276755
+   - 스킬 매칭 점수 (0.4): 0.131702
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.896293
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 서비스보안 및 취약점 진단 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   필요 skill_set: 분석, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.231141
+   - 스킬 매칭 점수 (0.4): 0.033678
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.870674
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14245?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.218883
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.875529
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+
+5. 네트워크 보안 담당자 (보안)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~10년
+   필요 skill_set: 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.201568
+   - 스킬 매칭 점수 (0.4): 0.034483
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.751095
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14247?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[35] 직무: 정보보호
+====================================================================================================
+Industry: 보안Solution Service
+핵심 Skill Set: Presentation, 통신, 공공, 법규, 암호화, 인증, Business Writing, 대외제조, 대내Hi-Tech, Cloud 보안, 1/2금융, 미디어/콘텐츠, 협업, Risk 평가, AI 보안, 데이터분석, 커뮤니케이션, Defense-in-Depth, OT 보안, 대내Process, 유통/물류/서비스, 시스템보안, Global, Coordination, AI 활용, 표준Framework, 시큐어코딩, 신기술Trend 분석
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   필요 skill_set: AWS, Cloud, Firewall, TCP/IP, 네트워크 보안, 클라우드 보안, 클라우드 보안 솔루션, 트러블 슈팅
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.498898
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.998653
+   - ChromaDB 코사인 (0.25): 0.597477
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+
+2. 네트워크 보안 담당자 (보안)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~10년
+   필요 skill_set: 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.232732
+   - 스킬 매칭 점수 (0.4): 0.035714
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.873781
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14247?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   필요 skill_set: 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.231491
+   - 스킬 매칭 점수 (0.4): 0.035714
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.868816
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.219627
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.878506
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+
+5. 네트워크 보안 담당자 (보안)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~10년
+   필요 skill_set: Compliance, Network Security, SOAR, Zerotrust
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.215873
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000007
+   - ChromaDB 코사인 (0.25): 0.863483
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14247?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[36] 직무: Domain Expert
+====================================================================================================
+Industry: 제1 금융
+핵심 Skill Set: 통신, 공공, 제2 금융, Global, 미디어/콘텐츠, 유통/물류/서비스, 제1 금융, Account
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE BK Product Manager
+   회사: LINE Financial Corp.
+   업무분야: Planning
+   경력: 경력 3년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.349541
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.998690
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2786/
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.215479
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000002
+   - ChromaDB 코사인 (0.25): 0.861912
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.208693
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000005
+   - ChromaDB 코사인 (0.25): 0.834766
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+4. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.183331
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000003
+   - ChromaDB 코사인 (0.25): 0.733318
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+
+5. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AWS, Azure, Cloud, Cloud Native, DevOps, Git, Kubernetes, Linux, Terraform, Virtualization
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.160977
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000028
+   - ChromaDB 코사인 (0.25): 0.643870
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+
+====================================================================================================
+[37] 직무: Domain Expert
+====================================================================================================
+Industry: 제2 금융
+핵심 Skill Set: 통신, 공공, 제2 금융, Global, 미디어/콘텐츠, 유통/물류/서비스, 제1 금융, Account
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE BK Product Manager
+   회사: LINE Financial Corp.
+   업무분야: Planning
+   경력: 경력 3년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.332967
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.951335
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2786/
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.215784
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000019
+   - ChromaDB 코사인 (0.25): 0.863109
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.208767
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000039
+   - ChromaDB 코사인 (0.25): 0.835015
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+4. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.183530
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000028
+   - ChromaDB 코사인 (0.25): 0.734080
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+
+5. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AWS, Azure, Cloud, Cloud Native, DevOps, Git, Kubernetes, Linux, Terraform, Virtualization
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.160704
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000229
+   - ChromaDB 코사인 (0.25): 0.642496
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+
+====================================================================================================
+[38] 직무: Domain Expert
+====================================================================================================
+Industry: 제조
+핵심 Skill Set: 통신, 화학, 자동차/부품, 공공, 제2 금융, Global, 미디어/콘텐츠, 철강/금속, 유통/물류/서비스, 식음료 등, 조선/중공업, 제1 금융, Account
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE BK Product Manager
+   회사: LINE Financial Corp.
+   업무분야: Planning
+   경력: 경력 3년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.284680
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.813371
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2786/
+
+2. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.217658
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000008
+   - ChromaDB 코사인 (0.25): 0.870620
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+3. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.215816
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000008
+   - ChromaDB 코사인 (0.25): 0.863252
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+4. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.213870
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000008
+   - ChromaDB 코사인 (0.25): 0.855467
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+5. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   필요 skill_set: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning, Digital Factory 구축, Git, Java, MES, Machine Learning, NLP, Node.js, PHP, Perl, Python, RPA, SAP, TensorFlow, VR/AR 시각화, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.209952
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000008
+   - ChromaDB 코사인 (0.25): 0.839795
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+
+====================================================================================================
+[39] 직무: Consulting
+====================================================================================================
+Industry: ESG
+핵심 Skill Set: Responsive 관계 형성, 사업 기회 식별 방법론, Presentation, 통신, AI Literacy / Collaboration, 공공, IT 서비스/솔루션/제품의 특장점, Risk Management, 고객 Pain Point 파악, Business Writing, Deal Qualification, 대내 Hi-Tech, 고객 맞춤형 솔루션 도출, IT 서비스의 Value Chain, Value Proposition 설정, 신사업 개발 방법론, 트렌드분석, 고객 Needs 분석, 미디어/콘텐츠, Initiatives, 기술동향, Offering 개발, 문제 해결 Approach 방법, IT 기술, 대외 제조, 1/2 금융, ESG, 투자 전략 분석/수립 방법론, 고객 요구사항 경청, Sales 전략 수립 절차, 유통/물류/서비스, Collaboration, Global, Delivery Skill, Interview Skill, 사업 타당성 분석, Coordination, Trustworthy 관계 형성, Framework, Sales 이후 성과와 고객 만족도를 위한 follow-up 방안 도출 기법, 대내 Process, 데이터 분석, PJT 제안, LCA
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.287191
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.204116
+   - ChromaDB 코사인 (0.25): 0.863001
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+2. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   필요 skill_set: Risk Management
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.280113
+   - 스킬 매칭 점수 (0.4): 0.022727
+   - BM25 정규화 (0.35): 0.774348
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+
+3. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.206092
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000228
+   - ChromaDB 코사인 (0.25): 0.824047
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: AI, AI Evaluation, Deep Learning, Machine Learning, PyTorch, TensorFlow, Vision AI
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.197529
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000035
+   - ChromaDB 코사인 (0.25): 0.790066
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: BCP, Compliance, IT 거버넌스, 장애 관리
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.190411
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000239
+   - ChromaDB 코사인 (0.25): 0.761310
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[40] 직무: Consulting
+====================================================================================================
+Industry: SHE
+핵심 Skill Set: Responsive 관계 형성, 사업 기회 식별 방법론, Presentation, 통신, AI Literacy / Collaboration, 공공, IT 서비스/솔루션/제품의 특장점, Risk Management, 고객 Pain Point 파악, Business Writing, Deal Qualification, 대내 Hi-Tech, 고객 맞춤형 솔루션 도출, IT 서비스의 Value Chain, Value Proposition 설정, 신사업 개발 방법론, 트렌드분석, 고객 Needs 분석, 미디어/콘텐츠, 기술동향, SHE, Offering 개발, 문제 해결 Approach 방법, IT 기술, 대외 제조, 1/2 금융, 투자 전략 분석/수립 방법론, 고객 요구사항 경청, Sales 전략 수립 절차, 유통/물류/서비스, Collaboration, Global, Digital, Delivery Skill, Interview Skill, 사업 타당성 분석, Coordination, Trustworthy 관계 형성, Sales 이후 성과와 고객 만족도를 위한 follow-up 방안 도출 기법, 대내 Process, 데이터 분석, PJT 제안
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE AI Product Manager
+   회사: LINE Plus
+   업무분야: Planning
+   경력: 경력 7년 이상
+   필요 skill_set: AI, Data, Deep Learning, Machine Learning, Prompt Engineering, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.271027
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.774363
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2720/
+
+2. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.218740
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000035
+   - ChromaDB 코사인 (0.25): 0.874910
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+3. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.218174
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000035
+   - ChromaDB 코사인 (0.25): 0.872648
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: AI, AI Evaluation, Deep Learning, Machine Learning, PyTorch, TensorFlow, Vision AI
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.217386
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000035
+   - ChromaDB 코사인 (0.25): 0.869495
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+5. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.217132
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.204120
+   - ChromaDB 코사인 (0.25): 0.582761
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+
+====================================================================================================
+[41] 직무: Consulting
+====================================================================================================
+Industry: ERP
+핵심 Skill Set: Responsive 관계 형성, ISP, 사업 기회 식별 방법론, Presentation, 통신, AI Literacy / Collaboration, 공공, IT 서비스/솔루션/제품의 특장점, Risk Management, 고객 Pain Point 파악, Business Writing, Deal Qualification, 대내 Hi-Tech, ERP, 고객 맞춤형 솔루션 도출, IT 서비스의 Value Chain, Value Proposition 설정, 신사업 개발 방법론, 트렌드분석, 고객 Needs 분석, 미디어/콘텐츠, 기술동향, Offering 개발, 문제 해결 Approach 방법, IT 기술, 대외 제조, 1/2 금융, 투자 전략 분석/수립 방법론, 고객 요구사항 경청, Sales 전략 수립 절차, PI, 유통/물류/서비스, Collaboration, Global, Digital, Delivery Skill, Interview Skill, 사업 타당성 분석, Coordination, Trustworthy 관계 형성, Sales 이후 성과와 고객 만족도를 위한 follow-up 방안 도출 기법, 대내 Process, 데이터 분석, PJT 제안, Consulting
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.316292
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.903693
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+2. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.213853
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000053
+   - ChromaDB 코사인 (0.25): 0.855337
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.197298
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000053
+   - ChromaDB 코사인 (0.25): 0.789117
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+4. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Cloud, Digital Twin, IoT, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.190554
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000138
+   - ChromaDB 코사인 (0.25): 0.762021
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: BCP, Compliance, IT 거버넌스, 장애 관리
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.190291
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000246
+   - ChromaDB 코사인 (0.25): 0.760820
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[42] 직무: Consulting
+====================================================================================================
+Industry: AI
+핵심 Skill Set: Concept 작성, Machine Learning, AI 기반 Business 혁신 전략 수립, Computing, AI 도입 기대 효과, AZURE, 강화학습, AI, 기초통계, 기술적 영향도 파악, Process, Planning, Data, 생성모델, 실행 로드맵 수립, Speech, Business Process Analysis, Analysis, AWS, 사업/시장성 검토, Deep Learning, Cloud, 아이디어 개발, Generative, AI 적용 방안 도출, Google Cloud, Vision, NLP, Value Analysis, Strategy
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Product Team Lead (Commercial)
+   회사: LINE Company Thailand
+   업무분야: Engineering, Planning, Analysis
+   경력: 15+ years
+   필요 skill_set: AI, AWS, Cloud, Data Analysis, Database, Deep Learning, Java, Machine Learning, Node.js, Python, SaaS, TensorFlow
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.386419
+   - 스킬 매칭 점수 (0.4): 0.144595
+   - BM25 정규화 (0.35): 0.938803
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2886/
+
+2. LINE AI Product Manager
+   회사: LINE Plus
+   업무분야: Planning
+   경력: 경력 7년 이상
+   필요 skill_set: AI, Data, Deep Learning, Machine Learning, Prompt Engineering, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.285281
+   - 스킬 매칭 점수 (0.4): 0.127500
+   - BM25 정규화 (0.35): 0.018177
+   - ChromaDB 코사인 (0.25): 0.911676
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2720/
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, API, Azure, Cloud, Deep Learning, Docker, GPU, Git, LangChain, MLOps, NoSQL, On-Premise, PyTorch, RESTful API, SQL, TensorFlow, Vector DB, Workflow Automation
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.277048
+   - 스킬 매칭 점수 (0.4): 0.103636
+   - BM25 정규화 (0.35): 0.000687
+   - ChromaDB 코사인 (0.25): 0.941414
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: AI, AI Evaluation, Deep Learning, Machine Learning, PyTorch, TensorFlow, Vision AI
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.269459
+   - 스킬 매칭 점수 (0.4): 0.091765
+   - BM25 정규화 (0.35): 0.004954
+   - ChromaDB 코사인 (0.25): 0.924076
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+5. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.231383
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000116
+   - ChromaDB 코사인 (0.25): 0.925372
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+
+====================================================================================================
+[43] 직무: Biz. Supporting
+====================================================================================================
+Industry: Strategy Planning
+핵심 Skill Set: 경영층 의사결정 지원, 효율적인 자원 활용, 전략 수립, 구성원 성장 지원, 경영목표 달성 지원
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Billing Operation Specialist
+   회사: LINE Pay Taiwan
+   업무분야: Planning
+   경력: 경력 3년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.465435
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.907338
+   - ChromaDB 코사인 (0.25): 0.591465
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2583/
+
+2. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: 법규, 분석, 전략 수립, 커뮤니케이션, 통신, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.258450
+   - 스킬 매칭 점수 (0.4): 0.130000
+   - BM25 정규화 (0.35): 0.000041
+   - ChromaDB 코사인 (0.25): 0.825742
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. LINE Pay Biz Support Manager
+   회사: LINE
+   업무분야: 기획
+   경력: 경력무관
+   필요 skill_set: Data Analysis, Java, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.241906
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.056415
+   - ChromaDB 코사인 (0.25): 0.888641
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2790/
+
+4. LINE Pay Biz Support Manager
+   회사: LINE
+   업무분야: 기획
+   경력: 경력무관
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.223830
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000041
+   - ChromaDB 코사인 (0.25): 0.895263
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2790/
+
+5. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.211956
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000041
+   - ChromaDB 코사인 (0.25): 0.847765
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+
+====================================================================================================
+[44] 직무: Biz. Supporting
+====================================================================================================
+Industry: New Biz. Development
+핵심 Skill Set: 경영층 의사결정 지원, 효율적인 자원 활용, 전략 수립, 구성원 성장 지원, Investment, 경영목표 달성 지원, Partnering
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE Pay Biz Support Manager
+   회사: LINE
+   업무분야: 기획
+   경력: 경력무관
+   필요 skill_set: Data Analysis, Java, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.286800
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.184658
+   - ChromaDB 코사인 (0.25): 0.888678
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2790/
+
+2. LINE Pay Biz Support Manager
+   회사: LINE
+   업무분야: 기획
+   경력: 경력무관
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.223576
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000820
+   - ChromaDB 코사인 (0.25): 0.893156
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2790/
+
+3. Business & Product Operations Assistant
+   회사: LINE NEXT
+   업무분야: Business & Sales
+   경력: 경력무관
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.209006
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.001216
+   - ChromaDB 코사인 (0.25): 0.834322
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2909/
+
+4. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   필요 skill_set: AWS, Cloud, Database, Git, Python
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.184622
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000820
+   - ChromaDB 코사인 (0.25): 0.737339
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+5. LINE Pay Business Development Manager
+   회사: LINE Pay
+   업무분야: Business & Sales
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.183135
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000820
+   - ChromaDB 코사인 (0.25): 0.731391
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2862/
+
+
+====================================================================================================
+[45] 직무: Software Development
+====================================================================================================
+Industry: Front-end Development
+핵심 Skill Set: Adobe, Presentation, 통신, AI Literacy / Collaboration, 공공, Less, Risk 관리, XD, Communication, 손익계산서, Vue.js, Sass/Scss/Less, Business Writing, Adobe XD, 대내 Hi-Tech, 업무지원시스템 운영/관리, IT 서비스의 Value Chain, 원가, 미디어/콘텐츠, Sass, 협업, jQuery, Angular, CSS, Scss, 재무제표, Sketch, 대외 제조, 1/2 금융, Material UI, SG&A, UI, 유통/물류/서비스, 사업별/조직별 주요 이슈 파악, SK그룹 경영철학, Global, 전사업무프로세스, Figma, 실행원리, Next.js, Nuxt.js, 4P 의미와 구성요소, 사업/수익구조, Bootstrap, 사업유형별 PJT 프로세스, React, 대내 Process, UX, 데이터 분석, 4개의 Key Word, Material, HTML, 조정
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Front End Engineer
+   회사: LINE Taiwan
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   필요 skill_set: CSS, CSS Preprocessors, HTML, Java, JavaScript, Perl, React, SPA, UI, UX
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.574545
+   - 스킬 매칭 점수 (0.4): 0.088647
+   - BM25 정규화 (0.35): 0.892064
+   - ChromaDB 코사인 (0.25): 0.907456
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2888/
+
+2. Frontend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   필요 skill_set: AWS, Git, Java, React, Typescript
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.229113
+   - 스킬 매칭 점수 (0.4): 0.017941
+   - BM25 정규화 (0.35): 0.000113
+   - ChromaDB 코사인 (0.25): 0.887587
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2838/
+
+3. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   필요 skill_set: Java, JavaScript, Next.js, React, TypeScript
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.204952
+   - 스킬 매칭 점수 (0.4): 0.036321
+   - BM25 정규화 (0.35): 0.000113
+   - ChromaDB 코사인 (0.25): 0.761536
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. Frontend Developer_LINE TODAY
+   회사: LINE Taiwan
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.202665
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000113
+   - ChromaDB 코사인 (0.25): 0.810500
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2773/
+
+5. Frontend Engineer
+   회사: LINE VIETNAM
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   필요 skill_set: AngularJS, CSS3, HTML5, JavaScript, RESTful API, React, git
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.191553
+   - 스킬 매칭 점수 (0.4): 0.017525
+   - BM25 정규화 (0.35): 0.000113
+   - ChromaDB 코사인 (0.25): 0.738016
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2254/
+
+
+====================================================================================================
+[46] 직무: Software Development
+====================================================================================================
+Industry: Back-end Development
+핵심 Skill Set: SOAP, Altibase, Presentation, 통신, Oracle, AI Literacy / Collaboration, Spring, 공공, REST, Risk 관리, API: REST, MSMQ, Boot, Nexcore, Communication, 손익계산서, Entity, J2EE, Business Writing, Cassandra, JPA, 대내 Hi-Tech, ibatis, Spring Cloud, RPC, MongoDB, 업무지원시스템 운영/관리, mybatis, IT 서비스의 Value Chain, Django, 원가, 미디어/콘텐츠, Flask, PostgreSQL, ASP.NET, Entity Framework, 협업, 재무제표, WebSocket, Rabbit, 대외 제조, 1/2 금융, MS_SQL, SG&A, WebSocket; 메시징: Kafka, MySQL, API, Cloud, 유통/물류/서비스, 사업별/조직별 주요 이슈 파악, SK그룹 경영철학, Global, 전사업무프로세스, 실행원리, MariaDB, Kafka, 4P 의미와 구성요소, Net, Framework, 사업/수익구조, Spring Boot, 사업유형별 PJT 프로세스, 대내 Process, 데이터 분석, 4개의 Key Word, Redis, JDBC, Nexcore J2EE/.Net, 조정
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 글로벌 서비스 Back-End 개발 (경력)
+   회사: NAVER WEBTOON
+   업무분야: Tech/Backend
+   경력: 경력
+   필요 skill_set: AWS, Docker, Java, Kafka, Kubernetes, NoSQL, RESTful API, Redis, Spring Boot, Tomcat, Vue
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.486272
+   - 스킬 매칭 점수 (0.4): 0.040316
+   - BM25 정규화 (0.35): 0.918527
+   - ChromaDB 코사인 (0.25): 0.594642
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004070&lang=ko
+
+2. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: HTML5, Java, Oracle, RDBMS, SCM, SRM, Spring, myBatis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.232188
+   - 스킬 매칭 점수 (0.4): 0.041422
+   - BM25 정규화 (0.35): 0.001381
+   - ChromaDB 코사인 (0.25): 0.860542
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+3. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: Java, NEXACRO, Oracle DB, Spring framework
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.218811
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000158
+   - ChromaDB 코사인 (0.25): 0.875023
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+
+4. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.218563
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000158
+   - ChromaDB 코사인 (0.25): 0.874031
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+
+5. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   필요 skill_set: AI, AWS, Cloud, Data Analysis, Database, DevOps, Docker, Kafka, Kubernetes, Linux, Python, Redis, SQL, Spark, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.205225
+   - 스킬 매칭 점수 (0.4): 0.038653
+   - BM25 정규화 (0.35): 0.000450
+   - ChromaDB 코사인 (0.25): 0.758425
+   - 멀티쿼리 매칭 횟수: 2회
+   
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[47] 직무: Software Development
+====================================================================================================
+Industry: Mobile Development
+핵심 Skill Set: Presentation, 통신, AI Literacy / Collaboration, 공공, Risk 관리, Flutter, Xamarin, Communication, 휴먼 인터페이스 지침, 손익계산서, Business Writing, RESTful, 대내 Hi-Tech, 업무지원시스템 운영/관리, IT 서비스의 Value Chain, 원가, 미디어/콘텐츠, Swift, Xcode, 협업, 재무제표, 대외 제조, 1/2 금융, SG&A, Android, API, Kotlin, 유통/물류/서비스, 사업별/조직별 주요 이슈 파악, SK그룹 경영철학, Global, 전사업무프로세스, 실행원리, TestFlight, 4P 의미와 구성요소, Studio, 머티리얼 디자인, Objective-C, 사업/수익구조, SDK, SQLite, Native, 사업유형별 PJT 프로세스, Firebase, XML, React, 대내 Process, Java, 데이터 분석, 4개의 Key Word, 조정
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 지도기반 슈퍼앱 서비스 Android / iOS 개발 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech
+   경력: 경력
+   필요 skill_set: Android, Clean Architecture, Coroutines, DI, Jetpack Compose, Kotlin, Map SDK, Swift, UIKit
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.355416
+   - 스킬 매칭 점수 (0.4): 0.054489
+   - BM25 정규화 (0.35): 0.317796
+   - ChromaDB 코사인 (0.25): 0.889568
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004020&lang=ko
+
+2. 비즈앱 iOS 개발자(경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: Database, Git, Network, Objective-C, REST API, Swift, SwiftUI, iOS
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.244679
+   - 스킬 매칭 점수 (0.4): 0.036326
+   - BM25 정규화 (0.35): 0.012322
+   - ChromaDB 코사인 (0.25): 0.903345
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14169?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. 비즈앱 iOS 개발자(경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   필요 skill_set: Git, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.234749
+   - 스킬 매칭 점수 (0.4): 0.019344
+   - BM25 정규화 (0.35): 0.000478
+   - ChromaDB 코사인 (0.25): 0.907377
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14169?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. 지도기반 슈퍼앱 서비스 Android / iOS 개발 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.226823
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000478
+   - ChromaDB 코사인 (0.25): 0.906622
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004020&lang=ko
+
+5. [2026 신입공채] Tech - Tech 공통
+   회사: 카카오
+   업무분야: 기타
+   경력: 신입
+   필요 skill_set: AI, AWS, Cloud, Data Analysis, Database, DevOps, Docker, Kafka, Kubernetes, Linux, Python, Redis, SQL, Spark, TensorFlow, Visual Basic
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.221303
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000478
+   - ChromaDB 코사인 (0.25): 0.884542
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14207?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[48] 직무: Software Development
+====================================================================================================
+Industry: Governance Management
+핵심 Skill Set: CR 전략수립, CR, Item, Network, 분석, 정보수집, Intelligence, 대외이슈대응, 감사
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AI, Data Governance, Database, Deep Learning, Machine Learning, Python, SQL, Statistical Analysis
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.402294
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.745843
+   - ChromaDB 코사인 (0.25): 0.564996
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+2. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: 법규, 분석, 전략 수립, 커뮤니케이션, 통신, 협업
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.249469
+   - 스킬 매칭 점수 (0.4): 0.083333
+   - BM25 정규화 (0.35): 0.000043
+   - ChromaDB 코사인 (0.25): 0.864481
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   필요 skill_set: BCP, Compliance, IT 거버넌스, 장애 관리
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.213371
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000043
+   - ChromaDB 코사인 (0.25): 0.853423
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   필요 skill_set: AWS, C#, Java, Python, SCM
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.208913
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000043
+   - ChromaDB 코사인 (0.25): 0.835592
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+5. 방산 SCM 모듈 운영 담당자 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: SCM 운영/개발
+   경력: 경력 3년 이상
+   필요 skill_set: AWS, C#, Database, Java, Oracle, Python, SCM, Web, XML
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.170814
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000043
+   - ChromaDB 코사인 (0.25): 0.683197
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17228
+
+
+====================================================================================================
+[49] 직무: Software Development
+====================================================================================================
+Industry: Public Management
+핵심 Skill Set: 캠페인/프로모션, Life, 마케팅전략수립, 브랜드마케팅, 콘텐츠마케팅, IMC, 가격모델수립, PR 전략수립, 서비스 Offering 기획/관리, Cycle, 미디어커뮤니케이션, PR, 고객의견/반응분석
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE Pay Business Development Manager
+   회사: LINE Pay
+   업무분야: Business & Sales
+   경력: 경력
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.262402
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.749719
+   - ChromaDB 코사인 (0.25): 0.000000
+   - 멀티쿼리 매칭 횟수: 1회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2862/
+
+2. LINE AD Product Manager (AD SDK PM)
+   회사: LINE Plus
+   업무분야: Planning
+   경력: 경력 2년 이상
+   필요 skill_set: AD SDK, Data Analysis, Java, JavaScript, Media Strategy, Optimization, Python, SDK, Team Collaboration
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.220411
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000034
+   - ChromaDB 코사인 (0.25): 0.881598
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2696/
+
+3. Marketing Manager
+   회사: LINE Pay Taiwan
+   업무분야: Marketing & CS
+   경력: 경력 6년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.217222
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000034
+   - ChromaDB 코사인 (0.25): 0.868842
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2785/
+
+4. EC_Advertising Planning Senior Manager
+   회사: LINE Taiwan
+   업무분야: Business & Sales
+   경력: 경력 10년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.216712
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000034
+   - ChromaDB 코사인 (0.25): 0.866801
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2737/
+
+5. Event Marketing & Communications Manager
+   회사: LINE Company Thailand
+   업무분야: Marketing & CS
+   경력: 경력 7년 이상
+   필요 skill_set: N/A
+   
+   [매칭 점수 상세]
+   - 최종 가중 합산: 0.216541
+   - 스킬 매칭 점수 (0.4): 0.000000
+   - BM25 정규화 (0.35): 0.000034
+   - ChromaDB 코사인 (0.25): 0.866118
+   - 멀티쿼리 매칭 횟수: 3회
+   
+   URL: https://careers.linecorp.com/ko/jobs/2893/
+

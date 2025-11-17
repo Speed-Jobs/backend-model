@@ -11,7 +11,7 @@ if openai_api_key is None:
 os.environ["OPENAI_API_KEY"] = openai_api_key
 
 # 직무기술서 데이터 로드 (JSON → DataFrame)
-json_path = "C:/workspace/Final_project/backend-model/AI_Lab/data/job_description.json"
+json_path = "C:/workspace/fproject/backend-model/AI_Lab/data/job_description.json"
 with open(json_path, encoding="utf-8") as f:
     data = json.load(f)
 df = pd.DataFrame(data)
@@ -19,7 +19,7 @@ df.head()
 
 # 채용공고 데이터 로드 (회사별 JSON → DataFrame)
 company_name = "kakao"
-jobs_json_path = f"C:/workspace/Final_project/backend-model/AI_Lab/data/{company_name}_jobs.json"
+jobs_json_path = f"C:/workspace/fproject/backend-model/AI_Lab/data/{company_name}_jobs.json"
 with open(jobs_json_path, encoding="utf-8") as f:
     jobs_data = json.load(f)
 jobs_df = pd.DataFrame(jobs_data)
@@ -37,48 +37,31 @@ from langchain_core.callbacks import CallbackManagerForRetrieverRun
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from typing import List
 
-# 여러 회사별 채용공고 파일을 효율적으로 한 번에 로드
+# 카카오, 우아한형제들 채용공고 전체 로드 (데이터 결합)
+kakao_path = "C:/workspace/fproject/backend-model/AI_Lab/data/kakao_jobs.json"
+woowahan_path = "C:/workspace/fproject/backend-model/AI_Lab/data/woowahan_jobs.json"
 job_postings = []
-job_paths = [
-    "C:/workspace/Final_project/backend-model/AI_Lab/data/kakao_jobs.json",
-    "C:/workspace/Final_project/backend-model/AI_Lab/data/woowahan_jobs.json",
-    "C:/workspace/Final_project/backend-model/AI_Lab/data/hanwha_jobs.json",
-    "C:/workspace/Final_project/backend-model/AI_Lab/data/line_jobs.json",
-    "C:/workspace/Final_project/backend-model/AI_Lab/data/naver_jobs.json",
-]
-
-for path in job_paths:
-    try:
-        with open(path, 'r', encoding='utf-8') as f:
-            job_postings.extend(json.load(f))
-    except FileNotFoundError:
-        print(f"파일을 찾을 수 없습니다: {path}")
-    except json.JSONDecodeError:
-        print(f"JSON decode 오류: {path}")
-
+with open(kakao_path, 'r', encoding='utf-8') as f:
+    kakao_jobs = json.load(f)
+    job_postings.extend(kakao_jobs)
+with open(woowahan_path, 'r', encoding='utf-8') as f:
+    woowahan_jobs = json.load(f)
+    job_postings.extend(woowahan_jobs)
 print(f"총 채용공고 수: {len(job_postings)}")
 
 # 채용공고 리스트 → LangChain Document로 변환
 documents = []
 for job in job_postings:
-    skill_set = job.get('skill_set', [])
-    skill_set_text = ", ".join(skill_set) if isinstance(skill_set, list) else str(skill_set)
+    skill_set_text = ", ".join(job['skill_set']) if isinstance(job.get('skill_set'), list) else str(job.get('skill_set', ''))
     required_skills_text = ""
-    job_category = ""
-    
-    # meta_data 안전하게 처리 (딕셔너리인지 확인)
-    meta_data = job.get('meta_data', {})
-    if isinstance(meta_data, dict) and meta_data:
-        if 'required_skills' in meta_data and meta_data['required_skills']:
-            required_skills_text = ", ".join(meta_data['required_skills']) if isinstance(meta_data['required_skills'], list) else str(meta_data['required_skills'])
-        if 'job_category' in meta_data:
-            job_category = meta_data['job_category']
-    
+    if 'meta_data' in job and job['meta_data']:
+        if 'required_skills' in job['meta_data'] and job['meta_data']['required_skills']:
+            required_skills_text = ", ".join(job['meta_data']['required_skills'])
     content = f"""
     제목: {job.get('title', '')}
     회사: {job.get('company', '')}
-    직무내용: {job.get('description', '')[:500] if job.get('description') else ''}
-    업무분야: {job_category}
+    직무내용: {job.get('description', '')[:500]}
+    업무분야: {job.get('meta_data', {}).get('job_category', '')}
     필요 스킬: {required_skills_text}
     스킬셋: {skill_set_text}
     경력: {job.get('experience', '')}
@@ -87,7 +70,7 @@ for job in job_postings:
         "title": job.get('title', ''),
         "company": job.get('company', ''),
         "url": job.get('url', ''),
-        "job_category": job_category,
+        "job_category": job.get('meta_data', {}).get('job_category', ''),
         "experience": job.get('experience', ''),
     }
     documents.append(Document(page_content=content.strip(), metadata=metadata))
@@ -139,10 +122,10 @@ class CustomEnsembleRetriever(BaseRetriever):
         )
         return sorted_docs
 
-# 하이브리드 검색기 생성 (임베딩: 30%, BM25: 70%)
+# 하이브리드 검색기 생성 (임베딩: 60%, BM25: 40%)
 ensemble_retriever = CustomEnsembleRetriever(
     retrievers=[chroma_retriever, bm25_retriever],
-    weights=[0.3, 0.7]
+    weights=[0.6, 0.4]
 )
 print("Ensemble Retriever 생성 완료")
 
@@ -171,7 +154,6 @@ print("="*100)
 for idx, row in df.iterrows():
     industry = row['industry']
     skill_set = row['공통_skill_set']
-    skill_set += row['skill_set']
     job_title = row['직무']
     
     # 검색 실행
