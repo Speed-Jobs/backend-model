@@ -13,7 +13,6 @@ from app.models.post_skill import PostSkill
 from app.models.position_skill import PositionSkill
 from app.models.industry_skill import IndustrySkill
 
-
 def get_posts(
     db: Session,
     skip: int = 0,
