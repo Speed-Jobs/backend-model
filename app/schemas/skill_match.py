@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List
 
-from pydantic import BaseModel, Field, conint, validator
+from pydantic import BaseModel, Field, conint
 
 
 class SimilarSkillItem(BaseModel):
@@ -18,12 +18,17 @@ class SimilarSkillRequest(BaseModel):
         10, description="가져올 유사 스킬 개수 (1~50)"
     )
 
-    @validator("keywords", each_item=True)
-    def strip_keyword(cls, v: str) -> str:
-        value = v.strip()
-        if not value:
-            raise ValueError("공백만 있는 스킬 키워드는 허용되지 않습니다.")
-        return value
+    def __init__(self, **data):
+        # strip and validate keywords before super().__init__
+        if "keywords" in data:
+            keywords = []
+            for v in data["keywords"]:
+                value = v.strip() if isinstance(v, str) else v
+                if not value:
+                    raise ValueError("공백만 있는 스킬 키워드는 허용되지 않습니다.")
+                keywords.append(value)
+            data["keywords"] = keywords
+        super().__init__(**data)
 
 
 class SimilarSkillResponse(BaseModel):

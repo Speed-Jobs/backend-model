@@ -15,6 +15,10 @@ from langchain_core.output_parsers import PydanticOutputParser
 # .env 파일을 로드하여 환경 변수 설정
 load_dotenv()
 
+'''
+채용공고에서 원래 없던 Skill Set을 추출하는 .py 파일
+'''
+
 
 class SkillSetOutput(BaseModel):
     """
