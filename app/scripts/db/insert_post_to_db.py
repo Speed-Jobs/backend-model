@@ -10,7 +10,7 @@ from typing import List, Dict, Any
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
-from app.db.base import SessionLocal, engine
+from app.db.config.base import SessionLocal, engine
 from app.models.company import Company
 from app.models.position import Position
 from app.models.industry import Industry
@@ -76,6 +76,28 @@ def create_post(db: Session, job_data: Dict[str, Any], company: Company) -> tupl
     if "tech_stack" in job_data:
         meta_data["tech_stack"] = job_data["tech_stack"]
 
+    # Industry ID 조회 (매칭 결과에서)
+    industry_id = None
+    sim_position = job_data.get("sim_position")
+    sim_industry = job_data.get("sim_industry")
+    
+    if sim_position and sim_industry:
+        # Position 조회
+        position = db.query(Position).filter(Position.name == sim_position).first()
+        if position:
+            # Industry 조회 (해당 Position에 속한 Industry)
+            industry = db.query(Industry).filter(
+                Industry.name == sim_industry,
+                Industry.position_id == position.id
+            ).first()
+            if industry:
+                industry_id = industry.id
+                print(f"  - 매칭된 산업: {sim_industry} (Industry ID: {industry_id})")
+            else:
+                print(f"  ⚠️ Industry '{sim_industry}'를 Position '{sim_position}' 하에서 찾을 수 없습니다.")
+        else:
+            print(f"  ⚠️ Position '{sim_position}'를 찾을 수 없습니다.")
+
     # Post 객체 생성
     post = Post(
         title=job_data.get("title", ""),
@@ -89,7 +111,8 @@ def create_post(db: Session, job_data: Dict[str, Any], company: Company) -> tupl
         crawled_at=parse_date(job_data.get("crawl_date")) or datetime.now(),
         source_url=job_data.get("url", ""),
         screenshot_url=job_data.get("screenshots", {}).get("combined"),
-        company_id=company.id
+        company_id=company.id,
+        industry_id=industry_id  # 매칭된 Industry ID 할당
     )
 
     db.add(post)

@@ -1,5 +1,5 @@
 """
-9개 리팩토링된 크롤러 순차 실행 스케줄러
+9개 리팩토링된 크롤러 순차 실행
 
 기존 4개 크롤러:
 - 현대오토에버 (비동기)
@@ -28,8 +28,6 @@ from app.services.crawler.naver.crawler_naver import main as naver_crawler
 from app.services.crawler.toss.crawler_toss import main as toss_crawler
 from app.services.crawler.woowahan.crawler_woowahan import main as woowahan_crawler
 
-from apscheduler.schedulers.blocking import BlockingScheduler
-from apscheduler.triggers.interval import IntervalTrigger
 import asyncio
 import inspect
 import logging
@@ -106,13 +104,10 @@ def run_all_crawlers_sequentially():
     """9개 리팩토링된 크롤러를 순차적으로 실행"""
     
     crawlers = [
-        # 기존 4개 크롤러
         (hyundai_crawler, "현대오토에버 (비동기)"),
         (lg_crawler, "LG CNS (비동기)"),
         (hanwha_crawler, "한화시스템 (동기)"),
         (kakao_crawler, "카카오 (동기)"),
-        
-        # 새로 추가된 5개 크롤러
         (coupang_crawler, "Coupang (동기)"),
         (line_crawler, "Line (동기)"),
         (naver_crawler, "Naver (동기)"),
@@ -170,42 +165,3 @@ def run_all_crawlers_sequentially():
         print(f"⚠️ {fail_count}개 크롤러 실패 - 로그를 확인하세요.\n")
 
 
-def run_schedulers():
-    """스케줄러 시작 (테스트: 즉시 1회 실행)"""
-    scheduler = BlockingScheduler()
-
-    scheduler.add_job(
-        run_all_crawlers_sequentially,
-        IntervalTrigger(days=3),  # 3일마다 실행
-        name="9개 리팩토링 크롤러 순차 실행",
-        replace_existing=True,
-        next_run_time=datetime.now()  # 즉시 실행
-    )
-
-    print("="*80)
-    print("🔬 9개 리팩토링된 크롤러 스케줄러 시작")
-    print("="*80)
-    print("\n[기존 4개 크롤러]")
-    print("  1. 현대오토에버 (비동기)")
-    print("  2. LG CNS (비동기)")
-    print("  3. 한화시스템 (동기)")
-    print("  4. 카카오 (동기)")
-    print("\n[새로 추가된 5개 크롤러]")
-    print("  5. Coupang (동기) - Cloudflare 우회 포함")
-    print("  6. Line (동기)")
-    print("  7. Naver (동기)")
-    print("  8. Toss (동기)")
-    print("  9. Woowahan/배달의민족 (동기)")
-    print()
-    print("실행 주기: 3일마다")
-    print("다음 실행: 지금 즉시")
-    print("="*80)
-    
-    try:
-        scheduler.start()
-    except (KeyboardInterrupt, SystemExit):
-        print("\n스케줄러 종료")
-
-
-if __name__ == "__main__":
-    run_schedulers()

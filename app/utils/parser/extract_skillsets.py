@@ -263,12 +263,15 @@ def main():
     backend_model_dir = current_file.parents[3]  # 4단계 상위 (프로젝트 루트)
 
     # description.json 파일 찾기 (여러 위치 확인)
-    # 1. 프로젝트 루트의 data 디렉토리 
-    description_path = backend_model_dir / 'data' / 'description.json'
+    # 1. 프로젝트 루트의 data 디렉토리
+    # 우선순위: new_job_description.json -> description.json
+    description_path = backend_model_dir / 'data' / 'new_job_description.json'
+    if not description_path.exists():
+        description_path = backend_model_dir / 'data' / 'description.json'
   
     
-    # data 디렉토리 경로 (jobs 파일들이 있는 곳)
-    data_dir = backend_model_dir / 'data'
+    # data/output 디렉토리 경로 (jobs 파일들이 있는 곳)
+    data_dir = backend_model_dir / 'data' / 'output'
 
     print("\n" + "=" * 60)
     print(":로켓: LLM 기반 Skill Set 추출 시작")
