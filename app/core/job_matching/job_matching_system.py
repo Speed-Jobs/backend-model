@@ -51,7 +51,7 @@ import numpy as np
 import networkx as nx
 from sentence_transformers import SentenceTransformer
 
-from app.core.job_matching.config import (
+from app.config.job_matching.config import (
     JOB_DESCRIPTION_FILE,
     SBERT_MODEL_NAME,
     TRAINING_DATA_FILES,

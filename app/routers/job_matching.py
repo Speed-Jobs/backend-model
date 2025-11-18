@@ -12,10 +12,10 @@ from sqlalchemy.orm import Session, joinedload
 from app.db.base import get_db
 from app.models.post import Post
 from app.models.post_skill import PostSkill
-from app.core.job_matching.model_loader import get_job_matching_system
+from app.utils.job_matching.model_loader import get_job_matching_system
 from app.core.job_matching.job_matching_system import JobMatchingSystem
 from app.services.job_matching.job_matching_service import JobMatchingService
-from app.core.job_matching.config import PPR_TOP_N, FINAL_TOP_K
+from app.config.job_matching.config import PPR_TOP_N, FINAL_TOP_K
 from app.schemas.job_output_schema import (
     SingleJobMatchingResponse,
     BatchJobMatchingResponse,
