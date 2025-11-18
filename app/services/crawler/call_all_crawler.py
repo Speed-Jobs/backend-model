@@ -104,13 +104,10 @@ def run_all_crawlers_sequentially():
     """9개 리팩토링된 크롤러를 순차적으로 실행"""
     
     crawlers = [
-        # 기존 4개 크롤러
         (hyundai_crawler, "현대오토에버 (비동기)"),
         (lg_crawler, "LG CNS (비동기)"),
         (hanwha_crawler, "한화시스템 (동기)"),
         (kakao_crawler, "카카오 (동기)"),
-        
-        # 새로 추가된 5개 크롤러
         (coupang_crawler, "Coupang (동기)"),
         (line_crawler, "Line (동기)"),
         (naver_crawler, "Naver (동기)"),
