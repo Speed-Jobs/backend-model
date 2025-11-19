@@ -4,10 +4,9 @@
 from datetime import date, datetime, timedelta
 from typing import Optional, List, Tuple
 from sqlalchemy.orm import Session
-from sqlalchemy import func, extract
 from collections import defaultdict
 
-from app.models.post import Post
+from app.db.crud import db_recruit_counter
 from app.schemas.schemas_recruit_counter import JobPostingsTrendData, TrendItem, PeriodInfo
 
 
@@ -79,76 +78,34 @@ def get_job_postings_trend(
     
     # timeframe별 쿼리
     if timeframe == "daily":
-        # 일간: DATE(posted_at)로 그룹핑
-        query = db.query(
-            func.date(Post.posted_at).label('date'),
-            func.count(Post.id).label('count')
-        ).filter(
-            Post.posted_at >= start_date,
-            Post.posted_at <= end_date
-        ).group_by(
-            func.date(Post.posted_at)
-        ).order_by(
-            func.date(Post.posted_at)
-        )
-        
-        results = query.all()
+        # 일간 CRUD 호출
+        results = db_recruit_counter.get_job_postings_daily(db, start_date, end_date)
         trends = [
             TrendItem(
-                period=_format_period_daily(row.date),
-                count=row.count
+                period=_format_period_daily(row[0]),  # date
+                count=row[1]  # count
             )
             for row in results
         ]
     
     elif timeframe == "weekly":
-        # 주간: YEARWEEK로 그룹핑
-        query = db.query(
-            func.year(Post.posted_at).label('year'),
-            func.week(Post.posted_at, 1).label('week'),
-            func.count(Post.id).label('count')
-        ).filter(
-            Post.posted_at >= start_date,
-            Post.posted_at <= end_date
-        ).group_by(
-            func.year(Post.posted_at),
-            func.week(Post.posted_at, 1)
-        ).order_by(
-            func.year(Post.posted_at),
-            func.week(Post.posted_at, 1)
-        )
-        
-        results = query.all()
+        # 주간 CRUD 호출
+        results = db_recruit_counter.get_job_postings_weekly(db, start_date, end_date)
         trends = [
             TrendItem(
-                period=_format_period_weekly(row.year, row.week),
-                count=row.count
+                period=_format_period_weekly(row[0], row[1]),  # year, week
+                count=row[2]  # count
             )
             for row in results
         ]
     
     elif timeframe == "monthly":
-        # 월간: YEAR-MONTH로 그룹핑
-        query = db.query(
-            func.year(Post.posted_at).label('year'),
-            func.month(Post.posted_at).label('month'),
-            func.count(Post.id).label('count')
-        ).filter(
-            Post.posted_at >= start_date,
-            Post.posted_at <= end_date
-        ).group_by(
-            func.year(Post.posted_at),
-            func.month(Post.posted_at)
-        ).order_by(
-            func.year(Post.posted_at),
-            func.month(Post.posted_at)
-        )
-        
-        results = query.all()
+        # 월간 CRUD 호출
+        results = db_recruit_counter.get_job_postings_monthly(db, start_date, end_date)
         trends = [
             TrendItem(
-                period=_format_period_monthly(row.year, row.month),
-                count=row.count
+                period=_format_period_monthly(row[0], row[1]),  # year, month
+                count=row[2]  # count
             )
             for row in results
         ]

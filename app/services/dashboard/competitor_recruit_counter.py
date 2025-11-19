@@ -4,11 +4,9 @@
 from datetime import date, datetime, timedelta
 from typing import Optional, List, Tuple, Dict
 from sqlalchemy.orm import Session
-from sqlalchemy import func
 from collections import defaultdict
 
-from app.models.post import Post
-from app.models.company import Company
+from app.db.crud import db_competitor_recruit_counter
 from app.schemas.schemas_competitor_recruit_counter import (
     RecruitmentActivityData,
     CompanyInfo,
@@ -124,32 +122,25 @@ def get_companies_recruitment_activity(
     # 기간 자동 계산
     start_date, end_date = _get_default_period(timeframe)
     
-    # 회사 정보 조회 (LIKE 검색으로 변경)
-    # OR 조건으로 각 키워드에 대해 LIKE 검색 (회사명이 키워드로 시작하는 경우만)
-    keyword_filters = [
-        Company.name.like(f'{keyword}%') 
-        for keyword in company_keywords
-    ]
-    
-    companies_query = db.query(Company).filter(
-        or_(*keyword_filters)
-    ).all()
+    # 회사 정보 조회 (CRUD 호출)
+    companies_query = db_competitor_recruit_counter.get_companies_by_keywords(db, company_keywords)
     
     companies_info = []
     company_id_to_key = {}
     company_ids = []  # 조회된 회사들의 ID 리스트
     
-    for company in companies_query:
-        key = _generate_company_key(company.name)
+    for row in companies_query:
+        company_id, company_name = row[0], row[1]
+        key = _generate_company_key(company_name)
         companies_info.append(
             CompanyInfo(
-                id=company.id,
-                name=company.name,
+                id=company_id,
+                name=company_name,
                 key=key
             )
         )
-        company_id_to_key[company.id] = key
-        company_ids.append(company.id)
+        company_id_to_key[company_id] = key
+        company_ids.append(company_id)
     
     # 회사가 없으면 빈 결과 반환
     if not company_ids:
@@ -161,31 +152,17 @@ def get_companies_recruitment_activity(
     
     # timeframe별 쿼리
     if timeframe == "daily":
-        # 일간 그룹핑
-        query = db.query(
-            func.date(Post.posted_at).label('date'),
-            Post.company_id,
-            func.count(Post.id).label('count')
-        ).filter(
-            Post.company_id.in_(company_ids),
-            Post.posted_at >= start_date,
-            Post.posted_at <= end_date
-        ).group_by(
-            func.date(Post.posted_at),
-            Post.company_id
-        ).order_by(
-            func.date(Post.posted_at),
-            Post.company_id
+        # 일간 CRUD 호출
+        results = db_competitor_recruit_counter.get_companies_recruitment_daily(
+            db, company_ids, start_date, end_date
         )
-        
-        results = query.all()
         
         # 데이터 구조화
         period_counts = defaultdict(dict)
         for row in results:
-            period = _format_period_daily(row.date)
-            company_key = company_id_to_key.get(row.company_id, f"company_{row.company_id}")
-            period_counts[period][company_key] = row.count
+            period = _format_period_daily(row[0])  # date
+            company_key = company_id_to_key.get(row[1], f"company_{row[1]}")  # company_id
+            period_counts[period][company_key] = row[2]  # count
         
         activities = [
             ActivityItem(period=period, counts=counts)
@@ -193,33 +170,16 @@ def get_companies_recruitment_activity(
         ]
     
     elif timeframe == "weekly":
-        # 주간 그룹핑
-        query = db.query(
-            func.year(Post.posted_at).label('year'),
-            func.week(Post.posted_at, 1).label('week'),
-            Post.company_id,
-            func.count(Post.id).label('count')
-        ).filter(
-            Post.company_id.in_(company_ids),
-            Post.posted_at >= start_date,
-            Post.posted_at <= end_date
-        ).group_by(
-            func.year(Post.posted_at),
-            func.week(Post.posted_at, 1),
-            Post.company_id
-        ).order_by(
-            func.year(Post.posted_at),
-            func.week(Post.posted_at, 1),
-            Post.company_id
+        # 주간 CRUD 호출
+        results = db_competitor_recruit_counter.get_companies_recruitment_weekly(
+            db, company_ids, start_date, end_date
         )
-        
-        results = query.all()
         
         period_counts = defaultdict(dict)
         for row in results:
-            period = _format_period_weekly(row.year, row.week)
-            company_key = company_id_to_key.get(row.company_id, f"company_{row.company_id}")
-            period_counts[period][company_key] = row.count
+            period = _format_period_weekly(row[0], row[1])  # year, week
+            company_key = company_id_to_key.get(row[2], f"company_{row[2]}")  # company_id
+            period_counts[period][company_key] = row[3]  # count
         
         activities = [
             ActivityItem(period=period, counts=counts)
@@ -227,33 +187,16 @@ def get_companies_recruitment_activity(
         ]
     
     elif timeframe == "monthly":
-        # 월간 그룹핑
-        query = db.query(
-            func.year(Post.posted_at).label('year'),
-            func.month(Post.posted_at).label('month'),
-            Post.company_id,
-            func.count(Post.id).label('count')
-        ).filter(
-            Post.company_id.in_(company_ids),
-            Post.posted_at >= start_date,
-            Post.posted_at <= end_date
-        ).group_by(
-            func.year(Post.posted_at),
-            func.month(Post.posted_at),
-            Post.company_id
-        ).order_by(
-            func.year(Post.posted_at),
-            func.month(Post.posted_at),
-            Post.company_id
+        # 월간 CRUD 호출
+        results = db_competitor_recruit_counter.get_companies_recruitment_monthly(
+            db, company_ids, start_date, end_date
         )
-        
-        results = query.all()
         
         period_counts = defaultdict(dict)
         for row in results:
-            period = _format_period_monthly(row.year, row.month)
-            company_key = company_id_to_key.get(row.company_id, f"company_{row.company_id}")
-            period_counts[period][company_key] = row.count
+            period = _format_period_monthly(row[0], row[1])  # year, month
+            company_key = company_id_to_key.get(row[2], f"company_{row[2]}")  # company_id
+            period_counts[period][company_key] = row[3]  # count
         
         activities = [
             ActivityItem(period=period, counts=counts)
