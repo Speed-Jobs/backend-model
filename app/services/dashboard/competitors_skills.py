@@ -59,10 +59,14 @@ class CompetitorsSkillsService:
         self,
         db: Session,
         company_id: str,
-        year: int,
+        year: Optional[int] = None,
         top_n: int = 10
     ) -> schemas_competitors_skills.SkillTrendData:
-        """회사별 상위 스킬 분기별 트렌드 조회"""
+        """회사별 상위 스킬 분기별 트렌드 조회
+        
+        year가 None일 경우 현재 연도 기준 근 5개년치 각 연도별 상위 스킬의 빈도수를 반환합니다.
+        year가 지정된 경우 해당 연도의 분기별 트렌드를 반환합니다.
+        """
         
         trend_data = db_competitors_skills.get_company_skill_trends(
             db=db,
@@ -73,11 +77,13 @@ class CompetitorsSkillsService:
         
         return schemas_competitors_skills.SkillTrendData(
             company=trend_data["company"],
-            year=trend_data["year"],
+            year=trend_data.get("year"),
+            years=trend_data.get("years"),
             trends=[
                 schemas_competitors_skills.SkillTrend(**trend)
-                for trend in trend_data["trends"]
-            ]
+                for trend in trend_data.get("trends", [])
+            ],
+            skill_frequencies=trend_data.get("skill_frequencies")
         )
 
 # 싱글톤 인스턴스

@@ -61,8 +61,10 @@ class SkillTrend(BaseModel):
 class SkillTrendData(BaseModel):
     """스킬 트렌드 데이터"""
     company: str = Field(..., description="회사명")
-    year: int = Field(..., description="조회 연도")
-    trends: List[SkillTrend] = Field(..., description="분기별 트렌드 목록")
+    year: Optional[int] = Field(None, description="조회 연도 (None일 경우 다년도 조회)")
+    years: Optional[List[int]] = Field(None, description="조회 연도 목록 (다년도 조회 시 사용)")
+    trends: List[SkillTrend] = Field(default_factory=list, description="분기별 트렌드 목록 (연도 지정 시만 사용)")
+    skill_frequencies: Optional[Dict[str, Dict[str, int]]] = Field(None, description="연도별 스킬 빈도수 (연도 미지정 시 근 5개년 각 연도별 상위 스킬, 키: 연도 문자열, 값: 스킬별 빈도수)")
 
 
 class SkillTrendResponse(BaseModel):

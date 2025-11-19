@@ -117,10 +117,17 @@ def get_competitors_posts_with_skills(
 def get_company_skill_trends(
     db: Session,
     company_id: str,
-    year: int,
+    year: Optional[int] = None,
     top_n: int = 10
 ) -> Dict:
-    """회사별 상위 스킬 분기별 트렌드 조회"""
+    """회사별 상위 스킬 분기별 트렌드 조회
+    
+    Args:
+        db: 데이터베이스 세션
+        company_id: 회사 ID 또는 회사명
+        year: 조회 연도 (None일 경우 현재 연도 기준 근 5개년)
+        top_n: 상위 N개 스킬
+    """
     
     # company_id가 숫자인지 확인 (ID인지 이름인지)
     try:
@@ -142,7 +149,19 @@ def get_company_skill_trends(
     company_row = company_result.first()
     company_name = company_row.name if company_row else company_id
     
-    # 해당 연도의 모든 공고와 스킬 데이터 조회
+    # year가 None이면 현재 연도 기준 근 5개년
+    if year is None:
+        current_year = datetime.now().year
+        years = list(range(current_year - 4, current_year + 1))  # 5개년 (예: 2021~2025)
+        # SQL injection 방지를 위해 숫자만 사용하므로 안전하게 포맷팅
+        years_str = ','.join(map(str, years))
+        year_condition = f"YEAR(p.posted_at) IN ({years_str})"
+    else:
+        years = [year]
+        year_condition = "YEAR(p.posted_at) = :year"
+        params['year'] = year
+    
+    # 해당 연도(들)의 모든 공고와 스킬 데이터 조회
     query = text(f"""
         SELECT
             p.id AS post_id,
@@ -153,12 +172,10 @@ def get_company_skill_trends(
         INNER JOIN post_skill ps ON p.id = ps.post_id
         INNER JOIN skill s ON ps.skill_id = s.id
         WHERE {where_clause}
-          AND YEAR(p.posted_at) = :year
+          AND {year_condition}
           AND p.posted_at IS NOT NULL
         ORDER BY p.posted_at, s.name
     """)
-    
-    params['year'] = year
     
     result = db.execute(query, params)
     rows = [dict(row._mapping) for row in result]
@@ -167,55 +184,107 @@ def get_company_skill_trends(
         return {
             "company": company_name,
             "year": year,
-            "trends": []
+            "years": years if year is None else None,
+            "trends": [],
+            "skill_frequencies": {} if year is None else None
         }
     
     # DataFrame으로 변환
     df = pd.DataFrame(rows)
     df['posted_at'] = pd.to_datetime(df['posted_at'])
     
-    # 전체 기간에서 상위 N개 스킬 찾기
-    top_skills = df['skill_name'].value_counts().head(top_n).index.tolist()
+    # year가 None이면 (근 5개년 조회 시) 각 연도별 상위 N개 스킬 빈도수 반환
+    if year is None:
+        # 연도별 스킬 빈도수 계산
+        yearly_skill_frequencies = {}
+        
+        for y in years:
+            year_df = df[df['posted_at'].dt.year == y]
+            
+            if len(year_df) > 0:
+                # 해당 연도의 상위 N개 스킬 빈도수 계산
+                skill_counts = year_df['skill_name'].value_counts().head(top_n)
+                yearly_skill_frequencies[str(y)] = skill_counts.to_dict()
+            else:
+                # 해당 연도에 데이터가 없으면 빈 딕셔너리
+                yearly_skill_frequencies[str(y)] = {}
+        
+        return {
+            "company": company_name,
+            "year": year,
+            "years": years,
+            "trends": [],
+            "skill_frequencies": yearly_skill_frequencies
+        }
     
+    # year가 지정된 경우 현재 분기와 직전 분기의 스킬 빈도수 반환
     # 분기 계산 함수
     def get_quarter(date):
         if pd.isna(date):
             return None
-        return f"{date.year} Q{(date.month - 1) // 3 + 1}"
+        return (date.year, (date.month - 1) // 3 + 1)  # (연도, 분기) 튜플로 반환
     
-    df['quarter'] = df['posted_at'].apply(get_quarter)
+    # 현재 분기와 직전 분기 계산
+    current_date = datetime.now()
+    current_year = current_date.year
+    current_quarter = (current_date.month - 1) // 3 + 1
+    current_q_tuple = (current_year, current_quarter)
     
-    # 현재 분기와 이전 분기만 필터링
-    if len(df) > 0:
-        quarters = sorted(df['quarter'].dropna().unique())
-        if len(quarters) >= 2:
-            # 최근 2개 분기만 선택
-            quarters = quarters[-2:]
-        elif len(quarters) == 1:
-            quarters = quarters
-        else:
-            quarters = []
+    # 직전 분기 계산
+    if current_quarter == 1:
+        previous_q_tuple = (current_year - 1, 4)
     else:
-        quarters = []
+        previous_q_tuple = (current_year, current_quarter - 1)
     
-    # 분기별 스킬별 공고 수 집계
+    # 분기를 튜플로 추가
+    df['quarter_tuple'] = df['posted_at'].apply(get_quarter)
+    
+    # 현재 분기와 직전 분기만 필터링
+    target_quarters = [current_q_tuple, previous_q_tuple]
+    df_filtered = df[df['quarter_tuple'].isin(target_quarters)].copy()
+    
+    if len(df_filtered) == 0:
+        return {
+            "company": company_name,
+            "year": year,
+            "years": None,
+            "trends": [],
+            "skill_frequencies": None
+        }
+    
+    # 분기를 문자열 형식으로 변환
+    def quarter_to_str(q_tuple):
+        if pd.isna(q_tuple) or q_tuple is None:
+            return None
+        return f"{q_tuple[0]} Q{q_tuple[1]}"
+    
+    df_filtered['quarter'] = df_filtered['quarter_tuple'].apply(quarter_to_str)
+    
+    # 각 분기별로 모든 스킬의 빈도수 계산
     trends = []
-    for quarter in quarters:
-        quarter_df = df[df['quarter'] == quarter]
-        skill_counts = {}
+    for q_tuple in [current_q_tuple, previous_q_tuple]:
+        quarter_str = quarter_to_str(q_tuple)
+        quarter_df = df_filtered[df_filtered['quarter_tuple'] == q_tuple]
         
-        # 상위 N개 스킬에 대해 카운트 (없으면 0)
-        for skill in top_skills:
-            count = len(quarter_df[quarter_df['skill_name'] == skill])
-            skill_counts[skill] = count
-        
-        trends.append({
-            "quarter": quarter,
-            "skills": skill_counts
-        })
+        if len(quarter_df) > 0:
+            # 해당 분기의 모든 스킬 빈도수 계산
+            skill_counts = quarter_df['skill_name'].value_counts().to_dict()
+            
+            trends.append({
+                "quarter": quarter_str,
+                "skills": skill_counts
+            })
+        else:
+            # 데이터가 없어도 분기 정보는 반환
+            trends.append({
+                "quarter": quarter_str,
+                "skills": {}
+            })
     
     return {
         "company": company_name,
         "year": year,
-        "trends": trends
+        "years": None,
+        "trends": trends,
+        "skill_frequencies": None
     }

@@ -82,31 +82,31 @@ async def get_posts_with_skills(
     "/companies/{companyId}/skill-trends",
     response_model=schemas_competitors_skills.SkillTrendResponse,
     summary="회사별 상위 스킬 분기별 트렌드 조회",
-    description="특정 회사의 상위 스킬들이 분기별로 어떻게 변하는지 추이를 조회합니다. 현재 분기와 이전 분기의 데이터만 반환됩니다."
+    description="특정 회사의 상위 스킬 트렌드를 조회합니다. 연도를 지정하면 분기별 트렌드를, 연도를 입력하지 않으면 현재 연도 기준 근 5개년치 각 연도별 상위 스킬의 빈도수를 반환합니다."
 )
 async def get_company_skill_trends(
     companyId: str = Path(..., description="회사 ID 또는 회사명 (한글)"),
-    year: Optional[int] = Query(None, description="연도 (기본값: 현재 연도)", ge=2021, le=2025),
+    year: Optional[int] = Query(None, description="연도 (미입력시 현재 연도 기준 근 5개년)", ge=2021, le=2025),
     top_n: int = Query(10, description="상위 N개 스킬 (기본값: 10)", ge=1, le=20),
     db: Session = Depends(get_db)
 ):
-    """회사별 상위 스킬 분기별 트렌드 조회"""
+    """회사별 상위 스킬 분기별 트렌드 조회
     
-    from datetime import datetime
-    
-    # year가 없으면 현재 연도 사용
-    if year is None:
-        year = datetime.now().year
+    year가 None일 경우 현재 연도 기준 근 5개년치 각 연도별 상위 10개 스킬의 빈도수를 반환합니다.
+    """
     
     try:
         data = competitors_skills_service.get_skill_trends(
             db=db,
             company_id=companyId,
-            year=year,
+            year=year,  # None일 경우 서비스 레이어에서 근 5개년 처리
             top_n=top_n
         )
         
-        message = f"회사별 스킬 트렌드 조회 성공"
+        if year is None:
+            message = f"회사별 스킬 트렌드 조회 성공 (근 5개년)"
+        else:
+            message = f"회사별 스킬 트렌드 조회 성공 ({year}년)"
         
         return schemas_competitors_skills.SkillTrendResponse(
             status=200,
