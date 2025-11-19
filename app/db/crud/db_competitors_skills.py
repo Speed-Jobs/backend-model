@@ -3,11 +3,11 @@ from sqlalchemy import text
 from typing import List, Optional, Dict
 from datetime import datetime
 import pandas as pd
-import numpy as np
+
 
 # 경쟁사 목록 상수
 COMPETITOR_COMPANIES = [
-    '현대', 'Coupang', '한화', '카카오', 'LINE', 
+    '현대오토에버', 'Coupang', '한화시스템템', '카카오', 'LINE', 
     'NAVER', '토스', '비바리퍼블리카', '우아한형제들', '배달의민족'
 ]
 
@@ -26,7 +26,7 @@ def get_competitors_skill_diversity_all(db: Session) -> List[Dict]:
         INNER JOIN post_skill ps ON p.id = ps.post_id
         INNER JOIN skill s ON ps.skill_id = s.id
         WHERE {where_conditions}
-        GROUP BY c.id, c.name
+        GROUP BY c.id,
         ORDER BY skills DESC, c.name
     """)
     

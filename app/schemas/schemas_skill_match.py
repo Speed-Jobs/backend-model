@@ -32,9 +32,5 @@ class SimilarSkillRequest(BaseModel):
 
 
 class SimilarSkillResponse(BaseModel):
-    input_keywords: List[str]
-    matched_keywords: List[str]
     results: List[SimilarSkillItem]
-    top_n: int
-    count: int
 
