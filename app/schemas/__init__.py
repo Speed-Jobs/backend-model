@@ -1,4 +1,4 @@
-from .skill_match import (
+from .schemas_skill_match import (
     SimilarSkillItem,
     SimilarSkillRequest,
     SimilarSkillResponse,

@@ -5,7 +5,7 @@ from typing import List
 
 from fastapi import APIRouter, HTTPException
 
-from app.schemas import (
+from app.schemas.schemas_skill_match import (
     SimilarSkillItem,
     SimilarSkillRequest,
     SimilarSkillResponse,
@@ -15,7 +15,6 @@ from app.services.skill_match.skill_match import (
     get_similar_skills,
     load_skill_association_model,
 )
-
 
 router = APIRouter(
     prefix="/skill-match",

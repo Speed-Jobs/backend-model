@@ -126,7 +126,6 @@ def count_posts(db: Session) -> int:
     return db.query(Post).count()
 
 
-
 def get_posts_by_skill_name(
     db: Session,
     skill_name: str,

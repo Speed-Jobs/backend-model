@@ -246,8 +246,6 @@ if __name__ == "__main__":
     image_path = DATA_DIR / "skax_job_R251754.png"
     description_json_path = DEFAULT_DESCRIPTION_JSON_PATH  # 위에서 자동 세팅됨
 
-
-
     try:
         job_data = parse_job_posting(image_path, description_json_path=description_json_path)
         job_dict = job_data.model_dump()
