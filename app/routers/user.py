@@ -1,4 +1,6 @@
+from webbrowser import get
 from fastapi import APIRouter
+from app.services.user import get_user
 
 router = APIRouter(
     prefix="/user",
@@ -7,4 +9,4 @@ router = APIRouter(
 
 @router.get("/")
 def read_user():
-    return {"message": "Hello, User!"}
+    return get_user()
