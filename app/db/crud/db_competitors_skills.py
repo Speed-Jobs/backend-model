@@ -260,15 +260,16 @@ def get_company_skill_trends(
     
     df_filtered['quarter'] = df_filtered['quarter_tuple'].apply(quarter_to_str)
     
-    # 각 분기별로 모든 스킬의 빈도수 계산
+    # 각 분기별로 상위 top_n개 스킬의 빈도수 계산
     trends = []
     for q_tuple in [current_q_tuple, previous_q_tuple]:
         quarter_str = quarter_to_str(q_tuple)
         quarter_df = df_filtered[df_filtered['quarter_tuple'] == q_tuple]
         
         if len(quarter_df) > 0:
-            # 해당 분기의 모든 스킬 빈도수 계산
-            skill_counts = quarter_df['skill_name'].value_counts().to_dict()
+            # 해당 분기의 상위 top_n개 스킬 빈도수 계산
+            skill_counts_series = quarter_df['skill_name'].value_counts().head(top_n)
+            skill_counts = skill_counts_series.to_dict()
             
             trends.append({
                 "quarter": quarter_str,
