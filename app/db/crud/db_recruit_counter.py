@@ -14,17 +14,19 @@ def get_job_postings_daily(
     start_date: date,
     end_date: date
 ) -> List[Tuple[date, int]]:
-    """일간 채용 공고 수 조회"""
+    """일간 채용 공고 수 조회 (posted_at NULL이면 crawled_at 사용)"""
+    effective_date = func.coalesce(Post.posted_at, Post.crawled_at)
+    
     query = db.query(
-        func.date(Post.posted_at).label('date'),
+        func.date(effective_date).label('date'),
         func.count(Post.id).label('count')
     ).filter(
-        Post.posted_at >= start_date,
-        Post.posted_at <= end_date
+        effective_date >= start_date,
+        effective_date <= end_date
     ).group_by(
-        func.date(Post.posted_at)
+        func.date(effective_date)
     ).order_by(
-        func.date(Post.posted_at)
+        func.date(effective_date)
     )
     
     return query.all()
@@ -35,20 +37,22 @@ def get_job_postings_weekly(
     start_date: date,
     end_date: date
 ) -> List[Tuple[int, int, int]]:
-    """주간 채용 공고 수 조회 (year, week, count)"""
+    """주간 채용 공고 수 조회 (year, week, count) (posted_at NULL이면 crawled_at 사용)"""
+    effective_date = func.coalesce(Post.posted_at, Post.crawled_at)
+    
     query = db.query(
-        func.year(Post.posted_at).label('year'),
-        func.week(Post.posted_at, 1).label('week'),
+        func.year(effective_date).label('year'),
+        func.week(effective_date, 1).label('week'),
         func.count(Post.id).label('count')
     ).filter(
-        Post.posted_at >= start_date,
-        Post.posted_at <= end_date
+        effective_date >= start_date,
+        effective_date <= end_date
     ).group_by(
-        func.year(Post.posted_at),
-        func.week(Post.posted_at, 1)
+        func.year(effective_date),
+        func.week(effective_date, 1)
     ).order_by(
-        func.year(Post.posted_at),
-        func.week(Post.posted_at, 1)
+        func.year(effective_date),
+        func.week(effective_date, 1)
     )
     
     return query.all()
@@ -59,20 +63,22 @@ def get_job_postings_monthly(
     start_date: date,
     end_date: date
 ) -> List[Tuple[int, int, int]]:
-    """월간 채용 공고 수 조회 (year, month, count)"""
+    """월간 채용 공고 수 조회 (year, month, count) (posted_at NULL이면 crawled_at 사용)"""
+    effective_date = func.coalesce(Post.posted_at, Post.crawled_at)
+    
     query = db.query(
-        func.year(Post.posted_at).label('year'),
-        func.month(Post.posted_at).label('month'),
+        func.year(effective_date).label('year'),
+        func.month(effective_date).label('month'),
         func.count(Post.id).label('count')
     ).filter(
-        Post.posted_at >= start_date,
-        Post.posted_at <= end_date
+        effective_date >= start_date,
+        effective_date <= end_date
     ).group_by(
-        func.year(Post.posted_at),
-        func.month(Post.posted_at)
+        func.year(effective_date),
+        func.month(effective_date)
     ).order_by(
-        func.year(Post.posted_at),
-        func.month(Post.posted_at)
+        func.year(effective_date),
+        func.month(effective_date)
     )
     
     return query.all()

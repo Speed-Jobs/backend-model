@@ -36,20 +36,22 @@ def get_companies_recruitment_daily(
     start_date: date,
     end_date: date
 ) -> List[Tuple[date, int, int]]:
-    """일간 회사별 채용 공고 수 조회 (date, company_id, count)"""
+    """일간 회사별 채용 공고 수 조회 (date, company_id, count) (posted_at NULL이면 crawled_at 사용)"""
+    effective_date = func.coalesce(Post.posted_at, Post.crawled_at)
+    
     query = db.query(
-        func.date(Post.posted_at).label('date'),
+        func.date(effective_date).label('date'),
         Post.company_id,
         func.count(Post.id).label('count')
     ).filter(
         Post.company_id.in_(company_ids),
-        Post.posted_at >= start_date,
-        Post.posted_at <= end_date
+        effective_date >= start_date,
+        effective_date <= end_date
     ).group_by(
-        func.date(Post.posted_at),
+        func.date(effective_date),
         Post.company_id
     ).order_by(
-        func.date(Post.posted_at),
+        func.date(effective_date),
         Post.company_id
     )
     
@@ -62,23 +64,25 @@ def get_companies_recruitment_weekly(
     start_date: date,
     end_date: date
 ) -> List[Tuple[int, int, int, int]]:
-    """주간 회사별 채용 공고 수 조회 (year, week, company_id, count)"""
+    """주간 회사별 채용 공고 수 조회 (year, week, company_id, count) (posted_at NULL이면 crawled_at 사용)"""
+    effective_date = func.coalesce(Post.posted_at, Post.crawled_at)
+    
     query = db.query(
-        func.year(Post.posted_at).label('year'),
-        func.week(Post.posted_at, 1).label('week'),
+        func.year(effective_date).label('year'),
+        func.week(effective_date, 1).label('week'),
         Post.company_id,
         func.count(Post.id).label('count')
     ).filter(
         Post.company_id.in_(company_ids),
-        Post.posted_at >= start_date,
-        Post.posted_at <= end_date
+        effective_date >= start_date,
+        effective_date <= end_date
     ).group_by(
-        func.year(Post.posted_at),
-        func.week(Post.posted_at, 1),
+        func.year(effective_date),
+        func.week(effective_date, 1),
         Post.company_id
     ).order_by(
-        func.year(Post.posted_at),
-        func.week(Post.posted_at, 1),
+        func.year(effective_date),
+        func.week(effective_date, 1),
         Post.company_id
     )
     
@@ -91,23 +95,25 @@ def get_companies_recruitment_monthly(
     start_date: date,
     end_date: date
 ) -> List[Tuple[int, int, int, int]]:
-    """월간 회사별 채용 공고 수 조회 (year, month, company_id, count)"""
+    """월간 회사별 채용 공고 수 조회 (year, month, company_id, count) (posted_at NULL이면 crawled_at 사용)"""
+    effective_date = func.coalesce(Post.posted_at, Post.crawled_at)
+    
     query = db.query(
-        func.year(Post.posted_at).label('year'),
-        func.month(Post.posted_at).label('month'),
+        func.year(effective_date).label('year'),
+        func.month(effective_date).label('month'),
         Post.company_id,
         func.count(Post.id).label('count')
     ).filter(
         Post.company_id.in_(company_ids),
-        Post.posted_at >= start_date,
-        Post.posted_at <= end_date
+        effective_date >= start_date,
+        effective_date <= end_date
     ).group_by(
-        func.year(Post.posted_at),
-        func.month(Post.posted_at),
+        func.year(effective_date),
+        func.month(effective_date),
         Post.company_id
     ).order_by(
-        func.year(Post.posted_at),
-        func.month(Post.posted_at),
+        func.year(effective_date),
+        func.month(effective_date),
         Post.company_id
     )
     
