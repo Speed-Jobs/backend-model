@@ -1,63 +1,163 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import text
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Tuple
 from datetime import datetime
 import pandas as pd
 
 
-# 경쟁사 목록 상수
-COMPETITOR_COMPANIES = [
-    '현대오토에버', 'Coupang', '한화시스템템', '카카오', 'LINE', 
-    'NAVER', '토스', '비바리퍼블리카', '우아한형제들', '배달의민족'
-]
+# 경쟁사 그룹 및 키워드 매핑
+COMPETITOR_GROUPS: Dict[str, List[str]] = {
+    "토스": ["토스%", "토스뱅크%", "토스증권%", "비바리퍼블리카%", "AICC%"],
+    "카카오": ["카카오%"],
+    "한화시스템": ["한화시스템%", "한화시스템템%", "한화시스템/ICT%", "한화시스템·ICT%"],
+    "현대오토에버": ["현대오토에버%"],
+    "우아한형제들": ["우아한%", "배달의민족", "배민"],
+    "쿠팡": ["쿠팡%", "Coupang%"],
+    "라인": ["LINE%", "라인%"],
+    "네이버": ["NAVER%", "네이버%"],
+    "LG CNS": ["LG_CNS%", "LG CNS%"],
+}
+
+EFFECTIVE_POSTED_AT_SQL = "COALESCE(p.posted_at, p.crawled_at)"
+
+
+def _normalize_like_pattern(keyword: str) -> str:
+    """와일드카드가 없다면 자동으로 부분 일치 패턴으로 변환"""
+    if any(char in keyword for char in ("%", "_")):
+        return keyword
+    return f"%{keyword}%"
+
+
+def _build_like_clauses(
+    keywords: List[str],
+    alias: str,
+    prefix: str
+) -> Tuple[List[str], Dict[str, str]]:
+    """키워드 리스트를 LIKE 절과 파라미터로 변환"""
+    clauses: List[str] = []
+    params: Dict[str, str] = {}
+    for idx, keyword in enumerate(keywords):
+        param_name = f"{prefix}_{idx}"
+        clauses.append(f"{alias} LIKE :{param_name}")
+        params[param_name] = _normalize_like_pattern(keyword)
+    return clauses, params
+
+
+def _build_competitor_group_case(alias: str = "c.name") -> Tuple[str, str, Dict[str, str]]:
+    """경쟁사 그룹 CASE 절과 기본 WHERE 절 생성"""
+    where_fragments: List[str] = []
+    case_fragments: List[str] = []
+    params: Dict[str, str] = {}
+    for group_idx, (group_name, keywords) in enumerate(COMPETITOR_GROUPS.items()):
+        clauses, clause_params = _build_like_clauses(
+            keywords, alias, prefix=f"group_{group_idx}"
+        )
+        if not clauses:
+            continue
+        condition_sql = " OR ".join(clauses)
+        where_fragments.append(f"({condition_sql})")
+        case_fragments.append(f"WHEN {condition_sql} THEN '{group_name}'")
+        params.update(clause_params)
+    if not where_fragments:
+        raise ValueError("COMPETITOR_GROUPS가 비어 있어 그룹 조건을 생성할 수 없습니다.")
+    where_clause = " OR ".join(where_fragments)
+    case_expression = f"CASE {' '.join(case_fragments)} ELSE {alias} END"
+    return where_clause, case_expression, params
+
+
+def _strip_wildcards(keyword: str) -> str:
+    """LIKE 패턴 문자열에서 와일드카드를 제거"""
+    return keyword.replace("%", "").replace("_", "").strip()
+
+
+def _normalize_for_compare(value: str) -> str:
+    """비교를 위한 문자열 정규화"""
+    return value.replace(" ", "").lower()
+
+
+def _get_group_by_company_name(company_name: str) -> Optional[str]:
+    """회사명이 속한 그룹 키 반환"""
+    normalized_name = _normalize_for_compare(company_name)
+    for group_name, keywords in COMPETITOR_GROUPS.items():
+        if _normalize_for_compare(group_name) == normalized_name:
+            return group_name
+        for keyword in keywords:
+            base_keyword = _strip_wildcards(keyword)
+            if base_keyword and _normalize_for_compare(base_keyword) in normalized_name:
+                return group_name
+    return None
+
+
+def _build_group_filter_clause(
+    group_name: str,
+    alias: str = "c.name",
+    prefix: str = "target_group"
+) -> Tuple[str, Dict[str, str]]:
+    """그룹명을 기반으로 WHERE 절 생성"""
+    keywords = COMPETITOR_GROUPS.get(group_name)
+    if not keywords:
+        return "", {}
+    clauses, clause_params = _build_like_clauses(
+        keywords, alias, prefix=f"{prefix}_{group_name}"
+    )
+    return f"({' OR '.join(clauses)})", clause_params
+
+
+def _build_company_condition_from_input(
+    company_name: str,
+    alias: str = "c.name",
+    prefix: str = "target_company"
+) -> Tuple[str, Dict[str, str]]:
+    """입력된 회사명(또는 그룹명)에 맞는 WHERE 절 생성"""
+    group_name = _get_group_by_company_name(company_name)
+    if group_name:
+        return _build_group_filter_clause(group_name, alias=alias, prefix=prefix)
+    clauses, clause_params = _build_like_clauses(
+        [company_name], alias, prefix=prefix
+    )
+    return f"({' OR '.join(clauses)})", clause_params
 
 def get_competitors_skill_diversity_all(db: Session) -> List[Dict]:
-    """전체 경쟁사별 스킬 다양성 조회"""
+    """전체 경쟁사별 스킬 다양성 조회 (그룹 단위 집계)"""
     
-    # WHERE 조건 동적 생성
-    where_conditions = " OR ".join([f"c.name LIKE :company_{i}" for i in range(len(COMPETITOR_COMPANIES))])
+    where_clause, group_case_expr, params = _build_competitor_group_case()
     
     query = text(f"""
         SELECT 
-            c.name AS company,
+            {group_case_expr} AS company,
             COUNT(DISTINCT s.id) AS skills
         FROM company c
         INNER JOIN post p ON c.id = p.company_id
         INNER JOIN post_skill ps ON p.id = ps.post_id
         INNER JOIN skill s ON ps.skill_id = s.id
-        WHERE {where_conditions}
-        GROUP BY c.id,
-        ORDER BY skills DESC, c.name
+        WHERE {where_clause}
+        GROUP BY company
+        ORDER BY skills DESC, company
     """)
-    
-    # 파라미터 바인딩
-    params = {f"company_{i}": f"%{company}%" for i, company in enumerate(COMPETITOR_COMPANIES)}
     
     result = db.execute(query, params)
     return [{"company": row.company, "skills": row.skills} for row in result]
 
 
 def get_competitors_skill_diversity_by_year(db: Session, year: int) -> List[Dict]:
-    """연도별 경쟁사별 스킬 다양성 조회"""
+    """연도별 경쟁사별 스킬 다양성 조회 (그룹 단위 집계)"""
     
-    where_conditions = " OR ".join([f"c.name LIKE :company_{i}" for i in range(len(COMPETITOR_COMPANIES))])
+    where_clause, group_case_expr, params = _build_competitor_group_case()
+    params['year'] = year
     
     query = text(f"""
         SELECT 
-            c.name AS company,
+            {group_case_expr} AS company,
             COUNT(DISTINCT s.id) AS skills
         FROM company c
         INNER JOIN post p ON c.id = p.company_id
         INNER JOIN post_skill ps ON p.id = ps.post_id
         INNER JOIN skill s ON ps.skill_id = s.id
-        WHERE ({where_conditions})
-          AND YEAR(p.posted_at) = :year
-        GROUP BY c.id, c.name
-        ORDER BY skills DESC, c.name
+        WHERE ({where_clause})
+          AND YEAR({EFFECTIVE_POSTED_AT_SQL}) = :year
+        GROUP BY company
+        ORDER BY skills DESC, company
     """)
-    
-    params = {f"company_{i}": f"%{company}%" for i, company in enumerate(COMPETITOR_COMPANIES)}
-    params['year'] = year
     
     result = db.execute(query, params)
     return [{"company": row.company, "skills": row.skills} for row in result]
@@ -71,22 +171,24 @@ def get_competitors_posts_with_skills(
 ) -> List[Dict]:
     """경쟁사별 공고 및 스킬 상세 조회"""
     
-    where_conditions = " OR ".join([f"c.name LIKE :company_{i}" for i in range(len(COMPETITOR_COMPANIES))])
+    base_where_clause, _, params = _build_competitor_group_case()
     
     additional_where = []
-    params = {f"company_{i}": f"%{company}%" for i, company in enumerate(COMPETITOR_COMPANIES)}
     
     if company_name:
-        additional_where.append("c.name LIKE :target_company")
-        params['target_company'] = f"%{company_name}%"
+        company_clause, clause_params = _build_company_condition_from_input(
+            company_name, alias="c.name", prefix="target_company"
+        )
+        additional_where.append(company_clause)
+        params.update(clause_params)
     
     if year:
-        additional_where.append("YEAR(p.posted_at) = :year")
+        additional_where.append(f"YEAR({EFFECTIVE_POSTED_AT_SQL}) = :year")
         params['year'] = year
     
-    where_clause = where_conditions
+    where_clause = base_where_clause
     if additional_where:
-        where_clause += " AND " + " AND ".join(additional_where)
+        where_clause = f"({where_clause}) AND " + " AND ".join(additional_where)
     
     query = text(f"""
         SELECT
@@ -104,7 +206,7 @@ def get_competitors_posts_with_skills(
         INNER JOIN skill s ON ps.skill_id = s.id
         WHERE {where_clause}
         GROUP BY p.id, p.title, p.posted_at, p.close_at, p.crawled_at, c.id, c.name
-        ORDER BY c.name, p.posted_at DESC
+        ORDER BY c.name, {EFFECTIVE_POSTED_AT_SQL} DESC
         LIMIT :limit
     """)
     
@@ -130,6 +232,7 @@ def get_company_skill_trends(
     """
     
     # company_id가 숫자인지 확인 (ID인지 이름인지)
+    group_name = None
     try:
         company_id_int = int(company_id)
         where_clause = "c.id = :company_id"
@@ -137,17 +240,28 @@ def get_company_skill_trends(
         company_where_clause = "id = :company_id"
         company_params = {"company_id": company_id_int}
     except ValueError:
-        # 문자열이면 회사명으로 검색
-        where_clause = "c.name = :company_name"
-        params = {"company_name": company_id}
-        company_where_clause = "name = :company_name"
-        company_params = {"company_name": company_id}
+        group_name = _get_group_by_company_name(company_id)
+        if group_name:
+            where_clause, params = _build_group_filter_clause(
+                group_name, alias="c.name", prefix="trend_group"
+            )
+            company_where_clause = None
+            company_params = None
+        else:
+            # 문자열이면 회사명으로 검색
+            where_clause = "c.name = :company_name"
+            params = {"company_name": company_id}
+            company_where_clause = "name = :company_name"
+            company_params = {"company_name": company_id}
     
-    # 회사명 먼저 조회
-    company_query = text(f"SELECT name FROM company WHERE {company_where_clause} LIMIT 1")
-    company_result = db.execute(company_query, company_params)
-    company_row = company_result.first()
-    company_name = company_row.name if company_row else company_id
+    # 회사명 먼저 조회 (그룹 매칭 시에는 그룹명 사용)
+    if group_name:
+        company_name = group_name
+    else:
+        company_query = text(f"SELECT name FROM company WHERE {company_where_clause} LIMIT 1")
+        company_result = db.execute(company_query, company_params)
+        company_row = company_result.first()
+        company_name = company_row.name if company_row else company_id
     
     # year가 None이면 현재 연도 기준 근 5개년
     if year is None:
@@ -155,17 +269,17 @@ def get_company_skill_trends(
         years = list(range(current_year - 4, current_year + 1))  # 5개년 (예: 2021~2025)
         # SQL injection 방지를 위해 숫자만 사용하므로 안전하게 포맷팅
         years_str = ','.join(map(str, years))
-        year_condition = f"YEAR(p.posted_at) IN ({years_str})"
+        year_condition = f"YEAR({EFFECTIVE_POSTED_AT_SQL}) IN ({years_str})"
     else:
         years = [year]
-        year_condition = "YEAR(p.posted_at) = :year"
+        year_condition = f"YEAR({EFFECTIVE_POSTED_AT_SQL}) = :year"
         params['year'] = year
     
     # 해당 연도(들)의 모든 공고와 스킬 데이터 조회
     query = text(f"""
         SELECT
             p.id AS post_id,
-            p.posted_at,
+            {EFFECTIVE_POSTED_AT_SQL} AS effective_posted_at,
             s.name AS skill_name
         FROM company c
         INNER JOIN post p ON c.id = p.company_id
@@ -173,8 +287,8 @@ def get_company_skill_trends(
         INNER JOIN skill s ON ps.skill_id = s.id
         WHERE {where_clause}
           AND {year_condition}
-          AND p.posted_at IS NOT NULL
-        ORDER BY p.posted_at, s.name
+          AND {EFFECTIVE_POSTED_AT_SQL} IS NOT NULL
+        ORDER BY {EFFECTIVE_POSTED_AT_SQL}, s.name
     """)
     
     result = db.execute(query, params)
@@ -191,7 +305,7 @@ def get_company_skill_trends(
     
     # DataFrame으로 변환
     df = pd.DataFrame(rows)
-    df['posted_at'] = pd.to_datetime(df['posted_at'])
+    df['effective_posted_at'] = pd.to_datetime(df['effective_posted_at'])
     
     # year가 None이면 (근 5개년 조회 시) 각 연도별 상위 N개 스킬 빈도수 반환
     if year is None:
@@ -199,7 +313,7 @@ def get_company_skill_trends(
         yearly_skill_frequencies = {}
         
         for y in years:
-            year_df = df[df['posted_at'].dt.year == y]
+            year_df = df[df['effective_posted_at'].dt.year == y]
             
             if len(year_df) > 0:
                 # 해당 연도의 상위 N개 스킬 빈도수 계산
@@ -237,7 +351,7 @@ def get_company_skill_trends(
         previous_q_tuple = (current_year, current_quarter - 1)
     
     # 분기를 튜플로 추가
-    df['quarter_tuple'] = df['posted_at'].apply(get_quarter)
+    df['quarter_tuple'] = df['effective_posted_at'].apply(get_quarter)
     
     # 현재 분기와 직전 분기만 필터링
     target_quarters = [current_q_tuple, previous_q_tuple]

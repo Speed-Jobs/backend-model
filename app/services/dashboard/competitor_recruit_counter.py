@@ -16,13 +16,14 @@ from app.schemas.schemas_competitor_recruit_counter import (
 
 
 # 기본 5개 주요 경쟁사 키워드 (그룹 대표)
-DEFAULT_COMPANY_KEYWORDS = ["토스", "카카오", "한화", "현대오토에버", "우아한"]
+DEFAULT_COMPANY_KEYWORDS = ["토스", "카카오", "한화시스템", "현대오토에버", "우아한", "LG_CNS", "네이버", "쿠팡", "LINE"]
+
 
 # 키워드별 정규식 패턴 (계열사 자동 매칭)
 COMPANY_KEYWORD_PATTERNS = {
     "toss": r"^토스",           # 토스로 시작 (토스뱅크, 토스증권 등)
     "kakao": r"^카카오",        # 카카오로 시작
-    "hanwha": r"^한화",         # 한화로 시작 (한화시스템, 한화손해보험 등)
+    "hanwha": r"^한화시스템",         # 한화로 시작 (한화시스템, 한화손해보험 등)
     "hyundai_autoever": r"^현대오토에버",
     "woowahan": r"^우아한"      # 우아한으로 시작
 }

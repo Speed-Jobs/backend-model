@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from typing import Optional
+from typing import Optional, Literal
 from app.db.crud import db_competitors_skills
 from app.schemas import schemas_competitors_skills
 
@@ -8,21 +8,26 @@ class CompetitorsSkillsService:
     
     def get_skill_diversity(
         self, 
-        db: Session, 
+        db: Session,
+        view_mode: Literal["all", "year"] = "all",
         year: Optional[int] = None
     ) -> schemas_competitors_skills.SkillDiversityData:
         """회사별 스킬 다양성 조회"""
         
-        if year is None:
+        if view_mode == "all":
             diversity_data = db_competitors_skills.get_competitors_skill_diversity_all(db)
-            view_mode = "all"
-        else:
+            selected_year = None
+        elif view_mode == "year":
+            if year is None:
+                raise ValueError("view_mode이 'year'일 때 year 파라미터는 필수입니다.")
             diversity_data = db_competitors_skills.get_competitors_skill_diversity_by_year(db, year)
-            view_mode = "yearly"
+            selected_year = year
+        else:
+            raise ValueError(f"지원하지 않는 view_mode입니다: {view_mode}")
         
         return schemas_competitors_skills.SkillDiversityData(
             view_mode=view_mode,
-            year=year,
+            year=selected_year,
             diversity=[
                 schemas_competitors_skills.SkillDiversity(**item) 
                 for item in diversity_data

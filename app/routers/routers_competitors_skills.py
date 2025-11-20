@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Query, HTTPException, Path
 from sqlalchemy.orm import Session
-from typing import Optional
+from typing import Optional, Literal
 from app.db import get_db
 from app.schemas import schemas_competitors_skills
 from app.services.dashboard.competitors_skills import competitors_skills_service
@@ -17,15 +17,19 @@ router = APIRouter(
     description="경쟁사별 요구하는 고유 스킬 개수를 조회합니다."
 )
 async def get_skill_diversity(
-    year: Optional[int] = Query(None, description="조회 연도 (미입력시 전체)", ge=2020, le=2030),
+    view_mode: Literal["all", "year"] = Query("all", description="조회 모드 (all, year)"),
+    year: Optional[int] = Query(None, description="조회 연도 (view_mode=year일 때 필수)", ge=2020, le=2030),
     db: Session = Depends(get_db)
 ):
     """전체 또는 연도별 회사별 스킬 다양성 조회"""
     
     try:
-        data = competitors_skills_service.get_skill_diversity(db, year)
+        data = competitors_skills_service.get_skill_diversity(db, view_mode=view_mode, year=year)
         
-        message = f"회사별 스킬 다양성 조회 성공 ({'전체' if year is None else f'{year}년'})"
+        if view_mode == "all":
+            message = "회사별 스킬 다양성 조회 성공 (전체)"
+        else:
+            message = f"회사별 스킬 다양성 조회 성공 ({year}년)"
         
         return schemas_competitors_skills.SkillDiversityResponse(
             status=200,
@@ -33,6 +37,8 @@ async def get_skill_diversity(
             message=message,
             data=data
         )
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"조회 중 오류 발생: {str(e)}")
 
