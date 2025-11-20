@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(done)",
+      "Bash(PYTHONPATH=/home/penguin/project/backend-model python3:*)"
     ],
     "deny": [],
     "ask": []

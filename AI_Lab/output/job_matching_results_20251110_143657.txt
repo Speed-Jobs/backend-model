@@ -1,0 +1,5706 @@
+====================================================================================================
+직무기술서 - 채용공고 매칭 결과
+생성일시: 2025-11-10 14:36:57
+총 직무기술서 수: 49개
+총 채용공고 수: 197개
+====================================================================================================
+
+
+====================================================================================================
+[1] 직무: Software Development
+====================================================================================================
+Industry: Front-end Development
+Skill Set (샘플): ['Java', 'node.js', 'Python', 'C / C++', 'Go']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Web Front-end Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015873
+   - LTR 점수: 99.37/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.676449
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.203818
+   - 단순 평균: 0.338855
+   
+   URL: https://careers.linecorp.com/ko/jobs/2836/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015873
+
+2. 카카오디벨로퍼스 프론트/서버 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015776
+   - LTR 점수: 98.88/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.679040
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204096
+   - 단순 평균: 0.339794
+   
+   URL: https://careers.kakao.com/jobs/P-14122?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015776
+
+3. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.014642
+   - LTR 점수: 93.21/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000157
+   - ChromaDB 코사인 유사도: 0.654586
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.196486
+   - 단순 평균: 0.327372
+   
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 9, Weight 0.3, RRF = 0.3 / (9 + 60) = 0.004348
+   - BM25: Rank 8, Weight 0.7, RRF = 0.7 / (8 + 60) = 0.010294
+   → 총 RRF 점수: 0.014642
+
+4. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991353
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693947
+   - 단순 평균: 0.495677
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+5. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006680
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004676
+   - 단순 평균: 0.003340
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+
+====================================================================================================
+[2] 직무: Software Development
+====================================================================================================
+Industry: Back-end Development
+Skill Set (샘플): ['Java', 'node.js', 'Python', 'C / C++', 'Go']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015702
+   - LTR 점수: 98.51/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.660029
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202684
+   - 단순 평균: 0.333354
+   
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 8, Weight 0.3, RRF = 0.3 / (8 + 60) = 0.004412
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015702
+
+2. 카카오디벨로퍼스 프론트/서버 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015553
+   - LTR 점수: 97.76/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.663131
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.199323
+   - 단순 평균: 0.331839
+   
+   URL: https://careers.kakao.com/jobs/P-14122?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 5, Weight 0.3, RRF = 0.3 / (5 + 60) = 0.004615
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015553
+
+3. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+4. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+5. MLOps Engineer (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.kakao.com/jobs/P-14039?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[3] 직무: Software Development
+====================================================================================================
+Industry: Mobile Development
+Skill Set (샘플): ['Java', 'node.js', 'Python', 'C / C++', 'Go']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 카카오디벨로퍼스 프론트/서버 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015873
+   - LTR 점수: 99.37/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.686772
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206915
+   - 단순 평균: 0.344017
+   
+   URL: https://careers.kakao.com/jobs/P-14122?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015873
+
+2. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015133
+   - LTR 점수: 95.66/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000157
+   - ChromaDB 코사인 유사도: 0.695100
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208640
+   - 단순 평균: 0.347629
+   
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 8, Weight 0.7, RRF = 0.7 / (8 + 60) = 0.010294
+   → 총 RRF 점수: 0.015133
+
+3. LINE Messaging Server Engineer
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015084
+   - LTR 점수: 95.42/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000238
+   - ChromaDB 코사인 유사도: 0.677958
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.203554
+   - 단순 평균: 0.339098
+   
+   URL: https://careers.linecorp.com/ko/jobs/2209/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 7, Weight 0.3, RRF = 0.3 / (7 + 60) = 0.004478
+   - BM25: Rank 6, Weight 0.7, RRF = 0.7 / (6 + 60) = 0.010606
+   → 총 RRF 점수: 0.015084
+
+4. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991661
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.694163
+   - 단순 평균: 0.495830
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+5. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006682
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004677
+   - 단순 평균: 0.003341
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+
+====================================================================================================
+[4] 직무: Factory AX Engineering
+====================================================================================================
+Industry: Simulation
+Skill Set (샘플): ['제조공정', '공정/반송장비자동화/지능화 Concept Design', 'Digital Factory 구축', 'AI Literacy / Collaboration', '제조대외']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016314
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.679990
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.897823
+   - 단순 평균: 0.835585
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016314
+
+2. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016029
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.689881
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207847
+   - 단순 평균: 0.345571
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.016029
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015978
+   - LTR 점수: 99.89/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.630412
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.193799
+   - 단순 평균: 0.318545
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015978
+
+4. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. Cloud-Native Storage Engineer
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2875/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[5] 직무: Factory AX Engineering
+====================================================================================================
+Industry: 기구설계
+Skill Set (샘플): ['제조공정', '공정/반송장비자동화/지능화 Concept Design', 'Digital Factory 구축', 'AI Literacy / Collaboration', '제조대외']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016314
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991537
+   - ChromaDB 코사인 유사도: 0.694899
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.902545
+   - 단순 평균: 0.843218
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016314
+
+2. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016029
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.718746
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216507
+   - 단순 평균: 0.360004
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.016029
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015978
+   - LTR 점수: 99.89/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006681
+   - ChromaDB 코사인 유사도: 0.652619
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200462
+   - 단순 평균: 0.329650
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015978
+
+4. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015247
+   - LTR 점수: 96.23/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.646613
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.194217
+   - 단순 평균: 0.323473
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 7, Weight 0.3, RRF = 0.3 / (7 + 60) = 0.004478
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.015247
+
+5. Smart Yard 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014733
+   - LTR 점수: 93.67/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000188
+   - ChromaDB 코사인 유사도: 0.631472
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.189573
+   - 단순 평균: 0.315830
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16802
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 10, Weight 0.3, RRF = 0.3 / (10 + 60) = 0.004286
+   - BM25: Rank 7, Weight 0.7, RRF = 0.7 / (7 + 60) = 0.010448
+   → 총 RRF 점수: 0.014733
+
+
+====================================================================================================
+[6] 직무: Factory AX Engineering
+====================================================================================================
+Industry: 전장/제어
+Skill Set (샘플): ['제조공정', '공정/반송장비자동화/지능화 Concept Design', 'Digital Factory 구축', 'AI Literacy / Collaboration', '제조대외']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016314
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991273
+   - ChromaDB 코사인 유사도: 0.695406
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.902513
+   - 단순 평균: 0.843339
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016314
+
+2. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016029
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.717475
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216126
+   - 단순 평균: 0.359368
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.016029
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015978
+   - LTR 점수: 99.89/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.646372
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198587
+   - 단순 평균: 0.326526
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015978
+
+4. Smart Yard 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014892
+   - LTR 점수: 94.46/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000238
+   - ChromaDB 코사인 유사도: 0.629759
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.189094
+   - 단순 평균: 0.314999
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16802
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 10, Weight 0.3, RRF = 0.3 / (10 + 60) = 0.004286
+   - BM25: Rank 6, Weight 0.7, RRF = 0.7 / (6 + 60) = 0.010606
+   → 총 RRF 점수: 0.014892
+
+5. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[7] 직무: Solution Development
+====================================================================================================
+Industry: ERP_FCM (Financial Chain Management)
+Skill Set (샘플): ['고객요구사항분석', 'Solution별기능', '솔루션Architecture 설계방법론', 'Solution 별 정책', '프로그래밍(ABAP, Java, node.js, C#, BTP)']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. SAP ERP PS 모듈 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015799
+   - LTR 점수: 98.99/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.662965
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.199773
+   - 단순 평균: 0.332113
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17223
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015799
+
+2. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015638
+   - LTR 점수: 98.19/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.652698
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200485
+   - 단순 평균: 0.329689
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 9, Weight 0.3, RRF = 0.3 / (9 + 60) = 0.004348
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015638
+
+3. SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015221
+   - LTR 점수: 96.11/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000238
+   - ChromaDB 코사인 유사도: 0.661944
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198750
+   - 단순 평균: 0.331091
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17229
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 5, Weight 0.3, RRF = 0.3 / (5 + 60) = 0.004615
+   - BM25: Rank 6, Weight 0.7, RRF = 0.7 / (6 + 60) = 0.010606
+   → 총 RRF 점수: 0.015221
+
+4. 선박 엔진 제조 PLM/CAD 운영 담당자
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991273
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693891
+   - 단순 평균: 0.495636
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17226
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+5. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[8] 직무: Solution Development
+====================================================================================================
+Industry: ERP_SCM (Supply Chain Management)
+Skill Set (샘플): ['고객요구사항분석', 'Solution별기능', '솔루션Architecture 설계방법론', 'Solution 별 정책', '프로그래밍(ABAP, Java, node.js, C#, BTP)']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 방산 SCM 모듈 운영 담당자 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: SCM 운영/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016029
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.711712
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.214397
+   - 단순 평균: 0.356487
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17228
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.016029
+
+2. 선박 엔진 제조 PLM/CAD 운영 담당자
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17226
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+4. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[9] 직무: Solution Development
+====================================================================================================
+Industry: ERP_HCM (Human Capital Management)
+Skill Set (샘플): ['고객요구사항분석', 'Solution별기능', '솔루션Architecture 설계방법론', 'Solution 별 정책', '프로그래밍(ABAP, Java, node.js, C#, BTP)']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015315
+   - LTR 점수: 96.57/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.697511
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209486
+   - 단순 평균: 0.348922
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.015315
+
+2. 선박 엔진 제조 PLM/CAD 운영 담당자
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17226
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+5. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[10] 직무: Solution Development
+====================================================================================================
+Industry: Biz. Solution
+Skill Set (샘플): ['Cloud', 'SaaS', 'PaaS', 'IaaS', 'SAP']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015415
+   - LTR 점수: 97.08/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.658878
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198047
+   - 단순 평균: 0.329713
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 7, Weight 0.3, RRF = 0.3 / (7 + 60) = 0.004478
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015415
+
+2. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. Promotional Solution Sales
+   회사: LINE Pay Taiwan
+   업무분야: Business & Sales
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.linecorp.com/ko/jobs/2761/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+4. 카카오톡 SRE(Site Reliability Engineer) 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상 12년 이하
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.kakao.com/jobs/P-14249?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+5. Data Analytics Engineer (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.kakao.com/jobs/P-14276?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[11] 직무: Solution Development
+====================================================================================================
+Industry: Tech. Solution
+Skill Set (샘플): ['Cloud', 'SaaS', 'PaaS', 'IaaS', 'SAP']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015210
+   - LTR 점수: 96.05/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000188
+   - ChromaDB 코사인 유사도: 0.680751
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204357
+   - 단순 평균: 0.340469
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 7, Weight 0.7, RRF = 0.7 / (7 + 60) = 0.010448
+   → 총 RRF 점수: 0.015210
+
+2. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015055
+   - LTR 점수: 95.27/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.660241
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198305
+   - 단순 평균: 0.330287
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 10, Weight 0.3, RRF = 0.3 / (10 + 60) = 0.004286
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.015055
+
+3. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991537
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.694076
+   - 단순 평균: 0.495768
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+4. Promotional Solution Sales
+   회사: LINE Pay Taiwan
+   업무분야: Business & Sales
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006681
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004677
+   - 단순 평균: 0.003340
+   
+   URL: https://careers.linecorp.com/ko/jobs/2761/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+5. 카카오톡 SRE(Site Reliability Engineer) 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상 12년 이하
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.kakao.com/jobs/P-14249?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+
+====================================================================================================
+[12] 직무: Solution Development
+====================================================================================================
+Industry: Solution Architecture
+Skill Set (샘플): ['Cloud', 'SaaS', 'PaaS', 'IaaS', 'SAP']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015457
+   - LTR 점수: 97.28/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.668095
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200661
+   - 단순 평균: 0.334214
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.015457
+
+2. Cloud DB Platform Engineer (DBA) (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Infra Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.014733
+   - LTR 점수: 93.67/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000188
+   - ChromaDB 코사인 유사도: 0.655165
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.196681
+   - 단순 평균: 0.327676
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004088&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 10, Weight 0.3, RRF = 0.3 / (10 + 60) = 0.004286
+   - BM25: Rank 7, Weight 0.7, RRF = 0.7 / (7 + 60) = 0.010448
+   → 총 RRF 점수: 0.014733
+
+3. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991537
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.694076
+   - 단순 평균: 0.495768
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+4. Promotional Solution Sales
+   회사: LINE Pay Taiwan
+   업무분야: Business & Sales
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006681
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004677
+   - 단순 평균: 0.003340
+   
+   URL: https://careers.linecorp.com/ko/jobs/2761/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+5. 카카오톡 SRE(Site Reliability Engineer) 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 5년 이상 12년 이하
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.kakao.com/jobs/P-14249?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+
+====================================================================================================
+[13] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: System/Network Engineering
+Skill Set (샘플): ['Infra / Cloud Architecture', 'Cost Simulation', 'Business Writing', 'Communication', 'Presentation']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+2. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+3. LINE Pay Business Development Manager
+   회사: LINE Pay
+   업무분야: Business & Sales
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2862/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. Data Scientist - Risk & Abuse Analytics (Messaging Platform)
+   회사: LINE
+   업무분야: Engineering
+   경력: 경력 1년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2759/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[14] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: Middleware/Database Engineering
+Skill Set (샘플): ['Infra / Cloud Architecture', 'Cost Simulation', 'Business Writing', 'Communication', 'Presentation']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+2. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+3. LINE Pay Business Development Manager
+   회사: LINE Pay
+   업무분야: Business & Sales
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2862/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. Data Scientist - Risk & Abuse Analytics (Messaging Platform)
+   회사: LINE
+   업무분야: Engineering
+   경력: 경력 1년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2759/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[15] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: Data Center Engineering
+Skill Set (샘플): ['Infra / Cloud Architecture', 'Cost Simulation', 'Business Writing', 'Communication', 'Presentation']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+2. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+3. Data Scientist - Risk & Abuse Analytics (Messaging Platform)
+   회사: LINE
+   업무분야: Engineering
+   경력: 경력 1년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2759/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. Data Platform PostgreSQL DBA (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Infra Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004094&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. Data Engineer (Messaging Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2870/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[16] 직무: Software Architect
+====================================================================================================
+Industry: Software Development
+Skill Set (샘플): ['아키텍처전략및기술표준수립/관리', '아키텍처설계검토/기술리스크관리', '이해관계자와의협력및아키텍처역량확산', 'AI 활용', 'IndustryKnowledge']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016314
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991273
+   - ChromaDB 코사인 유사도: 0.736835
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.914941
+   - 단순 평균: 0.864054
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016314
+
+2. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016029
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.744985
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.224379
+   - 단순 평균: 0.373123
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.016029
+
+3. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015018
+   - LTR 점수: 95.09/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000238
+   - ChromaDB 코사인 유사도: 0.703122
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.211103
+   - 단순 평균: 0.351680
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 8, Weight 0.3, RRF = 0.3 / (8 + 60) = 0.004412
+   - BM25: Rank 6, Weight 0.7, RRF = 0.7 / (6 + 60) = 0.010606
+   → 총 RRF 점수: 0.015018
+
+4. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003340
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+5. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[17] 직무: Data Architect
+====================================================================================================
+Industry: Software Development
+Skill Set (샘플): ['아키텍처전략및기술표준수립/관리', '아키텍처설계검토/기술리스크관리', '이해관계자와의협력및아키텍처역량확산', 'AI 활용', 'IndustryKnowledge']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016237
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991353
+   - ChromaDB 코사인 유사도: 0.725010
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.911450
+   - 단순 평균: 0.858182
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016237
+
+2. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016029
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.733939
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.221065
+   - 단순 평균: 0.367600
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.016029
+
+3. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014910
+   - LTR 점수: 94.55/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000157
+   - ChromaDB 코사인 유사도: 0.720341
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216212
+   - 단순 평균: 0.360249
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 5, Weight 0.3, RRF = 0.3 / (5 + 60) = 0.004615
+   - BM25: Rank 8, Weight 0.7, RRF = 0.7 / (8 + 60) = 0.010294
+   → 총 RRF 점수: 0.014910
+
+4. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006680
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004676
+   - 단순 평균: 0.003340
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+5. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[18] 직무: Infra Architect
+====================================================================================================
+Industry: Software Development
+Skill Set (샘플): ['아키텍처전략및기술표준수립/관리', '아키텍처설계검토/기술리스크관리', '이해관계자와의협력및아키텍처역량확산', 'AI 활용', 'IndustryKnowledge']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014982
+   - LTR 점수: 94.91/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000157
+   - ChromaDB 코사인 유사도: 0.705938
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.211891
+   - 단순 평균: 0.353048
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 8, Weight 0.7, RRF = 0.7 / (8 + 60) = 0.010294
+   → 총 RRF 점수: 0.014982
+
+2. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991353
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693947
+   - 단순 평균: 0.495677
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006680
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004676
+   - 단순 평균: 0.003340
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+4. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+5. BI Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2577/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[19] 직무: AI Architect
+====================================================================================================
+Industry: AI Architecture
+Skill Set (샘플): ['Document Structuring', 'Data Chunking', 'Metadata Management', 'Workflow Framework', 'Prompt Engineering']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016237
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991273
+   - ChromaDB 코사인 유사도: 0.705830
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.905640
+   - 단순 평균: 0.848552
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016237
+
+2. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015978
+   - LTR 점수: 99.89/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.703260
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.215653
+   - 단순 평균: 0.354970
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015978
+
+3. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015553
+   - LTR 점수: 97.76/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.681641
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204876
+   - 단순 평균: 0.341095
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 5, Weight 0.3, RRF = 0.3 / (5 + 60) = 0.004615
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015553
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015524
+   - LTR 점수: 97.62/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000238
+   - ChromaDB 코사인 유사도: 0.715417
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.214792
+   - 단순 평균: 0.357828
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 6, Weight 0.7, RRF = 0.7 / (6 + 60) = 0.010606
+   → 총 RRF 점수: 0.015524
+
+5. Machine Learning Engineer (Search/ML/LLM) (경력)
+   회사: 카카오
+   업무분야: AI/머신러닝
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015397
+   - LTR 점수: 96.98/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.647897
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.195252
+   - 단순 평균: 0.324579
+   
+   URL: https://careers.kakao.com/jobs/P-14231?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 10, Weight 0.3, RRF = 0.3 / (10 + 60) = 0.004286
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015397
+
+
+====================================================================================================
+[20] 직무: Automation Architect
+====================================================================================================
+Industry: Automation Architecture
+Skill Set (샘플): ['CAD/CAE', 'Digital Twin Platform', '시뮬레이션', '최적화 알고리즘', '데이터 분석']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016029
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.678431
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204413
+   - 단순 평균: 0.339847
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.016029
+
+2. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.014907
+   - LTR 점수: 94.53/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000137
+   - ChromaDB 코사인 유사도: 0.656457
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.197033
+   - 단순 평균: 0.328297
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 9, Weight 0.7, RRF = 0.7 / (9 + 60) = 0.010145
+   → 총 RRF 점수: 0.014907
+
+3. 광고추천 데이터 사이언스, 머신러닝 전문가 (경력)
+   회사: 카카오
+   업무분야: 데이터 사이언스/머신러닝
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991373
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693961
+   - 단순 평균: 0.495687
+   
+   URL: https://careers.kakao.com/jobs/P-14148?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+4. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006680
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004676
+   - 단순 평균: 0.003340
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+5. BI Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2577/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[21] 직무: AI PM
+====================================================================================================
+Industry: AI Project Management
+Skill Set (샘플): ['AI 기술', '프로젝트 관리 역량', '리스크 관리', '최신 기술 트렌드 분석', 'AI 적용 방식의 장단점 파악']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015906
+   - LTR 점수: 99.53/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006681
+   - ChromaDB 코사인 유사도: 0.701709
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.215189
+   - 단순 평균: 0.354195
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 5, Weight 0.3, RRF = 0.3 / (5 + 60) = 0.004615
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015906
+
+2. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015887
+   - LTR 점수: 99.44/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991567
+   - ChromaDB 코사인 유사도: 0.666845
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.894151
+   - 단순 평균: 0.829206
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 8, Weight 0.3, RRF = 0.3 / (8 + 60) = 0.004412
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.015887
+
+3. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015799
+   - LTR 점수: 98.99/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.704330
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212182
+   - 단순 평균: 0.352796
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015799
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015608
+   - LTR 점수: 98.04/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.706187
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212089
+   - 단순 평균: 0.353260
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.015608
+
+5. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.014772
+   - LTR 점수: 93.86/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000157
+   - ChromaDB 코사인 유사도: 0.673552
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202176
+   - 단순 평균: 0.336855
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 7, Weight 0.3, RRF = 0.3 / (7 + 60) = 0.004478
+   - BM25: Rank 8, Weight 0.7, RRF = 0.7 / (8 + 60) = 0.010294
+   → 총 RRF 점수: 0.014772
+
+
+====================================================================================================
+[22] 직무: Project Management
+====================================================================================================
+Industry: Application PM
+Skill Set (샘플): ['개발/관리방법론', '프로젝트계획수립', '프로젝트실행및통제', '위험및이슈관리', '안전인증']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Technical Project Manager
+   회사: LINE Company Thailand
+   업무분야: Engineering/Project Management
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015978
+   - LTR 점수: 99.89/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.693289
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212662
+   - 단순 평균: 0.349984
+   
+   URL: https://careers.linecorp.com/ko/jobs/2851/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015978
+
+2. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. LINE Messenger Product Manager (LINE Profile, LINE MINI App)
+   회사: LINE Plus
+   업무분야: 기획/제품 관리
+   경력: 경력 7년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2883/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. Business Development Manager / Associate Manager - Merchant Partnerships & Project Management
+   회사: LINE Pay Taiwan
+   업무분야: Business & Sales
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2524/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[23] 직무: Project Management
+====================================================================================================
+Industry: Infra PM
+Skill Set (샘플): ['개발/관리방법론', '프로젝트계획수립', '프로젝트실행및통제', '위험및이슈관리', '안전인증']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Technical Project Manager
+   회사: LINE Company Thailand
+   업무분야: Engineering/Project Management
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015768
+   - LTR 점수: 98.84/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.665689
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204382
+   - 단순 평균: 0.336184
+   
+   URL: https://careers.linecorp.com/ko/jobs/2851/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 7, Weight 0.3, RRF = 0.3 / (7 + 60) = 0.004478
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015768
+
+2. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015368
+   - LTR 점수: 96.84/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000238
+   - ChromaDB 코사인 유사도: 0.680136
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204208
+   - 단순 평균: 0.340187
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 6, Weight 0.7, RRF = 0.7 / (6 + 60) = 0.010606
+   → 총 RRF 점수: 0.015368
+
+3. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991273
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693891
+   - 단순 평균: 0.495636
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+4. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+5. LINE Messenger Product Manager (LINE Profile, LINE MINI App)
+   회사: LINE Plus
+   업무분야: 기획/제품 관리
+   경력: 경력 7년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2883/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[24] 직무: Project Management
+====================================================================================================
+Industry: Solution PM
+Skill Set (샘플): ['개발/관리방법론', '프로젝트계획수립', '프로젝트실행및통제', '위험및이슈관리', '안전인증']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Technical Project Manager
+   회사: LINE Company Thailand
+   업무분야: Engineering/Project Management
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015978
+   - LTR 점수: 99.89/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.678092
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208102
+   - 단순 평균: 0.342385
+   
+   URL: https://careers.linecorp.com/ko/jobs/2851/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015978
+
+2. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. LINE Messenger Product Manager (LINE Profile, LINE MINI App)
+   회사: LINE Plus
+   업무분야: 기획/제품 관리
+   경력: 경력 7년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2883/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[25] 직무: Quality Management
+====================================================================================================
+Industry: PMO
+Skill Set (샘플): ['Business Writing', 'Communication', 'Presentation', 'Coordination', 'Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016129
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.664877
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204138
+   - 단순 평균: 0.335778
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.016129
+
+2. Fintech Risk & Business Reporting Manager
+   회사: LINE Financial Corp.
+   업무분야: Corporate/Risk Management
+   경력: 경력 2년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2778/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. Risk Management Specialist(EPI)
+   회사: LINE Pay Taiwan
+   업무분야: Corporate
+   경력: 1–2 years
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2726/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. Data Scientist - Risk & Abuse Analytics (Messaging Platform)
+   회사: LINE
+   업무분야: Engineering
+   경력: 경력 1년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2759/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[26] 직무: Quality Management
+====================================================================================================
+Industry: Quality Engineering
+Skill Set (샘플): ['Business Writing', 'Communication', 'Presentation', 'Coordination', 'Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016052
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.669364
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.205484
+   - 단순 평균: 0.338021
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.016052
+
+2. Fintech Risk & Business Reporting Manager
+   회사: LINE Financial Corp.
+   업무분야: Corporate/Risk Management
+   경력: 경력 2년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2778/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. Platform Server QA Assistant
+   회사: LINE Plus
+   업무분야: QA/SET
+   경력: 경력 1~3년
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2787/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. Risk Management Specialist(EPI)
+   회사: LINE Pay Taiwan
+   업무분야: Corporate
+   경력: 1–2 years
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2726/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[27] 직무: Quality Management
+====================================================================================================
+Industry: Offshoring Service Professional
+Skill Set (샘플): ['Business Writing', 'Communication', 'Presentation', 'Coordination', 'Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016163
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991388
+   - ChromaDB 코사인 유사도: 0.661911
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.892545
+   - 단순 평균: 0.826650
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016163
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014918
+   - LTR 점수: 94.59/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000122
+   - ChromaDB 코사인 유사도: 0.680113
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204119
+   - 단순 평균: 0.340118
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 10, Weight 0.7, RRF = 0.7 / (10 + 60) = 0.010000
+   → 총 RRF 점수: 0.014918
+
+3. Data Scientist - Risk & Abuse Analytics (Messaging Platform)
+   회사: LINE
+   업무분야: Engineering
+   경력: 경력 1년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006680
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004676
+   - 단순 평균: 0.003340
+   
+   URL: https://careers.linecorp.com/ko/jobs/2759/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+4. Fintech Risk & Business Reporting Manager
+   회사: LINE Financial Corp.
+   업무분야: Corporate/Risk Management
+   경력: 경력 2년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2778/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+5. Risk Management Specialist(EPI)
+   회사: LINE Pay Taiwan
+   업무분야: Corporate
+   경력: 1–2 years
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2726/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[28] 직무: AI
+====================================================================================================
+Industry: AI/Data Development
+Skill Set (샘플): ['AI 기반 서비스 기획 및 구조 설계', 'Cloud / Container 기반 AI Infra 아키텍처 설계', '개발 환경 및 프레임워크 구성', '인', '공']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016393
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991353
+   - ChromaDB 코사인 유사도: 0.753172
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.919899
+   - 단순 평균: 0.872262
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016393
+
+2. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016052
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006680
+   - ChromaDB 코사인 유사도: 0.725075
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.222198
+   - 단순 평균: 0.365877
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.016052
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015799
+   - LTR 점수: 98.99/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.722810
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.217726
+   - 단순 평균: 0.362036
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015799
+
+4. BI Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015285
+   - LTR 점수: 96.43/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.685318
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.205979
+   - 단순 평균: 0.342933
+   
+   URL: https://careers.linecorp.com/ko/jobs/2577/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 9, Weight 0.3, RRF = 0.3 / (9 + 60) = 0.004348
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015285
+
+5. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014840
+   - LTR 점수: 94.20/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000157
+   - ChromaDB 코사인 유사도: 0.699881
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.210074
+   - 단순 평균: 0.350019
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 8, Weight 0.7, RRF = 0.7 / (8 + 60) = 0.010294
+   → 총 RRF 점수: 0.014840
+
+
+====================================================================================================
+[29] 직무: AI
+====================================================================================================
+Industry: Generative AI Development
+Skill Set (샘플): ['AI 기반 서비스 기획 및 구조 설계', 'Cloud / Container 기반 AI Infra 아키텍처 설계', '개발 환경 및 프레임워크 구성', '대', '규']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016393
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991323
+   - ChromaDB 코사인 유사도: 0.737542
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.915189
+   - 단순 평균: 0.864433
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016393
+
+2. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016129
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.713740
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.218798
+   - 단순 평균: 0.360210
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.016129
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015873
+   - LTR 점수: 99.37/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.706857
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212940
+   - 단순 평균: 0.354059
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015873
+
+4. BI Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015223
+   - LTR 점수: 96.12/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.650535
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.195544
+   - 단순 평균: 0.325541
+   
+   URL: https://careers.linecorp.com/ko/jobs/2577/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 10, Weight 0.3, RRF = 0.3 / (10 + 60) = 0.004286
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015223
+
+5. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014993
+   - LTR 점수: 94.97/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000188
+   - ChromaDB 코사인 유사도: 0.686403
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206052
+   - 단순 평균: 0.343295
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 7, Weight 0.7, RRF = 0.7 / (7 + 60) = 0.010448
+   → 총 RRF 점수: 0.014993
+
+
+====================================================================================================
+[30] 직무: AI
+====================================================================================================
+Industry: Physical AI Development
+Skill Set (샘플): ['AI 기반 서비스 기획 및 구조 설계', 'Cloud / Container 기반 AI Infra 아키텍처 설계', '개발 환경 및 프레임워크 구성', '지', '능']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016393
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991323
+   - ChromaDB 코사인 유사도: 0.748766
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.918556
+   - 단순 평균: 0.870044
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016393
+
+2. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016129
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.716992
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.219773
+   - 단순 평균: 0.361836
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.016129
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015873
+   - LTR 점수: 99.37/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.709269
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.213664
+   - 단순 평균: 0.355265
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015873
+
+4. BI Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015349
+   - LTR 점수: 96.75/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.662531
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.199143
+   - 단순 평균: 0.331540
+   
+   URL: https://careers.linecorp.com/ko/jobs/2577/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 8, Weight 0.3, RRF = 0.3 / (8 + 60) = 0.004412
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015349
+
+5. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014993
+   - LTR 점수: 94.97/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000188
+   - ChromaDB 코사인 유사도: 0.691423
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207558
+   - 단순 평균: 0.345805
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 7, Weight 0.7, RRF = 0.7 / (7 + 60) = 0.010448
+   → 총 RRF 점수: 0.014993
+
+
+====================================================================================================
+[31] 직무: Software Development
+====================================================================================================
+Industry: Physical AI Development
+Skill Set (샘플): ['PyTorch', 'TensorFlow', 'C/C++', 'Python', 'ROS']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016029
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.695387
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209500
+   - 단순 평균: 0.348324
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.016029
+
+2. 추천 시스템 연구/개발 (경력)
+   회사: 카카오
+   업무분야: Algorithm/ML
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015084
+   - LTR 점수: 95.42/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000238
+   - ChromaDB 코사인 유사도: 0.658906
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.197839
+   - 단순 평균: 0.329572
+   
+   URL: https://careers.kakao.com/jobs/P-14287?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 7, Weight 0.3, RRF = 0.3 / (7 + 60) = 0.004478
+   - BM25: Rank 6, Weight 0.7, RRF = 0.7 / (6 + 60) = 0.010606
+   → 총 RRF 점수: 0.015084
+
+3. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014984
+   - LTR 점수: 94.92/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000137
+   - ChromaDB 코사인 유사도: 0.690472
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207237
+   - 단순 평균: 0.345305
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 9, Weight 0.7, RRF = 0.7 / (9 + 60) = 0.010145
+   → 총 RRF 점수: 0.014984
+
+4. Machine Learning Engineer (Search/ML/LLM) (경력)
+   회사: 카카오
+   업무분야: AI/머신러닝
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991681
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.694177
+   - 단순 평균: 0.495840
+   
+   URL: https://careers.kakao.com/jobs/P-14231?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+5. Machine Learning Engineer (Search/ML/LLM) (신입)
+   회사: 카카오
+   업무분야: AI/ML
+   경력: 신입
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006682
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004677
+   - 단순 평균: 0.003341
+   
+   URL: https://careers.kakao.com/jobs/P-14286?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+
+====================================================================================================
+[32] 직무: Software Development
+====================================================================================================
+Industry: Information Security
+Skill Set (샘플): ['AI Literacy / Collaboration', '보', '안', ' ', '전']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016091
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.998749
+   - ChromaDB 코사인 유사도: 0.714365
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.913434
+   - 단순 평균: 0.856557
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 5, Weight 0.3, RRF = 0.3 / (5 + 60) = 0.004615
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016091
+
+2. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015856
+   - LTR 점수: 99.28/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000552
+   - ChromaDB 코사인 유사도: 0.756438
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.227318
+   - 단순 평균: 0.378495
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015856
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015368
+   - LTR 점수: 96.84/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000240
+   - ChromaDB 코사인 유사도: 0.732854
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.220024
+   - 단순 평균: 0.366547
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 6, Weight 0.7, RRF = 0.7 / (6 + 60) = 0.010606
+   → 총 RRF 점수: 0.015368
+
+4. AI모델 플랫폼 프론트 개발자 (경력)
+   회사: 카카오
+   업무분야: Web front
+   경력: 경력 4년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015117
+   - LTR 점수: 95.59/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000335
+   - ChromaDB 코사인 유사도: 0.698091
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209662
+   - 단순 평균: 0.349213
+   
+   URL: https://careers.kakao.com/jobs/P-14188?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 9, Weight 0.3, RRF = 0.3 / (9 + 60) = 0.004348
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.015117
+
+5. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   
+   [점수 비교]
+   - RRF 점수: 0.014687
+   - LTR 점수: 93.44/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000123
+   - ChromaDB 코사인 유사도: 0.721719
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216602
+   - 단순 평균: 0.360921
+   
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 10, Weight 0.7, RRF = 0.7 / (10 + 60) = 0.010000
+   → 총 RRF 점수: 0.014687
+
+
+====================================================================================================
+[33] 직무: 정보보호
+====================================================================================================
+Industry: 보안Governance/Compliance
+Skill Set (샘플): ['시스템보안', 'AI 보안', 'Cloud 보안', 'OT 보안', '시큐어코딩']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   
+   [점수 비교]
+   - RRF 점수: 0.015799
+   - LTR 점수: 98.99/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001270
+   - ChromaDB 코사인 유사도: 0.702771
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.211721
+   - 단순 평균: 0.352021
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015799
+
+2. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   
+   [점수 비교]
+   - RRF 점수: 0.015063
+   - LTR 점수: 95.31/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000138
+   - ChromaDB 코사인 유사도: 0.730879
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.219360
+   - 단순 평균: 0.365508
+   
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 9, Weight 0.7, RRF = 0.7 / (9 + 60) = 0.010145
+   → 총 RRF 점수: 0.015063
+
+3. 서비스보안 및 취약점 진단 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.014993
+   - LTR 점수: 94.97/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000189
+   - ChromaDB 코사인 유사도: 0.693240
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208104
+   - 단순 평균: 0.346715
+   
+   URL: https://careers.kakao.com/jobs/P-14245?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 7, Weight 0.7, RRF = 0.7 / (7 + 60) = 0.010448
+   → 총 RRF 점수: 0.014993
+
+4. 서버보안 및 침해대응 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.014772
+   - LTR 점수: 93.86/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000158
+   - ChromaDB 코사인 유사도: 0.688973
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206803
+   - 단순 평균: 0.344566
+   
+   URL: https://careers.kakao.com/jobs/P-14248?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 7, Weight 0.3, RRF = 0.3 / (7 + 60) = 0.004478
+   - BM25: Rank 8, Weight 0.7, RRF = 0.7 / (8 + 60) = 0.010294
+   → 총 RRF 점수: 0.014772
+
+5. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.998245
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.698771
+   - 단순 평균: 0.499122
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+
+====================================================================================================
+[34] 직무: 정보보호
+====================================================================================================
+Industry: 보안진단/Consulting
+Skill Set (샘플): ['시스템보안', 'AI 보안', 'Cloud 보안', 'OT 보안', '시큐어코딩']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015887
+   - LTR 점수: 99.44/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.696870
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.902887
+   - 단순 평균: 0.844025
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 8, Weight 0.3, RRF = 0.3 / (8 + 60) = 0.004412
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.015887
+
+2. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015836
+   - LTR 점수: 99.18/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.699690
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.214582
+   - 단순 평균: 0.353184
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015836
+
+3. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. Omni-Foundation Model Pathfinding Research Scientist
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004077&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[35] 직무: 정보보호
+====================================================================================================
+Industry: 보안Solution Service
+Skill Set (샘플): ['시스템보안', 'AI 보안', 'Cloud 보안', 'OT 보안', '시큐어코딩']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016163
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991388
+   - ChromaDB 코사인 유사도: 0.698773
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.903603
+   - 단순 평균: 0.845080
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016163
+
+2. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   
+   [점수 비교]
+   - RRF 점수: 0.015856
+   - LTR 점수: 99.28/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.738376
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.221897
+   - 단순 평균: 0.369462
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015856
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015726
+   - LTR 점수: 98.63/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.685310
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206476
+   - 단순 평균: 0.343286
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 5, Weight 0.3, RRF = 0.3 / (5 + 60) = 0.004615
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015726
+
+4. 서비스보안 및 취약점 진단 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.014545
+   - LTR 점수: 92.73/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000122
+   - ChromaDB 코사인 유사도: 0.685051
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.205601
+   - 단순 평균: 0.342586
+   
+   URL: https://careers.kakao.com/jobs/P-14245?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 10, Weight 0.7, RRF = 0.7 / (10 + 60) = 0.010000
+   → 총 RRF 점수: 0.014545
+
+5. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006680
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004676
+   - 단순 평균: 0.003340
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+
+====================================================================================================
+[36] 직무: Domain Expert
+====================================================================================================
+Industry: 제1 금융
+Skill Set (샘플): ['제1 금융', '제2 금융', '통신', '유통/물류/서비스', '미디어/콘텐츠']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015608
+   - LTR 점수: 98.04/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.678231
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.203702
+   - 단순 평균: 0.339282
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.015608
+
+2. LINE BK Product Manager
+   회사: LINE Financial Corp.
+   업무분야: Planning
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2786/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. BI Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.linecorp.com/ko/jobs/2577/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+4. AML 데이터 분석 담당자 (경력)
+   회사: 카카오
+   업무분야: Statistics/Analysis
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.kakao.com/jobs/P-14273?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+5. Platform Engineer (Food Delivery Service)
+   회사: LINE Plus
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2868/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[37] 직무: Domain Expert
+====================================================================================================
+Industry: 제2 금융
+Skill Set (샘플): ['제1 금융', '제2 금융', '통신', '유통/물류/서비스', '미디어/콘텐츠']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE BK Product Manager
+   회사: LINE Financial Corp.
+   업무분야: Planning
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2786/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+2. AML 데이터 분석 담당자 (경력)
+   회사: 카카오
+   업무분야: Statistics/Analysis
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.kakao.com/jobs/P-14273?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+3. LINE AI Product Manager
+   회사: LINE Plus
+   업무분야: Planning
+   경력: 경력 7년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2720/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. Messenger Android Engineer
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 3~8년
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2863/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. BI Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2577/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[38] 직무: Domain Expert
+====================================================================================================
+Industry: 제조
+Skill Set (샘플): ['제1 금융', '제2 금융', '통신', '유통/물류/서비스', '미디어/콘텐츠']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015776
+   - LTR 점수: 98.88/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.692401
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208104
+   - 단순 평균: 0.346474
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015776
+
+2. LINE BK Product Manager
+   회사: LINE Financial Corp.
+   업무분야: Planning
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2786/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. Platform Engineer (Food Delivery Service)
+   회사: LINE Plus
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.linecorp.com/ko/jobs/2868/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+4. 선박 엔진 제조 PLM/CAD 운영 담당자
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17226
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+5. LINE AI Product Manager
+   회사: LINE Plus
+   업무분야: Planning
+   경력: 경력 7년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2720/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[39] 직무: Consulting
+====================================================================================================
+Industry: ESG
+Skill Set (샘플): ['IT 기술', '기술동향', '트렌드분석', 'IT 서비스의 Value Chain', 'IT 서비스/솔루션/제품의 특장점']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016208
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006680
+   - ChromaDB 코사인 유사도: 0.772686
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.236482
+   - 단순 평균: 0.389683
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.016208
+
+2. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015415
+   - LTR 점수: 97.08/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.660445
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198517
+   - 단순 평균: 0.330497
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 7, Weight 0.3, RRF = 0.3 / (7 + 60) = 0.004478
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015415
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014840
+   - LTR 점수: 94.20/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000157
+   - ChromaDB 코사인 유사도: 0.660644
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198303
+   - 단순 평균: 0.330401
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 8, Weight 0.7, RRF = 0.7 / (8 + 60) = 0.010294
+   → 총 RRF 점수: 0.014840
+
+4. Backend Server Engineer (Corp IT Systems)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 3~8년
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991353
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693947
+   - 단순 평균: 0.495677
+   
+   URL: https://careers.linecorp.com/ko/jobs/2791/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+5. 추천 시스템 연구/개발 (경력)
+   회사: 카카오
+   업무분야: Algorithm/ML
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.kakao.com/jobs/P-14287?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+
+====================================================================================================
+[40] 직무: Consulting
+====================================================================================================
+Industry: SHE
+Skill Set (샘플): ['IT 기술', '기술동향', '트렌드분석', 'IT 서비스의 Value Chain', 'IT 서비스/솔루션/제품의 특장점']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015524
+   - LTR 점수: 97.62/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000238
+   - ChromaDB 코사인 유사도: 0.698195
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209625
+   - 단순 평균: 0.349217
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 6, Weight 0.7, RRF = 0.7 / (6 + 60) = 0.010606
+   → 총 RRF 점수: 0.015524
+
+2. Backend Server Engineer (Corp IT Systems)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 3~8년
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991273
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693891
+   - 단순 평균: 0.495636
+   
+   URL: https://careers.linecorp.com/ko/jobs/2791/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+3. 추천 시스템 연구/개발 (경력)
+   회사: 카카오
+   업무분야: Algorithm/ML
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003340
+   
+   URL: https://careers.kakao.com/jobs/P-14287?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+4. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+5. B2B Business Consulting Manager / Senior Manager
+   회사: LINE Company Thailand
+   업무분야: Business & Sales
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2674/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+
+====================================================================================================
+[41] 직무: Consulting
+====================================================================================================
+Industry: ERP
+Skill Set (샘플): ['IT 기술', '기술동향', '트렌드분석', 'IT 서비스의 Value Chain', 'IT 서비스/솔루션/제품의 특장점']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. SAP ERP PS 모듈 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015699
+   - LTR 점수: 98.50/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.687773
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206716
+   - 단순 평균: 0.344161
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17223
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 3, Weight 0.3, RRF = 0.3 / (3 + 60) = 0.004762
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.015699
+
+2. SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015523
+   - LTR 점수: 97.61/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.676721
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.203899
+   - 단순 평균: 0.338991
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17229
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 8, Weight 0.3, RRF = 0.3 / (8 + 60) = 0.004412
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015523
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.014832
+   - LTR 점수: 94.16/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000137
+   - ChromaDB 코사인 유사도: 0.686535
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206056
+   - 단순 평균: 0.343336
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 9, Weight 0.7, RRF = 0.7 / (9 + 60) = 0.010145
+   → 총 RRF 점수: 0.014832
+
+4. Backend Server Engineer (Corp IT Systems)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 3~8년
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991373
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693961
+   - 단순 평균: 0.495687
+   
+   URL: https://careers.linecorp.com/ko/jobs/2791/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+5. SAP ERP 컨설턴트 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006680
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004676
+   - 단순 평균: 0.003340
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16807
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+
+====================================================================================================
+[42] 직무: Consulting
+====================================================================================================
+Industry: AI
+Skill Set (샘플): ['기초통계', 'NLP', 'Vision', 'Machine Learning', 'Deep Learning']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Machine Learning Engineer (Search/ML/LLM) (경력)
+   회사: 카카오
+   업무분야: AI/머신러닝
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.016021
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991731
+   - ChromaDB 코사인 유사도: 0.709132
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.906951
+   - 단순 평균: 0.850431
+   
+   URL: https://careers.kakao.com/jobs/P-14231?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016021
+
+2. Machine Learning Engineer (Search/ML/LLM) (신입)
+   회사: 카카오
+   업무분야: AI/ML
+   경력: 신입
+   
+   [점수 비교]
+   - RRF 점수: 0.015702
+   - LTR 점수: 98.51/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006682
+   - ChromaDB 코사인 유사도: 0.705509
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216330
+   - 단순 평균: 0.356095
+   
+   URL: https://careers.kakao.com/jobs/P-14286?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 8, Weight 0.3, RRF = 0.3 / (8 + 60) = 0.004412
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015702
+
+3. 광고추천 데이터 사이언스, 머신러닝 전문가 (경력)
+   회사: 카카오
+   업무분야: 데이터 사이언스/머신러닝
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015589
+   - LTR 점수: 97.94/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.706326
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212781
+   - 단순 평균: 0.353794
+   
+   URL: https://careers.kakao.com/jobs/P-14148?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 7, Weight 0.3, RRF = 0.3 / (7 + 60) = 0.004478
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015589
+
+4. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.015135
+   - LTR 점수: 95.68/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000188
+   - ChromaDB 코사인 유사도: 0.724967
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.217622
+   - 단순 평균: 0.362577
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 4, Weight 0.3, RRF = 0.3 / (4 + 60) = 0.004687
+   - BM25: Rank 7, Weight 0.7, RRF = 0.7 / (7 + 60) = 0.010448
+   → 총 RRF 점수: 0.015135
+
+5. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015063
+   - LTR 점수: 95.31/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000137
+   - ChromaDB 코사인 유사도: 0.760424
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.228223
+   - 단순 평균: 0.380280
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 9, Weight 0.7, RRF = 0.7 / (9 + 60) = 0.010145
+   → 총 RRF 점수: 0.015063
+
+
+====================================================================================================
+[43] 직무: Biz. Supporting
+====================================================================================================
+Industry: Strategy Planning
+Skill Set (샘플): ['경영목표 달성 지원', '전략 수립', '경영층 의사결정 지원', '효율적인 자원 활용', '구성원 성장 지원']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE Pay Biz Support Manager
+   회사: LINE
+   업무분야: 기획
+   경력: 경력무관
+   
+   [점수 비교]
+   - RRF 점수: 0.016029
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.761156
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.229230
+   - 단순 평균: 0.381209
+   
+   URL: https://careers.linecorp.com/ko/jobs/2790/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.016029
+
+2. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015836
+   - LTR 점수: 99.18/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.662502
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.203425
+   - 단순 평균: 0.334590
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.015836
+
+3. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+4. 보이스톡 / 페이스톡 Server 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 2년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.kakao.com/jobs/P-14172?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. People Care & Benefits Coordinator
+   회사: LINE
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2768/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[44] 직무: Biz. Supporting
+====================================================================================================
+Industry: New Biz. Development
+Skill Set (샘플): ['경영목표 달성 지원', '전략 수립', '경영층 의사결정 지원', '효율적인 자원 활용', '구성원 성장 지원']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Business & Product Operations Assistant
+   회사: LINE NEXT
+   업무분야: Business & Sales
+   경력: 경력무관
+   
+   [점수 비교]
+   - RRF 점수: 0.015286
+   - LTR 점수: 96.43/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000188
+   - ChromaDB 코사인 유사도: 0.687510
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206385
+   - 단순 평균: 0.343849
+   
+   URL: https://careers.linecorp.com/ko/jobs/2909/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 2, Weight 0.3, RRF = 0.3 / (2 + 60) = 0.004839
+   - BM25: Rank 7, Weight 0.7, RRF = 0.7 / (7 + 60) = 0.010448
+   → 총 RRF 점수: 0.015286
+
+2. LINE Pay Biz Support Manager
+   회사: LINE
+   업무분야: 기획
+   경력: 경력무관
+   
+   [점수 비교]
+   - RRF 점수: 0.014918
+   - LTR 점수: 94.59/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000123
+   - ChromaDB 코사인 유사도: 0.715384
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.214701
+   - 단순 평균: 0.357753
+   
+   URL: https://careers.linecorp.com/ko/jobs/2790/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 10, Weight 0.7, RRF = 0.7 / (10 + 60) = 0.010000
+   → 총 RRF 점수: 0.014918
+
+3. Billing Operations Assistant
+   회사: LINE NEXT
+   업무분야: Business & Sales
+   경력: 경력무관
+   
+   [점수 비교]
+   - RRF 점수: 0.014557
+   - LTR 점수: 92.78/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000137
+   - ChromaDB 코사인 유사도: 0.641343
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.192499
+   - 단순 평균: 0.320740
+   
+   URL: https://careers.linecorp.com/ko/jobs/2908/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 8, Weight 0.3, RRF = 0.3 / (8 + 60) = 0.004412
+   - BM25: Rank 9, Weight 0.7, RRF = 0.7 / (9 + 60) = 0.010145
+   → 총 RRF 점수: 0.014557
+
+4. LINE Home Tab Product Designer
+   회사: LINE
+   업무분야: 디자인
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.992863
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.695004
+   - 단순 평균: 0.496431
+   
+   URL: https://careers.linecorp.com/ko/jobs/2727/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+5. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006690
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004683
+   - 단순 평균: 0.003345
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+
+====================================================================================================
+[45] 직무: Software Development
+====================================================================================================
+Industry: Front-end Development
+Skill Set (샘플): ['IT 서비스의 Value Chain', '사업/수익구조', '사업유형별 PJT 프로세스', '사업별/조직별 주요 이슈 파악', '재무제표']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. EC_Advertising Planning Senior Manager
+   회사: LINE Taiwan
+   업무분야: Business & Sales
+   경력: 경력 10년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2737/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+2. 2026 TECH FRESH Spring Class - Alpha Dev
+   회사: LINE Taiwan
+   업무분야: Engineering
+   경력: 신입
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.linecorp.com/ko/jobs/2901/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+3. Business Development Manager - PM
+   회사: LINE Pay Taiwan
+   업무분야: Business & Sales
+   경력: 경력 2년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2859/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. Business Development Manager / Associate Manager - Merchant Partnerships & Project Management
+   회사: LINE Pay Taiwan
+   업무분야: Business & Sales
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2524/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. LINE Product Designer
+   회사: LINE Plus
+   업무분야: Design
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2647/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[46] 직무: Software Development
+====================================================================================================
+Industry: Back-end Development
+Skill Set (샘플): ['IT 서비스의 Value Chain', '사업/수익구조', '사업유형별 PJT 프로세스', '사업별/조직별 주요 이슈 파악', '재무제표']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. EC_Advertising Planning Senior Manager
+   회사: LINE Taiwan
+   업무분야: Business & Sales
+   경력: 경력 10년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2737/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+2. 2026 TECH FRESH Spring Class - Alpha Dev
+   회사: LINE Taiwan
+   업무분야: Engineering
+   경력: 신입
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.linecorp.com/ko/jobs/2901/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+3. Business Development Manager - PM
+   회사: LINE Pay Taiwan
+   업무분야: Business & Sales
+   경력: 경력 2년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2859/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. Business Development Manager / Associate Manager - Merchant Partnerships & Project Management
+   회사: LINE Pay Taiwan
+   업무분야: Business & Sales
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2524/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. LINE Product Designer
+   회사: LINE Plus
+   업무분야: Design
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2647/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[47] 직무: Software Development
+====================================================================================================
+Industry: Mobile Development
+Skill Set (샘플): ['IT 서비스의 Value Chain', '사업/수익구조', '사업유형별 PJT 프로세스', '사업별/조직별 주요 이슈 파악', '재무제표']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE Pay Biz Support Manager
+   회사: LINE
+   업무분야: 기획
+   경력: 경력무관
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693826
+   - 단순 평균: 0.495590
+   
+   URL: https://careers.linecorp.com/ko/jobs/2790/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+2. 카카오디벨로퍼스 프론트/서버 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.kakao.com/jobs/P-14122?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+3. LINE BK Product Manager
+   회사: LINE Financial Corp.
+   업무분야: Planning
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2786/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. Data Scientist - Risk & Abuse Analytics (Messaging Platform)
+   회사: LINE
+   업무분야: Engineering
+   경력: 경력 1년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.linecorp.com/ko/jobs/2759/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[48] 직무: Software Development
+====================================================================================================
+Industry: Governance Management
+Skill Set (샘플): ['정보수집', '분석', 'CR 전략수립', '대외이슈대응', '감사']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.016393
+   - LTR 점수: 100.00/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991179
+   - ChromaDB 코사인 유사도: 0.733581
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.913900
+   - 단순 평균: 0.862380
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 1, Weight 0.3, RRF = 0.3 / (1 + 60) = 0.004918
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.016393
+
+2. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006679
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004675
+   - 단순 평균: 0.003339
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+
+3. Business Development Manager / Associate Manager - Merchant Partnerships & Project Management
+   회사: LINE Pay Taiwan
+   업무분야: Business & Sales
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011111
+   - LTR 점수: 55.56/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001261
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000883
+   - 단순 평균: 0.000631
+   
+   URL: https://careers.linecorp.com/ko/jobs/2524/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.011111
+
+4. Data Analytics Engineer (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.010937
+   - LTR 점수: 54.69/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000548
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000384
+   - 단순 평균: 0.000274
+   
+   URL: https://careers.kakao.com/jobs/P-14276?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 4, Weight 0.7, RRF = 0.7 / (4 + 60) = 0.010937
+   → 총 RRF 점수: 0.010937
+
+5. 2026 TECH FRESH Spring Class - Alpha Dev
+   회사: LINE Taiwan
+   업무분야: Engineering
+   경력: 신입
+   
+   [점수 비교]
+   - RRF 점수: 0.010769
+   - LTR 점수: 53.85/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000333
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.000233
+   - 단순 평균: 0.000166
+   
+   URL: https://careers.linecorp.com/ko/jobs/2901/
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 5, Weight 0.7, RRF = 0.7 / (5 + 60) = 0.010769
+   → 총 RRF 점수: 0.010769
+
+
+====================================================================================================
+[49] 직무: Software Development
+====================================================================================================
+Industry: Public Management
+Skill Set (샘플): ['PR 전략수립', '미디어커뮤니케이션', '마케팅전략수립', '브랜드마케팅', '콘텐츠마케팅']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Backend Server Engineer (Media Platform)
+   회사: LINE Plus
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.015657
+   - LTR 점수: 98.28/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.001262
+   - ChromaDB 코사인 유사도: 0.689639
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207775
+   - 단순 평균: 0.345451
+   
+   URL: https://careers.linecorp.com/ko/jobs/2735/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 6, Weight 0.3, RRF = 0.3 / (6 + 60) = 0.004545
+   - BM25: Rank 3, Weight 0.7, RRF = 0.7 / (3 + 60) = 0.011111
+   → 총 RRF 점수: 0.015657
+
+2. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   
+   [점수 비교]
+   - RRF 점수: 0.014493
+   - LTR 점수: 92.46/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000137
+   - ChromaDB 코사인 유사도: 0.681992
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204693
+   - 단순 평균: 0.341064
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 9, Weight 0.3, RRF = 0.3 / (9 + 60) = 0.004348
+   - BM25: Rank 9, Weight 0.7, RRF = 0.7 / (9 + 60) = 0.010145
+   → 총 RRF 점수: 0.014493
+
+3. LINE AD Product Manager (AD SDK PM)
+   회사: LINE Plus
+   업무분야: Planning
+   경력: 경력 2년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.014478
+   - LTR 점수: 92.39/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.000122
+   - ChromaDB 코사인 유사도: 0.688795
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206724
+   - 단순 평균: 0.344459
+   
+   URL: https://careers.linecorp.com/ko/jobs/2696/
+   
+   [RRF 점수 계산 과정]
+   - ChromaDB: Rank 7, Weight 0.3, RRF = 0.3 / (7 + 60) = 0.004478
+   - BM25: Rank 10, Weight 0.7, RRF = 0.7 / (10 + 60) = 0.010000
+   → 총 RRF 점수: 0.014478
+
+4. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [점수 비교]
+   - RRF 점수: 0.011475
+   - LTR 점수: 57.38/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.991796
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.694257
+   - 단순 평균: 0.495898
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 1, Weight 0.7, RRF = 0.7 / (1 + 60) = 0.011475
+   → 총 RRF 점수: 0.011475
+
+5. 카카오디벨로퍼스 프론트/서버 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [점수 비교]
+   - RRF 점수: 0.011290
+   - LTR 점수: 56.45/100
+   
+   [Hybrid 점수 (BM25 Softmax + ChromaDB Cosine)]
+   - BM25 정규화 점수: 0.006683
+   - ChromaDB 코사인 유사도: 0.000000
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.004678
+   - 단순 평균: 0.003341
+   
+   URL: https://careers.kakao.com/jobs/P-14122?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+   
+   [RRF 점수 계산 과정]
+   - BM25: Rank 2, Weight 0.7, RRF = 0.7 / (2 + 60) = 0.011290
+   → 총 RRF 점수: 0.011290
+

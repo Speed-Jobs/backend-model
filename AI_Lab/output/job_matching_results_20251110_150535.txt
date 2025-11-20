@@ -1,0 +1,3388 @@
+====================================================================================================
+직무기술서 - 채용공고 매칭 결과 (가중평균 합산 기준)
+생성일시: 2025-11-10 15:05:35
+총 직무기술서 수: 49개
+총 채용공고 수: 197개
+====================================================================================================
+
+
+====================================================================================================
+[1] 직무: Software Development
+====================================================================================================
+Industry: Front-end Development
+Skill Set (샘플): ['Java', 'node.js', 'Python', 'C / C++', 'Go']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693024
+   - BM25 정규화: 0.990034
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. Frontend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204509
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.681591
+   
+   URL: https://careers.linecorp.com/ko/jobs/2838/
+
+3. 카카오디벨로퍼스 프론트/서버 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204072
+   - BM25 정규화: 0.000548
+   - ChromaDB 코사인: 0.678964
+   
+   URL: https://careers.kakao.com/jobs/P-14122?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. Web Front-end Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.203829
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.676490
+   
+   URL: https://careers.linecorp.com/ko/jobs/2836/
+
+5. Backend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200629
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.668658
+   
+   URL: https://careers.linecorp.com/ko/jobs/2837/
+
+
+====================================================================================================
+[2] 직무: Software Development
+====================================================================================================
+Industry: Back-end Development
+Skill Set (샘플): ['Java', 'node.js', 'Python', 'C / C++', 'Go']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692993
+   - BM25 정규화: 0.989989
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. Backend Engineer_Corporate Business
+   회사: LINE Taiwan
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207080
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.690160
+   
+   URL: https://careers.linecorp.com/ko/jobs/2781/
+
+3. Backend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204498
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.681554
+   
+   URL: https://careers.linecorp.com/ko/jobs/2837/
+
+4. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202739
+   - BM25 정규화: 0.006670
+   - ChromaDB 코사인: 0.660232
+   
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. Frontend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202250
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.674061
+   
+   URL: https://careers.linecorp.com/ko/jobs/2838/
+
+
+====================================================================================================
+[3] 직무: Software Development
+====================================================================================================
+Industry: Mobile Development
+Skill Set (샘플): ['Java', 'node.js', 'Python', 'C / C++', 'Go']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.895800
+   - BM25 정규화: 0.990078
+   - ChromaDB 코사인: 0.675818
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.213642
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.712036
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+
+3. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208613
+   - BM25 정규화: 0.000157
+   - ChromaDB 코사인: 0.695009
+   
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+4. 카카오디벨로퍼스 프론트/서버 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206876
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.686648
+   
+   URL: https://careers.kakao.com/jobs/P-14122?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. Backend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.205083
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.683506
+   
+   URL: https://careers.linecorp.com/ko/jobs/2837/
+
+
+====================================================================================================
+[4] 직무: Factory AX Engineering
+====================================================================================================
+Industry: Simulation
+Skill Set (샘플): ['제조공정', '공정/반송장비자동화/지능화 Concept Design', 'Digital Factory 구축', 'AI Literacy / Collaboration', '제조대외']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.897089
+   - BM25 정규화: 0.990034
+   - ChromaDB 코사인: 0.680217
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+2. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207868
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.689952
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.193787
+   - BM25 정규화: 0.006671
+   - ChromaDB 코사인: 0.630391
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+4. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.193432
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.644668
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+
+5. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.189100
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.630228
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+
+====================================================================================================
+[5] 직무: Factory AX Engineering
+====================================================================================================
+Industry: 기구설계
+Skill Set (샘플): ['제조공정', '공정/반송장비자동화/지능화 Concept Design', 'Digital Factory 구축', 'AI Literacy / Collaboration', '제조대외']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.901626
+   - BM25 정규화: 0.990123
+   - ChromaDB 코사인: 0.695133
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+2. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216511
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.718762
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200415
+   - BM25 정규화: 0.006671
+   - ChromaDB 코사인: 0.652483
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+4. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.199034
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.663343
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+5. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.195494
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.651542
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+
+====================================================================================================
+[6] 직무: Factory AX Engineering
+====================================================================================================
+Industry: 전장/제어
+Skill Set (샘플): ['제조공정', '공정/반송장비자동화/지능화 Concept Design', 'Digital Factory 구축', 'AI Literacy / Collaboration', '제조대외']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.901726
+   - BM25 정규화: 0.990078
+   - ChromaDB 코사인: 0.695571
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+2. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216121
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.717465
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+3. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198544
+   - BM25 정규화: 0.006671
+   - ChromaDB 코사인: 0.646248
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+4. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.195054
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.650075
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+5. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.193433
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.644672
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+
+====================================================================================================
+[7] 직무: Solution Development
+====================================================================================================
+Industry: ERP_FCM (Financial Chain Management)
+Skill Set (샘플): ['고객요구사항분석', 'Solution별기능', '솔루션Architecture 설계방법론', 'Solution 별 정책', '프로그래밍(ABAP, Java, node.js, C#, BTP)']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 선박 엔진 제조 PLM/CAD 운영 담당자
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693024
+   - BM25 정규화: 0.990034
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17226
+
+2. Smart Factory 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202705
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.675577
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16801
+
+3. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202154
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.673741
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+4. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.201985
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.673177
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+5. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200453
+   - BM25 정규화: 0.006671
+   - ChromaDB 코사인: 0.652613
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+
+====================================================================================================
+[8] 직무: Solution Development
+====================================================================================================
+Industry: ERP_SCM (Supply Chain Management)
+Skill Set (샘플): ['고객요구사항분석', 'Solution별기능', '솔루션Architecture 설계방법론', 'Solution 별 정책', '프로그래밍(ABAP, Java, node.js, C#, BTP)']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 선박 엔진 제조 PLM/CAD 운영 담당자
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17226
+
+2. 방산 SCM 모듈 운영 담당자 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: SCM 운영/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.214373
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.711637
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17228
+
+3. SAP ERP PS 모듈 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212772
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.709135
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17223
+
+4. SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.211180
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.703829
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17229
+
+5. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209937
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.699685
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+
+====================================================================================================
+[9] 직무: Solution Development
+====================================================================================================
+Industry: ERP_HCM (Human Capital Management)
+Skill Set (샘플): ['고객요구사항분석', 'Solution별기능', '솔루션Architecture 설계방법론', 'Solution 별 정책', '프로그래밍(ABAP, Java, node.js, C#, BTP)']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 선박 엔진 제조 PLM/CAD 운영 담당자
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17226
+
+2. SAP ERP PS 모듈 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.221952
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.739735
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17223
+
+3. SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.218105
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.726912
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17229
+
+4. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.217001
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.723233
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+5. SAP ERP 컨설턴트 경력사원 상시채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.213478
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.711490
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16807
+
+
+====================================================================================================
+[10] 직무: Solution Development
+====================================================================================================
+Industry: Biz. Solution
+Skill Set (샘플): ['Cloud', 'SaaS', 'PaaS', 'IaaS', 'SAP']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+
+2. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204634
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.682007
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+3. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202794
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.675877
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+4. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.201345
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.671044
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+5. SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200857
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.669420
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17229
+
+
+====================================================================================================
+[11] 직무: Solution Development
+====================================================================================================
+Industry: Tech. Solution
+Skill Set (샘플): ['Cloud', 'SaaS', 'PaaS', 'IaaS', 'SAP']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692993
+   - BM25 정규화: 0.989989
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+
+2. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208198
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.693889
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+3. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204588
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.681856
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+4. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204426
+   - BM25 정규화: 0.000188
+   - ChromaDB 코사인: 0.680981
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+5. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.203883
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.679505
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+
+====================================================================================================
+[12] 직무: Solution Development
+====================================================================================================
+Industry: Solution Architecture
+Skill Set (샘플): ['Cloud', 'SaaS', 'PaaS', 'IaaS', 'SAP']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Solution Engineer Lead
+   회사: LINE Company Thailand
+   업무분야: Engineering
+   경력: 경력무관
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692993
+   - BM25 정규화: 0.989989
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2895/
+
+2. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206511
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.688265
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+3. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.205155
+   - BM25 정규화: 0.000238
+   - ChromaDB 코사인: 0.683294
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+4. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.203991
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.679867
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+5. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.203913
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.679605
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+
+====================================================================================================
+[13] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: System/Network Engineering
+Skill Set (샘플): ['Infra / Cloud Architecture', 'Cost Simulation', 'Business Writing', 'Communication', 'Presentation']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692930
+   - BM25 정규화: 0.989900
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+
+2. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.222975
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.743145
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+3. 네트워크 인프라운영 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/네트워크
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.214650
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.715394
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17287
+
+4. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212801
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.709232
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+5. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212346
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.707715
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+
+====================================================================================================
+[14] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: Middleware/Database Engineering
+Skill Set (샘플): ['Infra / Cloud Architecture', 'Cost Simulation', 'Business Writing', 'Communication', 'Presentation']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692930
+   - BM25 정규화: 0.989900
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+
+2. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212522
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.708301
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+3. Backend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208192
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.693869
+   
+   URL: https://careers.linecorp.com/ko/jobs/2837/
+
+4. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207747
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.692384
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+5. Cloud DB Platform Engineer (DBA) (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Infra Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.205955
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.686411
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004088&lang=ko
+
+
+====================================================================================================
+[15] 직무: Cloud/Infra Engineering
+====================================================================================================
+Industry: Data Center Engineering
+Skill Set (샘플): ['Infra / Cloud Architecture', 'Cost Simulation', 'Business Writing', 'Communication', 'Presentation']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692930
+   - BM25 정규화: 0.989900
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+
+2. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216233
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.720671
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+3. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.215380
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.717829
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+4. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.213827
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.712652
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+5. 네트워크 인프라운영 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/네트워크
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.211994
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.706542
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17287
+
+
+====================================================================================================
+[16] 직무: Software Architect
+====================================================================================================
+Industry: Software Development
+Skill Set (샘플): ['아키텍처전략및기술표준수립/관리', '아키텍처설계검토/기술리스크관리', '이해관계자와의협력및아키텍처역량확산', 'AI 활용', 'IndustryKnowledge']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 2026 TECH FRESH Spring Class - Alpha Dev
+   회사: LINE Taiwan
+   업무분야: Engineering
+   경력: 신입
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2901/
+
+2. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.220661
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.735433
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+3. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.219584
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.731841
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.217278
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.724155
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212642
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.708702
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[17] 직무: Data Architect
+====================================================================================================
+Industry: Software Development
+Skill Set (샘플): ['아키텍처전략및기술표준수립/관리', '아키텍처설계검토/기술리스크관리', '이해관계자와의협력및아키텍처역량확산', 'AI 활용', 'IndustryKnowledge']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.909230
+   - BM25 정규화: 0.990034
+   - ChromaDB 코사인: 0.720686
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+2. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.220859
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.733256
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+3. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.217871
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.726133
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+4. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216990
+   - BM25 정규화: 0.000157
+   - ChromaDB 코사인: 0.722935
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+5. Data Engineer (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216883
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.722837
+   
+   URL: https://careers.kakao.com/jobs/P-14271?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[18] 직무: Infra Architect
+====================================================================================================
+Industry: Software Development
+Skill Set (샘플): ['아키텍처전략및기술표준수립/관리', '아키텍처설계검토/기술리스크관리', '이해관계자와의협력및아키텍처역량확산', 'AI 활용', 'IndustryKnowledge']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. BI Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2577/
+
+2. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216133
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.720339
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+3. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.215653
+   - BM25 정규화: 0.000238
+   - ChromaDB 코사인: 0.718287
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.215487
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.718185
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. 시스템 엔지니어 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 1~4년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209795
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.699211
+   
+   URL: https://careers.kakao.com/jobs/P-13952?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[19] 직무: AI Architect
+====================================================================================================
+Industry: AI Architecture
+Skill Set (샘플): ['Document Structuring', 'Data Chunking', 'Metadata Management', 'Workflow Framework', 'Prompt Engineering']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.904834
+   - BM25 정규화: 0.990256
+   - ChromaDB 코사인: 0.705516
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+2. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.215657
+   - BM25 정규화: 0.006672
+   - ChromaDB 코사인: 0.703287
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+
+3. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.214798
+   - BM25 정규화: 0.000238
+   - ChromaDB 코사인: 0.715438
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.213637
+   - BM25 정규화: 0.000137
+   - ChromaDB 코사인: 0.711804
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204867
+   - BM25 정규화: 0.000548
+   - ChromaDB 코사인: 0.681614
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[20] 직무: Automation Architect
+====================================================================================================
+Industry: Automation Architecture
+Skill Set (샘플): ['CAD/CAE', 'Digital Twin Platform', '시뮬레이션', '최적화 알고리즘', '데이터 분석']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 광고추천 데이터 사이언스, 머신러닝 전문가 (경력)
+   회사: 카카오
+   업무분야: 데이터 사이언스/머신러닝
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692993
+   - BM25 정규화: 0.989989
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.kakao.com/jobs/P-14148?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204435
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.678510
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+3. Computer Vision & 3D Vision Research Engineer
+   회사: NAVER LABS
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198319
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.660959
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30003613&lang=ko
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.196968
+   - BM25 정규화: 0.000137
+   - ChromaDB 코사인: 0.656240
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+5. 선박 엔진 제조 PLM/CAD 운영 담당자
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.196069
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.653458
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17226
+
+
+====================================================================================================
+[21] 직무: AI PM
+====================================================================================================
+Industry: AI Project Management
+Skill Set (샘플): ['AI 기술', '프로젝트 관리 역량', '리스크 관리', '최신 기술 트렌드 분석', 'AI 적용 방식의 장단점 파악']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.893397
+   - BM25 정규화: 0.990212
+   - ChromaDB 코사인: 0.667494
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.211799
+   - BM25 정규화: 0.006672
+   - ChromaDB 코사인: 0.690429
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.210727
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.702318
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. LINE AI Product Manager
+   회사: LINE Plus
+   업무분야: Planning
+   경력: 경력 7년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.210319
+   - BM25 정규화: 0.000548
+   - ChromaDB 코사인: 0.699787
+   
+   URL: https://careers.linecorp.com/ko/jobs/2720/
+
+5. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209497
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.695384
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+
+====================================================================================================
+[22] 직무: Project Management
+====================================================================================================
+Industry: Application PM
+Skill Set (샘플): ['개발/관리방법론', '프로젝트계획수립', '프로젝트실행및통제', '위험및이슈관리', '안전인증']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+
+2. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.214536
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.715014
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+3. 방산 SCM 모듈 운영 담당자 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: SCM 운영/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212742
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.709035
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17228
+
+4. Technical Project Manager
+   회사: LINE Company Thailand
+   업무분야: Engineering/Project Management
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212586
+   - BM25 정규화: 0.006670
+   - ChromaDB 코사인: 0.693057
+   
+   URL: https://careers.linecorp.com/ko/jobs/2851/
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208508
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.694923
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[23] 직무: Project Management
+====================================================================================================
+Industry: Infra PM
+Skill Set (샘플): ['개발/관리방법론', '프로젝트계획수립', '프로젝트실행및통제', '위험및이슈관리', '안전인증']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692993
+   - BM25 정규화: 0.989989
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+
+2. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206355
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.687745
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+3. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.205227
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.683986
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. Technical Project Manager
+   회사: LINE Company Thailand
+   업무분야: Engineering/Project Management
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204329
+   - BM25 정규화: 0.006670
+   - ChromaDB 코사인: 0.665532
+   
+   URL: https://careers.linecorp.com/ko/jobs/2851/
+
+5. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204225
+   - BM25 정규화: 0.000238
+   - ChromaDB 코사인: 0.680196
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+
+
+====================================================================================================
+[24] 직무: Project Management
+====================================================================================================
+Industry: Solution PM
+Skill Set (샘플): ['개발/관리방법론', '프로젝트계획수립', '프로젝트실행및통제', '위험및이슈관리', '안전인증']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. None
+   회사: Line
+   업무분야: 
+   경력: None
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/?ca=All&ci=Gwacheon,Bundang&co=East%20Asia
+
+2. 방산 SCM 모듈 운영 담당자 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: SCM 운영/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.210858
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.702755
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17228
+
+3. Technical Project Manager
+   회사: LINE Company Thailand
+   업무분야: Engineering/Project Management
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.210178
+   - BM25 정규화: 0.006670
+   - ChromaDB 코사인: 0.685030
+   
+   URL: https://careers.linecorp.com/ko/jobs/2851/
+
+4. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208695
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.695547
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+5. SAP ERP PS 모듈 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206909
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.689592
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17223
+
+
+====================================================================================================
+[25] 직무: Quality Management
+====================================================================================================
+Industry: PMO
+Skill Set (샘플): ['Business Writing', 'Communication', 'Presentation', 'Coordination', 'Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Fintech Risk & Business Reporting Manager
+   회사: LINE Financial Corp.
+   업무분야: Corporate/Risk Management
+   경력: 경력 2년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2778/
+
+2. Technical Project Manager
+   회사: LINE Company Thailand
+   업무분야: Engineering/Project Management
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200474
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.668141
+   
+   URL: https://careers.linecorp.com/ko/jobs/2851/
+
+3. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200138
+   - BM25 정규화: 0.000548
+   - ChromaDB 코사인: 0.665848
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+
+4. 방산 SCM 모듈 운영 담당자 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: SCM 운영/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198942
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.663034
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17228
+
+5. Business Development Manager - PM
+   회사: LINE Pay Taiwan
+   업무분야: Business & Sales
+   경력: 경력 2년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198183
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.660505
+   
+   URL: https://careers.linecorp.com/ko/jobs/2859/
+
+
+====================================================================================================
+[26] 직무: Quality Management
+====================================================================================================
+Industry: Quality Engineering
+Skill Set (샘플): ['Business Writing', 'Communication', 'Presentation', 'Coordination', 'Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Fintech Risk & Business Reporting Manager
+   회사: LINE Financial Corp.
+   업무분야: Corporate/Risk Management
+   경력: 경력 2년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2778/
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207587
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.691853
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.201741
+   - BM25 정규화: 0.006670
+   - ChromaDB 코사인: 0.656905
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+
+4. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198502
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.661570
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.197860
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.659428
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[27] 직무: Quality Management
+====================================================================================================
+Industry: Offshoring Service Professional
+Skill Set (샘플): ['Business Writing', 'Communication', 'Presentation', 'Coordination', 'Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Risk Management Manager
+   회사: LINE NEXT
+   업무분야: Corporate
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.891627
+   - BM25 정규화: 0.989989
+   - ChromaDB 코사인: 0.662115
+   
+   URL: https://careers.linecorp.com/ko/jobs/2839/
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204299
+   - BM25 정규화: 0.000122
+   - ChromaDB 코사인: 0.680712
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.201385
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.671179
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.199599
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.665227
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+5. 방산 SCM 모듈 운영 담당자 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: SCM 운영/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.197485
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.658180
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17228
+
+
+====================================================================================================
+[28] 직무: AI
+====================================================================================================
+Industry: AI/Data Development
+Skill Set (샘플): ['AI 기반 서비스 기획 및 구조 설계', 'Cloud / Container 기반 AI Infra 아키텍처 설계', '개발 환경 및 프레임워크 구성']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.908529
+   - BM25 정규화: 0.990167
+   - ChromaDB 코사인: 0.718038
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+2. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.224493
+   - BM25 정규화: 0.000548
+   - ChromaDB 코사인: 0.747030
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+3. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.218097
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.726884
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+4. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.217476
+   - BM25 정규화: 0.000238
+   - ChromaDB 코사인: 0.724366
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+
+5. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.214282
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.714167
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+
+====================================================================================================
+[29] 직무: AI
+====================================================================================================
+Industry: Generative AI Development
+Skill Set (샘플): ['AI 기반 서비스 기획 및 구조 설계', 'Cloud / Container 기반 AI Infra 아키텍처 설계', '개발 환경 및 프레임워크 구성']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.914278
+   - BM25 정규화: 0.990212
+   - ChromaDB 코사인: 0.737100
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+2. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.218765
+   - BM25 정규화: 0.006672
+   - ChromaDB 코사인: 0.713649
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212932
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.706833
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208404
+   - BM25 정규화: 0.000122
+   - ChromaDB 코사인: 0.694393
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+5. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207525
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.691644
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+
+====================================================================================================
+[30] 직무: AI
+====================================================================================================
+Industry: Physical AI Development
+Skill Set (샘플): ['AI 기반 서비스 기획 및 구조 설계', 'Cloud / Container 기반 AI Infra 아키텍처 설계', '개발 환경 및 프레임워크 구성']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.917695
+   - BM25 정규화: 0.990212
+   - ChromaDB 코사인: 0.748490
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+2. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.219780
+   - BM25 정규화: 0.006672
+   - ChromaDB 코사인: 0.717030
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.213678
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.709319
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.211916
+   - BM25 정규화: 0.000122
+   - ChromaDB 코사인: 0.706102
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+5. Cloud 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209403
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.697906
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17222
+
+
+====================================================================================================
+[31] 직무: Software Development
+====================================================================================================
+Industry: Physical AI Development
+Skill Set (샘플): ['PyTorch', 'TensorFlow', 'C/C++', 'Python', 'ROS']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Machine Learning Engineer (Search/ML/LLM) (경력)
+   회사: 카카오
+   업무분야: AI/머신러닝
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693024
+   - BM25 정규화: 0.990034
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.kakao.com/jobs/P-14231?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209459
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.695258
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207083
+   - BM25 정규화: 0.000137
+   - ChromaDB 코사인: 0.689959
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+4. AI Service Server Engineer
+   회사: LINE NEXTEngineering
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202509
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.674925
+   
+   URL: https://careers.linecorp.com/ko/jobs/2566/
+
+5. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200047
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.666719
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+
+====================================================================================================
+[32] 직무: Software Development
+====================================================================================================
+Industry: Information Security
+Skill Set (샘플): ['AI Literacy / Collaboration']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.922638
+   - BM25 정규화: 0.990167
+   - ChromaDB 코사인: 0.765071
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+2. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.222952
+   - BM25 정규화: 0.006672
+   - ChromaDB 코사인: 0.727607
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+3. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.221850
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.739395
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+4. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.221361
+   - BM25 정규화: 0.000238
+   - ChromaDB 코사인: 0.737314
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+5. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.215294
+   - BM25 정규화: 0.000122
+   - ChromaDB 코사인: 0.717362
+   
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[33] 직무: 정보보호
+====================================================================================================
+Industry: 보안Governance/Compliance
+Skill Set (샘플): ['시스템보안', 'AI 보안', 'Cloud 보안', 'OT 보안', '시큐어코딩']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693055
+   - BM25 정규화: 0.990078
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+2. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.219358
+   - BM25 정규화: 0.000137
+   - ChromaDB 코사인: 0.730875
+   
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+3. 네트워크 보안 담당자 (보안)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~10년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.218608
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.728589
+   
+   URL: https://careers.kakao.com/jobs/P-14247?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.211669
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.702623
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+
+5. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.211083
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.703505
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+
+====================================================================================================
+[34] 직무: 정보보호
+====================================================================================================
+Industry: 보안진단/Consulting
+Skill Set (샘플): ['시스템보안', 'AI 보안', 'Cloud 보안', 'OT 보안', '시큐어코딩']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.903874
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.703042
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+2. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.219315
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.730945
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+
+3. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.219002
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.729901
+   
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 서비스보안 및 취약점 진단 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.218406
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.727916
+   
+   URL: https://careers.kakao.com/jobs/P-14245?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212805
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.709246
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+
+====================================================================================================
+[35] 직무: 정보보호
+====================================================================================================
+Industry: 보안Solution Service
+Skill Set (샘플): ['시스템보안', 'AI 보안', 'Cloud 보안', 'OT 보안', '시큐어코딩']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.902653
+   - BM25 정규화: 0.990078
+   - ChromaDB 코사인: 0.698661
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+2. 클라우드 보안 솔루션 엔지니어 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech/Security
+   경력: 경력 2~7년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.221912
+   - BM25 정규화: 0.000548
+   - ChromaDB 코사인: 0.738430
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004041&lang=ko
+
+3. 보안 솔루션 개발 및 운영 담당자 (경력)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~7년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.221232
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.737334
+   
+   URL: https://careers.kakao.com/jobs/P-14246?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. 네트워크 보안 담당자 (보안)
+   회사: 카카오
+   업무분야: 보안
+   경력: 경력 2~10년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.210331
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.700997
+   
+   URL: https://careers.kakao.com/jobs/P-14247?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206498
+   - BM25 정규화: 0.001260
+   - ChromaDB 코사인: 0.685386
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+
+====================================================================================================
+[36] 직무: Domain Expert
+====================================================================================================
+Industry: 제1 금융
+Skill Set (샘플): ['제1 금융', '제2 금융', '통신', '유통/물류/서비스', '미디어/콘텐츠']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE BK Product Manager
+   회사: LINE Financial Corp.
+   업무분야: Planning
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2786/
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207151
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.690399
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.199391
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.664532
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+
+4. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.197557
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.658419
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+
+5. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.196019
+   - BM25 정규화: 0.000238
+   - ChromaDB 코사인: 0.652842
+   
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[37] 직무: Domain Expert
+====================================================================================================
+Industry: 제2 금융
+Skill Set (샘플): ['제1 금융', '제2 금융', '통신', '유통/물류/서비스', '미디어/콘텐츠']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE BK Product Manager
+   회사: LINE Financial Corp.
+   업무분야: Planning
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692930
+   - BM25 정규화: 0.989900
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2786/
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204545
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.681711
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.200542
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.668369
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+
+4. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.198172
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.660467
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+
+5. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.196694
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.655543
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+
+====================================================================================================
+[38] 직무: Domain Expert
+====================================================================================================
+Industry: 제조
+Skill Set (샘플): ['제1 금융', '제2 금융', '통신', '유통/물류/서비스', '미디어/콘텐츠']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE BK Product Manager
+   회사: LINE Financial Corp.
+   업무분야: Planning
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2786/
+
+2. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208181
+   - BM25 정규화: 0.000548
+   - ChromaDB 코사인: 0.692659
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+
+3. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208083
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.693505
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+4. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.201858
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.672755
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+
+5. 물류 자동화 구축 담당 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 물류/자동화
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.201478
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.671488
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16803
+
+
+====================================================================================================
+[39] 직무: Consulting
+====================================================================================================
+Industry: ESG
+Skill Set (샘플): ['IT 기술', '기술동향', '트렌드분석', 'IT 서비스의 Value Chain', 'IT 서비스/솔루션/제품의 특장점']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Backend Server Engineer (Corp IT Systems)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 3~8년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693024
+   - BM25 정규화: 0.990034
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2791/
+
+2. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.236567
+   - BM25 정규화: 0.006671
+   - ChromaDB 코사인: 0.772993
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+
+3. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202998
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.676554
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+4. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202710
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.675594
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+5. Site Reliability Engineer
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.199183
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.663837
+   
+   URL: https://careers.linecorp.com/ko/jobs/2709/
+
+
+====================================================================================================
+[40] 직무: Consulting
+====================================================================================================
+Industry: SHE
+Skill Set (샘플): ['IT 기술', '기술동향', '트렌드분석', 'IT 서비스의 Value Chain', 'IT 서비스/솔루션/제품의 특장점']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Backend Server Engineer (Corp IT Systems)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 3~8년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2791/
+
+2. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209557
+   - BM25 정규화: 0.000238
+   - ChromaDB 코사인: 0.697968
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+3. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.205329
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.684324
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+4. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204995
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.683212
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+5. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.204051
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.680066
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+
+
+====================================================================================================
+[41] 직무: Consulting
+====================================================================================================
+Industry: ERP
+Skill Set (샘플): ['IT 기술', '기술동향', '트렌드분석', 'IT 서비스의 Value Chain', 'IT 서비스/솔루션/제품의 특장점']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Backend Server Engineer (Corp IT Systems)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 3~8년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.693024
+   - BM25 정규화: 0.990034
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2791/
+
+2. ESG 컨설팅 및 수행 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: 컨설팅
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.211015
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.703278
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17233
+
+3. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208998
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.696555
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+4. SAP ERP PS 모듈 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206750
+   - BM25 정규화: 0.000548
+   - ChromaDB 코사인: 0.687890
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17223
+
+5. 조선업 IT 시스템 PI 및 구축 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.205987
+   - BM25 정규화: 0.000137
+   - ChromaDB 코사인: 0.686305
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17232
+
+
+====================================================================================================
+[42] 직무: Consulting
+====================================================================================================
+Industry: AI
+Skill Set (샘플): ['기초통계', 'NLP', 'Vision', 'Machine Learning', 'Deep Learning']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Machine Learning Engineer (Search/ML/LLM) (경력)
+   회사: 카카오
+   업무분야: AI/머신러닝
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.905785
+   - BM25 정규화: 0.990167
+   - ChromaDB 코사인: 0.708894
+   
+   URL: https://careers.kakao.com/jobs/P-14231?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+2. Vision AI 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.228181
+   - BM25 정규화: 0.000137
+   - ChromaDB 코사인: 0.760284
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17286
+
+3. LLM Engineer(AI 서비스 개발) 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.222566
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.741783
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17220
+
+4. Vertical AI 서비스 개발자 (경력)
+   회사: NAVER Cloud
+   업무분야: AI/ML
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.218910
+   - BM25 정규화: 0.000122
+   - ChromaDB 코사인: 0.729416
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004078&lang=ko
+
+5. AI 풀스택 개발자 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.217612
+   - BM25 정규화: 0.000188
+   - ChromaDB 코사인: 0.724937
+   
+   URL: https://careers.kakao.com/jobs/P-14191?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+
+====================================================================================================
+[43] 직무: Biz. Supporting
+====================================================================================================
+Industry: Strategy Planning
+Skill Set (샘플): ['경영목표 달성 지원', '전략 수립', '경영층 의사결정 지원', '효율적인 자원 활용', '구성원 성장 지원']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE Pay Biz Support Manager
+   회사: LINE
+   업무분야: 기획
+   경력: 경력무관
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.916288
+   - BM25 정규화: 0.989989
+   - ChromaDB 코사인: 0.744317
+   
+   URL: https://careers.linecorp.com/ko/jobs/2790/
+
+2. 클라우드 사업 기획 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/기획
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.205529
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.684992
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17283
+
+3. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.201418
+   - BM25 정규화: 0.006670
+   - ChromaDB 코사인: 0.655830
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+4. Business & Product Operations Assistant
+   회사: LINE NEXT
+   업무분야: Business & Sales
+   경력: 경력무관
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.201061
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.670098
+   
+   URL: https://careers.linecorp.com/ko/jobs/2909/
+
+5. 방산 SCM 모듈 운영 담당자 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: SCM 운영/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.199841
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.666032
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17228
+
+
+====================================================================================================
+[44] 직무: Biz. Supporting
+====================================================================================================
+Industry: New Biz. Development
+Skill Set (샘플): ['경영목표 달성 지원', '전략 수립', '경영층 의사결정 지원', '효율적인 자원 활용', '구성원 성장 지원']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 서비스/플랫폼 QA 담당자 (경력)
+   회사: 카카오
+   업무분야: QA
+   경력: 경력 2~10년
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692993
+   - BM25 정규화: 0.989989
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.kakao.com/jobs/P-13744?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. LINE Pay Biz Support Manager
+   회사: LINE
+   업무분야: 기획
+   경력: 경력무관
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.220597
+   - BM25 정규화: 0.000332
+   - ChromaDB 코사인: 0.734550
+   
+   URL: https://careers.linecorp.com/ko/jobs/2790/
+
+3. Business & Product Operations Assistant
+   회사: LINE NEXT
+   업무분야: Business & Sales
+   경력: 경력무관
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.210050
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.700062
+   
+   URL: https://careers.linecorp.com/ko/jobs/2909/
+
+4. LINE Pay Business Development Manager
+   회사: LINE Pay
+   업무분야: Business & Sales
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.202927
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.676318
+   
+   URL: https://careers.linecorp.com/ko/jobs/2862/
+
+5. Business Development Executive (Programmatic ad operation)
+   회사: LINE Hong Kong
+   업무분야: Business & Sales
+   경력: 경력 2년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.201332
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.671000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2906/
+
+
+====================================================================================================
+[45] 직무: Software Development
+====================================================================================================
+Industry: Front-end Development
+Skill Set (샘플): ['IT 서비스의 Value Chain', '사업/수익구조', '사업유형별 PJT 프로세스', '사업별/조직별 주요 이슈 파악', '재무제표']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. EC_Advertising Planning Senior Manager
+   회사: LINE Taiwan
+   업무분야: Business & Sales
+   경력: 경력 10년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692930
+   - BM25 정규화: 0.989900
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2737/
+
+2. Frontend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.217048
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.723390
+   
+   URL: https://careers.linecorp.com/ko/jobs/2838/
+
+3. Front-end Developer
+   회사: LINE Bank Taiwan
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.213245
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.710713
+   
+   URL: https://careers.linecorp.com/ko/jobs/190/
+
+4. Frontend Engineer
+   회사: LINE VIETNAM
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.212211
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.707266
+   
+   URL: https://careers.linecorp.com/ko/jobs/2254/
+
+5. Web Front-end Engineer
+   회사: LINE Pay
+   업무분야: Engineering
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.210655
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.702077
+   
+   URL: https://careers.linecorp.com/ko/jobs/2836/
+
+
+====================================================================================================
+[46] 직무: Software Development
+====================================================================================================
+Industry: Back-end Development
+Skill Set (샘플): ['IT 서비스의 Value Chain', '사업/수익구조', '사업유형별 PJT 프로세스', '사업별/조직별 주요 이슈 파악', '재무제표']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.899878
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.689723
+   
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. Backend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.213641
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.712033
+   
+   URL: https://careers.linecorp.com/ko/jobs/2837/
+
+3. Frontend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209500
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.698230
+   
+   URL: https://careers.linecorp.com/ko/jobs/2838/
+
+4. 글로벌 서비스 Back-End 개발 (경력)
+   회사: NAVER WEBTOON
+   업무분야: Tech/Backend
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.207703
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.692238
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004070&lang=ko
+
+5. System Engineer 제조서비스분야 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.206601
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.688567
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17221
+
+
+====================================================================================================
+[47] 직무: Software Development
+====================================================================================================
+Industry: Mobile Development
+Skill Set (샘플): ['IT 서비스의 Value Chain', '사업/수익구조', '사업유형별 PJT 프로세스', '사업별/조직별 주요 이슈 파악', '재무제표']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. LINE Pay Biz Support Manager
+   회사: LINE
+   업무분야: 기획
+   경력: 경력무관
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692930
+   - BM25 정규화: 0.989900
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2790/
+
+2. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.218395
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.727877
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+
+3. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.217424
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.724642
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+4. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.216979
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.723158
+   
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. 지도기반 슈퍼앱 서비스 Android / iOS 개발 (경력)
+   회사: NAVER Cloud
+   업무분야: Tech
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.214950
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.716396
+   
+   URL: https://recruit.navercorp.com/rcrt/view.do?annoId=30004020&lang=ko
+
+
+====================================================================================================
+[48] 직무: Software Development
+====================================================================================================
+Industry: Governance Management
+Skill Set (샘플): ['정보수집', '분석', 'CR 전략수립', '대외이슈대응', '감사']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. Senior Technical Program Manager
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 5년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692961
+   - BM25 정규화: 0.989945
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.linecorp.com/ko/jobs/2425/
+
+2. Data Governance 전문가 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.226777
+   - BM25 정규화: 0.006670
+   - ChromaDB 코사인: 0.740360
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16806
+
+3. 방산 SCM 모듈 운영 담당자 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: SCM 운영/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.213242
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.710701
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17228
+
+4. IT 서비스 안정성 및 위험관리 전문가 (경력)
+   회사: 카카오
+   업무분야: 기타
+   경력: 경력 10년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208520
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.694961
+   
+   URL: https://careers.kakao.com/jobs/P-14275?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=1
+
+5. 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208237
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.694018
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16344
+
+
+====================================================================================================
+[49] 직무: Software Development
+====================================================================================================
+Industry: Public Management
+Skill Set (샘플): ['PR 전략수립', '미디어커뮤니케이션', '마케팅전략수립', '브랜드마케팅', '콘텐츠마케팅']
+
+--------------------------------------추천 채용공고 Top 5---------------------------------------
+
+1. 보이스톡 / 페이스톡 Server 엔지니어 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 2년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.692993
+   - BM25 정규화: 0.989989
+   - ChromaDB 코사인: 0.000000
+   
+   URL: https://careers.kakao.com/jobs/P-14172?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+2. WEB 시스템 운영/개발 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.210511
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.701597
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=17280
+
+3. MES 개발/프로젝트 경력사원 채용
+   회사: 한화시스템/ICT
+   업무분야: IT/개발
+   경력: 경력
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.210044
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.700042
+   
+   URL: https://www.hanwhain.com/web/apply/notification/view.do?rtSeq=16808
+
+4. 검색 서비스・플랫폼 개발자 (경력)
+   회사: 카카오
+   업무분야: IT/개발
+   경력: 경력 3년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.209912
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.699603
+   
+   URL: https://careers.kakao.com/jobs/P-14008?skillSet=&part=TECHNOLOGY&company=KAKAO&keyword=&employeeType=&page=2
+
+5. Frontend Engineer (Developer Platform)
+   회사: LINE Plus
+   업무분야: Engineering
+   경력: 경력 2년 이상
+   
+   [가중평균 합산 점수]
+   - 가중 합산 (0.7*BM25 + 0.3*Chroma): 0.208391
+   - BM25 정규화: 0.000045
+   - ChromaDB 코사인: 0.694533
+   
+   URL: https://careers.linecorp.com/ko/jobs/2838/
+

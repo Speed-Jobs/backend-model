@@ -23,3 +23,6 @@ apscheduler
 celery
 asyncio
 logging
+networkx
+python-louvain
+sentence-transformers

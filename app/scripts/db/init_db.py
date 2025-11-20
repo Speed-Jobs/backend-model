@@ -84,6 +84,7 @@ class TableInitializer:
                 id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Position ID',
                 name VARCHAR(255) NOT NULL COMMENT 'Position name',
                 description TEXT COMMENT 'Position description',
+                skillset TEXT COMMENT 'Position skillset',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Created timestamp',
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Updated timestamp',
                 INDEX idx_name (name(191))
@@ -118,6 +119,7 @@ class TableInitializer:
                 id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Industry ID',
                 name VARCHAR(255) NOT NULL COMMENT 'Industry name',
                 description TEXT COMMENT 'Industry description',
+                skillset TEXT COMMENT 'Industry skillset',
                 position_id INT COMMENT 'Related position ID',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Created timestamp',
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Updated timestamp',

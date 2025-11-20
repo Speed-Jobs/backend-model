@@ -291,7 +291,7 @@ def main():
     # File paths
     base_dir = os.path.dirname(__file__)
     description_file = os.path.join(base_dir, "../../../data/description.json")
-    job_description_file = os.path.join(base_dir, "../../../data/job_description.json")
+    job_description_file = os.path.join(base_dir, "../../../data/new_job_description.json")
 
     # Check file existence
     if not os.path.exists(description_file):

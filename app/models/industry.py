@@ -9,6 +9,7 @@ class Industry(Base):
     id = Column(Integer, primary_key=True, index=True, comment="아이디")
     name = Column(String(255), nullable=False, index=True, comment="이름")
     description = Column(Text, nullable=True, comment="설명")
+    skillset = Column(Text, nullable=True, comment="스킬셋")
     position_id = Column(Integer, ForeignKey("position.id"), nullable=True, index=True, comment="직무id")
 
     # Relationships
