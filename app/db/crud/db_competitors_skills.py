@@ -3,7 +3,7 @@ from sqlalchemy import text
 from typing import List, Optional, Dict, Tuple
 from datetime import datetime
 import pandas as pd
-
+# v2
 
 # 경쟁사 그룹 및 키워드 매핑
 COMPETITOR_GROUPS: Dict[str, List[str]] = {
