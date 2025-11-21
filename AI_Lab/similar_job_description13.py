@@ -6,23 +6,19 @@
 2. Jaccard + SBERT로만 점수 계산 - 전체 스킬(common + specific) 사용
 3. 가중치 없이 단순 합산 (0~2 범위)
 
-주요 변경사항 (v7 → v13):
+주요 변경사항 (v12 → v13):
 1. PPR 역할 변경
-   - 기존: 점수 계산에 포함 (15%)
+   - 기존: 점수 계산에 포함 (50%)
    - 변경: 후보 필터링 전용 (점수 버림)
    - 이유: 정규화 시 Hallucination 발생
    - PPR 계산: specific_skills만 사용 (직무 특화 스킬로 필터링)
 
-2. Clustering 제거
-   - Louvain 커뮤니티 탐지 제거
-   - 직무/산업 정보로 충분한 구분 가능
-
-3. Jaccard 강화
-   - Weighted Jaccard (common 0.33 + specific 0.67)
+2. Jaccard 부활
+   - Weighted Jaccard 재도입 (common 0.33 + specific 0.67)
    - 필터링 제거 (모든 후보 계산)
    - Jaccard 계산: 전체 스킬(common + specific) 사용
 
-4. 점수 계산
+3. 점수 계산
    - Final = Jaccard + SBERT (0~2 범위)
    - 가중치 없음 (단순 합산)
 
@@ -37,6 +33,9 @@
 - Jaccard로 스킬 매칭 정확도 향상
 - SBERT 높은 성능 활용
 - 단순하고 투명한 점수 체계
+
+Usage:
+    python similar_job_description13.py
 """
 
 import json
@@ -50,12 +49,6 @@ from datetime import datetime
 import numpy as np
 import networkx as nx
 from sentence_transformers import SentenceTransformer
-
-from app.config.job_matching.config import (
-    JOB_DESCRIPTION_FILE,
-    SBERT_MODEL_NAME,
-    TRAINING_DATA_FILES,
-)
 
 # ============================================================================
 # Output Logger (Terminal + File)
@@ -167,7 +160,6 @@ class JobPostingGraph:
                 skill_node = f"skill:{skill_normalized}"
                 self.G.add_edge(posting_node, skill_node, weight=1.0)
 
-
     @staticmethod
     def _normalize_skill(skill: str) -> str:
         return (
@@ -194,13 +186,9 @@ class SbertDescriptionMatcher:
     def __init__(
         self,
         job_descriptions: List[JobDescription],
-        model_name: str = None,
+        model_name: str = "sentence-transformers/distiluse-base-multilingual-cased-v2",
     ):
         self.job_descriptions = job_descriptions
-
-        # config에서 모델명 가져오기 (없으면 기본값 사용)
-        if model_name is None:
-            model_name = SBERT_MODEL_NAME
 
         print(f"[SBERT] 모델 로딩 중... ({model_name})")
         self.model = SentenceTransformer(model_name)
@@ -524,16 +512,8 @@ class JobMatchingSystem:
             sys.stdout = self.logger.terminal
             self.logger.close()
 
-    def load_job_descriptions(self, filepath: str = None):
-        """
-        직무 정의 로드
-        
-        Args:
-            filepath: 직무 정의 JSON 파일 경로 (None이면 config에서 가져옴)
-        """
-        if filepath is None:
-            filepath = str(JOB_DESCRIPTION_FILE)
-        
+    def load_job_descriptions(self, filepath: str):
+        """직무 정의 로드"""
         with open(filepath, 'r', encoding='utf-8') as f:
             data = json.load(f)
         
@@ -545,26 +525,14 @@ class JobMatchingSystem:
                 common_skills=item.get('공통_skill_set', []),
                 specific_skills=item.get('skill_set', []),
                 skill_set_description=item.get('skill_set_description', ''),
-                common_skill_set_description=item.get('공통_skill_set_description', ''),  # v13: 추가
+                common_skill_set_description=item.get('공통_skill_set_description', ''),
             )
             self.job_descriptions.append(job_desc)
         
         print(f"[OK] Job descriptions loaded: {len(self.job_descriptions)}")
 
-    def load_training_data(self, job_files: List[str] = None):
-        """
-        기존 채용공고 로드
-        
-        Args:
-            job_files: 학습 데이터 JSON 파일 경로 리스트 (None이면 config에서 가져옴)
-            
-        Note:
-            TODO: 추후 DB에서 직접 가져오도록 수정 필요
-            데이터 파이프라인 구축 완료 후 DB 쿼리로 대체 예정
-        """
-        if job_files is None:
-            job_files = TRAINING_DATA_FILES
-        
+    def load_training_data(self, job_files: List[str]):
+        """기존 채용공고 로드"""
         for filepath in job_files:
             try:
                 with open(filepath, 'r', encoding='utf-8') as f:
@@ -692,8 +660,7 @@ class JobMatchingSystem:
             if not skills:
                 continue
             
-            # ---------- 🔧 변경 포인트 2: description에 본문 전체 우선 사용 ----------
-            # 크롤러에서 본문 전체를 job["description"]이나 유사 키로 넣어준다 가정
+            # description에 본문 전체 우선 사용
             raw_body = (
                 job.get('description')
                 or job.get('content')
@@ -707,7 +674,6 @@ class JobMatchingSystem:
                 title=job.get('title', ''),
                 skills=skills,
                 url=job.get('url', ''),
-                # 여기에는 "본문 전체"를 넣어두고, SBERT 쿼리에서는 title과 합쳐서 사용
                 description=raw_body,
             )
             
@@ -782,82 +748,81 @@ class JobMatchingSystem:
 
 
 # ============================================================================
-# Main Execution (주석 처리 - FastAPI에서 사용할 예정)
+# Main Execution
 # ============================================================================
 
-# def main():
-#     """메인 실행"""
-# 
-#     # 로그 파일명 생성 (타임스탬프 포함)
-#     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-#     log_file = f"job_matching_v7_results_{timestamp}.txt"
-# 
-#     print("="*80)
-#     print("직무 매칭 시스템 v7 - SBERT DESCRIPTION MATCHING")
-#     print(f"로그 파일: {log_file}")
-#     print("="*80)
-# 
-#     # app/core/job_matching에서 AI_Lab/data로 접근
-#     base_dir = Path(__file__).parent.parent.parent.parent
-#     data_dir = base_dir / "AI_Lab" / "data"
-# 
-#     # 로그 파일 활성화
-#     system = JobMatchingSystem(log_file=log_file)
-# 
-#     print("\n[1/4] 직무 정의 로드")
-#     system.load_job_descriptions(str(data_dir / 'new_job_description.json'))
-# 
-#     print("\n[2/4] 학습 데이터 로드")
-#     training_files = [
-#         str(data_dir / 'hanwha_jobs.json'),
-#         str(data_dir / 'kakao_jobs.json'),
-#         str(data_dir / 'line_jobs.json'),
-#         str(data_dir / 'naver_jobs.json'),
-#     ]
-#     system.load_training_data(training_files)
-# 
-#     print("\n[3/4] 그래프 구축")
-#     system.build_graph()
-# 
-#     print("\n[4/4] Matchers 초기화")
-#     system.build_matchers()
-# 
-#     print("\n" + "="*80)
-#     print("[OK] System ready!")
-#     print("="*80)
-# 
-#     # line_jobs.json 안에 'description'(본문 전체) 필드까지 들어가 있으면
-#     # SBERT가 제목+본문 기반으로 매칭 수행
-#     results = system.match_company_jobs(
-#         str(data_dir / 'line_jobs.json'),
-#         ppr_top_n=20,
-#         final_top_k=2,
-#     )
-# 
-#     # DB 저장용 JSON 파일 생성 (1등 결과만)
-#     json_output_file = f"job_matching_v7_db_results_{timestamp}.json"
-#     db_results = []
-#     
-#     for result in results:
-#         if result.get('db_result'):
-#             # 원본 채용공고 정보와 DB 결과를 함께 저장
-#             db_entry = {
-#                 'company': result['posting'].company,
-#                 'title': result['posting'].title,
-#                 'url': result['posting'].url,
-#                 **result['db_result']  # sim_position, sim_industry, sim_score, sim_skill_matching
-#             }
-#             db_results.append(db_entry)
-#     
-#     # JSON 파일로 저장
-#     with open(json_output_file, 'w', encoding='utf-8') as f:
-#         json.dump(db_results, f, ensure_ascii=False, indent=2)
-#     
-#     print(f"\n{'='*80}")
-#     print(f"로그 파일: {log_file}")
-#     print(f"DB 결과 JSON: {json_output_file} ({len(db_results)}개 결과)")
-#     print(f"{'='*80}")
-# 
-# 
-# if __name__ == '__main__':
-#     main()
+def main():
+    """메인 실행"""
+
+    # 로그 파일명 생성 (타임스탬프 포함)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = f"job_matching_v13_results_{timestamp}.txt"
+
+    print("="*80)
+    print("직무 매칭 시스템 v13 - PPR 필터링 전용 버전")
+    print(f"로그 파일: {log_file}")
+    print("="*80)
+
+    base_dir = Path(__file__).parent
+    data_dir = base_dir / "data"
+
+    # 로그 파일 활성화
+    system = JobMatchingSystem(log_file=log_file)
+
+    print("\n[1/4] 직무 정의 로드")
+    system.load_job_descriptions(str(data_dir / 'new_job_description.json'))
+
+    print("\n[2/4] 학습 데이터 로드")
+    training_files = [
+        str(data_dir / 'hanwha_jobs.json'),
+        str(data_dir / 'kakao_jobs.json'),
+        str(data_dir / 'line_jobs.json'),
+        str(data_dir / 'naver_jobs.json'),
+    ]
+    system.load_training_data(training_files)
+
+    print("\n[3/4] 그래프 구축")
+    system.build_graph()
+
+    print("\n[4/4] Matchers 초기화")
+    system.build_matchers()
+
+    print("\n" + "="*80)
+    print("[OK] System ready!")
+    print("="*80)
+
+    # 매칭 수행
+    results = system.match_company_jobs(
+        str(data_dir / 'line_jobs.json'),
+        ppr_top_n=20,
+        final_top_k=2,
+    )
+
+    # DB 저장용 JSON 파일 생성 (1등 결과만)
+    json_output_file = f"job_matching_v13_db_results_{timestamp}.json"
+    db_results = []
+    
+    for result in results:
+        if result.get('db_result'):
+            # 원본 채용공고 정보와 DB 결과를 함께 저장
+            db_entry = {
+                'company': result['posting'].company,
+                'title': result['posting'].title,
+                'url': result['posting'].url,
+                **result['db_result']  # position, industry, sim_score, sim_skill_matching
+            }
+            db_results.append(db_entry)
+    
+    # JSON 파일로 저장
+    with open(json_output_file, 'w', encoding='utf-8') as f:
+        json.dump(db_results, f, ensure_ascii=False, indent=2)
+    
+    print(f"\n{'='*80}")
+    print(f"로그 파일: {log_file}")
+    print(f"DB 결과 JSON: {json_output_file} ({len(db_results)}개 결과)")
+    print(f"{'='*80}")
+
+
+if __name__ == '__main__':
+    main()
+

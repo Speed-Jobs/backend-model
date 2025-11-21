@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# SQLAlchemy 모델 import (관계 설정을 위해 필요)
+
+# SQLAlchemy 모델들을 import하여 relationship이 제대로 작동하도록 함
 from app.models import (
     company,
     industry,
@@ -20,6 +21,7 @@ from app.routers import (
     routers_competitors_skills,
     routers_recruit_counter,
     routers_competitor_recruit_counter,
+    job_matching
 )
 
 app = FastAPI()
@@ -33,3 +35,4 @@ app.include_router(routers_skill_match.router)
 app.include_router(routers_competitors_skills.router)
 app.include_router(routers_recruit_counter.router)
 app.include_router(routers_competitor_recruit_counter.router)
+app.include_router(job_matching.router)
