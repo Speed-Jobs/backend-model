@@ -4,14 +4,14 @@ FROM python:3.11-slim
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# 시스템 패키지 업데이트 및 필요한 패키지 설치
+# 시스템 패키지 업데이트 및 필요한 패키지 설치 (Python 패키지 빌드용)
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
-    default-libmysqlclient-dev \
-    pkg-config \
-    curl \
     && rm -rf /var/lib/apt/lists/*
+
+# pip, setuptools, wheel 업그레이드
+RUN pip install --upgrade pip setuptools wheel
 
 # requirements.txt 복사 및 의존성 설치
 COPY requirements.txt .

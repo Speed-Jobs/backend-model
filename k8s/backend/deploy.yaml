@@ -3,10 +3,8 @@ kind: Deployment
 metadata:
   name: speedjobs-backend
   namespace: skala-practice
-  labels:
-    app: speedjobs-backend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: speedjobs-backend
@@ -15,9 +13,10 @@ spec:
       labels:
         app: speedjobs-backend
     spec:
+      serviceAccountName: default
       containers:
-      - name: backend
-        image: speedjobs-backend:latest
+      - name: speedjobs-backend
+        image: amdp-registry.skala-ai.com/skala25a/speedjobs-backend:1.0.0
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
@@ -45,7 +44,6 @@ spec:
             secretKeyRef:
               name: speedjobs-backend-secret
               key: openai-api-key
-              optional: true
         resources:
           requests:
             cpu: 250m

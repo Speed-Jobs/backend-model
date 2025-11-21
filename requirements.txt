@@ -8,7 +8,7 @@ playwright
 requests
 bs4
 openai
-dotenv
+python-dotenv
 pymupdf
 jupyter
 langchain
@@ -16,15 +16,12 @@ langchain_openai
 langchain-core
 chromadb
 rank_bm25
-reportlab 
-dotenv
+reportlab
 lxml
 mysql-connector-python
 sqlalchemy
 apscheduler
 celery
-asyncio
-logging
 networkx
 python-louvain
 sentence-transformers
