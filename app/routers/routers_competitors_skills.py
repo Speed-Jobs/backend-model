@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Query, HTTPException, Path
 from sqlalchemy.orm import Session
 from typing import Optional, Literal
-from app.db import get_db
+from app.db.config.base import get_db
 from app.schemas import schemas_competitors_skills
 from app.services.dashboard.competitors_skills import competitors_skills_service
 

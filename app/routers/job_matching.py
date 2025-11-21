@@ -9,7 +9,7 @@ from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session, joinedload
 
-from app.db.base import get_db
+from app.db.config.base import get_db
 from app.models.post import Post
 from app.models.post_skill import PostSkill
 from app.utils.job_matching.model_loader import get_job_matching_system

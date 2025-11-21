@@ -25,3 +25,9 @@ celery
 networkx
 python-louvain
 sentence-transformers
+pandas
+numpy
+matplotlib
+scikit-learn
+gensim
+pandas
