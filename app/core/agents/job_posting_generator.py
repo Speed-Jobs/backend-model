@@ -23,7 +23,6 @@ from app.core.agents.tools.issue_analyzer import (
 from app.utils.agents.evaluation.json_loader import (
     load_evaluation_json,
     list_available_evaluations,
-    delete_evaluation_json,
 )
 
 # DB
@@ -106,7 +105,6 @@ def create_job_posting_generator_agent(
         analyze_specificity_issues,
         analyze_attractiveness_issues,
         get_overall_improvement_summary,
-        delete_evaluation_json,
     ]
     
     # System Prompt - 피드백 적용된 AI 채용공고만 출력

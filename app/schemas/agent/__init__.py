@@ -24,6 +24,16 @@ from .schemas_tool import (
     EvaluationResponse,
 )
 
+from .schemas_request import (
+    # Request Schemas
+    TwoPostsRequest,
+)
+
+from .schemas_response import (
+    # Response Schemas
+    ReportGenerationResponse,
+)
+
 __all__ = [
     # Input Schema
     "ToolInput",
@@ -43,4 +53,8 @@ __all__ = [
     "AttractivenessModuleResult",
     # API Response Schema
     "EvaluationResponse",
+    # Request Schemas
+    "TwoPostsRequest",
+    # Response Schemas
+    "ReportGenerationResponse",
 ]

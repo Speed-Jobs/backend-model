@@ -3,107 +3,57 @@ Evaluation API Router
 채용공고 평가 결과 조회 API
 """
 
-from fastapi import APIRouter, HTTPException, Path as PathParam, UploadFile, File
-from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException, Query, UploadFile, File
 from typing import Dict
 import PyPDF2
 import io
 
-from app.schemas.agent import EvaluationResponse
+from app.schemas.agent import EvaluationResponse, TwoPostsRequest, ReportGenerationResponse
 from app.services.agent.evaluation_service import (
-    evaluate_post_by_id,
     evaluate_two_posts,
-    evaluate_pdf_files
+    evaluate_pdf_files,
+    generate_report
 )
 
 router = APIRouter(prefix="/evaluation", tags=["evaluation"])
 
 
-# Request Schema
-class TwoPostsRequest(BaseModel):
-    post_id_1: int
-    post_id_2: int
-
-
 @router.get(
-    "/post/{post_id}",
-    response_model=EvaluationResponse,
-    summary="채용공고 평가",
-    description="특정 채용공고를 실시간으로 평가하여 결과를 반환합니다.",
-)
-async def get_evaluation_by_post(
-    post_id: int = PathParam(..., description="채용공고 ID", ge=1)
-) -> EvaluationResponse:
-    """
-    채용공고 ID로 평가
-    
-    이 API는:
-    1. DB에서 해당 post_id의 채용공고를 조회
-    2. 평가 모듈(가독성, 구체성, 매력도)을 병렬로 실행
-    3. 평가 결과를 반환
-    
-    Args:
-        post_id: 채용공고 ID
-        
-    Returns:
-        EvaluationResponse: 가독성, 구체성, 매력도 평가 결과
-        
-    Raises:
-        404: 해당 채용공고를 찾을 수 없음
-        500: 서버 내부 오류
-    """
-    try:
-        # Service 레이어에서 평가 실행
-        result = await evaluate_post_by_id(post_id)
-        return result
-        
-    except ValueError as e:
-        # 채용공고를 찾을 수 없는 경우
-        raise HTTPException(
-            status_code=404,
-            detail=str(e)
-        )
-    except Exception as e:
-        # 기타 서버 오류
-        raise HTTPException(
-            status_code=500,
-            detail=f"Evaluation failed: {str(e)}"
-        )
-
-
-@router.post(
-    "/posts",
+    "/compare",
     response_model=Dict[str, EvaluationResponse],
     summary="2개 채용공고 비교 평가",
-    description="2개의 채용공고를 병렬로 평가하여 비교 결과를 반환합니다.",
+    description="SK AX 채용공고와 경쟁사 채용공고를 병렬로 평가하여 비교 결과를 반환합니다.",
 )
 async def evaluate_two_posts_api(
-    request: TwoPostsRequest
+    sk_ax_post: int = Query(..., description="SK AX 채용공고 ID", ge=1, example=123),
+    competitor_post: int = Query(..., description="경쟁사 채용공고 ID", ge=1, example=456)
 ) -> Dict[str, EvaluationResponse]:
     """
     2개의 채용공고 ID로 비교 평가
     
     이 API는:
-    1. DB에서 2개의 채용공고를 조회
+    1. DB에서 2개의 채용공고를 조회 (SK AX vs 경쟁사)
     2. 각 공고를 병렬로 평가 (가독성, 구체성, 매력도)
     3. 두 개의 평가 결과를 반환
     
     Args:
-        request: TwoPostsRequest
-            - post_id_1: 첫 번째 채용공고 ID
-            - post_id_2: 두 번째 채용공고 ID
+        sk_ax_post: SK AX 채용공고 ID
+        competitor_post: 경쟁사 채용공고 ID
         
     Returns:
         Dict[str, EvaluationResponse]: 두 개의 평가 결과
-            - post_1: 첫 번째 공고 평가 결과
-            - post_2: 두 번째 공고 평가 결과
+            - sk_ax: SK AX 공고 평가 결과
+            - competitor: 경쟁사 공고 평가 결과
         
     Raises:
         404: 채용공고를 찾을 수 없음
         500: 서버 내부 오류
+        
+    Example:
+        GET /api/v1/evaluation/compare?sk_ax_post=123&competitor_post=456
     """
     try:
-        result = await evaluate_two_posts(request.post_id_1, request.post_id_2)
+        result = await evaluate_two_posts(sk_ax_post, competitor_post)
         return result
         
     except ValueError as e:
@@ -209,5 +159,65 @@ async def evaluate_two_pdfs_api(
         raise HTTPException(
             status_code=500,
             detail=f"PDF evaluation failed: {str(e)}"
+        )
+
+
+@router.post(
+    "/reports/{post_id}",
+    response_model=ReportGenerationResponse,
+    summary="평가 기반 보고서 생성",
+    description="평가 데이터를 기반으로 개선된 채용공고 보고서를 생성합니다.",
+)
+async def generate_report_api(
+    post_id: int
+) -> ReportGenerationResponse:
+    """
+    특정 post_id의 평가 데이터를 기반으로 개선된 채용공고를 생성합니다.
+    
+    이 API는:
+    1. post_id로 저장된 JSON 파일 검색 (가장 최근 파일)
+    2. job_posting_generator를 사용하여 개선된 채용공고 생성
+    3. 사용한 JSON 파일 자동 삭제
+    
+    Args:
+        post_id: 채용공고 ID
+        
+    Returns:
+        ReportGenerationResponse: 보고서 생성 결과
+        
+    Raises:
+        404: 평가 데이터를 찾을 수 없음
+        500: 서버 내부 오류
+        
+    Example:
+        POST /api/v1/evaluation/reports/123
+        
+        Response:
+        {
+            "status": "success",
+            "improved_posting": "[채용공고]\n\n회사명: 현대오토에버\n직무: 백엔드 개발자\n..."
+        }
+    """
+    try:
+        # Service layer에서 보고서 생성
+        result = await generate_report(post_id)
+        
+        # 응답 반환
+        return ReportGenerationResponse(
+            status=result.get("status", "success"),
+            improved_posting=result.get("improved_posting", "")
+        )
+        
+    except ValueError as e:
+        raise HTTPException(
+            status_code=404,
+            detail=str(e)
+        )
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail=f"보고서 생성 중 오류 발생: {str(e)}"
         )
 
