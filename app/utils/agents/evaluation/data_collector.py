@@ -8,14 +8,12 @@ import asyncio
 import os
 from dotenv import load_dotenv
 
-from app.utils.evaluation.evaluators import (
-    collect_readability_data,
-    collect_specificity_data,
-    collect_attractiveness_data
-)
+from app.utils.agents.evaluation.modules.module_readability import collect_readability_data
+from app.utils.agents.evaluation.modules.module_specificity import collect_specificity_data
+from app.utils.agents.evaluation.modules.module_attractiveness import collect_attractiveness_data
 from app.db.crud.post import get_post_by_id
 from app.db.config.base import get_db
-from app.utils.evaluation.report_saver import save_raw_evaluation_data
+from app.utils.agents.evaluation.report_saver import save_raw_evaluation_data
 
 load_dotenv(override=True)
 

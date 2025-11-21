@@ -6,7 +6,7 @@ import json
 # 경로 추가
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from app.utils.evaluation import collect_multiple_posts
+from app.utils.agents.evaluation.data_collector import collect_multiple_posts
 
 def main():
     """Data Collector로 2개의 채용 공고 데이터 수집"""

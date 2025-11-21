@@ -4,7 +4,7 @@ LLM structured output 및 Tool Input을 위한 Pydantic 모델 정의
 """
 
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 
 
 # ============ Tool Input Schemas ============
@@ -99,4 +99,59 @@ class SpecialContentQualityResult(BaseEvaluationResult):
     """특별 콘텐츠 텍스트 추출 결과"""
     keywords: List[str] = Field(
         description="기준에 해당되는 키워드 리스트 (특별 콘텐츠 관련 키워드 또는 콘텐츠 유형)"
+    )
+
+
+# ============ Module Level Response Schemas ============
+
+class ReadabilityModuleResult(BaseModel):
+    """가독성 평가 모듈 결과 (3개 evaluator 통합)"""
+    jargon: JargonResult = Field(
+        description="사내 전문 용어 빈도수 평가 결과"
+    )
+    consistency: ConsistencyResult = Field(
+        description="문단 일관성 평가 결과"
+    )
+    grammar: GrammarResult = Field(
+        description="문법 정확성 평가 결과"
+    )
+
+
+class SpecificityModuleResult(BaseModel):
+    """구체성 평가 모듈 결과 (4개 evaluator 통합)"""
+    responsibility: ResponsibilityResult = Field(
+        description="담당 업무 구체성 평가 결과"
+    )
+    qualification: QualificationResult = Field(
+        description="자격요건 구체성 평가 결과"
+    )
+    keyword_relevance: KeywordRelevanceResult = Field(
+        description="키워드 적합성 평가 결과"
+    )
+    required_fields: RequiredFieldsResult = Field(
+        description="필수 항목 포함 여부 평가 결과"
+    )
+
+
+class AttractivenessModuleResult(BaseModel):
+    """매력도 평가 모듈 결과 (2개 evaluator 통합)"""
+    content_count: SpecialContentInclusionResult = Field(
+        description="특별 콘텐츠 포함 여부 평가 결과"
+    )
+    content_quality: SpecialContentQualityResult = Field(
+        description="특별 콘텐츠 충실도 평가 결과"
+    )
+
+
+# ============ API Response Schema ============
+class EvaluationResponse(BaseModel):
+    """평가 결과 API 응답"""
+    readability: ReadabilityModuleResult = Field(
+        description="가독성 평가 결과"
+    )
+    specificity: SpecificityModuleResult = Field(
+        description="구체성 평가 결과"
+    )
+    attractiveness: AttractivenessModuleResult = Field(
+        description="매력도 평가 결과"
     )

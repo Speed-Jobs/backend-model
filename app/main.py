@@ -23,11 +23,22 @@ from app.routers import (
     routers_competitor_recruit_counter,
     job_matching
 )
+from app.routers.v1.agent import evaluation
 
-app = FastAPI()
+app = FastAPI(
+    title="Speedjobs Backend API",
+    description="채용공고 평가 및 분석 API",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
 
 app.add_middleware(
     CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(user.router)
@@ -36,3 +47,4 @@ app.include_router(routers_competitors_skills.router)
 app.include_router(routers_recruit_counter.router)
 app.include_router(routers_competitor_recruit_counter.router)
 app.include_router(job_matching.router)
+app.include_router(evaluation.router, prefix="/api/v1") 
