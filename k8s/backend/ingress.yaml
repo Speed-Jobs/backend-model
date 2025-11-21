@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: speedjobs-backend
+  namespace: skala-practice
+  labels:
+    app: speedjobs-backend
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: speedjobs-backend.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: speedjobs-backend
+            port:
+              number: 8000
+  # TLS 설정이 필요한 경우 아래 주석을 해제하고 사용
+  # tls:
+  # - hosts:
+  #   - speedjobs-backend.local
+  #   secretName: speedjobs-backend-tls
+

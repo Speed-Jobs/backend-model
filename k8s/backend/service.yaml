@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: speedjobs-backend
+  namespace: skala-practice
+  labels:
+    app: speedjobs-backend
+spec:
+  type: ClusterIP
+  selector:
+    app: speedjobs-backend
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000
+    protocol: TCP
+  sessionAffinity: None
+
