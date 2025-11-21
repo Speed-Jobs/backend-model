@@ -29,5 +29,4 @@ pandas
 numpy
 matplotlib
 scikit-learn
-gensim
-pandas
+gensimdd
