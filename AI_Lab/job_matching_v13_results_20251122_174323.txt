@@ -1,0 +1,598 @@
+
+[1/4] 직무 정의 로드
+[OK] Job descriptions loaded: 58
+
+[2/4] 학습 데이터 로드
+[OK] hanwha_jobs.json: 23 loaded
+[OK] kakao_jobs.json: 25 loaded
+[OK] line_jobs.json: 137 loaded
+[OK] naver_jobs.json: 12 loaded
+
+[3/4] 그래프 구축
+
+[그래프 구축]
+  노드: 508개
+  엣지: 1216개
+  [NOTE] v13: 스킬 동시 출현 엣지 생성 생략
+  [NOTE] v13: PPR은 specific_skills만, Jaccard는 전체 스킬 사용
+
+[4/4] Matchers 초기화
+
+[SBERT Description 인덱싱]
+[SBERT] 모델 로딩 중... (sentence-transformers/distiluse-base-multilingual-cased-v2)
+[SBERT] 직무 definition 임베딩 생성 중... (직무 정의 + industry + skill_set_description + 공통_skill_set_description)
+[OK] 58개 직무 정의 임베딩 완료 (industry + skill_set_description + 공통_skill_set_description 포함)
+[NOTE] v13: PPR은 필터링 전용 (점수 버림)
+[NOTE] v13: Jaccard + SBERT 단순 합산 (0~2)
+[NOTE] v13: 필터링 제거 (모든 후보 계산)
+
+================================================================================
+[OK] System ready!
+================================================================================
+
+================================================================================
+[INFO] Company job matching: 23 postings
+파일: hanwha_jobs.json
+================================================================================
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Solution Development/Database (원본 점수: 0.013021)
+  - PPR 20등: Project Management/Solution PM (원본 점수: 0.000021)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Solution Development (점수: 0.7420)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/Database
+         점수: 0.8744 (Jacc:0.1324, SBERT:0.7420)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[1/23] 한화시스템/ICT - SAP MM 운영/개발 경력사원 채용
+스킬: ABAP, Java, MS-SQL, SAP, Spring framework
+
+  1위. Solution Development / Database
+       점수: 0.8744 | 매칭: mssql, abap, java
+  2위. Solution Development / ERP_T&E
+       점수: 0.8066 | 매칭: abap, java
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: AI/Physical AI Development (원본 점수: 0.004107)
+  - PPR 20등: Architect/Automation Architect (원본 점수: 0.000106)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Solution Development (점수: 0.7252)
+  [OK] Final top 2 returned
+  - 1등: AI/Physical AI Development
+         점수: 0.8336 (Jacc:0.1120, SBERT:0.7216)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[2/23] 한화시스템/ICT - LLM Engineer(AI 서비스 개발) 경력사원 채용
+스킬: AI, API, Azure, Cloud, Deep Learning...
+
+  1위. AI / Physical AI Development
+       점수: 0.8336 | 매칭: langchain, docker, tensorflow
+  2위. AI / Generative AI Development
+       점수: 0.8120 | 매칭: langchain, docker, azure
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Consulting/SCM (원본 점수: 0.005850)
+  - PPR 20등: Architect/AI Architect (원본 점수: 0.000102)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Biz. Supporting (점수: 0.7445)
+  [OK] Final top 2 returned
+  - 1등: Consulting/SCM
+         점수: 0.7070 (Jacc:0.0744, SBERT:0.6326)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[3/23] 한화시스템/ICT - Data Governance 전문가 경력사원 채용
+스킬: AI, Data Governance, Database, Deep Learning, Machine Learning...
+
+  1위. Consulting / SCM
+       점수: 0.7070 | 매칭: machinelearning, ai
+  2위. Solution Development / Solution Architecture
+       점수: 0.7035 | 매칭: 
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Consulting/ERP (원본 점수: 0.005837)
+  - PPR 20등: Project Management/Application PM (원본 점수: 0.000017)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Solution Development (점수: 0.7137)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/ERP_T&E
+         점수: 0.7635 (Jacc:0.0499, SBERT:0.7137)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[4/23] 한화시스템/ICT - SAP CO(관리회계/원가) 운영/개발 경력사원 채용
+스킬: ABAP, SAP, SAP S/4 Hana
+
+  1위. Solution Development / ERP_T&E
+       점수: 0.7635 | 매칭: abap
+  2위. Solution Development / Database
+       점수: 0.7331 | 매칭: abap
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Solution Development/Solution Architecture (원본 점수: 0.006387)
+  - PPR 20등: Cloud/Infra Engineering/Data Center Engineering (원본 점수: 0.000041)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: 정보보호 (점수: 0.7221)
+  [OK] Final top 2 returned
+  - 1등: Cloud/Infra Engineering/System/Network Engineering
+         점수: 0.7027 (Jacc:0.0163, SBERT:0.6864)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[5/23] 한화시스템/ICT - 네트워크 인프라운영 경력사원 채용
+스킬: CISCO, Cloud, Linux, SD-WAN, SDN...
+
+  1위. Cloud/Infra Engineering / System/Network Engineering
+       점수: 0.7027 | 매칭: sdn, cloud
+  2위. Consulting / CRM
+       점수: 0.6994 | 매칭: cloud
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Consulting/CRM (원본 점수: 0.008358)
+  - PPR 20등: Project Management/Application PM (원본 점수: 0.000049)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Project Management (점수: 0.7157)
+  [OK] Final top 2 returned
+  - 1등: Consulting/CRM
+         점수: 0.7433 (Jacc:0.0893, SBERT:0.6540)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[6/23] 한화시스템/ICT - 조선업 IT 시스템 PI 및 구축 경력사원 채용
+스킬: AI, Cloud, Digital Twin, IoT, Python
+
+  1위. Consulting / CRM
+       점수: 0.7433 | 매칭: ai, cloud
+  2위. AI / Physical AI Development
+       점수: 0.7332 | 매칭: python, digitaltwin
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Solution Development/Solution Architecture (원본 점수: 0.003880)
+  - PPR 20등: Cloud/Infra Engineering/Data Center Engineering (원본 점수: 0.000051)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Solution Development (점수: 0.6615)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/Solution Architecture
+         점수: 0.7010 (Jacc:0.0394, SBERT:0.6615)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[8/23] 한화시스템/ICT - Cloud 운영/개발 경력사원 채용
+스킬: AWS, Azure, Cloud, Cloud Native, DevOps...
+
+  1위. Solution Development / Solution Architecture
+       점수: 0.7010 | 매칭: cloud
+  2위. Solution Development / ERP_T&E
+       점수: 0.6846 | 매칭: cloud
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Solution Development/Solution Architecture (원본 점수: 0.005565)
+  - PPR 20등: Project Management/Application PM (원본 점수: 0.000043)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Project Management (점수: 0.6579)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/Solution Architecture
+         점수: 0.6871 (Jacc:0.0558, SBERT:0.6313)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[9/23] 한화시스템/ICT - 클라우드 사업 기획 경력사원 채용
+스킬: AWS, Cloud, Database, Git, Python
+
+  1위. Solution Development / Solution Architecture
+       점수: 0.6871 | 매칭: cloud
+  2위. Solution Development / ERP_T&E
+       점수: 0.6592 | 매칭: cloud
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Consulting/ERP (원본 점수: 0.005837)
+  - PPR 20등: Project Management/Application PM (원본 점수: 0.000017)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Solution Development (점수: 0.7272)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/ERP_T&E
+         점수: 0.7771 (Jacc:0.0499, SBERT:0.7272)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[10/23] 한화시스템/ICT - SAP ERP 컨설턴트 경력사원 상시채용
+스킬: ABAP, S/4HANA, SAP
+
+  1위. Solution Development / ERP_T&E
+       점수: 0.7771 | 매칭: abap
+  2위. Solution Development / Database
+       점수: 0.7466 | 매칭: abap
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Consulting/ERP (원본 점수: 0.006986)
+  - PPR 20등: Project Management/Application PM (원본 점수: 0.000018)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Solution Development (점수: 0.7461)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/ERP_T&E
+         점수: 0.7986 (Jacc:0.0525, SBERT:0.7461)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[11/23] 한화시스템/ICT - SAP ERP PS 모듈 운영/개발 경력사원 채용
+스킬: ABAP, SAP
+
+  1위. Solution Development / ERP_T&E
+       점수: 0.7986 | 매칭: abap
+  2위. Solution Development / Database
+       점수: 0.7667 | 매칭: abap
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Solution Development/Database (원본 점수: 0.007824)
+  - PPR 20등: Project Management/Application PM (원본 점수: 0.000033)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Biz. Supporting (점수: 0.6932)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/Database
+         점수: 0.7805 (Jacc:0.0909, SBERT:0.6896)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[12/23] 한화시스템/ICT - 방산 SCM 모듈 운영 담당자 경력사원 채용
+스킬: AWS, C#, Database, Java, Oracle...
+
+  1위. Solution Development / Database
+       점수: 0.7805 | 매칭: oracle, c#, java
+  2위. Solution Development / Biz. Solution
+       점수: 0.7549 | 매칭: scm, c#, java
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Solution Development/Solution Architecture (원본 점수: 0.006747)
+  - PPR 20등: Cloud/Infra Engineering/Data Center Engineering (원본 점수: 0.000050)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: 정보보호 (점수: 0.7593)
+  [OK] Final top 2 returned
+  - 1등: Cloud/Infra Engineering/System/Network Engineering
+         점수: 0.7394 (Jacc:0.0082, SBERT:0.7313)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[13/23] 한화손해보험 - 한화손해보험 시스템 운영 관리 경력사원 채용
+스킬: AIX, AWS, Cloud, Linux, Windows
+
+  1위. Cloud/Infra Engineering / System/Network Engineering
+       점수: 0.7394 | 매칭: cloud
+  2위. Consulting / CRM
+       점수: 0.7355 | 매칭: cloud
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Consulting/SCM (원본 점수: 0.005037)
+  - PPR 20등: AI/Generative AI Development (원본 점수: 0.000048)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Factory AX Engineering (점수: 0.7468)
+  [OK] Final top 2 returned
+  - 1등: Architect/Automation Architect
+         점수: 0.7724 (Jacc:0.0462, SBERT:0.7261)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[14/23] 한화시스템/ICT - 물류 자동화 구축 담당 경력사원 채용
+스킬: AGV/AMR, AS/RS, AutoCad, Data Analysis, MES...
+
+  1위. Architect / Automation Architect
+       점수: 0.7724 | 매칭: dataanalysis, autocad
+  2위. Factory AX Engineering / Simulation
+       점수: 0.7468 | 매칭: 
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: AI/Physical AI Development (원본 점수: 0.009366)
+  - PPR 20등: Project Management/Solution PM (원본 점수: 0.000038)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Architect (점수: 0.7080)
+  [OK] Final top 2 returned
+  - 1등: Architect/AI Architect
+         점수: 0.7190 (Jacc:0.0110, SBERT:0.7080)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[15/23] 한화시스템/ICT - Smart Yard 경력사원 상시채용
+스킬: Data Preprocessing, Python
+
+  1위. Architect / AI Architect
+       점수: 0.7190 | 매칭: datapreprocessing
+  2위. AI / Physical AI Development
+       점수: 0.7179 | 매칭: python
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: AI/Physical AI Development (원본 점수: 0.004236)
+  - PPR 20등: Project Management/Application PM (원본 점수: 0.000034)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Architect (점수: 0.7778)
+  [OK] Final top 2 returned
+  - 1등: Architect/AI Architect
+         점수: 0.7863 (Jacc:0.0085, SBERT:0.7778)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[16/23] 한화시스템/ICT - Smart Factory 경력사원 상시채용
+스킬: C#, Cloud, Data Ingestion Pipeline, Database, Deep Learning...
+
+  1위. Architect / AI Architect
+       점수: 0.7863 | 매칭: dataingestionpipeline
+  2위. Architect / Infra Architect
+       점수: 0.7778 | 매칭: 
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Solution Development/Solution Architecture (원본 점수: 0.003874)
+  - PPR 20등: Cloud/Infra Engineering/Data Center Engineering (원본 점수: 0.000039)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: 정보보호 (점수: 0.6935)
+  [OK] Final top 2 returned
+  - 1등: AI/Physical AI Development
+         점수: 0.7396 (Jacc:0.1310, SBERT:0.6085)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[17/23] 한화시스템/ICT - System Engineer 제조서비스분야 경력사원 채용
+스킬: AWS, Azure, Cloud, Docker, Kubernetes...
+
+  1위. AI / Physical AI Development
+       점수: 0.7396 | 매칭: docker, azure, python
+  2위. Solution Development / Solution Architecture
+       점수: 0.7157 | 매칭: cloud
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: AI/Physical AI Development (원본 점수: 0.001913)
+  - PPR 20등: Project Management/Solution PM (원본 점수: 0.000023)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Solution Development (점수: 0.7375)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/Database
+         점수: 0.7558 (Jacc:0.0183, SBERT:0.7375)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[18/23] 한화시스템/ICT - WEB 시스템 운영/개발 경력사원 채용
+스킬: Java, NEXACRO, Oracle DB, Spring framework
+
+  1위. Solution Development / Database
+       점수: 0.7558 | 매칭: java
+  2위. Solution Development / Solution Architecture
+       점수: 0.7558 | 매칭: java
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Architect/Automation Architect (원본 점수: 0.002461)
+  - PPR 20등: Project Management/Solution PM (원본 점수: 0.000020)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Factory AX Engineering (점수: 0.7018)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/Solution Architecture
+         점수: 0.7153 (Jacc:0.0174, SBERT:0.6979)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[19/23] 한화시스템/ICT - 선박 엔진 제조 PLM/CAD 운영 담당자
+스킬: CAD, Java, Oracle ERP, TeamCenter, Weblogic
+
+  1위. Solution Development / Solution Architecture
+       점수: 0.7153 | 매칭: java
+  2위. Solution Development / Database
+       점수: 0.7153 | 매칭: java
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: AI/Physical AI Development (원본 점수: 0.007446)
+  - PPR 20등: Project Management/Application PM (원본 점수: 0.000044)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: AI (점수: 0.7449)
+  [OK] Final top 2 returned
+  - 1등: AI/Physical AI Development
+         점수: 0.8313 (Jacc:0.0864, SBERT:0.7449)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[20/23] 한화시스템/ICT - Vision AI 전문가 경력사원 채용
+스킬: AI, AI Evaluation, Deep Learning, Machine Learning, PyTorch...
+
+  1위. AI / Physical AI Development
+       점수: 0.8313 | 매칭: pytorch, tensorflow
+  2위. AI / AI/Data Development
+       점수: 0.7643 | 매칭: pytorch
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Solution Development/Database (원본 점수: 0.010377)
+  - PPR 20등: Quality Management/Offshoring Service Professional (원본 점수: 0.000035)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Project Management (점수: 0.7112)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/Biz. Solution
+         점수: 0.7844 (Jacc:0.0938, SBERT:0.6906)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[21/23] 한화시스템/ICT - MES 개발/프로젝트 경력사원 채용
+스킬: HTML5, Java, Oracle, RDBMS, SCM...
+
+  1위. Solution Development / Biz. Solution
+       점수: 0.7844 | 매칭: srm, scm, java
+  2위. Solution Development / Database
+       점수: 0.7726 | 매칭: oracle, java
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: AI/Physical AI Development (원본 점수: 0.004863)
+  - PPR 20등: Project Management/Application PM (원본 점수: 0.000037)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Solution Development (점수: 0.7166)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/Biz. Solution
+         점수: 0.7980 (Jacc:0.0813, SBERT:0.7166)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[22/23] 한화시스템/ICT - 물류 솔루션(WMS/WCS) 개발 경력사원 채용
+스킬: AWS, C#, Java, Python, SCM
+
+  1위. Solution Development / Biz. Solution
+       점수: 0.7980 | 매칭: scm, c#, java
+  2위. Solution Development / Database
+       점수: 0.7533 | 매칭: c#, java
+
+============================================================
+직무 매칭 시작
+============================================================
+
+[Stage 1] PPR 기반 1차 필터링 (상위 20개 추출, 점수 버림)
+  - PPR 1등: Consulting/ERP (원본 점수: 0.004611)
+  - PPR 20등: Project Management/Application PM (원본 점수: 0.000014)
+  [OK] 20 jobs selected
+
+[Stage 2] SBERT + Jaccard 점수 계산
+  - SBERT 1등: Solution Development (점수: 0.7455)
+  [OK] Final top 2 returned
+  - 1등: Solution Development/ERP_T&E
+         점수: 0.7908 (Jacc:0.0453, SBERT:0.7455)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+[23/23] 한화시스템/ICT - SAP ERP SD/LE 모듈 운영/개발(방산부문) 경력사원 채용
+스킬: ABAP, SAP, SAP ERP, SAP LE, SAP SD
+
+  1위. Solution Development / ERP_T&E
+       점수: 0.7908 | 매칭: abap
+  2위. Solution Development / Database
+       점수: 0.7629 | 매칭: abap
+
+================================================================================
+[DONE] Complete: 22 job postings matched
+================================================================================
+
+================================================================================
+[SUMMARY] Matching results
+================================================================================
+
+[직무별 분포 (Top 10)]
+  Solution Development: 12개 (54.5%)
+  AI: 3개 (13.6%)
+  Architect: 3개 (13.6%)
+  Consulting: 2개 (9.1%)
+  Cloud/Infra Engineering: 2개 (9.1%)
+
+[산업별 분포]
+  ERP_T&E: 4개 (18.2%)
+  Database: 3개 (13.6%)
+  Physical AI Development: 3개 (13.6%)
+  Solution Architecture: 3개 (13.6%)
+  System/Network Engineering: 2개 (9.1%)
+  AI Architect: 2개 (9.1%)
+  Biz. Solution: 2개 (9.1%)
+  SCM: 1개 (4.5%)
+  CRM: 1개 (4.5%)
+  Automation Architect: 1개 (4.5%)
+
+================================================================================
+
+================================================================================
+로그 파일: job_matching_v13_results_20251122_174323.txt
+DB 결과 JSON: job_matching_v13_db_results_20251122_174323.json (22개 결과)
+================================================================================
