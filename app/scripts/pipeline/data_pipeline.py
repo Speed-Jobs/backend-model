@@ -757,11 +757,11 @@ def main():
     
     results = pipeline.run()
     
-    # 성공 여부에 따라 종료 코드 반환
+    # 성공 여부에 따라 로그 출력
     if results.get('status') == 'failed':
-        sys.exit(1)
+        logger.error("파이프라인 실행 실패")
     else:
-        sys.exit(0)
+        logger.info("파이프라인 실행 완료")
 
 
 if __name__ == '__main__':

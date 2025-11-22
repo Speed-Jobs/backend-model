@@ -27,5 +27,5 @@ COPY . .
 # 포트 노출
 EXPOSE 8000
 
-# Uvicorn으로 FastAPI 실행
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
+# 스케줄러를 백그라운드로 실행하고 FastAPI 서버를 포그라운드로 실행
+CMD python -m app.core.schedular.scheduler & uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1
