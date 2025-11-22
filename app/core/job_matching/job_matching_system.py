@@ -44,6 +44,7 @@ import sys
 from pathlib import Path
 from collections import defaultdict, Counter
 from typing import List, Dict, Tuple, Optional, Any
+from sqlalchemy.orm import Session
 from dataclasses import dataclass, field
 from datetime import datetime
 
@@ -524,18 +525,78 @@ class JobMatchingSystem:
             sys.stdout = self.logger.terminal
             self.logger.close()
 
-    def load_job_descriptions(self, filepath: str = None):
+    def load_job_descriptions(self, db: Optional[Session] = None, filepath: Optional[str] = None):
         """
-        직무 정의 로드
+        직무 정의 로드 (DB 또는 JSON 파일)
         
         Args:
-            filepath: 직무 정의 JSON 파일 경로 (None이면 config에서 가져옴)
+            db: Database session (DB에서 로드할 경우 필수)
+            filepath: 직무 정의 JSON 파일 경로 (filepath가 None일 때 사용, 하위 호환성)
+            
+        Note:
+            DB 세션이 제공되면 DB에서 로드, 없으면 JSON 파일에서 로드 (하위 호환)
         """
+        # DB에서 로드
+        if db is not None:
+            from app.models.position import Position
+            from app.models.industry import Industry
+            from app.models.position_skill import PositionSkill
+            from app.models.industry_skill import IndustrySkill
+            from app.models.skill import Skill
+            
+            # Position과 Industry 조회
+            positions = db.query(Position).all()
+            
+            for position in positions:
+                # 해당 Position의 Industry들 조회
+                industries = db.query(Industry).filter(
+                    Industry.position_id == position.id
+                ).all()
+                
+                # 각 Industry에 대해 JobDescription 생성
+                for industry in industries:
+                    # PositionSkill에서 공통 스킬 가져오기
+                    position_skills = (
+                        db.query(Skill)
+                        .join(PositionSkill, Skill.id == PositionSkill.skill_id)
+                        .filter(PositionSkill.position_id == position.id)
+                        .all()
+                    )
+                    common_skills = [skill.name for skill in position_skills]
+                    
+                    # IndustrySkill에서 특화 스킬 가져오기
+                    industry_skills = (
+                        db.query(Skill)
+                        .join(IndustrySkill, Skill.id == IndustrySkill.skill_id)
+                        .filter(IndustrySkill.industry_id == industry.id)
+                        .all()
+                    )
+                    specific_skills = [skill.name for skill in industry_skills]
+                    
+                    job_desc = JobDescription(
+                        job_name=position.name,
+                        job_definition=position.description or "",
+                        industry=industry.name,
+                        common_skills=common_skills,
+                        specific_skills=specific_skills,
+                        skill_set_description=industry.description or "",
+                        common_skill_set_description=position.skillset or "",
+                    )
+                    self.job_descriptions.append(job_desc)
+            
+            print(f"[OK] Job descriptions loaded from DB: {len(self.job_descriptions)}")
+            return
+        
+        # JSON 파일에서 로드 (하위 호환성)
         if filepath is None:
             filepath = str(JOB_DESCRIPTION_FILE)
         
-        with open(filepath, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        except FileNotFoundError:
+            print(f"[ERROR] Job description file not found: {filepath}")
+            raise
         
         for item in data:
             job_desc = JobDescription(
@@ -549,19 +610,75 @@ class JobMatchingSystem:
             )
             self.job_descriptions.append(job_desc)
         
-        print(f"[OK] Job descriptions loaded: {len(self.job_descriptions)}")
+        print(f"[OK] Job descriptions loaded from file: {len(self.job_descriptions)}")
 
-    def load_training_data(self, job_files: List[str] = None):
+    def load_training_data(
+        self, 
+        db: Optional[Session] = None,
+        company_groups: Optional[List[str]] = None,
+        job_files: Optional[List[str]] = None
+    ):
         """
-        기존 채용공고 로드
+        기존 채용공고 로드 (DB 또는 JSON 파일)
         
         Args:
-            job_files: 학습 데이터 JSON 파일 경로 리스트 (None이면 config에서 가져옴)
+            db: Database session (DB에서 로드할 경우 필수)
+            company_groups: 회사 그룹 리스트 
+                           예: ["토스", "카카오", "네이버", "쿠팡", "라인"]
+                           None이면 전체 9개 그룹
+            job_files: JSON 파일 경로 리스트 (filepath가 None일 때 사용, 하위 호환성)
             
         Note:
-            TODO: 추후 DB에서 직접 가져오도록 수정 필요
-            데이터 파이프라인 구축 완료 후 DB 쿼리로 대체 예정
+            DB 세션이 제공되면 DB에서 로드, 없으면 JSON 파일에서 로드 (하위 호환)
         """
+        # DB에서 로드
+        if db is not None:
+            from app.db.crud.post import get_posts_by_competitor_groups
+            from app.models.post import Post
+            from app.models.post_skill import PostSkill
+            
+            # 기본 9개 회사 그룹
+            if company_groups is None:
+                company_groups = [
+                    "토스", "카카오", "한화시스템", "현대오토에버", 
+                    "우아한형제들", "LG CNS", "네이버", "쿠팡", "라인"
+                ]
+            
+            # DB에서 Post 조회
+            posts = get_posts_by_competitor_groups(db, company_groups)
+            
+            if not posts:
+                print(f"[WARNING] {len(company_groups)}개 그룹에서 Post를 찾을 수 없습니다.")
+                return
+            
+            # Post → JobPosting 변환
+            loaded_count = 0
+            for post in posts:
+                # PostSkill에서 스킬 이름 추출
+                skills = []
+                if post.post_skills:
+                    skills = [ps.skill.name for ps in post.post_skills if ps.skill]
+                
+                if not skills:
+                    continue  # 스킬이 없으면 스킵
+                
+                company_name = post.company.name if post.company else "Unknown"
+                
+                posting = JobPosting(
+                    posting_id=str(post.id),
+                    company=company_name,
+                    title=post.title,
+                    url=post.source_url or "",
+                    skills=skills,
+                )
+                
+                self.graph.add_posting(posting)
+                loaded_count += 1
+            
+            print(f"[OK] {loaded_count} posts loaded from DB (companies: {', '.join(company_groups)})")
+            return
+        
+        # JSON 파일에서 로드 (하위 호환성)
         if job_files is None:
             job_files = TRAINING_DATA_FILES
         
