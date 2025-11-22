@@ -69,7 +69,7 @@ spec:
           failureThreshold: 3
         volumeMounts:
         - name: app-data
-          mountPath: /app/data
+          mountPath: /app/data/output
         - name: chroma-db
           mountPath: /app/AI_Lab/chroma_db
       volumes:
