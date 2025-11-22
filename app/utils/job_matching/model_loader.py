@@ -40,29 +40,39 @@ def get_job_matching_system() -> JobMatchingSystem:
     try:
         logger.info("[JobMatching] 시스템 초기화 시작...")
         
-        # JobMatchingSystem 인스턴스 생성
-        _job_matching_system = JobMatchingSystem(log_file=None)
+        # DB 세션 생성
+        from app.db.config.base import SessionLocal
+        db = SessionLocal()
         
-        # 1. 직무 정의 로드
-        logger.info("[JobMatching] 직무 정의 로드 중...")
-        _job_matching_system.load_job_descriptions()  # config에서 자동으로 경로 가져옴
-        
-        # 2. 학습 데이터 로드
-        logger.info("[JobMatching] 학습 데이터 로드 중...")
-        _job_matching_system.load_training_data()  # config에서 자동으로 경로 가져옴
-        
-        # 3. 그래프 구축
-        logger.info("[JobMatching] 그래프 구축 중...")
-        _job_matching_system.build_graph()
-        
-        # 4. Matchers 초기화 (SBERT, Cluster)
-        logger.info("[JobMatching] Matchers 초기화 중...")
-        _job_matching_system.build_matchers()
-        
-        _initialized = True
-        logger.info("[JobMatching] 시스템 초기화 완료!")
-        
-        return _job_matching_system
+        try:
+            # JobMatchingSystem 인스턴스 생성
+            _job_matching_system = JobMatchingSystem(log_file=None)
+            
+            # 1. 직무 정의 로드 (JSON 파일에서)
+            from app.config.job_matching.config import JOB_DESCRIPTION_FILE
+            logger.info("[JobMatching] 직무 정의 로드 중 (JSON 파일에서)...")
+            _job_matching_system.load_job_descriptions(filepath=str(JOB_DESCRIPTION_FILE))
+            
+            # 2. 학습 데이터 로드 (DB에서)
+            logger.info("[JobMatching] 학습 데이터 로드 중 (DB에서)...")
+            _job_matching_system.load_training_data(db=db)
+            
+            # 3. 그래프 구축
+            logger.info("[JobMatching] 그래프 구축 중...")
+            _job_matching_system.build_graph()
+            
+            # 4. Matchers 초기화 (SBERT, Cluster)
+            logger.info("[JobMatching] Matchers 초기화 중...")
+            _job_matching_system.build_matchers()
+            
+            _initialized = True
+            logger.info("[JobMatching] 시스템 초기화 완료!")
+            
+            return _job_matching_system
+            
+        finally:
+            # DB 세션 정리
+            db.close()
         
     except Exception as e:
         logger.error(f"[JobMatching] 초기화 실패: {e}", exc_info=True)
