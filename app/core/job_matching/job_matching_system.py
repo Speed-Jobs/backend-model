@@ -368,14 +368,18 @@ class JobMatcher:
         
         print(f"  [OK] Final top {min(final_top_k, len(results))} returned")
         if results:
-            print(
-                "  - 1등: "
-                f"{results[0].job_name}/{results[0].industry}\n"
-                "         점수: "
-                f"{results[0].final_score:.4f} "
-                f"(Jacc:{results[0].jaccard_score:.4f}, "
-                f"SBERT:{results[0].sbert_score:.4f})"
-            )
+            # final_top_k 개수만큼 결과 출력
+            for i in range(min(final_top_k, len(results))):
+                rank = i + 1
+                result = results[i]
+                print(
+                    f"  - {rank}등: "
+                    f"{result.job_name}/{result.industry}\n"
+                    "         점수: "
+                    f"{result.final_score:.4f} "
+                    f"(Jacc:{result.jaccard_score:.4f}, "
+                    f"SBERT:{result.sbert_score:.4f})"
+                )
         else:
             print(f"  [WARNING] 매칭 가능한 직무 없음")
         
@@ -577,7 +581,7 @@ class JobMatchingSystem:
         """
         # DB에서 로드
         if db is not None:
-            from app.db.crud.post import get_posts_by_competitor_groups
+            from app.db.crud.job_matching_post import get_posts_by_competitor_groups
             from app.models.post import Post
             from app.models.post_skill import PostSkill
             
