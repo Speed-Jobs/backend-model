@@ -793,7 +793,7 @@ def main():
 
     # 매칭 수행
     results = system.match_company_jobs(
-        str(data_dir / 'line_jobs.json'),
+        str(data_dir / 'hanwha_jobs.json'),
         ppr_top_n=20,
         final_top_k=2,
     )
