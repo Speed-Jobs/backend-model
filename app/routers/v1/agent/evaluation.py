@@ -8,7 +8,12 @@ from typing import Dict
 import PyPDF2
 import io
 
-from app.schemas.agent import EvaluationResponse, TwoPostsRequest, ReportGenerationResponse
+from app.schemas.agent import (
+    EvaluationResponse, 
+    TwoPostsRequest, 
+    ReportGenerationResponse,
+    JobPostingDetailReportResponse
+)
 from app.services.agent.evaluation_service import (
     evaluate_two_posts,
     evaluate_pdf_files,
@@ -164,26 +169,29 @@ async def evaluate_two_pdfs_api(
 
 @router.post(
     "/reports/{post_id}",
-    response_model=ReportGenerationResponse,
+    response_model=JobPostingDetailReportResponse,
     summary="평가 기반 보고서 생성",
-    description="평가 데이터를 기반으로 개선된 채용공고 보고서를 생성합니다.",
+    description="평가 데이터를 기반으로 구조화된 채용공고 상세 정보를 생성합니다.",
 )
 async def generate_report_api(
     post_id: int
-) -> ReportGenerationResponse:
+) -> JobPostingDetailReportResponse:
     """
-    특정 post_id의 평가 데이터를 기반으로 개선된 채용공고를 생성합니다.
+    특정 post_id의 평가 데이터를 기반으로 채용공고 상세 정보를 구조화하여 반환합니다.
     
     이 API는:
     1. post_id로 저장된 JSON 파일 검색 (가장 최근 파일)
-    2. job_posting_generator를 사용하여 개선된 채용공고 생성
+    2. job_posting_generator를 사용하여 채용공고 정보를 20개 필드로 구조화
     3. 사용한 JSON 파일 자동 삭제
     
     Args:
         post_id: 채용공고 ID
         
     Returns:
-        ReportGenerationResponse: 보고서 생성 결과
+        JobPostingDetailReportResponse: 구조화된 채용공고 상세 정보
+            - status: 응답 상태 (success/error)
+            - data: JobPostingDetailReport (20개 필드)
+            - message: 응답 메시지
         
     Raises:
         404: 평가 데이터를 찾을 수 없음
@@ -195,7 +203,13 @@ async def generate_report_api(
         Response:
         {
             "status": "success",
-            "improved_posting": "[채용공고]\n\n회사명: 현대오토에버\n직무: 백엔드 개발자\n..."
+            "data": {
+                "company_name": "현대오토에버",
+                "position": "백엔드 개발자",
+                "employment_type": "정규직",
+                ...
+            },
+            "message": "채용공고 정보 추출 완료"
         }
     """
     try:
@@ -203,9 +217,10 @@ async def generate_report_api(
         result = await generate_report(post_id)
         
         # 응답 반환
-        return ReportGenerationResponse(
+        return JobPostingDetailReportResponse(
             status=result.get("status", "success"),
-            improved_posting=result.get("improved_posting", "")
+            data=result.get("data"),
+            message=result.get("message", "채용공고 정보 추출 완료")
         )
         
     except ValueError as e:

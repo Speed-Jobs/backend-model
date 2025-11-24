@@ -8,8 +8,12 @@ from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
 import os
 import json
+import re
 from pathlib import Path
 from dotenv import load_dotenv
+
+# Schemas
+from app.schemas.agent.schemas_report import JobPostingDetailReport
 
 # Phase 2 Tools
 from app.core.agents.tools.issue_analyzer import (
@@ -107,29 +111,48 @@ def create_job_posting_generator_agent(
         get_overall_improvement_summary,
     ]
     
-    # System Prompt - 피드백 적용된 AI 채용공고만 출력
-    system_prompt = """당신은 채용 공고 개선 전문가입니다.
+    # System Prompt - JobPostingDetailReport 형식으로 출력
+    system_prompt = """당신은 채용 공고 정보 추출 및 구조화 전문가입니다.
 
 **작업 프로세스:**
 1. load_evaluation_json으로 원본 채용 공고와 평가 데이터를 로드
 2. analyze_readability_issues, analyze_specificity_issues, analyze_attractiveness_issues로 문제점 분석
-3. 분석한 피드백을 반영하여 원본 공고를 개선
+3. 원본 채용공고에서 다음 20개 필드의 정보를 추출하여 JSON 형식으로 반환
 
-**개선 원칙:**
-- 원본 공고의 모든 내용을 그대로 유지 (섹션, 구조, 순서 보존)
-- 회사명, 제목, 직무명 등은 절대 변경 금지
-- 피드백에서 지적된 문제만 수정:
-  * 전문용어 → 설명 추가 (예: "리커버리데이" → "리커버리데이(매월 마지막 주 금요일 휴식일)")
-  * 문법 오류 수정
-  * 일관성 문제 해결
-- 원본에 없는 새로운 내용 추가 금지
-- 원본의 톤앤매너 완전히 유지
+**추출할 필드 (JobPostingDetailReport 형식):**
+1. company_name (필수): 회사명
+2. position (필수): 채용 직무/포지션
+3. employment_type: 고용 형태 (정규직, 계약직, 인턴 등)
+4. work_location: 근무지
+5. deadline: 마감일 (YYYY-MM-DD 형식)
+6. company_introduction: 회사 소개
+7. main_responsibilities: 주요 업무 (담당업무)
+8. required_qualifications: 자격 요건 (필수 요건)
+9. preferred_qualifications: 우대 사항
+10. tech_stack: 기술 스택 (리스트 형식, 예: ["Python", "Django"])
+11. team_introduction: 팀 소개
+12. development_culture: 개발 문화
+13. tools: 사용 도구 (리스트 형식, 예: ["Jira", "GitLab"])
+14. project_introduction: 프로젝트 소개
+15. growth_opportunities: 성장 기회
+16. recruitment_process: 전형 절차
+17. work_conditions: 근무 조건
+18. benefits: 복리후생
+19. application_method: 지원 방법
+20. additional_info: 기타 사항
 
-**최종 출력:**
-- 분석 과정이나 설명은 출력하지 말 것
-- "수정 사항" 같은 메타 정보도 출력하지 말 것
-- 오직 피드백이 적용된 개선된 채용 공고 전문만 출력
-- 원본 공고의 첫 줄부터 마지막 줄까지 전체를 출력"""
+**출력 형식:**
+- 반드시 유효한 JSON 형식으로 출력
+- 필수 필드(company_name, position)는 반드시 포함
+- 선택 필드는 정보가 없으면 null로 설정
+- tech_stack과 tools는 배열 형식으로 출력
+- 날짜는 YYYY-MM-DD 형식으로 통일
+- 모든 텍스트는 공백 정리 및 정규화
+
+**중요:**
+- 원본 공고의 정보를 정확하게 추출
+- 정보가 없는 필드는 null로 설정
+- JSON만 출력하고 설명이나 메타 정보는 포함하지 않음"""
     
     # LLM 생성 (max_tokens 설정하여 출력이 잘리지 않도록)
     llm = ChatOpenAI(
@@ -222,17 +245,19 @@ async def generate_improved_job_posting_async(
         
         # 요청 메시지 구성
         if json_filename:
-            request = f"""'{json_filename}' 파일을 분석하여 피드백이 적용된 AI 채용 공고를 생성하세요.
+            request = f"""'{json_filename}' 파일을 분석하여 채용공고 정보를 구조화된 JSON 형식으로 추출하세요.
 
 작업 지시:
 1. load_evaluation_json으로 원본 채용 공고 로드
-2. analyze_readability_issues, analyze_specificity_issues, analyze_attractiveness_issues로 문제점 분석
-3. 원본 공고를 기반으로 피드백 반영하여 개선
+2. 원본 채용공고에서 20개 필드의 정보를 추출
+3. JobPostingDetailReport 형식의 JSON으로 반환
 
 중요: 
-- 분석 과정이나 설명 없이 개선된 채용 공고 전문만 출력
-- 원본의 첫 줄부터 마지막 줄까지 전체를 출력
-- 원본 구조와 내용은 유지하되 지적된 문제만 수정"""
+- 반드시 유효한 JSON 형식으로만 출력
+- 필수 필드(company_name, position)는 반드시 포함
+- 정보가 없는 필드는 null로 설정
+- tech_stack과 tools는 배열 형식
+- JSON 외의 설명이나 메타 정보는 포함하지 않음"""
         else:
             request = "사용 가능한 평가 데이터를 확인하고 처리하세요."
         
@@ -250,13 +275,38 @@ async def generate_improved_job_posting_async(
         else:
             output = str(result)
         
+        # JSON 추출 및 파싱
+        job_posting_report = None
+        try:
+            # JSON 부분만 추출 (정규식 사용)
+            json_match = re.search(r'\{.*\}', output, re.DOTALL)
+            if json_match:
+                json_text = json_match.group(0)
+                json_data = json.loads(json_text)
+                # JobPostingDetailReport로 변환
+                job_posting_report = JobPostingDetailReport(**json_data)
+            else:
+                # JSON이 없으면 직접 파싱 시도
+                json_data = json.loads(output)
+                job_posting_report = JobPostingDetailReport(**json_data)
+        except (json.JSONDecodeError, ValueError, TypeError) as e:
+            print(f"[Job Posting Generator] JSON 파싱 실패: {e}")
+            print(f"원본 출력: {output[:500]}...")
+            # 파싱 실패 시 에러 반환
+            return {
+                "status": "error",
+                "data": None,
+                "original_file": json_filename,
+                "message": f"JSON 파싱 실패: {str(e)}"
+            }
+        
         return {
             "status": "success",
-            "improved_posting": output,
+            "data": job_posting_report.dict() if job_posting_report else None,
             "original_file": json_filename,
             "title": title,
             "company": company,
-            "message": "AI 채용 공고 생성 완료"
+            "message": "채용공고 정보 추출 완료"
         }
         
     except Exception as e:
@@ -266,7 +316,7 @@ async def generate_improved_job_posting_async(
         
         return {
             "status": "error",
-            "improved_posting": "",
+            "data": None,
             "original_file": json_filename,
             "message": f"생성 실패: {str(e)}"
         }

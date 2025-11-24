@@ -330,6 +330,7 @@ async def generate_report(post_id: int) -> Dict[str, Any]:
     
     return {
         "status": result.get("status", "success"),
-        "improved_posting": result.get("improved_posting", "")
+        "data": result.get("data"),  # JobPostingDetailReport 데이터
+        "message": result.get("message", "채용공고 정보 추출 완료")
     }
 

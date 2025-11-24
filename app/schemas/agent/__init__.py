@@ -34,6 +34,12 @@ from .schemas_response import (
     ReportGenerationResponse,
 )
 
+from .schemas_report import (
+    # Report Schemas
+    JobPostingDetailReport,
+    JobPostingDetailReportResponse,
+)
+
 __all__ = [
     # Input Schema
     "ToolInput",
@@ -57,4 +63,7 @@ __all__ = [
     "TwoPostsRequest",
     # Response Schemas
     "ReportGenerationResponse",
+    # Report Schemas
+    "JobPostingDetailReport",
+    "JobPostingDetailReportResponse",
 ]
