@@ -16,7 +16,7 @@ spec:
       serviceAccountName: default
       containers:
       - name: speedjobs-backend
-        image: progamm3r/skala-backend-model:1.0.0
+        image: amdp-registry.skala-ai.com/skala25a/speedjobs-backend:1.0.0
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
@@ -78,4 +78,3 @@ spec:
       - name: chroma-db
         emptyDir: {}
       restartPolicy: Always
-

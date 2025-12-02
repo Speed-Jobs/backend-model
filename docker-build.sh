@@ -1,9 +1,8 @@
 #!/bin/bash
-
-IMAGE_NAME="skala-backend-model" 
+IMAGE_NAME="speedjobs-backend"
 VERSION="1.0.0"
+
 CPU_PLATFORM=amd64
-IS_CACHE="--no-cache"
 
 # Docker 이미지 빌드
 docker build \
