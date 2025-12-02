@@ -17,7 +17,7 @@ from app.utils.agents.evaluation.modules.module_specificity import collect_speci
 from app.utils.agents.evaluation.modules.module_attractiveness import collect_attractiveness_data
 from app.utils.agents.evaluation.report_saver import save_raw_evaluation_data
 from app.schemas.agent import EvaluationResponse
-from app.core.agents.job_posting_generator import generate_improved_job_posting_async
+from app.core.agents.job_posting.job_posting_agent import generate_improved_job_posting_async
 
 
 async def evaluate_post_by_id(post_id: int) -> EvaluationResponse:

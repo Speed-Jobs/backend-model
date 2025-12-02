@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 from app.schemas.agent.schemas_report import JobPostingDetailReport
 
 # Phase 2 Tools
-from app.core.agents.tools.issue_analyzer import (
+from app.core.agents.job_posting.tools.issue_analyzer import (
     analyze_readability_issues,
     analyze_specificity_issues,
     analyze_attractiveness_issues,

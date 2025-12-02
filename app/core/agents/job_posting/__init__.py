@@ -1,8 +1,8 @@
 """
-Phase 2: AI 채용 공고 생성
+Job Posting Agent
 """
 
-from .job_posting import (
+from .job_posting_agent import (
     create_job_posting_generator_agent,
     generate_improved_job_posting_async,
     generate_improved_job_posting,
