@@ -2,7 +2,10 @@ import os
 import sys
 import json
 import re
+import time
 from typing import Optional, Dict, Any, List
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from threading import Lock
 
 # 프로젝트 루트를 sys.path에 추가 (직접 실행 시 모듈을 찾을 수 있도록)
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
@@ -10,6 +13,7 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from openai import OpenAI
+from openai import RateLimitError
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
@@ -42,189 +46,83 @@ class ScheduleParserExtractor:
     def extract_schedule_info(self, description: str, title: str = "") -> RecruitScheduleData:
         """LLM을 사용하여 채용 일정 정보 추출"""
 
-        system_prompt = """당신은 한국어 채용 공고에서 '채용 전형 일정'을 정밀하게 추출하는 전문가입니다.
+        system_prompt = """
+당신은 한국어 채용 공고(Job Description) 텍스트를 분석하여 **채용 전형 일정(Hiring Timeline)**을 정밀하게 추출하는 전문 AI입니다.
+공고 내용을 바탕으로 아래 6개 핵심 필드의 날짜 정보를 추출하여, 오직 **JSON 포맷**으로만 응답하세요.
 
-다음 6개의 필드를 추출해서 JSON 객체로 반환하세요.
-
-**필드 정의:**
-1. application_date: 지원서 접수/모집 기간 리스트 [[["시작일", "마감일"]], ...] (여러 접수 기간이 있을 수 있음)
-2. semester: "상반기" 또는 "하반기" (application_date 기반으로 자동 판단)
-3. document_screening_date: 서류전형/코딩테스트 기간 리스트 [[["시작일", "마감일"]], ...] (여러 개 가능)
-4. first_interview: 1차 면접 날짜 리스트 ["YYYY-MM-DD", ...] (여러 개 가능)
-5. second_interview: 2차/최종 면접 날짜 리스트 ["YYYY-MM-DD", ...] (여러 개 가능)
-6. join_date: 입사일 기간 리스트 [[["시작일", "마감일"]], ...] (여러 입사 기회가 있을 수 있음)
-
-**JSON 스키마:**
+### 1. 목표 출력 포맷 (JSON Schema)
 {
-  "application_date": [[["YYYY-MM-DD", "YYYY-MM-DD"]], ...],
-  "semester": "상반기" 또는 "하반기" 또는 null,
-  "document_screening_date": [[["YYYY-MM-DD", "YYYY-MM-DD"]], ...],
-  "first_interview": ["YYYY-MM-DD", ...],
-  "second_interview": ["YYYY-MM-DD", ...],
-  "join_date": [[["YYYY-MM-DD", "YYYY-MM-DD"]], ...]
+  "application_date": [["YYYY-MM-DD", "YYYY-MM-DD"], ...],   // 서류 접수/모집 기간
+  "semester": "상반기" | "하반기" | null,                     // 채용 시즌 (접수 시작월 기준 자동 판단)
+  "document_screening_date": [["YYYY-MM-DD", "YYYY-MM-DD"], ...], // 서류발표, 필기시험, 코딩테스트, AI역량검사, 과제전형
+  "first_interview": [["YYYY-MM-DD", "YYYY-MM-DD"], ...],    // 1차 면접, 실무/직무 면접, 화상 면접
+  "second_interview": [["YYYY-MM-DD", "YYYY-MM-DD"], ...],   // 2차 면접, 임원/최종 면접 (단, 처우협의는 제외)
+  "join_date": [["YYYY-MM-DD", "YYYY-MM-DD"], ...]           // 입사 예정일, 입문 교육 시작일
 }
 
-**핵심 규칙:**
-1. 반드시 위 JSON 객체 한 개만 반환하고, 추가 설명은 절대 포함하지 마세요.
-2. 모든 날짜는 YYYY-MM-DD 형식의 문자열로만 반환하세요.
-3. application_date, document_screening_date, join_date는 [[["시작일", "마감일"]]] 형태의 2차원 리스트입니다.
-4. first_interview, second_interview는 단일 날짜의 1차원 리스트입니다.
-5. 기간이 하나의 날짜만 있으면 [[["YYYY-MM-DD", "YYYY-MM-DD"]]]처럼 같은 날짜를 두 번 반복합니다.
+### 2. 핵심 추출 원칙 (Strict Rules)
+1. **JSON Only:** 설명, 주석, 마크다운 없이 순수한 JSON 객체 하나만 반환합니다.
+2. **Date Format:** 모든 날짜는 `YYYY-MM-DD` 문자열 형식입니다.
+3. **2D Array Structure:** 모든 날짜 필드는 `[[시작일, 종료일], ...]` 형태의 리스트입니다.
+   - **단일 날짜(Point):** `["2025-11-20", "2025-11-20"]` (시작과 끝을 동일하게 처리)
+   - **기간(Range):** `["2025-11-20", "2025-11-30"]`
+   - **복수 일정:** `[["2025-11-20", "2025-11-20"], ["2025-12-01", "2025-12-05"]]`
+4. **Data Missing:** 해당 단계의 날짜 정보가 없거나 "추후 안내", "개별 통보"인 경우 빈 리스트 `[]`를 반환합니다.
 
-**날짜 추출 상세 규칙:**
+### 3. 날짜 및 연도 추론 로직 (Advanced Logic)
+**[규칙 A] 모호한 날짜 표현의 정규화 (Normalization)**
+구체적인 날짜 없이 시점만 묘사된 경우, 아래 기준표에 따라 **기간(Range)**으로 변환합니다.
+- **월초 / 상순:** 해당 월 01일 ~ 10일
+- **월중 / 중순:** 해당 월 11일 ~ 20일
+- **월말 / 하순:** 해당 월 21일 ~ 말일(28/30/31일)
+- **N월 중 / N월 내:** 해당 월 01일 ~ 해당 월 말일 (예: "11월 중 면접" → 11월 전체)
+- **주차(Week) 표현:**
+  - 1주차/첫째주: 01일 ~ 07일
+  - 2주차/둘째주: 08일 ~ 14일
+  - 3주차/셋째주: 15일 ~ 21일
+  - 4주차/넷째주: 22일 ~ 28일
+  - 5주차/마지막주: 29일 ~ 말일
 
-[1] 모집/접수 기간 (application_date):
-- "2025.11.10 ~ 2025.11.28" → [[["2025-11-10", "2025-11-28"]]]
-- "2025.11.10 ~ 2025.11.28 (17:00)" → [[["2025-11-10", "2025-11-28"]]] (시간 정보는 무시)
-- "11월 28일까지" 또는 "11월 28일 마감" → [[["2025-11-01", "2025-11-28"]]] (월 초부터로 추정)
-- 시작일이 명시되지 않은 경우 해당 월의 1일로 추정
-- 단일 날짜: "3월 15일" → [[["2025-03-15", "2025-03-15"]]]
-- "모집 기간", "지원 기간", "접수 기간" 등의 표현 모두 포함
-- 날짜 정보가 전혀 없으면 빈 리스트 []
+**[규칙 B] 연도(Year) 자동 추정 알고리즘**
+공고에 연도가 명시되지 않은 경우 다음 로직을 따릅니다.
+1. **기준 설정:** `application_date`의 시작 연도를 기준 연도(Y)로 잡습니다. (텍스트에 없으면 현재 연도 2025년으로 가정)
+2. **해 넘김(Year Turnover):** 전형 순서상(서류→면접→입사) 나중에 오는 단계의 월(Month) 숫자가 이전 단계보다 현저히 작다면, 다음 해(Y+1)로 계산합니다.
+   - 예: 접수(11월) → 면접(1월) : 면접은 내년 1월로 판단.
+3. **과거 방지:** 모든 일정은 접수 시작일 이후라고 가정합니다.
 
-[2] 학기 구분 (semester):
-- application_date의 시작작일 기준으로 자동 판단
-- 1월~6월 시작: "상반기"
-- 7월~12월 시작작: "하반기"
-- application_date가 없거나 판단 불가능한 경우: null
+**[규칙 C] 단계별 포함/제외 기준**
+- **semester:** 1~6월 시작은 "상반기", 7~12월 시작은 "하반기".
+- **document_screening_date:** 서류 합격자 발표뿐만 아니라 **코딩테스트, 직무/필기 테스트, AI역량검사, 과제 제출** 일정을 모두 포함합니다.
+- **first_interview:** 1차, 실무, 기술, 직무 면접.
+- **second_interview:** 2차, 임원, 경영진, 최종, CEO 면접. ("레퍼런스 체크"는 이 단계에 포함하되, "처우협의/신체검사"는 제외)
+- **join_date:** 입사일, OJT 시작일. ("수습기간 3개월" 같은 기간 정보는 제외)
 
-[3] 서류전형 필기시험 (document_screening_date):
-- "서류전형", "서류심사", "서류발표", "서류합격자 발표", "서류 검토" → document_screening_date에 추가
-- "코딩테스트", "필기시험", "직무 테스트", "기업문화적합도 검사" → 모두 document_screening_date에 추가
-- "1차 인터뷰", "면접" 이전의 모든 평가 단계
-- 여러 차수가 있으면 각각 별도 항목으로:
-  예: "서류전형: 10월 11일", "코딩테스트: 10월 26일" → [[["2025-10-11", "2025-10-11"]], [["2025-10-26", "2025-10-26"]]]
-- 기간 형태: "서류심사: 9월 1일 ~ 9월 5일" → [[["2025-09-01", "2025-09-05"]]]
-- 단일 날짜: "서류발표: 3월 10일" → [[["2025-03-10", "2025-03-10"]]]
-- 날짜가 명시되지 않고 "서류전형 ▶ 1차 인터뷰"처럼 순서만 나열된 경우 빈 리스트 []
+### 4. 입력 데이터 처리 예시 (Few-shot)
+**Input Text:**
+"2025년 하반기 공채. 11월 1일~14일 접수. 11월 말 서류 발표. 12월 첫째 주 코딩테스트 및 1차 면접. 내년 1월 중 최종 면접 후 입사."
 
-[4] 면접 (first_interview, second_interview):
-- "1차 면접", "1차 인터뷰", "초기 면접", "실무 면접" → first_interview
-- "2차 면접", "2차 인터뷰", "최종 면접", "임원 면접", "처우협의" → second_interview
-- "면접"이라고만 되어 있고 차수가 없으면 → first_interview
-- "레퍼런스체크"는 면접 단계로 간주하여 해당 차수에 포함
-- 면접은 단일 날짜 리스트입니다: ["2025-03-20", "2025-03-21"]
-- 기간이 주어진 경우 시작일과 종료일을 모두 포함: "3월 20일 ~ 3월 25일" → ["2025-03-20", "2025-03-25"]
-- 날짜가 명시되지 않고 단순히 "1차 인터뷰 ▶ 2차 인터뷰"처럼 순서만 있으면 빈 리스트 []
-- "추가 인터뷰"는 상황에 따라 추가될 수 있으므로 기본적으로 무시
+**Internal Reasoning:**
+- 접수: 2025-11-01 ~ 2025-11-14
+- 서류발표(11월 말): 2025-11-21 ~ 2025-11-30
+- 코테/1차면접(12월 1주): 2025-12-01 ~ 2025-12-07 (둘 다 해당 기간에 넣음)
+- 최종면접(1월 중): 접수가 11월이므로 1월은 2026년. → 2026-01-01 ~ 2026-01-31
+- 입사: 최종 면접 후이므로 1월 또는 그 이후이나, 문맥상 1월 중으로 추정 → 2026-01-01 ~ 2026-01-31
 
-[5] 입사일 (join_date):
-- "입사일", "입사 예정일", "합류일", "근무 시작일", "최종합격" 이후 입사 등
-- 단일 날짜: "7월 1일" → [[["2025-07-01", "2025-07-01"]]]
-- 여러 입사일: "7월 1일 또는 9월 1일" → [[["2025-07-01", "2025-07-01"]], [["2025-09-01", "2025-09-01"]]]
-- 입사 가능 기간: "7월 중" → [[["2025-07-01", "2025-07-31"]]]
-- "수습 기간 3개월"은 입사 후의 정보이므로 무시
-- 날짜가 명시되지 않으면 빈 리스트 []
-
-[6] 날짜 표현 변환:
-- "1월 초" → 해당 연도-01-02 ~ 해당 연도-01-10
-- "1월 말" → 해당 연도-01-21 ~ 해당 연도-01-31
-- "3월 중순" → 해당 연도-03-11 ~ 해당 연도-03-20
-- "11월 중", "12월 중" → 해당 연도-11-01 ~ 해당 연도-11-30
-- "상순" → 1일 ~ 10일, "중순" → 11일 ~ 20일, "하순" → 21일 ~ 말일
-- 구체적 날짜 없이 "11월 중"처럼만 표현된 경우 중간값 사용: 15일
-
-[7] 연도 추정:
-- 연도가 명시되지 않은 경우, 채용 공고의 문맥과 현재 시점(2025년 12월)을 고려
-- 일반적으로 접수일 이후 날짜들은 같은 연도이거나 다음 연도
-- 예: 11월 접수 → 12월은 같은 연도 → 1월은 다음 연도(2026)
-- 과거 날짜는 피하고, 현재(2025년 12월)보다 미래의 날짜로 추정
-- 1~6월이 나오면 일반적으로 2026년, 7~12월이면 2025년 하반기 또는 2026년 판단
-- 공고에 연도가 명시된 경우(예: "2025.11.10") 그대로 사용
-
-[8] 무시해야 하는 표현:
-- "추후 안내", "별도 안내", "개별 안내", "상세 일정은 추후 공지" 등
-- "수시 채용", "상시 모집", "수시로" 등 구체적 날짜가 없는 표현
-- "조기 마감될 수 있음", "연장될 수 있음" 등 변동 가능성 표현
-- "결격 사유", "병역 의무", "지원서 허위 기재" 등 자격 요건
-- 회사 주소, 문의처, 우대사항 등 채용 일정과 무관한 정보
-
-**예시 1: NAVER Cloud 채용 (날짜 명시, 단계만 있는 경우)**
-입력:
-[NAVER Cloud] NCP DNS / GSLB 경량화 개발 (경력)
-모집 기간: 2025.11.10 ~ 2025.11.28 (17:00)
-
-전형절차:
-서류전형(기업문화적합도 검사 및 직무 테스트 포함) ▶ 1차 인터뷰 ▶ 레퍼런스체크 및 2차 인터뷰 ▶ 처우협의 ▶ 최종합격
-
-출력:
+**Output JSON:**
 {
-  "application_date": [[["2025-11-10", "2025-11-28"]]],
+  "application_date": [["2025-11-01", "2025-11-14"]],
   "semester": "하반기",
-  "document_screening_date": [],
-  "first_interview": [],
-  "second_interview": [],
-  "join_date": []
+  "document_screening_date": [["2025-11-21", "2025-11-30"], ["2025-12-01", "2025-12-07"]],
+  "first_interview": [["2025-12-01", "2025-12-07"]],
+  "second_interview": [["2026-01-01", "2026-01-31"]],
+  "join_date": [["2026-01-01", "2026-01-31"]]
 }
 
-**예시 2: 카카오 공채 (모든 날짜 명시)**
-입력:
-◆ 전형단계 및 일정
-서류 접수: 2025.09.08(월) 14:00 ~ 2025.09.28(일) 23:59
-1차 코딩테스트(온라인): 2025.10.11(토)
-2차 코딩테스트(온라인): 2025.10.26(일)
-서류합격자 발표: 2025.11.01(금)
-1차 인터뷰(오프라인): 2025.11.15(금)
-2차 인터뷰(오프라인): 2025.12.10(화)
-최종 합격: 2025.12.20(금)
-입사일: 2026년 1월 2일
-
-출력:
-{
-  "application_date": [[["2025-09-08", "2025-09-28"]]],
-  "semester": "하반기",
-  "document_screening_date": [[["2025-10-11", "2025-10-11"]], [["2025-10-26", "2025-10-26"]], [["2025-11-01", "2025-11-01"]]],
-  "first_interview": ["2025-11-15"],
-  "second_interview": ["2025-12-10"],
-  "join_date": [[["2026-01-02", "2026-01-02"]]]
-}
-
-**예시 3: 상반기 채용 (일부 날짜만 명시)**
-입력:
-2026년 상반기 신입 채용
-모집 기간: 2월 1일 ~ 2월 28일
-서류 전형 결과 발표: 3월 5일
-1차 면접: 3월 중순
-2차 면접: 3월 하순
-입사: 7월 1일
-
-출력:
-{
-  "application_date": [[["2026-02-01", "2026-02-28"]]],
-  "semester": "상반기",
-  "document_screening_date": [[["2026-03-05", "2026-03-05"]]],
-  "first_interview": ["2026-03-15"],
-  "second_interview": ["2026-03-25"],
-  "join_date": [[["2026-07-01", "2026-07-01"]]]
-}
-
-**예시 4: 수시 채용 (상시 채용)**
-입력:
-◆ 채용 일정
-- 지원 기간: 상시 채용
-- 전형 절차: 서류 → 면접 → 처우 협의
-- 입사일: 협의 후 결정
-
-출력:
-{
-  "application_date": [],
-  "semester": null,
-  "document_screening_date": [],
-  "first_interview": [],
-  "second_interview": [],
-  "join_date": []
-}
-
-**중요 주의사항:**
-- 코딩테스트, 필기시험, 직무테스트는 절대 면접에 넣지 마세요. 반드시 document_screening_date에 넣습니다.
-- application_date, document_screening_date, join_date는 반드시 [[["시작일", "마감일"]]] 형태의 2차원 리스트입니다.
-- first_interview, second_interview는 ["날짜"] 형태의 1차원 리스트입니다.
-- semester는 application_date의 마감일 월을 기준으로 판단합니다 (1~6월: 상반기, 7~12월: 하반기).
-- 날짜 정보가 전혀 없거나 "추후 안내"인 경우 빈 리스트 []를 반환하세요.
-- 모든 날짜는 YYYY-MM-DD 형식이어야 합니다.
-- 현재 시점(2025년 12월)을 고려하여 과거 날짜가 되지 않도록 연도를 조정하세요.
-- "처우협의", "최종합격"은 면접 단계가 아니므로 추출하지 않습니다.
+---
+**이제 아래의 채용 공고 텍스트를 분석하여 JSON 결과만 출력하세요.**
 """
+
+
 
         user_prompt = f"""채용 공고 제목: {title}
 
@@ -233,32 +131,67 @@ class ScheduleParserExtractor:
 
 위 채용 공고에서 '채용 전형 일정'을 추출해 JSON 스키마에 맞춰 정확히 한 개의 JSON 객체로만 답변해주세요."""
 
-        try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt},
-                ],
-                response_format={"type": "json_object"},
-                temperature=0.0,
-            )
+        # Rate limit 오류 발생 시 재시도 로직
+        max_retries = 5
+        retry_delay = 2  # 초기 대기 시간 (초)
+        response = None
+        
+        for attempt in range(max_retries):
+            try:
+                response = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt},
+                    ],
+                    response_format={"type": "json_object"},
+                    temperature=0.0,
+                )
+                break  # 성공 시 루프 종료
+                
+            except RateLimitError as e:
+                if attempt < max_retries - 1:
+                    # 에러 메시지에서 대기 시간 추출 시도
+                    wait_time = retry_delay * (2 ** attempt)  # Exponential backoff
+                    
+                    # 에러 메시지에서 "try again in X.XXXs" 추출
+                    error_str = str(e)
+                    if "try again in" in error_str:
+                        try:
+                            match = re.search(r'try again in ([\d.]+)s', error_str)
+                            if match:
+                                wait_time = float(match.group(1)) + 1  # 안전을 위해 1초 추가
+                        except:
+                            pass
+                    
+                    print(f"  ⚠ Rate limit 도달. {wait_time:.1f}초 대기 후 재시도 ({attempt + 1}/{max_retries})...")
+                    time.sleep(wait_time)
+                else:
+                    # 최대 재시도 횟수 초과
+                    print(f"  ✗ Rate limit 오류: 최대 재시도 횟수({max_retries}) 초과")
+                    raise
+        
+        if response is None:
+            raise Exception("API 호출 실패: 응답을 받지 못했습니다.")
 
+        try:
             result = json.loads(response.choices[0].message.content)
 
             # 데이터 추출
             app_dates_raw = result.get("application_date", [])
             doc_dates_raw = result.get("document_screening_date", [])
             join_dates_raw = result.get("join_date", [])
+            first_int_raw = result.get("first_interview", [])
+            second_int_raw = result.get("second_interview", [])
 
-            # [[[start, end]]] 형태 등을 [[start, end]] 형태로 정규화
+            # 모든 날짜 필드를 [[start, end]] 형태로 정규화
             app_dates = self._normalize_period_list(app_dates_raw)
             doc_dates = self._normalize_period_list(doc_dates_raw)
             join_dates = self._normalize_period_list(join_dates_raw)
+            first_int = self._normalize_period_list(first_int_raw)
+            second_int = self._normalize_period_list(second_int_raw)
 
             semester = result.get("semester")
-            first_int = result.get("first_interview", [])
-            second_int = result.get("second_interview", [])
 
             # semester가 LLM에서 제대로 추출되지 않은 경우 수동 판단
             if not semester and app_dates:
@@ -302,22 +235,39 @@ class ScheduleParserExtractor:
 
     def _normalize_period_list(self, periods: List) -> List[List[str]]:
         """
-        [[[start, end]]] 또는 [[start, end]] 등 다양한 중첩 구조를
-        Pydantic 스키마에 맞는 [[start, end]] 형태로 정규화한다.
+        다양한 형태의 날짜 데이터를 [["start", "end"], ...] 형태로 정규화한다.
+        
+        입력 형태:
+        - [["start", "end"], ...] (이미 정규화된 형태)
+        - [[["start", "end"]], ...] (3중 중첩)
+        - ["date", ...] (단일 날짜 리스트 - 면접일 등)
+        - "date" (단일 문자열)
+        
+        출력 형태:
+        - [["start", "end"], ...] (항상 동일한 형태)
+        - 단일 날짜는 [date, date] 형태로 변환
         """
         if not isinstance(periods, list):
             return []
 
         normalized: List[List[str]] = []
         for p in periods:
-            # case 1: [[start, end]]
+            # case 1: ["start", "end"] 형태 (이미 정규화됨)
             if isinstance(p, list) and len(p) == 2 and all(isinstance(x, str) for x in p):
                 normalized.append(p)
-            # case 2: [[[start, end]]] 또는 [[["start", "end"], ...]] 중 첫 번째만 사용
-            elif isinstance(p, list) and len(p) >= 1 and isinstance(p[0], list):
-                inner = p[0]
-                if isinstance(inner, list) and len(inner) == 2 and all(isinstance(x, str) for x in inner):
-                    normalized.append(inner)
+            # case 2: [["start", "end"]] 형태 (3중 중첩)
+            elif isinstance(p, list) and len(p) >= 1:
+                if isinstance(p[0], list):
+                    inner = p[0]
+                    if isinstance(inner, list) and len(inner) == 2 and all(isinstance(x, str) for x in inner):
+                        normalized.append(inner)
+                # case 3: ["date"] 형태 (단일 날짜 문자열)
+                elif isinstance(p[0], str) and len(p) == 1:
+                    # 단일 날짜를 [date, date] 형태로 변환
+                    normalized.append([p[0], p[0]])
+            # case 4: 단일 문자열 "date"
+            elif isinstance(p, str):
+                normalized.append([p, p])
             # 그 외 형태는 무시
 
         return normalized
@@ -330,7 +280,7 @@ class ScheduleParserExtractor:
         하반기: 7월~12월 (입사는 주로 하반기 또는 다음해 1월)
 
         Args:
-            application_dates: [[["시작일", "마감일"]], ...] 형태의 날짜 리스트
+            application_dates: [["시작일", "마감일"], ...] 형태의 날짜 리스트
 
         Returns:
             "상반기", "하반기", 또는 None
@@ -339,21 +289,17 @@ class ScheduleParserExtractor:
             return None
 
         try:
-            # [[["yyyy-mm-dd", "yyyy-mm-dd"]], ...] 구조 처리
+            # [["yyyy-mm-dd", "yyyy-mm-dd"], ...] 구조 처리
             first_period = application_dates[0]
             
-            if isinstance(first_period, list) and len(first_period) > 0:
-                # 가장 안쪽 리스트 찾기
-                inner_period = first_period[0] if isinstance(first_period[0], list) else first_period
+            if isinstance(first_period, list) and len(first_period) >= 2:
+                deadline = first_period[1]  # 마감일
+                month = int(deadline.split('-')[1])
                 
-                if isinstance(inner_period, list) and len(inner_period) >= 2:
-                    deadline = inner_period[1]  # 마감일
-                    month = int(deadline.split('-')[1])
-                    
-                    if 1 <= month <= 6:
-                        return "상반기"
-                    elif 7 <= month <= 12:
-                        return "하반기"
+                if 1 <= month <= 6:
+                    return "상반기"
+                elif 7 <= month <= 12:
+                    return "하반기"
             
             return None
 
@@ -373,6 +319,8 @@ class ScheduleParserProcessor:
         batch_size: int = 10,
         limit: Optional[int] = None,
         company_keyword: Optional[str] = None,
+        competitor_only: bool = False,
+        max_workers: int = 5,
     ):
         """
         Post 데이터를 배치로 처리하여 일정 추출 및 저장
@@ -381,6 +329,8 @@ class ScheduleParserProcessor:
             batch_size: 커밋 단위 배치 크기
             limit: 최대 처리할 포스트 수 (None 이면 전체)
             company_keyword: 회사명에 포함되어야 할 키워드 (예: "naver"). None 이면 전체 회사 대상
+            competitor_only: True이면 주요 경쟁사 그룹만 필터링 (LINE, NAVER, 토스, 우아한형제들, 현대오토에버, Coupang, 카카오, 한화시스템, 한화손해보험)
+            max_workers: 병렬 처리 시 최대 동시 실행 스레드 수 (기본값: 5, Rate limit 고려)
         """
         session = self.SessionLocal()
 
@@ -388,9 +338,30 @@ class ScheduleParserProcessor:
             # 기본: Post 테이블에서 시작
             query = session.query(Post)
 
+            # 주요 경쟁사 그룹 필터링
+            if competitor_only:
+                from sqlalchemy import or_
+                query = query.join(Company, Post.company_id == Company.id).filter(
+                    or_(
+                        func.lower(Company.name).like('%line%'),
+                        func.lower(Company.name) == 'ipx',
+                        func.lower(Company.name).like('%naver%'),
+                        func.lower(Company.name).like('%토스%'),
+                        func.lower(Company.name).like('%toss%'),
+                        func.lower(Company.name).in_(['비바리퍼블리카', 'aicc']),
+                        func.lower(Company.name).like('%우아한형제들%'),
+                        func.lower(Company.name).like('%배달의민족%'),
+                        func.lower(Company.name).like('%현대오토에버%'),
+                        func.lower(Company.name).like('%coupang%'),
+                        func.lower(Company.name).like('%쿠팡%'),
+                        func.lower(Company.name).like('%카카오%'),
+                        func.lower(Company.name).like('%한화시스템%'),
+                        func.lower(Company.name).like('%한화손해보험%'),
+                    )
+                )
             # 회사 키워드가 없는 경우에만
             # "아직 일정이 추출되지 않은 포스트"로 한정
-            if not company_keyword:
+            elif not company_keyword:
                 query = query.outerjoin(
                     RecruitSchedule,
                     Post.id == RecruitSchedule.post_id
@@ -398,7 +369,7 @@ class ScheduleParserProcessor:
                     RecruitSchedule.schedule_id.is_(None)
                 )
 
-            if company_keyword:
+            if company_keyword and not competitor_only:
                 # 회사명 부분 일치 필터 (대소문자 무시, LIKE '%키워드%')
                 # 예: "NAVER" / "naver" 입력 시 "네이버페이", "Naver Cloud" 등 포함한 모든 회사명 매칭
                 pattern = company_keyword.strip()
@@ -427,6 +398,11 @@ class ScheduleParserProcessor:
                         print(f"  description 미리보기(앞 800자): {preview}")
                     else:
                         print("  description 없음 또는 빈 문자열")
+                    
+                    # Rate limit 방지를 위한 요청 간 딜레이 (0.5초)
+                    if i > 1:
+                        time.sleep(0.5)
+                    
                     # 일정 정보 추출
                     schedule_data = self.extractor.extract_schedule_info(
                         description=post.description or "",
@@ -440,6 +416,12 @@ class ScheduleParserProcessor:
                     if processed_count % batch_size == 0:
                         session.commit()
                         print(f"  ✓ {processed_count}개 포스트 처리 완료 (커밋)")
+                except RateLimitError as e:
+                    print(f"  ✗ Post ID {post.id} 처리 실패: Rate limit 오류 (재시도 불가)")
+                    print(f"    오류 메시지: {str(e)}")
+                    session.rollback()
+                    # Rate limit 오류는 재시도 로직에서 처리되므로 여기서는 건너뛰기
+                    continue
                 except Exception as e:
                     print(f"  ✗ Post ID {post.id} 처리 실패: {str(e)}")
                     session.rollback()
@@ -568,27 +550,32 @@ def main():
     # 프로세서 초기화
     processor = ScheduleParserProcessor(api_key=OPENAI_API_KEY)
 
-    # 회사명 키워드 입력 (예: "naver", "카카오" 등)
-    company_keyword = input("회사명 키워드 (예: naver, kakao; 전체 대상이면 엔터): ").strip() or None
-
     print("=" * 60)
-    print("채용 일정 추출 시작")
+    print("주요 경쟁사 채용 일정 추출 시작")
+    print("=" * 60)
+    print("대상 경쟁사 그룹:")
+    print("  - LINE (IPX 포함)")
+    print("  - NAVER")
+    print("  - 토스 (비바리퍼블리카, AICC 포함)")
+    print("  - 우아한형제들 (배달의민족 포함)")
+    print("  - 현대오토에버")
+    print("  - Coupang (쿠팡)")
+    print("  - 카카오")
+    print("  - 한화시스템")
+    print("  - 한화손해보험")
     print("=" * 60)
 
-    # 상위 N개만 시험용으로 처리 (배치 크기: 10, limit=20)
-    processor.process_posts(batch_size=10, limit=200, company_keyword=company_keyword)
+    # 주요 경쟁사 그룹의 채용 공고 처리
+    # limit=None이면 전체 처리, 특정 개수로 제한하려면 limit=숫자 지정
+    processor.process_posts(
+        batch_size=10, 
+        limit=None,  # 전체 처리 (필요시 숫자로 변경)
+        competitor_only=True  # 주요 경쟁사만 필터링
+    )
 
     print("\n" + "=" * 60)
     print("처리 완료")
     print("=" * 60)
-
-    # 특정 포스트의 결과 확인 (예시)
-    print("\n[결과 확인 예시]")
-    schedule = processor.get_schedule_by_post_id(1)
-    if schedule:
-        print(json.dumps(schedule, indent=2, ensure_ascii=False))
-    else:
-        print("Post ID 1의 일정 정보가 없습니다.")
 
 
 if __name__ == "__main__":

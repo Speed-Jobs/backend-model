@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from pydantic import BaseModel, Field
 
@@ -8,15 +8,16 @@ class RecruitScheduleData(BaseModel):
 
     - 모든 날짜 필드: [[start_date, end_date], ...] 형태의 1차원 배열 리스트
     - 단일 날짜인 경우: [date, date] 형태로 동일한 날짜를 두 번 반복
+    - application_date의 마감일은 없을 수 있음 (None 허용)
     """
 
     semester: Optional[str] = Field(
         None,
         description="상반기 또는 하반기"
     )
-    application_date: List[List[str]] = Field(
+    application_date: List[List[Optional[str]]] = Field(
         default_factory=list,
-        description="지원서 접수 기간 리스트 ([[시작일, 마감일], ...], YYYY-MM-DD 형식)"
+        description="지원서 접수 기간 리스트 ([[시작일, 마감일], ...], 시작일은 posted_at, 마감일은 description에서 추출, 없으면 None)"
     )
     document_screening_date: List[List[str]] = Field(
         default_factory=list,
