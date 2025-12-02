@@ -439,7 +439,7 @@ class DataPipeline:
             logger.info("\n[3-2] 학습 데이터 로드")
             job_files = list(self.data_output_dir.glob('*_jobs.json'))
             training_files = [str(f) for f in job_files]
-            system.load_training_data(training_files)
+            system.load_training_data(job_files=training_files)
             
             # 그래프 구축
             logger.info("\n[3-3] 그래프 구축")
@@ -757,11 +757,11 @@ def main():
     
     results = pipeline.run()
     
-    # 성공 여부에 따라 종료 코드 반환
+    # 성공 여부에 따라 로그 출력
     if results.get('status') == 'failed':
-        sys.exit(1)
+        logger.error("파이프라인 실행 실패")
     else:
-        sys.exit(0)
+        logger.info("파이프라인 실행 완료")
 
 
 if __name__ == '__main__':
