@@ -74,7 +74,7 @@ async def get_company_insight(
         timeframe=timeframe,
         start_date=start_date or start.isoformat(),
         end_date=end_date or end.isoformat(),
-        llm_model="gpt-4o"
+        llm_model="gpt-4o-mini"
     )
     
     if result["status"] == "error":
