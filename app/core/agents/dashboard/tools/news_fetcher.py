@@ -95,7 +95,7 @@ async def _filter_news_by_relevance(
         
         # LLM 초기화
         llm = ChatOpenAI(
-            model="gpt-4o",
+            model="gpt-4o-mini",
             temperature=0.1,
             max_tokens=4096,
             api_key=os.getenv("OPENAI_API_KEY")

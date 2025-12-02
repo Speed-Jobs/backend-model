@@ -32,7 +32,7 @@ async def generate_company_insight_async(
     timeframe: str = "weekly",
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
-    llm_model: str = "gpt-4o"
+    llm_model: str = "gpt-4o-mini"
 ) -> Dict[str, Any]:
     """
     Agent 없이 직접 툴을 호출하여 인사이트 생성

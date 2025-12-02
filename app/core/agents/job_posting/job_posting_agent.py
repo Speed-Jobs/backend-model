@@ -89,7 +89,7 @@ def _format_evaluation_feedback(raw_results: Dict[str, Any]) -> str:
 
 
 def create_job_posting_generator_agent(
-    llm_model: str = "gpt-4o",
+    llm_model: str = "gpt-4o-mini",
 ):
     """
     AI 채용 공고 개선 Agent 생성
@@ -174,7 +174,7 @@ def create_job_posting_generator_agent(
 
 async def generate_improved_job_posting_async(
     json_filename: Optional[str] = None,
-    llm_model: str = "gpt-4o"
+    llm_model: str = "gpt-4o-mini"
 ) -> Dict[str, Any]:
     """
     비동기로 개선된 채용 공고를 생성합니다.
