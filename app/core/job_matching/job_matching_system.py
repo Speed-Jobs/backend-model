@@ -50,7 +50,14 @@ from datetime import datetime
 
 import numpy as np
 import networkx as nx
-from sentence_transformers import SentenceTransformer
+# 모델 서비스 클라이언트 import (HTTP 통신)
+try:
+    from app.utils.model import ModelServiceClient as SentenceTransformer
+    USE_MODEL_SERVICE = True
+except ImportError:
+    # Fallback: 로컬 모델 사용
+    from sentence_transformers import SentenceTransformer
+    USE_MODEL_SERVICE = False
 
 from app.config.job_matching.config import (
     JOB_DESCRIPTION_FILE,
@@ -203,8 +210,13 @@ class SbertDescriptionMatcher:
         if model_name is None:
             model_name = SBERT_MODEL_NAME
 
-        print(f"[SBERT] 모델 로딩 중... ({model_name})")
-        self.model = SentenceTransformer(model_name)
+        # 모델 서비스 클라이언트 또는 로컬 모델 초기화
+        if USE_MODEL_SERVICE:
+            print(f"[SBERT] 모델 서비스 클라이언트 초기화 중...")
+            self.model = SentenceTransformer()  # ModelServiceClient (base_url은 환경변수에서)
+        else:
+            print(f"[SBERT] 로컬 모델 로딩 중... ({model_name})")
+            self.model = SentenceTransformer(model_name)
 
         print(f"[SBERT] 직무 definition 임베딩 생성 중... (직무 정의 + industry + skill_set_description + 공통_skill_set_description)")
         corpus = []

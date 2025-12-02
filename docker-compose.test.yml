@@ -1,0 +1,46 @@
+# Docker Compose 테스트 환경
+# 로컬에서 모델 서비스와 메인 API를 함께 테스트
+
+version: '3.8'
+
+services:
+  # 모델 서비스
+  model-service:
+    build:
+      context: ./model-service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8000"  # 로컬에서는 8001 포트 사용
+    environment:
+      - MODEL_NAME=sentence-transformers/distiluse-base-multilingual-cased-v2
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s  # 모델 로딩 시간 고려
+    volumes:
+      - model-cache:/root/.cache  # 모델 캐시 볼륨
+  
+  # 메인 API (선택적 - 통합 테스트용)
+  # api-service:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - MODEL_SERVICE_URL=http://model-service:8000
+  #     - DATABASE_URL=postgresql://user:pass@db:5432/dbname
+  #   depends_on:
+  #     - model-service
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 3
+
+volumes:
+  model-cache:  # 모델 캐시를 저장하여 재시작 시 다운로드 생략
+
