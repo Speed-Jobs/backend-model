@@ -21,7 +21,8 @@ from app.routers import (
     routers_competitors_skills,
     routers_recruit_counter,
     routers_competitor_recruit_counter,
-    job_matching
+    routers_competitor_industry_trend,
+    job_matching,
 )
 from app.routers.v1.agent import evaluation
 
@@ -46,5 +47,6 @@ app.include_router(routers_skill_match.router)
 app.include_router(routers_competitors_skills.router)
 app.include_router(routers_recruit_counter.router)
 app.include_router(routers_competitor_recruit_counter.router)
+app.include_router(routers_competitor_industry_trend.router)
 app.include_router(job_matching.router)
 app.include_router(evaluation.router, prefix="/api/v1") 
