@@ -176,7 +176,7 @@ async def crawl_single_job(
             # 기본 정보 설정
             job_info = {
                 "title": None,
-                "company": "LG",
+                "company": "LG CNS",
                 "location": None,
                 "employment_type": None,
                 "experience": None,
@@ -413,7 +413,7 @@ class LGCareerCrawler:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         
         # JSON 저장
-        json_file = output_path / f"lg_jobs_{timestamp}.json"
+        json_file = output_path / f"lg_jobs.json"
         with open(json_file, 'w', encoding='utf-8') as f:
             json.dump(jobs, f, ensure_ascii=False, indent=2)
         print(f"  ✅ JSON 저장: {json_file}")
@@ -421,7 +421,7 @@ class LGCareerCrawler:
         # CSV 저장
         try:
             import csv
-            csv_file = output_path / f"lg_jobs_{timestamp}.csv"
+            csv_file = output_path / f"lg_jobs.csv"
 
             if jobs:
                 simple_jobs = []

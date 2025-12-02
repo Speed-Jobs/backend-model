@@ -6,7 +6,7 @@ Agent Schemas
 from .schemas_tool import (
     # Tool Input Schema
     ToolInput,
-    # Output Schemas
+    # Individual Evaluator Output Schemas
     JargonResult,
     ConsistencyResult,
     GrammarResult,
@@ -16,12 +16,18 @@ from .schemas_tool import (
     RequiredFieldsResult,
     SpecialContentInclusionResult,
     SpecialContentQualityResult,
+    # Module Level Response Schemas
+    ReadabilityModuleResult,
+    SpecificityModuleResult,
+    AttractivenessModuleResult,
+    # API Response Schema
+    EvaluationResponse,
 )
 
 __all__ = [
     # Input Schema
     "ToolInput",
-    # Output Schemas
+    # Individual Evaluator Output Schemas
     "JargonResult",
     "ConsistencyResult",
     "GrammarResult",
@@ -31,4 +37,10 @@ __all__ = [
     "RequiredFieldsResult",
     "SpecialContentInclusionResult",
     "SpecialContentQualityResult",
+    # Module Level Response Schemas
+    "ReadabilityModuleResult",
+    "SpecificityModuleResult",
+    "AttractivenessModuleResult",
+    # API Response Schema
+    "EvaluationResponse",
 ]

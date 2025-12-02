@@ -1,17 +1,42 @@
 """
-직무 매칭 시스템 v7 - SBERT DESCRIPTION MATCHING
+직무 매칭 시스템 v13 - PPR 필터링 전용 버전
 
-주요 개선사항:
-- Sentence-BERT 임베딩으로 description vs description 의미 유사도 매칭 추가
-- (변경) 제목 + 본문 전체를 합쳐서 SBERT 쿼리 텍스트로 사용
-- Description 유사도를 최종 점수에 45% 반영 (가장 높은 가중치)
-- 기존 BM25 대신 SBERT cosine similarity 사용
+핵심 전략:
+1. PPR은 "필터링 전용" - specific_skills만 사용, 점수 버림, 상위 20개만 추출
+2. Jaccard + SBERT로만 점수 계산 - 전체 스킬(common + specific) 사용
+3. 가중치 없이 단순 합산 (0~2 범위)
+
+주요 변경사항 (v7 → v13):
+1. PPR 역할 변경
+   - 기존: 점수 계산에 포함 (15%)
+   - 변경: 후보 필터링 전용 (점수 버림)
+   - 이유: 정규화 시 Hallucination 발생
+   - PPR 계산: specific_skills만 사용 (직무 특화 스킬로 필터링)
+
+2. Clustering 제거
+   - Louvain 커뮤니티 탐지 제거
+   - 직무/산업 정보로 충분한 구분 가능
+
+3. Jaccard 강화
+   - Weighted Jaccard (common 0.33 + specific 0.67)
+   - 필터링 제거 (모든 후보 계산)
+   - Jaccard 계산: 전체 스킬(common + specific) 사용
+
+4. 점수 계산
+   - Final = Jaccard + SBERT (0~2 범위)
+   - 가중치 없음 (단순 합산)
 
 점수 구성:
-- 15% PPR (구조적 유사도)
-- 25% Jaccard (스킬 직접 매칭)
-- 15% Cluster (커뮤니티 유사도)
-- 45% SBERT (Description 유사도)
+- PPR: 필터링 전용 (specific_skills로 상위 20개 추출)
+- Jaccard: 스킬 직접 매칭 (common + specific 전체, 0~1)
+- SBERT: 의미 유사도 (0~1)
+- Final: Jaccard + SBERT (0~2)
+
+장점:
+- PPR Hallucination 제거
+- Jaccard로 스킬 매칭 정확도 향상
+- SBERT 높은 성능 활용
+- 단순하고 투명한 점수 체계
 """
 
 import json
@@ -24,10 +49,9 @@ from datetime import datetime
 
 import numpy as np
 import networkx as nx
-from community import community_louvain
 from sentence_transformers import SentenceTransformer
 
-from app.core.job_matching.config import (
+from app.config.job_matching.config import (
     JOB_DESCRIPTION_FILE,
     SBERT_MODEL_NAME,
     TRAINING_DATA_FILES,
@@ -68,10 +92,14 @@ class JobDescription:
     common_skills: List[str]
     specific_skills: List[str]
     all_skills: List[str] = field(default_factory=list)
+    specific_only_skills: List[str] = field(default_factory=list)  # PPR 전용
     skill_set_description: str = ""  # 주요 업무 설명 (SBERT에 사용)
+    common_skill_set_description: str = ""  # 공통 스킬 설명 (SBERT에 사용)
 
     def __post_init__(self):
+        # v13: all_skills는 전체 (Jaccard/매칭용), specific_only_skills는 PPR 전용
         self.all_skills = list(set(self.common_skills + self.specific_skills))
+        self.specific_only_skills = list(set(self.specific_skills))
 
 @dataclass
 class NewJobPosting:
@@ -104,9 +132,8 @@ class JobMatchResult:
     final_score: float
     
     jaccard_score: float = 0.0
-    cluster_score: float = 0.0
-    pagerank_score: float = 0.0
-    sbert_score: float = 0.0  # SBERT 유사도 점수
+    pagerank_score: float = 0.0  # 로깅용, 점수 계산에는 미포함
+    sbert_score: float = 0.0
     
     matching_skills: List[str] = field(default_factory=list)
     missing_skills: List[str] = field(default_factory=list)
@@ -140,19 +167,6 @@ class JobPostingGraph:
                 skill_node = f"skill:{skill_normalized}"
                 self.G.add_edge(posting_node, skill_node, weight=1.0)
 
-    def build_skill_cooccurrence(self, min_cooccur: int = 2):
-        skill_pairs = Counter()
-
-        for posting in self.postings.values():
-            skills = [f"skill:{self._normalize_skill(s)}" for s in posting.skills]
-            for i, skill1 in enumerate(skills):
-                for skill2 in skills[i+1:]:
-                    pair = tuple(sorted([skill1, skill2]))
-                    skill_pairs[pair] += 1
-
-        for (skill1, skill2), count in skill_pairs.items():
-            if count >= min_cooccur:
-                self.G.add_edge(skill1, skill2, weight=count)
 
     @staticmethod
     def _normalize_skill(skill: str) -> str:
@@ -191,7 +205,7 @@ class SbertDescriptionMatcher:
         print(f"[SBERT] 모델 로딩 중... ({model_name})")
         self.model = SentenceTransformer(model_name)
 
-        print(f"[SBERT] 직무 definition 임베딩 생성 중... (직무 정의 + industry + skill_set_description)")
+        print(f"[SBERT] 직무 definition 임베딩 생성 중... (직무 정의 + industry + skill_set_description + 공통_skill_set_description)")
         corpus = []
         
         for jd in job_descriptions:
@@ -209,6 +223,10 @@ class SbertDescriptionMatcher:
             if jd.skill_set_description:
                 parts.append(f"주요 업무: {jd.skill_set_description}")
             
+            # 4. 공통 Skill Set Description 추가 (프로그래밍 언어, 협업 도구 등)
+            if jd.common_skill_set_description:
+                parts.append(f"공통 기술: {jd.common_skill_set_description}")
+            
             # 모든 정보 결합 (정보가 없으면 job_name만 사용)
             combined_text = "\n\n".join(parts) if parts else jd.job_name
             corpus.append(combined_text)
@@ -220,14 +238,14 @@ class SbertDescriptionMatcher:
             normalize_embeddings=True,
         )
 
-        print(f"[OK] {len(job_descriptions)}개 직무 정의 임베딩 완료 (industry + skill_set_description 포함)")
+        print(f"[OK] {len(job_descriptions)}개 직무 정의 임베딩 완료 (industry + skill_set_description + 공통_skill_set_description 포함)")
 
-    def calculate_similarity(self, query_text: str) -> Dict[str, float]:
+    def calculate_similarity_no_normalize(self, query_text: str) -> Dict[str, float]:
         """
-        새 공고의 쿼리 텍스트(제목+본문)와 모든 직무 정의의 의미 유사도 계산 (0~1)
+        새 공고의 쿼리 텍스트와 직무 정의의 의미 유사도 계산 (정규화 제거)
 
         Returns:
-            Dict[job_name, normalized_score]
+            Dict[job_name, raw_similarity_score] - 원본 코사인 유사도 (0~1 변환만)
         """
         if not query_text or not query_text.strip():
             return {jd.job_name: 0.0 for jd in self.job_descriptions}
@@ -242,13 +260,8 @@ class SbertDescriptionMatcher:
         # cosine similarity (normalized embeddings → dot product)
         sims = np.dot(self.job_embeddings, query_emb)  # [-1, 1]
 
-        # 1차 변환: [-1, 1] → [0, 1]
+        # [-1, 1] → [0, 1] 변환만 (max 정규화 제거!)
         sims = (sims + 1.0) / 2.0
-
-        # 2차 정규화: 최댓값 기준으로 0~1
-        max_sim = sims.max() if sims.size > 0 else 1.0
-        if max_sim > 0:
-            sims = sims / max_sim
 
         result = {}
         for i, jd in enumerate(self.job_descriptions):
@@ -258,89 +271,19 @@ class SbertDescriptionMatcher:
 
 
 # ============================================================================
-# Cluster Matcher (Louvain 기반)
-# ============================================================================
-
-class ClusterMatcher:
-    """Louvain 클러스터링 기반 매칭"""
-
-    def __init__(self, graph: nx.Graph):
-        self.graph = graph
-        self.clusters = {}
-        self.cluster_skills = defaultdict(list)
-        
-        print(f"[Louvain] 커뮤니티 탐지 중...")
-        
-        # Louvain 클러스터링
-        self.clusters = community_louvain.best_partition(graph, weight='weight')
-        
-        # 클러스터별 스킬 노드 정리
-        for node, cluster_id in self.clusters.items():
-            if node.startswith('skill:'):
-                self.cluster_skills[cluster_id].append(node)
-        
-        num_clusters = len(set(self.clusters.values()))
-        num_skill_nodes = len([n for n in graph.nodes() if n.startswith('skill:')])
-        
-        print(f"[OK] {num_clusters}개 클러스터 탐지 (스킬 노드: {num_skill_nodes}개)")
-
-    def get_cluster_distribution(self, skills: List[str], normalize_func) -> np.ndarray:
-        """
-        스킬 리스트의 클러스터 분포 계산
-        """
-        skill_nodes = [f"skill:{normalize_func(s)}" for s in skills]
-        
-        cluster_counts = Counter()
-        for skill_node in skill_nodes:
-            if skill_node in self.clusters:
-                cluster_id = self.clusters[skill_node]
-                cluster_counts[cluster_id] += 1
-        
-        num_clusters = max(self.clusters.values()) + 1
-        distribution = np.zeros(num_clusters)
-        
-        for cluster_id, count in cluster_counts.items():
-            distribution[cluster_id] = count
-        
-        total = distribution.sum()
-        if total > 0:
-            distribution = distribution / total
-        
-        return distribution
-    
-    def calculate_similarity(self, skills1: List[str], skills2: List[str], normalize_func) -> float:
-        """
-        두 스킬 집합 간 클러스터 유사도 계산 (코사인 유사도)
-        """
-        dist1 = self.get_cluster_distribution(skills1, normalize_func)
-        dist2 = self.get_cluster_distribution(skills2, normalize_func)
-        
-        norm1 = np.linalg.norm(dist1)
-        norm2 = np.linalg.norm(dist2)
-        
-        if norm1 == 0 or norm2 == 0:
-            return 0.0
-        
-        similarity = np.dot(dist1, dist2) / (norm1 * norm2)
-        return similarity
-
-
-# ============================================================================
 # Job Matcher (핵심 로직)
 # ============================================================================
 
 class JobMatcher:
-    """새 채용공고 → 직무 매칭"""
+    """새 채용공고 → 직무 매칭 (PPR 필터링 전용)"""
 
     def __init__(
         self,
         graph: JobPostingGraph,
-        cluster_matcher: ClusterMatcher,
         sbert_matcher: SbertDescriptionMatcher,
         job_descriptions: List[JobDescription],
     ):
         self.graph = graph
-        self.cluster_matcher = cluster_matcher
         self.sbert_matcher = sbert_matcher
         self.job_descriptions = job_descriptions
 
@@ -353,14 +296,14 @@ class JobMatcher:
         """
         새 채용공고를 직무와 매칭
         
-        3단계 파이프라인:
-        1. PPR로 상위 20개 직무 추출 (구조적 유사도)
-        2. SBERT로 (제목+본문) 의미 유사도 계산
-        3. 스킬 매칭 필터링 + 최종 Top 1~2 선정
+        v13: PPR 필터링 전용 + Jaccard + SBERT
+        - PPR: 상위 20개 추출 (점수 버림)
+        - Jaccard + SBERT: 단순 합산 (0~2)
+        - 필터링 제거 (모든 후보 계산)
         """
-        print(f"\n[Stage 1] PPR 기반 1차 필터링 (상위 {ppr_top_n}개 추출)")
+        print(f"\n[Stage 1] PPR 기반 1차 필터링 (상위 {ppr_top_n}개 추출, 점수 버림)")
         
-        # Stage 1: PPR로 직무별 점수 계산 및 상위 N개 추출
+        # Stage 1: PPR로 상위 N개 직무 추출 (점수는 버림!)
         ppr_candidates = self._get_ppr_top_jobs(new_posting, ppr_top_n)
         
         if not ppr_candidates:
@@ -369,29 +312,25 @@ class JobMatcher:
         
         print(f"  [OK] {len(ppr_candidates)} jobs selected")
         
-        # ---------- 🔧 변경 포인트 1: SBERT 쿼리 텍스트 구성 (title + description) ----------
+        # SBERT 쿼리 텍스트 구성 (title + description)
         query_text = f"{new_posting.title}\n\n{new_posting.description}".strip()
         
-        # Stage 1.5: SBERT description 유사도 계산 (전체 직무 대상)
-        print(f"\n[Stage 1.5] SBERT Description 유사도 계산")
-        sbert_scores = self.sbert_matcher.calculate_similarity(query_text)
+        # Stage 2: SBERT 계산 (전체 직무 대상)
+        print(f"\n[Stage 2] SBERT + Jaccard 점수 계산")
+        sbert_scores = self.sbert_matcher.calculate_similarity_no_normalize(query_text)
         
         if query_text:
-            top_sbert_job = max(sbert_scores.items(), key=lambda x: x[1])
-            print(f"  - SBERT 1등: {top_sbert_job[0]} (점수: {top_sbert_job[1]:.4f})")
+            top_sbert = max(sbert_scores.items(), key=lambda x: x[1])
+            print(f"  - SBERT 1등: {top_sbert[0]} (점수: {top_sbert[1]:.4f})")
         else:
             print(f"  ! Description/Title 없음 - SBERT 점수 모두 0")
         
-        # Stage 2: 선정된 후보들에 대해서만 스킬 매칭
-        print(f"\n[Stage 2] 스킬 매칭 (Jaccard + Cluster) + 필터링")
-        
+        # Stage 3: PPR 후보들에 대해 Jaccard + SBERT 계산
         results = []
-        filtered_count = 0
         
         for job_desc, ppr_score in ppr_candidates:
-            # Jaccard + Cluster 계산
-            jaccard = self._calculate_jaccard(new_posting.skills, job_desc.all_skills)
-            cluster = self._calculate_cluster_similarity(new_posting.skills, job_desc.all_skills)
+            # Weighted Jaccard 계산
+            jaccard = self._calculate_weighted_jaccard(new_posting.skills, job_desc)
             
             # SBERT 점수
             sbert = sbert_scores.get(job_desc.job_name, 0.0)
@@ -403,40 +342,28 @@ class JobMatcher:
             matching_skills = list(new_skills_norm & job_skills_norm)
             missing_skills = list(job_skills_norm - new_skills_norm)
             
-            # 필터링: 스킬 0개 매칭이면 제외 (완전 의미 매칭만으로 추천되는 것 방지)
-            if len(matching_skills) == 0 and jaccard < 0.05 and cluster < 0.2:
-                filtered_count += 1
-                continue
+            # v13: 필터링 제거! 모든 후보 계산
             
-            # 최종 점수
-            final_score = (
-                0.15 * ppr_score   # 구조적 유사도
-                + 0.25 * jaccard   # 스킬 직접 매칭
-                + 0.15 * cluster   # 클러스터 유사도
-                + 0.45 * sbert     # (제목+본문) 의미 유사도
-            )
+            # 최종 점수: Jaccard + SBERT (0~2 범위)
+            final_score = jaccard + sbert
             
             result = JobMatchResult(
                 job_name=job_desc.job_name,
                 industry=job_desc.industry,
                 final_score=final_score,
                 jaccard_score=jaccard,
-                cluster_score=cluster,
-                pagerank_score=ppr_score,
+                pagerank_score=ppr_score,  # 로깅용
                 sbert_score=sbert,
                 matching_skills=matching_skills[:10],
                 missing_skills=missing_skills[:5],
                 job_definition=job_desc.job_definition,
-                reason=self._generate_reason(matching_skills, jaccard, ppr_score, sbert),
+                reason=self._generate_reason(matching_skills, jaccard, sbert),
             )
             
             results.append(result)
         
         # 정렬 및 Top-K 반환
         results.sort(key=lambda x: x.final_score, reverse=True)
-        
-        if filtered_count > 0:
-            print(f"  [FILTER] {filtered_count}개 직무 제외 (스킬 매칭 부족)")
         
         print(f"  [OK] Final top {min(final_top_k, len(results))} returned")
         if results:
@@ -445,9 +372,7 @@ class JobMatcher:
                 f"{results[0].job_name}/{results[0].industry}\n"
                 "         점수: "
                 f"{results[0].final_score:.4f} "
-                f"(PPR:{results[0].pagerank_score:.4f}, "
-                f"Jacc:{results[0].jaccard_score:.4f}, "
-                f"Clust:{results[0].cluster_score:.4f}, "
+                f"(Jacc:{results[0].jaccard_score:.4f}, "
                 f"SBERT:{results[0].sbert_score:.4f})"
             )
         else:
@@ -457,7 +382,7 @@ class JobMatcher:
     
     def _get_ppr_top_jobs(self, new_posting: NewJobPosting, top_n: int) -> List[Tuple[JobDescription, float]]:
         """
-        PPR로 상위 N개 직무 추출
+        PPR로 상위 N개 직무 추출 (점수는 버림!)
         """
         try:
             personalization = {}
@@ -485,7 +410,7 @@ class JobMatcher:
             for job_desc in self.job_descriptions:
                 skill_nodes = [
                     f"skill:{self.graph._normalize_skill(s)}"
-                    for s in job_desc.all_skills
+                    for s in job_desc.specific_only_skills  # PPR은 specific만 사용
                 ]
                 
                 ppr_scores = [ppr.get(node, 0.0) for node in skill_nodes]
@@ -493,22 +418,18 @@ class JobMatcher:
                 
                 job_ppr_scores.append((job_desc, avg_ppr))
             
-            if job_ppr_scores:
-                max_ppr = max(score for _, score in job_ppr_scores)
-                if max_ppr > 0:
-                    job_ppr_scores = [(jd, score / max_ppr) for jd, score in job_ppr_scores]
-            
+            # 정규화 없이 그냥 정렬만
             job_ppr_scores.sort(key=lambda x: x[1], reverse=True)
             top_candidates = job_ppr_scores[:top_n]
             
             if top_candidates:
                 print(
                     f"  - PPR 1등: {top_candidates[0][0].job_name}/"
-                    f"{top_candidates[0][0].industry} (점수: {top_candidates[0][1]:.4f})"
+                    f"{top_candidates[0][0].industry} (원본 점수: {top_candidates[0][1]:.6f})"
                 )
                 print(
                     f"  - PPR {len(top_candidates)}등: {top_candidates[-1][0].job_name}/"
-                    f"{top_candidates[-1][0].industry} (점수: {top_candidates[-1][1]:.4f})"
+                    f"{top_candidates[-1][0].industry} (원본 점수: {top_candidates[-1][1]:.6f})"
                 )
             
             return top_candidates
@@ -518,6 +439,7 @@ class JobMatcher:
             return []
 
     def _calculate_jaccard(self, skills1: List[str], skills2: List[str]) -> float:
+        """기본 Jaccard 계산 (단일 스킬 리스트 비교)"""
         set1 = set(self.graph._normalize_skill(s) for s in skills1)
         set2 = set(self.graph._normalize_skill(s) for s in skills2)
         
@@ -528,26 +450,54 @@ class JobMatcher:
         union = len(set1 | set2)
         
         return intersection / union if union > 0 else 0.0
-
-    def _calculate_cluster_similarity(self, skills1: List[str], skills2: List[str]) -> float:
-        """클러스터 기반 유사도 계산"""
-        return self.cluster_matcher.calculate_similarity(
-            skills1, skills2, self.graph._normalize_skill
+    
+    def _calculate_weighted_jaccard(self, new_posting_skills: List[str], job_desc: JobDescription) -> float:
+        """
+        가중치 적용 Jaccard 계산
+        
+        - common_skills: 0.33 가중치 (모든 직무 공통, 덜 중요)
+        - specific_skills: 0.67 가중치 (직무 특화, 매우 중요)
+        
+        Args:
+            new_posting_skills: 채용공고의 스킬 리스트
+            job_desc: 직무 정의 객체
+            
+        Returns:
+            float (0~1): 가중치 적용된 Jaccard 점수
+        """
+        # 1. Common skills Jaccard
+        jaccard_common = self._calculate_jaccard(
+            new_posting_skills, 
+            job_desc.common_skills
         )
+        
+        # 2. Specific skills Jaccard
+        jaccard_specific = self._calculate_jaccard(
+            new_posting_skills, 
+            job_desc.specific_skills
+        )
+        
+        # 3. 가중 평균 (specific에 2배 가중치)
+        weighted_jaccard = 0.33 * jaccard_common + 0.67 * jaccard_specific
+        
+        return weighted_jaccard
 
-    def _generate_reason(self, matching_skills: List[str], jaccard: float, ppr: float, sbert: float) -> str:
+    def _generate_reason(self, matching_skills: List[str], jaccard: float, sbert: float) -> str:
+        """매칭 이유 생성"""
         num_matches = len(matching_skills)
         
-        if sbert > 0.5:
+        if sbert > 0.5 and jaccard > 0.3:
+            return f"의미 + 스킬 매칭 강함 (SBERT: {sbert:.3f}, Jacc: {jaccard:.3f}), 스킬 {num_matches}개"
+        elif sbert > 0.5:
             return f"Description 의미 매칭 강함 (SBERT: {sbert:.3f}), 스킬 {num_matches}개"
         elif num_matches >= 5:
-            return f"매칭 스킬 {num_matches}개 (PPR: {ppr:.3f}, Jacc: {jaccard:.2%})"
+            return f"매칭 스킬 {num_matches}개 (Jacc: {jaccard:.3f})"
         elif num_matches >= 3:
-            return f"매칭 스킬 {num_matches}개: {', '.join(matching_skills[:3])} (PPR: {ppr:.3f})"
+            return f"매칭 스킬 {num_matches}개: {', '.join(matching_skills[:3])} (Jacc: {jaccard:.3f})"
         elif num_matches > 0:
-            return f"매칭 스킬: {', '.join(matching_skills)} (PPR: {ppr:.3f})"
+            return f"매칭 스킬: {', '.join(matching_skills)} (Jacc: {jaccard:.3f})"
         else:
-            return f"구조적 유사도 + 의미 유사도 기반 (PPR: {ppr:.3f}, SBERT: {sbert:.3f})"
+            return f"의미 유사도 기반 (SBERT: {sbert:.3f})"
 
 
 # ============================================================================
@@ -555,11 +505,10 @@ class JobMatcher:
 # ============================================================================
 
 class JobMatchingSystem:
-    """통합 직무 매칭 시스템"""
+    """통합 직무 매칭 시스템 v13 (PPR 필터링 전용)"""
 
     def __init__(self, log_file: Optional[str] = None):
         self.graph = JobPostingGraph()
-        self.cluster_matcher: Optional[ClusterMatcher] = None
         self.sbert_matcher: Optional[SbertDescriptionMatcher] = None
         self.job_descriptions: List[JobDescription] = []
         self.matcher: Optional[JobMatcher] = None
@@ -596,6 +545,7 @@ class JobMatchingSystem:
                 common_skills=item.get('공통_skill_set', []),
                 specific_skills=item.get('skill_set', []),
                 skill_set_description=item.get('skill_set_description', ''),
+                common_skill_set_description=item.get('공통_skill_set_description', ''),  # v13: 추가
             )
             self.job_descriptions.append(job_desc)
         
@@ -647,25 +597,23 @@ class JobMatchingSystem:
         print("\n[그래프 구축]")
         print(f"  노드: {self.graph.G.number_of_nodes()}개")
         print(f"  엣지: {self.graph.G.number_of_edges()}개")
-
-        print("\n[스킬 동시 출현 엣지 추가]")
-        self.graph.build_skill_cooccurrence(min_cooccur=2)
-        print(f"  엣지: {self.graph.G.number_of_edges()}개 (업데이트)")
+        print(f"  [NOTE] v13: 스킬 동시 출현 엣지 생성 생략")
+        print(f"  [NOTE] v13: PPR은 specific_skills만, Jaccard는 전체 스킬 사용")
 
     def build_matchers(self):
-        """클러스터링 + SBERT 인덱싱"""
-        print("\n[Louvain 클러스터링]")
-        self.cluster_matcher = ClusterMatcher(self.graph.G)
-        
+        """SBERT 인덱싱"""
         print("\n[SBERT Description 인덱싱]")
         self.sbert_matcher = SbertDescriptionMatcher(self.job_descriptions)
         
         self.matcher = JobMatcher(
             self.graph,
-            self.cluster_matcher,
             self.sbert_matcher,
             self.job_descriptions,
         )
+        
+        print("[NOTE] v13: PPR은 필터링 전용 (점수 버림)")
+        print("[NOTE] v13: Jaccard + SBERT 단순 합산 (0~2)")
+        print("[NOTE] v13: 필터링 제거 (모든 후보 계산)")
 
     def match_new_job(
         self,

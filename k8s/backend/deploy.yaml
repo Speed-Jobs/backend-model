@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: speedjobs-backend
+  namespace: skala-practice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: speedjobs-backend
+  template:
+    metadata:
+      labels:
+        app: speedjobs-backend
+    spec:
+      serviceAccountName: default
+      containers:
+      - name: speedjobs-backend
+        image: amdp-registry.skala-ai.com/skala25a/speedjobs-backend:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        env:
+        - name: DB_HOST
+          value: "speedjobs-mysql.skala-practice.svc.cluster.local"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-mysql-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-mysql-secret
+              key: password
+        - name: DB_NAME
+          value: "mysql"
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-backend-secret
+              key: openai-api-key
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: 1000m
+            memory: 2Gi
+        livenessProbe:
+          httpGet:
+            path: /docs
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /docs
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        volumeMounts:
+        - name: app-data
+          mountPath: /app/data
+        - name: chroma-db
+          mountPath: /app/AI_Lab/chroma_db
+      volumes:
+      - name: app-data
+        emptyDir: {}
+      - name: chroma-db
+        emptyDir: {}
+      restartPolicy: Always
+

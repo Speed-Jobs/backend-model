@@ -1,6 +1,6 @@
 """
-Evaluation Utils (Phase 1)
-채용 공고 평가 데이터 수집 유틸리티
+Evaluation Module
+채용공고 품질 평가 모듈
 """
 
 from .data_collector import (
@@ -9,11 +9,9 @@ from .data_collector import (
     collect_multiple_posts_async,
     collect_multiple_posts
 )
-from .evaluators import (
-    collect_readability_data,
-    collect_specificity_data,
-    collect_attractiveness_data
-)
+from .modules.module_readability import collect_readability_data
+from .modules.module_specificity import collect_specificity_data
+from .modules.module_attractiveness import collect_attractiveness_data
 from .report_saver import (
     save_raw_evaluation_data,
     save_final_report,
@@ -31,7 +29,7 @@ __all__ = [
     "collect_evaluation_data",
     "collect_multiple_posts_async",
     "collect_multiple_posts",
-    # Evaluators
+    # Modules
     "collect_readability_data",
     "collect_specificity_data",
     "collect_attractiveness_data",

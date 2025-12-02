@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: speedjobs-backend-ingress
+  namespace: skala-practice
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+spec:
+  ingressClassName: public-nginx
+  rules:
+  - host: speedjobs-backend.skala25a.project.skala-ai.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: speedjobs-backend
+            port:
+              number: 8000
+  tls:
+  - hosts:
+    - speedjobs-backend.skala25a.project.skala-ai.com
+    secretName: speedjobs-backend-project-tls-cert
+

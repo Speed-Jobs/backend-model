@@ -210,3 +210,7 @@ output/*.json
 # 이미 Git에 추가된 대용량 파일이나 무시 대상 파일은
 # git rm --cached <파일명> 명령어로 인덱스에서 제거해야 .gitignore가 동작합니다.
 # 즉, 이미 트래킹 중인 data/toss_jobs.json이나 대용량 파일은 git에서 먼저 untrack하세요.
+
+# Kubernetes Secrets
+k8s/backend/secret.yaml
+k8s/db/secret.yaml

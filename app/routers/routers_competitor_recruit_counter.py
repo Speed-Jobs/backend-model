@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from datetime import date
 from typing import Optional, List
 
-from app.db import get_db
+from app.db.config.base import get_db
 from app.services.dashboard.competitor_recruit_counter import get_companies_recruitment_activity
 from app.schemas.schemas_recruit_counter import DashBoardResponse
 

@@ -3,7 +3,7 @@
 
 전체 프로세스:
 1. 크롤러 실행 (call_all_crawler.py) → data/output/*_jobs.json 생성
-2. 스킬셋 추출 (extract_skillsets.py) → skill_set_info 추가
+2. 스킬셋 추출 (extract_skillsets_async.py) → skill_set_info 추가 (비동기)
 3. 직무 매칭 (job_matching_system.py) → 매칭 결과 생성
 
 각 단계는 순차적으로 실행되며, 이전 단계의 출력이 다음 단계의 입력이 됩니다.
@@ -15,6 +15,7 @@ import logging
 import time
 import subprocess
 import os
+import asyncio
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, List, Dict, Any
@@ -27,7 +28,7 @@ if str(backend_root) not in sys.path:
 
 # 각 단계의 모듈 import
 from app.services.crawler.call_all_crawler import run_all_crawlers_sequentially
-from app.utils.parser.extract_skillsets import main as extract_skillsets_main
+from app.utils.parser.extract_skillsets import main as extract_skillsets_main_async
 from app.core.job_matching.job_matching_system import JobMatchingSystem
 from app.scripts.db.insert_post_to_db import main as insert_post_main
 
@@ -38,6 +39,9 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+logging.getLogger("openai").setLevel(logging.WARNING)
+logging.getLogger("httpx").setLevel(logging.WARNING)
 
 
 class DataPipeline:
@@ -210,7 +214,7 @@ class DataPipeline:
                 logger.info("\n[Step 1] 크롤러 실행 - SKIPPED")
                 self.pipeline_results['crawler'] = {'status': 'skipped'}
             
-            # Step 2: 스킬셋 추출
+            # Step 2: 스킬셋 추출 (비동기)
             if not self.skip_skillset:
                 success = self._run_skillset_extraction()
                 if not success:
@@ -279,7 +283,7 @@ class DataPipeline:
             False: 실패
         """
         logger.info("\n" + "="*80)
-        logger.info("[Step 1/3] 크롤러 실행")
+        logger.info("[Step 1/4] 크롤러 실행")
         logger.info("="*80)
         
         step_start = time.time()
@@ -340,22 +344,22 @@ class DataPipeline:
     
     def _run_skillset_extraction(self) -> bool:
         """
-        Step 2: 스킬셋 추출
+        Step 2: 스킬셋 추출 (비동기 버전)
         
         Returns:
             True: 성공
             False: 실패
         """
         logger.info("\n" + "="*80)
-        logger.info("[Step 2/3] 스킬셋 추출 (LLM 기반)")
+        logger.info("[Step 2/4] 스킬셋 추출 (LLM 기반 - 비동기)")
         logger.info("="*80)
         
         step_start = time.time()
         
         try:
-            # extract_skillsets.py의 main() 실행
-            # main()은 data/output/*_jobs.json 파일들을 자동으로 찾아서 처리
-            extract_skillsets_main()
+            # extract_skillsets_async.py의 main() 실행 (비동기)
+            # asyncio.run()으로 비동기 함수 실행
+            extract_skillsets_main_async()
             
             duration = time.time() - step_start
             
@@ -380,6 +384,7 @@ class DataPipeline:
             
             logger.info(f"\n✅ 스킬셋 추출 완료 ({duration/60:.1f}분)")
             logger.info(f"   처리된 파일: {len(job_files)}개")
+            logger.info(f"   ⚡ 비동기 처리로 최대 30개씩 동시 실행")
             
             return True
             
@@ -414,7 +419,7 @@ class DataPipeline:
             False: 실패
         """
         logger.info("\n" + "="*80)
-        logger.info("[Step 3/3] 직무 매칭 시스템")
+        logger.info("[Step 3/4] 직무 매칭 시스템")
         logger.info("="*80)
         
         step_start = time.time()
@@ -761,4 +766,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

@@ -1,3 +1,0 @@
-"""
-Data pipeline orchestration module
-"""

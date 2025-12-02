@@ -20,7 +20,7 @@ from app.core.agents.tools.issue_analyzer import (
 )
 
 # Utils
-from app.utils.evaluation.json_loader import (
+from app.utils.agents.evaluation.json_loader import (
     load_evaluation_json,
     list_available_evaluations,
     delete_evaluation_json,
