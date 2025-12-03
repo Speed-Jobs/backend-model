@@ -18,7 +18,6 @@ mysql-connector-python
 sqlalchemy
 apscheduler
 networkx
-sentence-transformers
 pandas
 numpy
 scikit-learn
