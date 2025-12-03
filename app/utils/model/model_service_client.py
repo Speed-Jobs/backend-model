@@ -6,7 +6,7 @@
 
 사용 예시:
     # 기존 코드와 동일한 인터페이스
-    client = ModelServiceClient("http://model-service:8000")
+    client = ModelServiceClient("http://model-service:8001")
     embeddings = client.encode(["Python 개발자", "Backend Engineer"])
     
     # numpy array로 변환 (기존 코드 호환)
@@ -30,7 +30,7 @@ def _get_default_model_service_url() -> str:
     
     Returns:
         str: 모델 서비스 URL
-        - Kubernetes/Docker 환경: http://model-service:8000
+        - Kubernetes/Docker 환경: http://model-service:8001
         - 로컬 개발 환경: http://localhost:8000
     
     Note:
@@ -39,7 +39,7 @@ def _get_default_model_service_url() -> str:
     try:
         # model-service 호스트명이 해석되면 Kubernetes/Docker 환경
         socket.gethostbyname('model-service')
-        return "http://model-service:8000"
+        return "http://model-service:8001"
     except socket.gaierror:
         # 해석 안 되면 로컬 개발 환경
         return "http://localhost:8000"
@@ -74,7 +74,7 @@ class ModelServiceClient:
         Args:
             base_url: 모델 서비스 URL (환경 변수 MODEL_SERVICE_URL로 설정 가능)
                      기본값: 환경에 따라 자동 결정
-                     - Kubernetes: http://model-service:8000
+                     - Kubernetes: http://model-service:8001
                      - 로컬: http://localhost:8000
             timeout: HTTP 요청 타임아웃 (초)
         

@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Tools
-from app.core.agents.dashboard.tools import (
+from app.core.agents.dashboard.recruitment_trends.tools import (
     get_company_recruitment_data,
     get_competitors_recruitment_data,
     get_total_recruitment_data,

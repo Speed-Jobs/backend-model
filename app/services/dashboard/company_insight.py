@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from datetime import date, datetime, timedelta
 import logging
 
-from app.core.agents.dashboard.company_insight_agent import generate_company_insight_async
+from app.core.agents.dashboard.recruitment_trends.company_insight_agent import generate_company_insight_async
 from app.schemas.schemas_company_insight import CompanyInsightData
 from app.schemas.schemas_recruit_counter import PeriodInfo
 from app.db.crud import db_recruit_counter

@@ -1,9 +1,12 @@
 """
 직군별 통계 API Schemas
 """
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
 
 from pydantic import BaseModel, Field
+
+if TYPE_CHECKING:
+    from app.schemas.schemas_job_role_insight import JobRoleInsightData
 
 
 class PeriodSummary(BaseModel):
@@ -91,5 +94,21 @@ class JobRoleStatisticsResponse(BaseModel):
     code: str = Field("SUCCESS", description="응답 코드")
     message: str = Field(..., description="응답 메시지")
     data: JobRoleStatisticsData
+
+
+class JobRoleStatisticsWithInsightsData(BaseModel):
+    """직군별 통계 + 인사이트 응답 데이터"""
+
+    statistics: JobRoleStatisticsData = Field(..., description="직군별 통계 데이터")
+    insights: Optional[dict] = Field(None, description="직군별 인사이트 데이터 (include_insights=true인 경우)")
+
+
+class JobRoleStatisticsWithInsightsResponse(BaseModel):
+    """직군별 통계 + 인사이트 조회 응답 래퍼"""
+
+    status: int = Field(200, description="HTTP 상태 코드")
+    code: str = Field("SUCCESS", description="응답 코드")
+    message: str = Field(..., description="응답 메시지")
+    data: JobRoleStatisticsWithInsightsData
 
 
