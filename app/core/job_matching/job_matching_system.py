@@ -51,13 +51,8 @@ from datetime import datetime
 import numpy as np
 import networkx as nx
 # 모델 서비스 클라이언트 import (HTTP 통신)
-try:
-    from app.utils.model import ModelServiceClient as SentenceTransformer
-    USE_MODEL_SERVICE = True
-except ImportError:
-    # Fallback: 로컬 모델 사용
-    from sentence_transformers import SentenceTransformer
-    USE_MODEL_SERVICE = False
+from app.utils.model import ModelServiceClient as SentenceTransformer
+USE_MODEL_SERVICE = True
 
 from app.config.job_matching.config import (
     JOB_DESCRIPTION_FILE,
