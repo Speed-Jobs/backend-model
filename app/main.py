@@ -22,13 +22,9 @@ from app.routers import (
     routers_competitors_skills,
     routers_recruit_counter,
     routers_competitor_recruit_counter,
-<<<<<<< HEAD
     job_matching,
-    routers_recruitment_schedule
-=======
+    routers_recruitment_schedule,
     routers_competitor_industry_trend,
-    job_matching,
->>>>>>> main
 )
 from app.routers.v1.agent import evaluation
 
