@@ -66,6 +66,7 @@ def get_companies_by_keyword(
 ) -> List[Tuple[int, str, int]]:
     """
     키워드를 포함하는 모든 회사 조회
+    그룹명인 경우 COMPETITOR_GROUPS의 모든 키워드로 검색
     
     Args:
         db: 데이터베이스 세션
@@ -81,7 +82,24 @@ def get_companies_by_keyword(
         >>> get_companies_by_keyword(db, "네이버", start, end)
         [(25, "NAVER Cloud", 24), (30, "NAVER", 8), ...]
     """
+    from app.db.crud.db_competitors_skills import COMPETITOR_GROUPS
+    from sqlalchemy import or_
+    
     effective_date = func.coalesce(Post.posted_at, Post.crawled_at)
+    
+    # 그룹명인지 확인
+    if keyword in COMPETITOR_GROUPS:
+        # 그룹의 모든 키워드로 검색
+        keywords = COMPETITOR_GROUPS[keyword]
+        keyword_filters = []
+        for kw in keywords:
+            # % 제거하고 앞뒤에 % 추가
+            clean_kw = kw.rstrip('%').lstrip('%')
+            keyword_filters.append(func.upper(Company.name).like(f'%{clean_kw.upper()}%'))
+        filter_condition = or_(*keyword_filters)
+    else:
+        # 단일 키워드 검색
+        filter_condition = func.upper(Company.name).like(f'%{keyword.upper()}%')
     
     return db.query(
         Company.id,
@@ -90,7 +108,7 @@ def get_companies_by_keyword(
     ).join(
         Post, Company.id == Post.company_id
     ).filter(
-        func.upper(Company.name).like(f'%{keyword.upper()}%'),
+        filter_condition,
         effective_date >= start_date,
         effective_date <= end_date
     ).group_by(
