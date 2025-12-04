@@ -140,19 +140,11 @@ def _classify_category(position_name: str) -> str:
         "마케팅",
         "pm",
         "product manager",
+        "Domain Expert"," Consulting"
     ]
     support_keywords = [
-        "지원",
+        "Biz. Supporting",
         "support",
-        "operations",
-        "operation",
-        "ops",
-        "hr",
-        "인사",
-        "총무",
-        "재무",
-        "finance",
-        "관리",
     ]
 
     if any(k in name for k in tech_keywords):

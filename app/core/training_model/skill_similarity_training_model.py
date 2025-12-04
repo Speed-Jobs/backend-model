@@ -1,15 +1,28 @@
 import json
+import os
+import pickle
+from collections import defaultdict
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import Dict, List, Tuple, Union
+
 import networkx as nx
 import numpy as np
-from node2vec import Node2Vec
-from collections import defaultdict
-import pickle
-from typing import List, Tuple, Dict, Union
-import os
-from pathlib import Path
-
 from dotenv import load_dotenv
+from node2vec import Node2Vec
 from openai import OpenAI
+from sqlalchemy import func
+from sqlalchemy.orm import Session
+
+from app.db.config.base import SessionLocal
+from app.models.post import Post
+from app.models.post_skill import PostSkill
+from app.models.skill import Skill
+from app.models.company import Company  # 관계 매핑 초기화를 위해 import (직접 사용 X)
+from app.models.industry import Industry  # 관계 매핑 초기화를 위해 import (직접 사용 X)
+from app.models.position import Position  # 관계 매핑 초기화를 위해 import
+from app.models.industry_skill import IndustrySkill  # 관계 매핑 초기화를 위해 import
+from app.models.position_skill import PositionSkill  # 관계 매핑 초기화를 위해 import
 
 # .env로부터 OPENAI_API_KEY 로드
 load_dotenv()
@@ -283,6 +296,102 @@ class SkillAssociationModel:
             results['graph_connection_rate'] = np.mean(graph_connected) if graph_connected else 0
             results['evaluated_pairs'] = len(similarities)
         return results
+
+
+def _load_skill_sets_from_db(
+    db: Session,
+    days: int = 365,
+) -> List[List[str]]:
+    """
+    최근 N일 동안의 공고에서 스킬 세트를 로드하여
+    Node2Vec 학습용 코퍼스로 변환합니다.
+
+    - Post.is_deleted = False 인 공고만 사용
+    - posted_at 이 있으면 posted_at, 없으면 crawled_at 기준
+    """
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+    # (post_id, skill_name) 레코드 조회
+    rows = (
+        db.query(Post.id, Skill.name)
+        .join(PostSkill, PostSkill.post_id == Post.id)
+        .join(Skill, Skill.id == PostSkill.skill_id)
+        .filter(Post.is_deleted.is_(False))
+        .filter(func.coalesce(Post.posted_at, Post.crawled_at) >= cutoff)
+        .all()
+    )
+
+    post_to_skills: Dict[int, set] = defaultdict(set)
+    for post_id, skill_name in rows:
+        if not skill_name:
+            continue
+        post_to_skills[post_id].add(skill_name.strip())
+
+    # 각 공고별 스킬 리스트 (빈 세트는 제외)
+    skill_sets: List[List[str]] = [
+        sorted(list(skills))
+        for skills in post_to_skills.values()
+        if skills
+    ]
+
+    print(f"DB에서 로드한 공고 수: {len(post_to_skills)}")
+    print(f"DB에서 로드한 스킬 세트 수: {len(skill_sets)}")
+    return skill_sets
+
+
+def train_skill_association_model_from_db(
+    days: int = 365,
+) -> None:
+    """
+    최근 N일 동안의 DB 데이터를 기반으로 스킬 연관성 Node2Vec 모델을 학습하고 저장합니다.
+
+    1. DB에서 (post, skills) 코퍼스 로드
+    2. SkillAssociationModel 로 그래프 구축 + Node2Vec 학습
+    3. app/core/data_model/skill_association_model.pkl 에 저장
+    """
+    db: Session = SessionLocal()
+    try:
+        skill_sets = _load_skill_sets_from_db(db=db, days=days)
+    finally:
+        db.close()
+
+    if not skill_sets:
+        print("경고: DB에서 로드된 스킬 세트가 없습니다. 학습을 건너뜁니다.")
+        return
+
+    print("=" * 60)
+    print("DB 기반 스킬 연관성 학습 모델")
+    print("=" * 60)
+
+    model = SkillAssociationModel(
+        dimensions=128,
+        walk_length=30,
+        num_walks=200,
+        workers=6,
+        min_skill_freq=3,
+        min_cooccurrence=3,
+        p=1.0,
+        q=1.0,
+    )
+
+    model.train(skill_sets)
+
+    # 모델 평가 (옵션)
+    print("\n" + "=" * 60)
+    print("DB 기반 모델 평가")
+    print("=" * 60)
+    evaluation = model.evaluate_model()
+    for key, value in evaluation.items():
+        if isinstance(value, float):
+            print(f"  {key}: {value:.4f}")
+        else:
+            print(f"  {key}: {value}")
+
+    # 모델 저장 (기존 경로 재사용)
+    project_root = Path(__file__).resolve().parents[3]
+    model_path = project_root / 'app' / 'core' / 'data_model' / 'skill_association_model.pkl'
+    model_path.parent.mkdir(parents=True, exist_ok=True)
+    model.save_model(str(model_path))
 
 
 def main():
