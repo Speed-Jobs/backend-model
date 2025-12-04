@@ -1,0 +1,621 @@
+openapi: 3.1.0
+info:
+  title: FastAPI
+  version: 0.1.0
+paths:
+  /user/:
+    get:
+      tags:
+      - user
+      summary: Read User
+      operationId: read_user_user__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /skill-match/similar-skills:
+    post:
+      tags:
+      - skill-match
+      summary: 입력 스킬과 유사한 스킬 추천
+      operationId: fetch_similar_skills_skill_match_similar_skills_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimilarSkillRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimilarSkillResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/dashboard/skills/diversity:
+    get:
+      tags:
+      - 경쟁사 분석
+      summary: 회사별 스킬 다양성 조회
+      description: 경쟁사별 요구하는 고유 스킬 개수를 조회합니다.
+      operationId: get_skill_diversity_api_v1_dashboard_skills_diversity_get
+      parameters:
+      - name: view_mode
+        in: query
+        required: false
+        schema:
+          enum:
+          - all
+          - year
+          type: string
+          description: 조회 모드 (all, year)
+          default: all
+          title: View Mode
+        description: 조회 모드 (all, year)
+      - name: year
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            maximum: 2030
+            minimum: 2020
+          - type: 'null'
+          description: 조회 연도 (view_mode=year일 때 필수)
+          title: Year
+        description: 조회 연도 (view_mode=year일 때 필수)
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillDiversityResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/dashboard/posts:
+    get:
+      tags:
+      - 경쟁사 분석
+      summary: 경쟁사 공고 및 스킬 조회
+      description: 경쟁사별 채용 공고와 요구 스킬을 상세 조회합니다.
+      operationId: get_posts_with_skills_api_v1_dashboard_posts_get
+      parameters:
+      - name: company_name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: 회사명 필터 (부분 일치)
+          title: Company Name
+        description: 회사명 필터 (부분 일치)
+      - name: year
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            maximum: 2030
+            minimum: 2020
+          - type: 'null'
+          description: 연도 필터
+          title: Year
+        description: 연도 필터
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+          description: 조회 제한
+          default: 100
+          title: Limit
+        description: 조회 제한
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostsWithSkillsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/dashboard/companies/{companyId}/skill-trends:
+    get:
+      tags:
+      - 경쟁사 분석
+      summary: 회사별 상위 스킬 분기별 트렌드 조회
+      description: 특정 회사의 상위 스킬 트렌드를 조회합니다. 연도를 지정하면 분기별 트렌드를, 연도를 입력하지 않으면 현재 연도
+        기준 근 5개년치 각 연도별 상위 스킬의 빈도수를 반환합니다.
+      operationId: get_company_skill_trends_api_v1_dashboard_companies__companyId__skill_trends_get
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+          description: 회사 ID 또는 회사명 (한글)
+          title: Companyid
+        description: 회사 ID 또는 회사명 (한글)
+      - name: year
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+            maximum: 2025
+            minimum: 2021
+          - type: 'null'
+          description: 연도 (미입력시 현재 연도 기준 근 5개년)
+          title: Year
+        description: 연도 (미입력시 현재 연도 기준 근 5개년)
+      - name: top_n
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 20
+          minimum: 1
+          description: '상위 N개 스킬 (기본값: 10)'
+          default: 10
+          title: Top N
+        description: '상위 N개 스킬 (기본값: 10)'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SkillTrendResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/dashboard/job-postings-trend:
+    get:
+      tags:
+      - Dashboard
+      summary: 채용 공고 수 추이 조회
+      description: 전체 채용 공고 수의 일간/주간/월간 추이를 조회합니다.
+      operationId: get_job_postings_trend_endpoint_api_v1_dashboard_job_postings_trend_get
+      parameters:
+      - name: timeframe
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 시간 단위
+          enum:
+          - daily
+          - weekly
+          - monthly
+          title: Timeframe
+        description: 시간 단위
+        example: daily
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashBoardResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/dashboard/companies/recruitment-activity:
+    get:
+      tags:
+      - Dashboard
+      summary: 주요 회사별 채용 활동 조회
+      description: 여러 회사의 채용 활동을 일간/주간/월간 단위로 비교 조회합니다.
+      operationId: get_companies_recruitment_activity_endpoint_api_v1_dashboard_companies_recruitment_activity_get
+      parameters:
+      - name: timeframe
+        in: query
+        required: true
+        schema:
+          type: string
+          description: 시간 단위
+          enum:
+          - daily
+          - weekly
+          - monthly
+          title: Timeframe
+        description: 시간 단위
+        example: daily
+      - name: company_keywords
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: '조회할 회사명 키워드 (쉼표로 구분, 시작 일치). 예: ''토스,한화,라인'''
+          title: Company Keywords
+        description: '조회할 회사명 키워드 (쉼표로 구분, 시작 일치). 예: ''토스,한화,라인'''
+        example: 토스,한화,라인,네이버,카카오,LG,현대오토에버,우아한
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashBoardResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    DashBoardResponse:
+      properties:
+        status:
+          type: integer
+          title: Status
+          description: HTTP 상태 코드
+        code:
+          type: string
+          title: Code
+          description: 응답 코드
+        message:
+          type: string
+          title: Message
+          description: 응답 메시지
+        data:
+          title: Data
+          description: 응답 데이터
+      type: object
+      required:
+      - status
+      - code
+      - message
+      - data
+      title: DashBoardResponse
+      description: 공통 대시보드 응답 형식
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PostWithSkills:
+      properties:
+        post_id:
+          type: integer
+          title: Post Id
+        post_title:
+          type: string
+          title: Post Title
+        posted_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Posted At
+        close_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Close At
+        crawled_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Crawled At
+        company_id:
+          type: integer
+          title: Company Id
+        company_name:
+          type: string
+          title: Company Name
+        skills:
+          type: string
+          title: Skills
+      type: object
+      required:
+      - post_id
+      - post_title
+      - posted_at
+      - close_at
+      - crawled_at
+      - company_id
+      - company_name
+      - skills
+      title: PostWithSkills
+      description: 공고 및 스킬 정보
+    PostsWithSkillsData:
+      properties:
+        company_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Company Name
+        year:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Year
+        total_count:
+          type: integer
+          title: Total Count
+        posts:
+          items:
+            $ref: '#/components/schemas/PostWithSkills'
+          type: array
+          title: Posts
+      type: object
+      required:
+      - total_count
+      - posts
+      title: PostsWithSkillsData
+      description: 공고 목록 데이터
+    PostsWithSkillsResponse:
+      properties:
+        status:
+          type: integer
+          title: Status
+          default: 200
+        code:
+          type: string
+          title: Code
+          default: SUCCESS
+        message:
+          type: string
+          title: Message
+        data:
+          $ref: '#/components/schemas/PostsWithSkillsData'
+      type: object
+      required:
+      - message
+      - data
+      title: PostsWithSkillsResponse
+      description: 공고 목록 조회 응답
+    SimilarSkillItem:
+      properties:
+        skill:
+          type: string
+          title: Skill
+          description: 추천된 스킬 명
+        score:
+          type: number
+          maximum: 1.0
+          minimum: -1.0
+          title: Score
+          description: 모델이 계산한 유사도 점수
+      type: object
+      required:
+      - skill
+      - score
+      title: SimilarSkillItem
+    SimilarSkillRequest:
+      properties:
+        keywords:
+          items:
+            type: string
+          type: array
+          minItems: 1
+          title: Keywords
+          description: 유사 스킬을 조회할 키워드 목록
+        top_n:
+          type: integer
+          maximum: 50.0
+          minimum: 1.0
+          title: Top N
+          description: 가져올 유사 스킬 개수 (1~50)
+          default: 10
+      type: object
+      required:
+      - keywords
+      title: SimilarSkillRequest
+    SimilarSkillResponse:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/SimilarSkillItem'
+          type: array
+          title: Results
+      type: object
+      required:
+      - results
+      title: SimilarSkillResponse
+    SkillDiversity:
+      properties:
+        company:
+          type: string
+          title: Company
+          description: 회사명
+        skills:
+          type: integer
+          minimum: 0.0
+          title: Skills
+          description: 스킬 개수
+      type: object
+      required:
+      - company
+      - skills
+      title: SkillDiversity
+      description: 회사별 스킬 다양성
+    SkillDiversityData:
+      properties:
+        view_mode:
+          type: string
+          title: View Mode
+          description: 조회 모드 (all, yearly)
+        year:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Year
+          description: 조회 연도
+        diversity:
+          items:
+            $ref: '#/components/schemas/SkillDiversity'
+          type: array
+          title: Diversity
+          description: 회사별 스킬 다양성
+      type: object
+      required:
+      - view_mode
+      - diversity
+      title: SkillDiversityData
+      description: 스킬 다양성 데이터
+    SkillDiversityResponse:
+      properties:
+        status:
+          type: integer
+          title: Status
+          description: HTTP 상태 코드
+          default: 200
+        code:
+          type: string
+          title: Code
+          description: 응답 코드
+          default: SUCCESS
+        message:
+          type: string
+          title: Message
+          description: 응답 메시지
+        data:
+          $ref: '#/components/schemas/SkillDiversityData'
+      type: object
+      required:
+      - message
+      - data
+      title: SkillDiversityResponse
+      description: 스킬 다양성 조회 응답
+    SkillTrend:
+      properties:
+        quarter:
+          type: string
+          title: Quarter
+          description: '분기 (YYYY QN 형식, 예: ''2025 Q3'', ''2025 Q4'')'
+        skills:
+          additionalProperties:
+            type: integer
+          type: object
+          title: Skills
+          description: 각 스킬별 공고 수 (해당 분기의 월별 데이터 집계값)
+      type: object
+      required:
+      - quarter
+      - skills
+      title: SkillTrend
+      description: 분기별 스킬 트렌드
+    SkillTrendData:
+      properties:
+        company:
+          type: string
+          title: Company
+          description: 회사명
+        year:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Year
+          description: 조회 연도 (None일 경우 다년도 조회)
+        years:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Years
+          description: 조회 연도 목록 (다년도 조회 시 사용)
+        trends:
+          items:
+            $ref: '#/components/schemas/SkillTrend'
+          type: array
+          title: Trends
+          description: 분기별 트렌드 목록 (연도 지정 시만 사용)
+        skill_frequencies:
+          anyOf:
+          - additionalProperties:
+              additionalProperties:
+                type: integer
+              type: object
+            type: object
+          - type: 'null'
+          title: Skill Frequencies
+          description: '연도별 스킬 빈도수 (연도 미지정 시 근 5개년 각 연도별 상위 스킬, 키: 연도 문자열, 값: 스킬별
+            빈도수)'
+      type: object
+      required:
+      - company
+      title: SkillTrendData
+      description: 스킬 트렌드 데이터
+    SkillTrendResponse:
+      properties:
+        status:
+          type: integer
+          title: Status
+          description: HTTP 상태 코드
+          default: 200
+        code:
+          type: string
+          title: Code
+          description: 응답 코드
+          default: SUCCESS
+        message:
+          type: string
+          title: Message
+          description: 응답 메시지
+        data:
+          $ref: '#/components/schemas/SkillTrendData'
+      type: object
+      required:
+      - message
+      - data
+      title: SkillTrendResponse
+      description: 스킬 트렌드 조회 응답
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

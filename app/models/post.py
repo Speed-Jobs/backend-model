@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, JSON
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, JSON, Boolean
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db.config.base import Base
@@ -14,6 +14,7 @@ class Post(Base):
     work_type = Column(String(50), nullable=True, comment="근무형태")
     
     # 추가 필드
+    # ERD 상 description 은 varchar(255)이지만, 실제 본문이 길 수 있어 Text 로 매핑
     description = Column(Text, nullable=True, comment="공고 상세설명")
     meta_data = Column(JSON, nullable=True, comment="메타데이터 (job_category, preferred_qualifications 등)")
     
@@ -21,10 +22,16 @@ class Post(Base):
     close_at = Column(DateTime, nullable=True, comment="종료시작")
     crawled_at = Column(DateTime, nullable=False, default=datetime.utcnow, index=True, comment="크롤링시작")
     source_url = Column(String(1000), nullable=False, unique=True, index=True, comment="원문url")
+    url_hash = Column(String(255), nullable=True, comment="URL 해시")
     screenshot_url = Column(String(1000), nullable=True, comment="스크린샷_url")
     
     company_id = Column(Integer, ForeignKey("company.id"), nullable=False, index=True, comment="회사id")
     industry_id = Column(Integer, ForeignKey("industry.id"), nullable=True, index=True, comment="산업id")
+
+    # 소프트 삭제 및 생성/수정 시간 (ERD 반영)
+    is_deleted = Column(Boolean, nullable=False, default=False, comment="삭제 여부")
+    created_at = Column(DateTime, nullable=True, comment="생성일시")
+    modified_at = Column(DateTime, nullable=True, comment="수정일시")
 
     # Relationships
     company = relationship("Company", back_populates="posts")
