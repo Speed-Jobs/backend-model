@@ -39,7 +39,24 @@ jobs:
           docker tag ${{ env.IMAGE_NAME }}:${{ env.VERSION }} ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           docker push ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
       
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+      
+      - name: Configure Kubernetes
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+      
+      - name: Restart Deployment
+        run: |
+          kubectl rollout restart deployment/speedjobs-backend -n skala-practice
+          kubectl rollout status deployment/speedjobs-backend -n skala-practice --timeout=5m
+      
       - name: Summary
         run: |
-          echo "✅ Docker 이미지 푸시 완료"
+          echo "Docker 이미지 푸시 완료"
           echo "- ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}"
+          echo "Kubernetes Deployment 재시작 완료"
