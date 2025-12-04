@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'speedjobs-model/**'
+      - '**'
       - '.github/workflows/deploy-backend.yaml'
 
 env:
@@ -16,7 +16,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     environment: backend-model
-
+   
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -32,24 +32,14 @@ jobs:
       
       - name: Build Docker image
         run: |
-          cd speedjobs-model
           docker build --no-cache -t ${{ env.IMAGE_NAME }}:${{ env.VERSION }} .
       
-      - name: Tag Docker image
+      - name: Tag and Push Docker image
         run: |
           docker tag ${{ env.IMAGE_NAME }}:${{ env.VERSION }} ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-          docker tag ${{ env.IMAGE_NAME }}:${{ env.VERSION }} ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          docker tag ${{ env.IMAGE_NAME }}:${{ env.VERSION }} ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-      
-      - name: Push Docker image
-        run: |
           docker push ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-          docker push ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
       
       - name: Summary
         run: |
           echo "✅ Docker 이미지 푸시 완료"
           echo "- ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}"
-          echo "- ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
-          echo "- ${{ secrets.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
