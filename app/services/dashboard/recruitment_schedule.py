@@ -123,7 +123,7 @@ def filter_and_convert_schedules(
 ) -> List[Dict[str, Any]]:
     """
     채용 일정을 필터링하고 Swagger 형식으로 변환합니다.
-    같은 회사의 여러 schedule은 하나로 병합합니다.
+    각 schedule은 별도로 반환됩니다 (다른 공고는 분리).
     
     Args:
         schedules: RecruitmentSchedule 객체 리스트
@@ -132,10 +132,9 @@ def filter_and_convert_schedules(
         end_date: 조회 종료일 (YYYY-MM-DD)
         
     Returns:
-        변환된 일정 리스트 (회사별로 병합됨)
+        변환된 일정 리스트 (각 schedule별로 분리됨)
     """
-    # company_id를 키로 하는 딕셔너리로 병합
-    merged_schedules = {}
+    result_schedules = []
     
     for schedule in schedules:
         # post가 없거나 experience가 null이면 제외
@@ -166,20 +165,19 @@ def filter_and_convert_schedules(
         company_id = schedule.company_id
         company_name = schedule.company.name if schedule.company else "Unknown"
         
-        # 같은 회사면 stages 병합, 아니면 새로 추가
-        if company_id in merged_schedules:
-            merged_schedules[company_id]["stages"].extend(stages)
-        else:
-            merged_schedules[company_id] = {
-                "id": str(company_id),
-                "company_id": company_id,
-                "company_name": company_name,
-                "type": type_filter,
-                "data_type": "actual",
-                "stages": stages
-            }
+        # 각 schedule을 별도로 추가 (병합 없음)
+        schedule_data = {
+            "id": str(company_id),
+            "company_id": company_id,
+            "company_name": company_name,
+            "type": type_filter,
+            "data_type": "actual",
+            "stages": stages
+        }
+        
+        result_schedules.append(schedule_data)
     
-    return list(merged_schedules.values())
+    return result_schedules
 
 
 # ==================== 예측 관련 유틸리티 함수 ====================
