@@ -22,7 +22,9 @@ from app.routers import (
     routers_recruit_counter,
     routers_competitor_recruit_counter,
     routers_competitor_industry_trend,
+    # routers_recruitment_schedule,
     job_matching,
+
 )
 from app.routers.v1.agent import evaluation
 
@@ -49,4 +51,5 @@ app.include_router(routers_recruit_counter.router)
 app.include_router(routers_competitor_recruit_counter.router)
 app.include_router(routers_competitor_industry_trend.router)
 app.include_router(job_matching.router)
+# app.include_router(routers_recruitment_schedule.router)
 app.include_router(evaluation.router, prefix="/api/v1") 

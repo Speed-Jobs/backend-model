@@ -30,8 +30,8 @@ COPY . .
 # 포트 노출
 EXPOSE 8000
 
-# 스케줄러를 백그라운드로 실행하고 FastAPI 서버를 포그라운드로 실행
-CMD uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1
+# 두 프로세스를 안전하게 실행
+CMD ["/bin/bash", "-c", "uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1 & python -m app.core.schedular.schedular_skill_model & wait -n; kill $(jobs -p) 2>/dev/null || true"]
 
 
 #   python -m app.core.schedular.scheduler & 
