@@ -2,13 +2,42 @@
 Recruitment Schedule Service
 """
 from typing import List, Optional, Dict, Any
-from sqlalchemy.orm import Session
-from datetime import datetime
+from sqlalchemy.orm import Session, joinedload
+from sqlalchemy import or_
+from datetime import datetime, timedelta
+from collections import defaultdict
+import calendar
 from app.db.crud.db_recruitment_schedule import (
     get_recruitment_schedules_by_company,
     get_recruitment_schedules
 )
 from app.models.recruitment_schedule import RecruitmentSchedule
+from app.models.company import Company
+from app.models.post import Post
+# SQLAlchemy relationship 초기화를 위한 모델 import
+from app.models.industry import Industry
+from app.models.post_skill import PostSkill
+from app.models.position import Position
+from app.models.position_skill import PositionSkill
+from app.models.industry_skill import IndustrySkill
+from app.models.skill import Skill
+
+# ==================== 예측 관련 상수 ====================
+PREDICTION_STAGES = ["application_date", "document_screening_date", "first_interview", "second_interview", "join_date"]
+PREDICTION_STAGE_NAMES = {
+    "application_date": "서류접수",
+    "document_screening_date": "서류전형",
+    "first_interview": "1차면접",
+    "second_interview": "2차면접",
+    "join_date": "입사일"
+}
+PREDICTION_DURATIONS = {
+    "application_date": 7,
+    "document_screening_date": 3,
+    "first_interview": 2,
+    "second_interview": 2,
+    "join_date": 0
+}
 
 
 def parse_date_range(date_array: list) -> tuple:
@@ -76,7 +105,7 @@ def convert_to_stages(
         
         if start_date and is_date_in_range(start_date, start_filter, end_filter):
             stages.append({
-                "id": f"{schedule.schedule_id}-{stage_id_counter}",
+                "id": f"{schedule.company_id}-{stage_id_counter}",
                 "stage": stage_name,
                 "start_date": start_date,
                 "end_date": end_date
@@ -94,6 +123,7 @@ def filter_and_convert_schedules(
 ) -> List[Dict[str, Any]]:
     """
     채용 일정을 필터링하고 Swagger 형식으로 변환합니다.
+    같은 회사의 여러 schedule은 하나로 병합합니다.
     
     Args:
         schedules: RecruitmentSchedule 객체 리스트
@@ -102,9 +132,10 @@ def filter_and_convert_schedules(
         end_date: 조회 종료일 (YYYY-MM-DD)
         
     Returns:
-        변환된 일정 리스트
+        변환된 일정 리스트 (회사별로 병합됨)
     """
-    result_schedules = []
+    # company_id를 키로 하는 딕셔너리로 병합
+    merged_schedules = {}
     
     for schedule in schedules:
         # post가 없거나 experience가 null이면 제외
@@ -132,21 +163,369 @@ def filter_and_convert_schedules(
             continue
         
         # 회사 정보
+        company_id = schedule.company_id
         company_name = schedule.company.name if schedule.company else "Unknown"
         
-        # Swagger 형식으로 변환
-        schedule_data = {
-            "id": str(schedule.schedule_id),
-            "company_id": schedule.company_id,
-            "company_name": company_name,
-            "type": type_filter,
-            "data_type": "actual",
-            "stages": stages
-        }
-        
-        result_schedules.append(schedule_data)
+        # 같은 회사면 stages 병합, 아니면 새로 추가
+        if company_id in merged_schedules:
+            merged_schedules[company_id]["stages"].extend(stages)
+        else:
+            merged_schedules[company_id] = {
+                "id": str(company_id),
+                "company_id": company_id,
+                "company_name": company_name,
+                "type": type_filter,
+                "data_type": "actual",
+                "stages": stages
+            }
     
-    return result_schedules
+    return list(merged_schedules.values())
+
+
+# ==================== 예측 관련 유틸리티 함수 ====================
+def normalize_date(date_str: str) -> Optional[str]:
+    """날짜 정규화"""
+    if not date_str:
+        return None
+    return date_str.replace(".", "-").replace("/", "-")
+
+
+def get_dates_from_json_for_prediction(date_json: list) -> tuple:
+    """JSON 배열에서 시작/종료 날짜 추출 (예측용)"""
+    if not date_json:
+        return None, None
+    
+    dates = []
+    for date_range in date_json:
+        if date_range and date_range[0]:
+            dates.append(date_range[0])
+        if date_range and len(date_range) > 1 and date_range[1]:
+            dates.append(date_range[1])
+    
+    if not dates:
+        return None, None
+    
+    return min(dates), max(dates)
+
+
+def to_pattern(date_str: str) -> Optional[Dict[str, int]]:
+    """날짜 → 패턴 (월, 주차, 요일)"""
+    if not date_str:
+        return None
+    
+    try:
+        normalized = normalize_date(date_str)
+        date_obj = datetime.strptime(normalized, "%Y-%m-%d")
+        
+        cal = calendar.monthcalendar(date_obj.year, date_obj.month)
+        week = next((i for i, w in enumerate(cal, 1) if date_obj.day in w), 1)
+        
+        return {
+            "month": date_obj.month,
+            "week": week,
+            "weekday": date_obj.weekday()
+        }
+    except:
+        return None
+
+
+def to_date(pattern: Dict[str, int], year: int) -> Optional[str]:
+    """패턴 → 날짜"""
+    if not pattern:
+        return None
+    
+    try:
+        cal = calendar.monthcalendar(year, pattern["month"])
+        week_idx = min(pattern["week"] - 1, len(cal) - 1)
+        day = cal[week_idx][pattern["weekday"]]
+        
+        if day == 0:
+            for week in cal:
+                if week[pattern["weekday"]] != 0:
+                    day = week[pattern["weekday"]]
+                    break
+        
+        if day == 0:
+            return None
+        
+        return f"{year}-{pattern['month']:02d}-{day:02d}"
+    except:
+        return None
+
+
+def avg_pattern(patterns: List[Dict[str, int]]) -> Optional[Dict[str, int]]:
+    """패턴 평균 계산"""
+    if not patterns:
+        return None
+    
+    return {
+        "month": round(sum(p["month"] for p in patterns) / len(patterns)),
+        "week": round(sum(p["week"] for p in patterns) / len(patterns)),
+        "weekday": round(sum(p["weekday"] for p in patterns) / len(patterns))
+    }
+
+
+# ==================== 패턴 추출 ====================
+def extract_company_patterns(company_id: int, db: Session, type_filter: str) -> Optional[Dict[str, Any]]:
+    """특정 회사의 과거 채용 패턴 추출"""
+    posts = db.query(Post)\
+        .options(joinedload(Post.company))\
+        .filter(Post.company_id == company_id, Post.experience == type_filter)\
+        .all()
+    
+    if not posts:
+        return None
+    
+    company_name = posts[0].company.name if posts[0].company else "Unknown"
+    
+    # Schedule 조회
+    post_ids = [p.id for p in posts]
+    schedules = {
+        s.post_id: s 
+        for s in db.query(RecruitmentSchedule).filter(RecruitmentSchedule.post_id.in_(post_ids)).all()
+    }
+    
+    # 연도별 그룹화
+    yearly = defaultdict(lambda: {"patterns": defaultdict(list)})
+    
+    for post in posts:
+        schedule = schedules.get(post.id)
+        year = None
+        
+        # 연도 추출
+        if schedule and schedule.application_date:
+            start, _ = get_dates_from_json_for_prediction(schedule.application_date)
+            if start:
+                try:
+                    year = datetime.strptime(normalize_date(start), "%Y-%m-%d").year
+                except:
+                    pass
+        
+        if not year and post.posted_at:
+            year = post.posted_at.year
+        
+        if not year:
+            continue
+        
+        # 각 단계별 패턴 추출
+        for stage in PREDICTION_STAGES:
+            if schedule:
+                date_json = getattr(schedule, stage, None)
+                if date_json:
+                    start, _ = get_dates_from_json_for_prediction(date_json)
+                    if start:
+                        pattern = to_pattern(start)
+                        if pattern:
+                            yearly[year]["patterns"][stage].append(pattern)
+            
+            # Schedule 없으면 Post에서
+            if stage == "application_date" and post.posted_at and not yearly[year]["patterns"][stage]:
+                pattern = to_pattern(post.posted_at.strftime("%Y-%m-%d"))
+                if pattern:
+                    yearly[year]["patterns"][stage].append(pattern)
+    
+    if not yearly:
+        return None
+    
+    # 연도별 평균 패턴 계산
+    result = {}
+    for year, data in yearly.items():
+        avg_patterns = {}
+        for stage, patterns in data["patterns"].items():
+            if patterns:
+                avg_patterns[stage] = avg_pattern(patterns)
+        
+        if avg_patterns:
+            result[year] = avg_patterns
+    
+    if not result:
+        return None
+    
+    return {
+        "company_id": company_id,
+        "company_name": company_name,
+        "patterns": result
+    }
+
+
+# ==================== 일정 예측 ====================
+def predict_schedule(patterns: Dict[str, Any], target_year: int) -> Optional[Dict[str, Any]]:
+    """패턴 기반 채용 일정 예측"""
+    if not patterns or not patterns.get("patterns"):
+        return None
+    
+    # 최신 연도 패턴 사용
+    latest_year = max(patterns["patterns"].keys())
+    latest_patterns = patterns["patterns"][latest_year]
+    
+    predicted = {}
+    prev_date = None
+    
+    for stage in PREDICTION_STAGES:
+        if stage not in latest_patterns:
+            continue
+        
+        pattern = latest_patterns[stage]
+        date_str = to_date(pattern, target_year)
+        
+        if not date_str:
+            continue
+        
+        # 날짜 순서 검증
+        try:
+            curr_date = datetime.strptime(date_str, "%Y-%m-%d")
+            if prev_date and curr_date < prev_date:
+                continue
+            prev_date = curr_date
+        except:
+            continue
+        
+        # 종료일 계산
+        try:
+            end_date = (curr_date + timedelta(days=PREDICTION_DURATIONS.get(stage, 1))).strftime("%Y-%m-%d")
+        except:
+            end_date = date_str
+        
+        predicted[stage] = {
+            "start_date": date_str,
+            "end_date": end_date
+        }
+    
+    if not predicted:
+        return None
+    
+    return {
+        "company_id": patterns["company_id"],
+        "company_name": patterns["company_name"],
+        "stages": predicted
+    }
+
+
+def format_predicted_response(predictions: List[Dict[str, Any]], type_filter: str) -> List[Dict[str, Any]]:
+    """예측 결과를 Swagger 형식으로 변환"""
+    schedules = []
+    
+    for pred in predictions:
+        stages = []
+        stage_id_counter = 1
+        
+        for stage, dates in pred["stages"].items():
+            stages.append({
+                "id": f"{pred['company_id']}-{stage_id_counter}",
+                "stage": PREDICTION_STAGE_NAMES[stage],
+                "start_date": dates["start_date"],
+                "end_date": dates["end_date"]
+            })
+            stage_id_counter += 1
+        
+        schedules.append({
+            "id": str(pred["company_id"]),
+            "company_id": pred["company_id"],
+            "company_name": pred["company_name"],
+            "type": type_filter,
+            "data_type": "predicted",
+            "stages": stages
+        })
+    
+    return schedules
+
+
+def get_predicted_schedules(
+    db: Session,
+    type_filter: str,
+    start_date: str,
+    end_date: str,
+    company_ids: Optional[List[int]] = None
+) -> List[Dict[str, Any]]:
+    """
+    예측된 채용 일정을 조회합니다.
+    
+    Args:
+        db: Database session
+        type_filter: "신입" 또는 "경력"
+        start_date: 조회 시작일 (YYYY-MM-DD) - 예측 연도 결정에 사용
+        end_date: 조회 종료일 (YYYY-MM-DD) - 예측 연도 결정에 사용
+        company_ids: 회사 ID 리스트 (None이면 경쟁사 전체)
+        
+    Returns:
+        예측된 일정 리스트
+    """
+    try:
+        # 예측 연도 결정 (start_date의 연도 사용)
+        target_year = datetime.strptime(start_date, "%Y-%m-%d").year
+        
+        # 조회할 회사 결정
+        if company_ids:
+            companies = db.query(Company.id, Company.name)\
+                .filter(Company.id.in_(company_ids))\
+                .order_by(Company.id)\
+                .all()
+        else:
+            # 경쟁사 전체 조회
+            from app.db.crud.db_competitors_skills import COMPETITOR_GROUPS
+            recruiting_companies = ["네이버", "카카오", "현대오토에버", "한화시스템", "LG CNS"]
+            like_conditions = []
+            
+            for company_name in recruiting_companies:
+                if company_name in COMPETITOR_GROUPS:
+                    for keyword in COMPETITOR_GROUPS[company_name]:
+                        like_conditions.append(Company.name.like(keyword))
+            
+            companies = db.query(Company.id, Company.name)\
+                .filter(or_(*like_conditions))\
+                .order_by(Company.id)\
+                .all()
+        
+        # 패턴 추출 및 예측
+        predictions = []
+        for company_id, company_name in companies:
+            patterns = extract_company_patterns(company_id, db, type_filter)
+            if patterns:
+                prediction = predict_schedule(patterns, target_year)
+                if prediction:
+                    # 날짜 필터링 (start_date ~ end_date 범위 내의 예측만 포함)
+                    filtered_stages = {}
+                    for stage, dates in prediction["stages"].items():
+                        pred_start = dates["start_date"]
+                        if is_date_in_range(pred_start, start_date, end_date):
+                            filtered_stages[stage] = dates
+                    
+                    if filtered_stages:
+                        prediction["stages"] = filtered_stages
+                        predictions.append(prediction)
+        
+        # Swagger 형식으로 변환
+        return format_predicted_response(predictions, type_filter)
+    
+    except Exception as e:
+        return []
+
+
+def merge_actual_and_predicted(
+    actual_schedules: List[Dict[str, Any]],
+    predicted_schedules: List[Dict[str, Any]]
+) -> List[Dict[str, Any]]:
+    """
+    actual과 predicted 일정을 병합합니다.
+    data_type="all"일 때는 같은 회사라도 actual과 predicted를 구분해서 반환합니다.
+    
+    Args:
+        actual_schedules: 실제 일정 리스트
+        predicted_schedules: 예측 일정 리스트
+        
+    Returns:
+        병합된 일정 리스트 (actual과 predicted가 구분됨)
+    """
+    # actual과 predicted를 모두 포함 (같은 회사라도 data_type이 다르면 별도 항목)
+    result = []
+    
+    # actual 추가
+    result.extend(actual_schedules)
+    
+    # predicted 추가 (별도 항목으로)
+    result.extend(predicted_schedules)
+    
+    return result
 
 
 def get_company_recruitment_schedule(
@@ -154,7 +533,8 @@ def get_company_recruitment_schedule(
     company_id: int,
     type_filter: str,
     start_date: str,
-    end_date: str
+    end_date: str,
+    data_type: str = "actual"
 ) -> Dict[str, Any]:
     """
     특정 회사의 채용 일정을 조회합니다.
@@ -165,24 +545,51 @@ def get_company_recruitment_schedule(
         type_filter: "신입" 또는 "경력"
         start_date: 조회 시작일 (YYYY-MM-DD)
         end_date: 조회 종료일 (YYYY-MM-DD)
+        data_type: "actual", "predicted", "all"
         
     Returns:
         Swagger 형식의 응답 딕셔너리
     """
     try:
-        # CRUD로 데이터 조회
-        schedules = get_recruitment_schedules_by_company(
-            db=db,
-            company_id=company_id
-        )
+        result_schedules = []
         
-        # 필터링 및 변환
-        result_schedules = filter_and_convert_schedules(
-            schedules=schedules,
-            type_filter=type_filter,
-            start_date=start_date,
-            end_date=end_date
-        )
+        # actual 데이터 조회
+        if data_type in ["actual", "all"]:
+            schedules = get_recruitment_schedules_by_company(
+                db=db,
+                company_id=company_id
+            )
+            
+            actual_schedules = filter_and_convert_schedules(
+                schedules=schedules,
+                type_filter=type_filter,
+                start_date=start_date,
+                end_date=end_date
+            )
+            
+            if data_type == "actual":
+                result_schedules = actual_schedules
+            else:
+                result_schedules = actual_schedules
+        
+        # predicted 데이터 조회 (경력은 예측 불가)
+        if data_type in ["predicted", "all"] and type_filter == "신입":
+            predicted_schedules = get_predicted_schedules(
+                db=db,
+                type_filter=type_filter,
+                start_date=start_date,
+                end_date=end_date,
+                company_ids=[company_id]
+            )
+            
+            if data_type == "predicted":
+                result_schedules = predicted_schedules
+            else:
+                # all인 경우 병합
+                result_schedules = merge_actual_and_predicted(
+                    result_schedules,
+                    predicted_schedules
+                )
         
         return {
             "status": 200,
@@ -207,7 +614,8 @@ def get_all_recruitment_schedules(
     type_filter: str,
     start_date: str,
     end_date: str,
-    company_ids: Optional[List[int]] = None
+    company_ids: Optional[List[int]] = None,
+    data_type: str = "actual"
 ) -> Dict[str, Any]:
     """
     전체 또는 특정 회사들의 채용 일정을 조회합니다.
@@ -218,24 +626,51 @@ def get_all_recruitment_schedules(
         start_date: 조회 시작일 (YYYY-MM-DD)
         end_date: 조회 종료일 (YYYY-MM-DD)
         company_ids: 회사 ID 리스트 (None이면 전체)
+        data_type: "actual", "predicted", "all"
         
     Returns:
         Swagger 형식의 응답 딕셔너리
     """
     try:
-        # CRUD로 데이터 조회
-        schedules = get_recruitment_schedules(
-            db=db,
-            company_ids=company_ids
-        )
+        result_schedules = []
         
-        # 필터링 및 변환
-        result_schedules = filter_and_convert_schedules(
-            schedules=schedules,
-            type_filter=type_filter,
-            start_date=start_date,
-            end_date=end_date
-        )
+        # actual 데이터 조회
+        if data_type in ["actual", "all"]:
+            schedules = get_recruitment_schedules(
+                db=db,
+                company_ids=company_ids
+            )
+            
+            actual_schedules = filter_and_convert_schedules(
+                schedules=schedules,
+                type_filter=type_filter,
+                start_date=start_date,
+                end_date=end_date
+            )
+            
+            if data_type == "actual":
+                result_schedules = actual_schedules
+            else:
+                result_schedules = actual_schedules
+        
+        # predicted 데이터 조회 (경력은 예측 불가)
+        if data_type in ["predicted", "all"] and type_filter == "신입":
+            predicted_schedules = get_predicted_schedules(
+                db=db,
+                type_filter=type_filter,
+                start_date=start_date,
+                end_date=end_date,
+                company_ids=company_ids
+            )
+            
+            if data_type == "predicted":
+                result_schedules = predicted_schedules
+            else:
+                # all인 경우 병합
+                result_schedules = merge_actual_and_predicted(
+                    result_schedules,
+                    predicted_schedules
+                )
         
         return {
             "status": 200,
