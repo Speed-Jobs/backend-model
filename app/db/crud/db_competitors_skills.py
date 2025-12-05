@@ -5,8 +5,8 @@ from datetime import datetime
 import pandas as pd
 # v2
 
-# 경쟁사 그룹 및 표시명은 company_groups.py에서 import
-from app.config.company_groups import COMPANY_GROUPS, COMPANY_KEY_TO_DISPLAY_NAME
+# 경쟁사 그룹은 company_groups.py에서 import
+from app.config.company_groups import COMPANY_GROUPS
 
 EFFECTIVE_POSTED_AT_SQL = "COALESCE(p.posted_at, p.crawled_at)"
 

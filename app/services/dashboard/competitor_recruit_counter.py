@@ -12,7 +12,20 @@ from app.schemas.schemas_competitor_recruit_counter import (
     CompanyInfo,
     ActivityItem
 )
-from app.config.company_groups import COMPANY_GROUPS, COMPANY_KEY_TO_DISPLAY_NAME, get_company_patterns
+from app.config.company_groups import COMPANY_GROUPS, get_company_patterns
+
+# 표시명 매핑 (로컬 정의)
+COMPANY_KEY_TO_DISPLAY_NAME = {
+    "toss": "토스",
+    "kakao": "카카오",
+    "hanwha": "한화시스템",
+    "hyundai autoever": "현대오토에버",
+    "woowahan": "우아한형제들",
+    "coupang": "쿠팡",
+    "line": "라인",
+    "naver": "네이버",
+    "lg cns": "LG CNS",
+}
 
 
 def _calculate_period(timeframe: str) -> Tuple[date, date]:

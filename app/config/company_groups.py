@@ -16,18 +16,6 @@ COMPANY_GROUPS = {
     "lg cns": ["LG_CNS%", "LG CNS%"],
 }
 
-COMPANY_KEY_TO_DISPLAY_NAME = {
-    "toss": "토스",
-    "kakao": "카카오",
-    "hanwha": "한화시스템",
-    "hyundai autoever": "현대오토에버",
-    "woowahan": "우아한형제들",
-    "coupang": "쿠팡",
-    "line": "라인",
-    "naver": "네이버",
-    "lg cns": "LG CNS",
-}
-
 
 def get_company_patterns(keyword: str) -> List[str]:
     """
