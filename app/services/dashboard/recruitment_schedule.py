@@ -9,7 +9,8 @@ from collections import defaultdict
 import calendar
 from app.db.crud.db_recruitment_schedule import (
     get_recruitment_schedules_by_company,
-    get_recruitment_schedules
+    get_recruitment_schedules,
+    get_competition_intensity_analysis
 )
 from app.models.recruitment_schedule import RecruitmentSchedule
 from app.models.company import Company
@@ -606,7 +607,7 @@ def get_all_recruitment_schedules(
 ) -> Dict[str, Any]:
     """
     전체 또는 특정 회사들의 채용 일정을 조회합니다.
-    
+
     Args:
         db: Database session
         type_filter: "신입" 또는 "경력"
@@ -614,32 +615,32 @@ def get_all_recruitment_schedules(
         end_date: 조회 종료일 (YYYY-MM-DD)
         company_ids: 회사 ID 리스트 (None이면 전체)
         data_type: "actual", "predicted", "all"
-        
+
     Returns:
         Swagger 형식의 응답 딕셔너리
     """
     try:
         result_schedules = []
-        
+
         # actual 데이터 조회
         if data_type in ["actual", "all"]:
             schedules = get_recruitment_schedules(
                 db=db,
                 company_ids=company_ids
             )
-            
+
             actual_schedules = filter_and_convert_schedules(
                 schedules=schedules,
                 type_filter=type_filter,
                 start_date=start_date,
                 end_date=end_date
             )
-            
+
             if data_type == "actual":
                 result_schedules = actual_schedules
             else:
                 result_schedules = actual_schedules
-        
+
         # predicted 데이터 조회 (경력은 예측 불가)
         if data_type in ["predicted", "all"] and type_filter == "신입":
             predicted_schedules = get_predicted_schedules(
@@ -649,7 +650,7 @@ def get_all_recruitment_schedules(
                 end_date=end_date,
                 company_ids=company_ids
             )
-            
+
             if data_type == "predicted":
                 result_schedules = predicted_schedules
             else:
@@ -658,7 +659,7 @@ def get_all_recruitment_schedules(
                     result_schedules,
                     predicted_schedules
                 )
-        
+
         return {
             "status": 200,
             "code": "SUCCESS",
@@ -667,7 +668,41 @@ def get_all_recruitment_schedules(
                 "schedules": result_schedules
             }
         }
-    
+
+    except Exception as e:
+        return {
+            "status": 500,
+            "code": "INTERNAL_ERROR",
+            "message": f"오류 발생: {str(e)}",
+            "data": None
+        }
+
+
+def get_competition_intensity(
+    db: Session,
+    start_date: str,
+    end_date: str,
+    type_filter: Optional[str] = None
+) -> Dict[str, Any]:
+    """
+    날짜별 경쟁 강도 분석
+
+    Args:
+        db: Database session
+        start_date: 분석 시작일 (YYYY-MM-DD)
+        end_date: 분석 종료일 (YYYY-MM-DD)
+        type_filter: 채용 유형 필터 ("신입", "경력", None)
+
+    Returns:
+        Swagger 형식의 응답 딕셔너리
+    """
+    try:
+        return get_competition_intensity_analysis(
+            db=db,
+            start_date=start_date,
+            end_date=end_date,
+            type_filter=type_filter
+        )
     except Exception as e:
         return {
             "status": 500,

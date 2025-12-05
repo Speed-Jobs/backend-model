@@ -6,8 +6,30 @@
 주요 기능:
 1. 9개 주요 경쟁사 그룹의 채용 일정 조회
 2. 각 날짜별로 동시에 채용 중인 경쟁사 수 계산 (회사 단위 중복 제거)
-3. 신입/경력 필터링 지원
-4. Raw SQL을 사용하여 DB 쿼리와 완전히 동일한 결과 보장
+3. 각 날짜별 채용 중인 회사 목록 제공 (company_id, company_name)
+4. 신입/경력 필터링 지원
+5. Raw SQL을 사용하여 DB 쿼리와 완전히 동일한 결과 보장
+
+출력 형식:
+{
+    "status": 200,
+    "code": "SUCCESS",
+    "message": "경쟁 강도 분석 성공",
+    "data": {
+        "period": {"start_date": "2025-11-01", "end_date": "2025-11-30"},
+        "max_overlaps": 5,
+        "daily_intensity": [
+            {
+                "date": "2025-11-01",
+                "overlap_count": 2,
+                "companies": [
+                    {"company_id": 3, "company_name": "삼성전자"},
+                    {"company_id": 4, "company_name": "LG전자"}
+                ]
+            }
+        ]
+    }
+}
 
 사용법:
     python test_04_recruitment_intensity.py [시작일] [종료일] [채용유형]
@@ -216,11 +238,17 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
             "message": "경쟁 강도 분석 성공",
             "data": {
                 "period": {"start_date": "2025-11-01", "end_date": "2025-11-30"},
-                "type": "전체",
                 "max_overlaps": 14,
                 "daily_intensity": [
-                    {"date": "2025-11-01", "overlap_count": 11},
-                    {"date": "2025-11-02", "overlap_count": 11},
+                    {
+                        "date": "2025-11-01",
+                        "overlap_count": 11,
+                        "companies": [
+                            {"company_id": 3, "company_name": "삼성전자"},
+                            {"company_id": 4, "company_name": "LG전자"},
+                            ...
+                        ]
+                    },
                     ...
                 ]
             }
@@ -228,9 +256,10 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
 
         디버깅 정보:
         {
-            "competitor_count": 47,  # 찾은 경쟁사 회사 수
-            "max_overlaps": 14,      # 최대 겹침 수
-            "daily_intensity_count": 30  # 분석된 날짜 수
+            "competitor_count": 47,        # 찾은 경쟁사 회사 수
+            "max_overlaps": 14,            # 최대 겹침 수
+            "daily_intensity_count": 30,   # 분석된 날짜 수
+            "type_filter": "전체"          # 채용 유형 필터 (디버깅용)
         }
 
     Example:
@@ -264,11 +293,10 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
             "message": "경쟁 강도 분석 성공",
             "data": {
                 "period": {"start_date": start_date, "end_date": end_date},
-                "type": type_filter if type_filter else "전체",
                 "max_overlaps": 0,
                 "daily_intensity": []
             }
-        }, {"competitor_count": 0, "max_overlaps": 0}
+        }, {"competitor_count": 0, "max_overlaps": 0, "type_filter": type_filter if type_filter else "전체"}
 
     company_where = " OR ".join(company_conditions)
 
@@ -294,18 +322,18 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
     #    - p.experience IS NOT NULL로 experience가 있는 공고만 포함
     #    - experience_filter로 신입/경력 필터링 (옵션)
     #
-    # 3) LEFT JOIN
+    # 3) INNER JOIN
     #    - 날짜 시퀀스와 채용 일정을 날짜 범위로 조인
     #    - dr.date BETWEEN rs.start_date AND rs.end_date
     #
-    # 4) GROUP BY & COUNT(DISTINCT)
-    #    - 날짜별로 그룹화
-    #    - COUNT(DISTINCT rs.company_id)로 회사 단위 중복 제거
-    #    - HAVING overlap_count > 0으로 채용 중인 날짜만 반환
+    # 4) SELECT
+    #    - 날짜, company_id, company_name을 모두 반환
+    #    - Python에서 날짜별로 그룹화하여 처리
     sql_query = text(f"""
         SELECT
             dr.date,
-            COUNT(DISTINCT rs.company_id) AS overlap_count
+            rs.company_id,
+            rs.company_name
         FROM (
             SELECT DATE_ADD(:start_date, INTERVAL n DAY) AS date
             FROM (
@@ -318,7 +346,7 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
             ) numbers
             WHERE DATE_ADD(:start_date, INTERVAL n DAY) <= :end_date
         ) dr
-        LEFT JOIN (
+        INNER JOIN (
             SELECT
                 rs.schedule_id,
                 rs.company_id,
@@ -350,9 +378,7 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
             AND rs.end_date != '0000-01-01'
             AND rs.end_date >= :start_date
             AND rs.start_date <= :end_date
-        GROUP BY dr.date
-        HAVING overlap_count > 0
-        ORDER BY dr.date
+        ORDER BY dr.date, rs.company_id
     """)
 
     # 4. SQL 실행
@@ -360,16 +386,41 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
     rows = result.fetchall()
 
     # 5. 결과 변환
-    # SQL 결과를 Python 딕셔너리 리스트로 변환하고 최대값 계산
+    # SQL 결과를 날짜별로 그룹화하여 회사 리스트 생성
+    from collections import defaultdict
+
+    daily_companies = defaultdict(set)  # 날짜별 고유 company_id 집합
+    company_info = {}  # company_id -> company_name 매핑
+
+    for row in rows:
+        date_str = str(row.date)
+        company_id = row.company_id
+        company_name = row.company_name
+
+        daily_companies[date_str].add(company_id)
+        company_info[company_id] = company_name
+
+    # 날짜별 결과 리스트 생성
     daily_intensity = []
     max_overlaps = 0
 
-    for row in rows:
-        overlap_count = row.overlap_count
+    for date_str in sorted(daily_companies.keys()):
+        company_ids = sorted(daily_companies[date_str])
+        overlap_count = len(company_ids)
         max_overlaps = max(max_overlaps, overlap_count)
+
+        companies = [
+            {
+                "company_id": company_id,
+                "company_name": company_info[company_id]
+            }
+            for company_id in company_ids
+        ]
+
         daily_intensity.append({
-            "date": str(row.date),
-            "overlap_count": overlap_count
+            "date": date_str,
+            "overlap_count": overlap_count,
+            "companies": companies
         })
 
     # 6. 디버깅 정보 수집
@@ -388,18 +439,47 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
         "message": "경쟁 강도 분석 성공",
         "data": {
             "period": {"start_date": start_date, "end_date": end_date},
-            "type": type_filter if type_filter else "전체",
             "max_overlaps": max_overlaps,
             "daily_intensity": daily_intensity
         }
     }, {
         "competitor_count": competitor_count,
         "max_overlaps": max_overlaps,
-        "daily_intensity_count": len(daily_intensity)
+        "daily_intensity_count": len(daily_intensity),
+        "type_filter": type_filter if type_filter else "전체"
     }
 
 
 # ==================== 메인 ====================
+def print_analysis_result(result, debug_info, type_label):
+    """분석 결과를 출력하는 헬퍼 함수"""
+    print(f"\n{'='*60}")
+    print(f"[{type_label}] 경쟁 강도 분석 결과")
+    print(f"{'='*60}")
+
+    # 날짜별 결과 출력
+    print(f"\n[날짜별 경쟁 강도]")
+    if result["data"]["daily_intensity"]:
+        for item in result["data"]["daily_intensity"]:  # 전체 출력
+            companies_str = ", ".join([
+                f"{c['company_name']}(ID:{c['company_id']})"
+                for c in item['companies'][:3]  # 처음 3개만 출력
+            ])
+            if len(item['companies']) > 3:
+                companies_str += f" 외 {len(item['companies']) - 3}개"
+            print(f"{item['date']}\t{item['overlap_count']}개\t{companies_str}")
+
+        print(f"\n총 {len(result['data']['daily_intensity'])}일")
+    else:
+        print("  (결과 없음)")
+
+    # 통계 출력
+    print(f"\n[통계]")
+    print(f"  경쟁사 수: {debug_info['competitor_count']}개")
+    print(f"  최대 겹침: {debug_info['max_overlaps']}개")
+    print(f"  분석 날짜: {debug_info['daily_intensity_count']}일")
+
+
 def main():
     """
     메인 실행 함수
@@ -407,39 +487,20 @@ def main():
     커맨드라인 인자를 파싱하여 경쟁 강도 분석을 실행하고 결과를 출력합니다.
 
     실행 방법:
-        python test_04_recruitment_intensity.py [시작일] [종료일] [채용유형]
+        python test_04_recruitment_intensity.py [시작일] [종료일] [모드]
 
     인자:
         시작일: 분석 시작 날짜 (YYYY-MM-DD), 기본값: 2025-11-01
         종료일: 분석 종료 날짜 (YYYY-MM-DD), 기본값: 2025-11-30
-        채용유형: "신입" 또는 "경력", 기본값: 전체
+        모드: "신입", "경력", "전체", "비교" (기본값: 비교)
+             - "비교": 신입/경력/전체를 모두 분석하여 비교
 
     출력:
-        1. 설정 정보 (시작일, 종료일, 채용 유형)
-        2. 날짜별 경쟁 강도 (날짜 \t 겹침 수)
-        3. 통계 (경쟁사 수, 최대 겹침, 분석 날짜 수)
+        1. 설정 정보 (시작일, 종료일)
+        2. 각 채용 유형별 결과 (날짜별 경쟁 강도, 통계)
 
     Example:
-        $ python test_04_recruitment_intensity.py 2025-11-01 2025-11-30 신입
-
-        ============================================================
-        경쟁 강도 분석 (Company 단위)
-        ============================================================
-
-        [설정]
-          시작일: 2025-11-01
-          종료일: 2025-11-30
-          채용 유형: 신입
-
-        [날짜별 경쟁 강도]
-        2025-11-01      11
-        2025-11-02      11
-        ...
-
-        [통계]
-          경쟁사 수: 47개
-          최대 겹침: 14개
-          분석 날짜: 30일
+        $ python test_04_recruitment_intensity.py 2025-11-01 2025-11-30 비교
     """
     print("\n" + "=" * 60)
     print("경쟁 강도 분석 (Company 단위)")
@@ -451,32 +512,68 @@ def main():
         # 커맨드라인 인자 파싱
         start_date = sys.argv[1] if len(sys.argv) > 1 else "2025-11-01"
         end_date = sys.argv[2] if len(sys.argv) > 2 else "2025-11-30"
-        type_filter = sys.argv[3] if len(sys.argv) > 3 else None
+        mode = sys.argv[3] if len(sys.argv) > 3 else "비교"
 
         # 설정 출력
         print(f"\n[설정]")
         print(f"  시작일: {start_date}")
         print(f"  종료일: {end_date}")
-        print(f"  채용 유형: {type_filter if type_filter else '전체'}")
+        print(f"  모드: {mode}")
 
-        # 경쟁 강도 분석 실행
-        result, debug_info = analyze_competition_intensity(
-            db=db,
-            start_date=start_date,
-            end_date=end_date,
-            type_filter=type_filter
-        )
+        # 모드에 따라 분석 실행
+        if mode == "비교":
+            # 신입, 경력, 전체를 모두 분석
+            print(f"\n{'*'*60}")
+            print("신입/경력/전체를 모두 분석하여 비교합니다.")
+            print(f"{'*'*60}")
 
-        # 날짜별 결과 출력
-        print(f"\n[날짜별 경쟁 강도]")
-        for item in result["data"]["daily_intensity"]:
-            print(f"{item['date']}\t{item['overlap_count']}")
+            # 1. 신입
+            result_new, debug_new = analyze_competition_intensity(
+                db=db,
+                start_date=start_date,
+                end_date=end_date,
+                type_filter="신입"
+            )
+            print_analysis_result(result_new, debug_new, "신입")
 
-        # 통계 출력
-        print(f"\n[통계]")
-        print(f"  경쟁사 수: {debug_info['competitor_count']}개")
-        print(f"  최대 겹침: {debug_info['max_overlaps']}개")
-        print(f"  분석 날짜: {debug_info['daily_intensity_count']}일")
+            # 2. 경력
+            result_career, debug_career = analyze_competition_intensity(
+                db=db,
+                start_date=start_date,
+                end_date=end_date,
+                type_filter="경력"
+            )
+            print_analysis_result(result_career, debug_career, "경력")
+
+            # 3. 전체
+            result_all, debug_all = analyze_competition_intensity(
+                db=db,
+                start_date=start_date,
+                end_date=end_date,
+                type_filter=None
+            )
+            print_analysis_result(result_all, debug_all, "전체")
+
+            # 비교 요약
+            print(f"\n{'='*60}")
+            print("[비교 요약]")
+            print(f"{'='*60}")
+            print(f"신입 최대 겹침: {debug_new['max_overlaps']}개")
+            print(f"경력 최대 겹침: {debug_career['max_overlaps']}개")
+            print(f"전체 최대 겹침: {debug_all['max_overlaps']}개")
+
+        else:
+            # 단일 모드 분석
+            type_filter = None if mode == "전체" else mode
+
+            result, debug_info = analyze_competition_intensity(
+                db=db,
+                start_date=start_date,
+                end_date=end_date,
+                type_filter=type_filter
+            )
+
+            print_analysis_result(result, debug_info, mode)
 
     except Exception as e:
         print(f"\n오류: {e}")
