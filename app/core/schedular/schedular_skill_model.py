@@ -17,15 +17,15 @@ def run_skill_model_training_job():
     DB 기반으로 스킬 연관성 모델을 재학습하는 단일 배치 작업.
     """
     print("\n" + "=" * 80)
-    print(f"[{datetime.now()}] 🚀 스킬 연관성 Node2Vec 모델 재학습 시작")
+    print(f"[{datetime.now()}] 스킬 연관성 Node2Vec 모델 재학습 시작")
     print("=" * 80 + "\n")
 
     try:
         # 최근 1년 데이터를 기준으로 학습 (필요 시 days 인자 조정 가능)
         train_skill_association_model_from_db(days=365)
-        print(f"[{datetime.now()}] ✅ 스킬 연관성 모델 재학습 완료")
+        print(f"[{datetime.now()}] 스킬 연관성 모델 재학습 완료")
     except Exception as e:
-        print(f"[{datetime.now()}] ❌ 스킬 연관성 모델 재학습 실패: {e}")
+        print(f"[{datetime.now()}] 스킬 연관성 모델 재학습 실패: {e}")
 
 
 def run_skill_model_scheduler():
@@ -46,7 +46,7 @@ def run_skill_model_scheduler():
     )
 
     print("=" * 80)
-    print("🧠 스킬 연관성(Node2Vec) 모델 재학습 스케줄러 시작")
+    print("스스킬 연관성(Node2Vec) 모델 재학습 스케줄러 시작")
     print("=" * 80)
     print("실행 주기: 약 1분기(13주)마다")
     print("다음 실행: 지금 즉시")

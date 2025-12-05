@@ -33,6 +33,17 @@ engine = create_engine(
     pool_recycle=int(os.getenv("DB_POOL_RECYCLE", "1800")),
 )
 
+
+# readonly: 읽기 작업용
+readonly_engine = create_engine(
+    f"mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}",
+    execution_options={"readonly": True}
+)
+
+# 세션 팩토리
+SessionReadonly = sessionmaker(bind=readonly_engine)
+
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
@@ -44,3 +55,16 @@ def get_db():
         yield db
     finally:
         db.close()
+
+from fastapi import Depends
+from sqlalchemy.orm import Session
+
+# 의존성 주입
+def get_db_readonly():
+    """읽기 전용 DB 세션"""
+    db = SessionReadonly()
+    try:
+        yield db
+    finally:
+        db.close()
+

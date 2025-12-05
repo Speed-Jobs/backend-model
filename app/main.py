@@ -18,10 +18,10 @@ from app.models import (
 from app.routers import (
     routers_skill_match,
     user,
-    routers_competitors_skills,
     routers_recruit_counter,
     routers_competitor_recruit_counter,
     routers_competitor_industry_trend,
+    routers_skill_insights,
     job_matching,
 )
 from app.routers.v1.agent import evaluation
@@ -44,9 +44,12 @@ app.add_middleware(
 
 app.include_router(user.router)
 app.include_router(routers_skill_match.router)
-app.include_router(routers_competitors_skills.router)
 app.include_router(routers_recruit_counter.router)
 app.include_router(routers_competitor_recruit_counter.router)
 app.include_router(routers_competitor_industry_trend.router)
+app.include_router(routers_skill_insights.router)
 app.include_router(job_matching.router)
 app.include_router(evaluation.router, prefix="/api/v1") 
+
+ 
+
