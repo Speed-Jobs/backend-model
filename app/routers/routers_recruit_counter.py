@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from datetime import date
 from typing import Optional
 
-from app.db.config.base import get_db
+from app.db.config.base import get_db,get_db_readonly
 from app.services.dashboard.recruit_counter import get_job_postings_trend
 from app.schemas.schemas_recruit_counter import DashBoardResponse, JobPostingsTrendData
 
@@ -30,7 +30,7 @@ def get_job_postings_trend_endpoint(
         enum=["daily", "weekly", "monthly"],
         example="daily"
     ),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db_readonly)
 ):
     """
     채용 공고 수 추이 조회

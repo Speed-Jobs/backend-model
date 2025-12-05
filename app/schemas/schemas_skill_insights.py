@@ -23,6 +23,7 @@ class SkillTrendMultiYearData(BaseModel):
 
 class SkillTrendData(BaseModel):
     """스킬 트렌드 데이터 (단일 연도 또는 다년도)"""
+    company_name: Optional[str] = Field(None, description="회사명 (회사별 조회 시)")
     year: Optional[str] = Field(None, description="조회 연도 (단일 연도 조회 시)")
     comparison_year: Optional[str] = Field(None, description="비교 연도 (단일 연도 조회 시)")
     years: Optional[List[str]] = Field(None, description="조회 연도 목록 (다년도 조회 시)")

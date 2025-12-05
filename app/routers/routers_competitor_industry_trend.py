@@ -4,7 +4,7 @@ from typing import Optional, Literal
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
-from app.db.config.base import get_db
+from app.db.config.base import get_db,get_db_readonly
 from app.schemas.schemas_competitor_industry_trend import JobRoleStatisticsResponse
 from app.services.dashboard.competitor_industry_trend import (
     get_job_role_statistics,
@@ -66,7 +66,7 @@ def get_job_role_statistics_endpoint(
         description="특정 회사명 필터 (부분 일치). 지정하지 않으면 전체 회사 기준으로 집계합니다.",
         example="토스",
     ),
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db_readonly),
 ) -> JobRoleStatisticsResponse:
     """
     직군별 채용 공고 통계를 조회합니다.

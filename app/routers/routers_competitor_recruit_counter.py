@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from datetime import date
 from typing import Optional, List
 
-from app.db.config.base import get_db
+from app.db.config.base import get_db,get_db_readonly
 from app.services.dashboard.competitor_recruit_counter import get_companies_recruitment_activity
 from app.schemas.schemas_recruit_counter import DashBoardResponse
 
@@ -35,7 +35,7 @@ def get_companies_recruitment_activity_endpoint(
         description="조회할 회사명 키워드 (쉼표로 구분, 시작 일치). 예: '토스,한화,라인'",
         example="토스,한화,라인,네이버,카카오,LG,현대오토에버,우아한"
     ),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db_readonly)
 ):
     """
     주요 회사별 채용 활동 조회
