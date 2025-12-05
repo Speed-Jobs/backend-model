@@ -5,18 +5,8 @@ from datetime import datetime
 import pandas as pd
 # v2
 
-# 경쟁사 그룹 및 키워드 매핑
-COMPETITOR_GROUPS: Dict[str, List[str]] = {
-    "토스": ["토스%", "토스뱅크%", "토스증권%", "비바리퍼블리카%", "AICC%"],
-    "카카오": ["카카오%"],
-    "한화시스템": ["한화시스템%", "한화시스템템%", "한화시스템/ICT%", "한화시스템·ICT%"],
-    "현대오토에버": ["현대오토에버%"],
-    "우아한형제들": ["우아한%", "배달의민족", "배민"],
-    "쿠팡": ["쿠팡%", "Coupang%"],
-    "라인": ["LINE%", "라인%"],
-    "네이버": ["NAVER%", "네이버%"],
-    "LG CNS": ["LG_CNS%", "LG CNS%"],
-}
+# 경쟁사 그룹 및 표시명은 company_groups.py에서 import
+from app.config.company_groups import COMPANY_GROUPS, COMPANY_KEY_TO_DISPLAY_NAME
 
 EFFECTIVE_POSTED_AT_SQL = "COALESCE(p.posted_at, p.crawled_at)"
 
@@ -48,7 +38,7 @@ def _build_competitor_group_case(alias: str = "c.name") -> Tuple[str, str, Dict[
     where_fragments: List[str] = []
     case_fragments: List[str] = []
     params: Dict[str, str] = {}
-    for group_idx, (group_name, keywords) in enumerate(COMPETITOR_GROUPS.items()):
+    for group_idx, (group_name, keywords) in enumerate(COMPANY_GROUPS.items()):
         clauses, clause_params = _build_like_clauses(
             keywords, alias, prefix=f"group_{group_idx}"
         )
@@ -59,7 +49,7 @@ def _build_competitor_group_case(alias: str = "c.name") -> Tuple[str, str, Dict[
         case_fragments.append(f"WHEN {condition_sql} THEN '{group_name}'")
         params.update(clause_params)
     if not where_fragments:
-        raise ValueError("COMPETITOR_GROUPS가 비어 있어 그룹 조건을 생성할 수 없습니다.")
+        raise ValueError("COMPANY_GROUPS가 비어 있어 그룹 조건을 생성할 수 없습니다.")
     where_clause = " OR ".join(where_fragments)
     case_expression = f"CASE {' '.join(case_fragments)} ELSE {alias} END"
     return where_clause, case_expression, params
@@ -78,7 +68,7 @@ def _normalize_for_compare(value: str) -> str:
 def _get_group_by_company_name(company_name: str) -> Optional[str]:
     """회사명이 속한 그룹 키 반환"""
     normalized_name = _normalize_for_compare(company_name)
-    for group_name, keywords in COMPETITOR_GROUPS.items():
+    for group_name, keywords in COMPANY_GROUPS.items():
         if _normalize_for_compare(group_name) == normalized_name:
             return group_name
         for keyword in keywords:
@@ -94,7 +84,7 @@ def _build_group_filter_clause(
     prefix: str = "target_group"
 ) -> Tuple[str, Dict[str, str]]:
     """그룹명을 기반으로 WHERE 절 생성"""
-    keywords = COMPETITOR_GROUPS.get(group_name)
+    keywords = COMPANY_GROUPS.get(group_name)
     if not keywords:
         return "", {}
     clauses, clause_params = _build_like_clauses(
