@@ -76,18 +76,37 @@ def get_posts_with_filters(
         query = query.filter(Post.company_id == company_id)
     elif company_name is not None:
         # 회사명 필터링 (그룹명도 지원 - 대시보드와 동일한 로직)
-        from app.db.crud.db_competitors_skills import (
-            _get_group_by_company_name, 
-            COMPETITOR_GROUPS
-        )
+        from app.config.company_groups import COMPANY_GROUPS
         
         # 입력된 회사명이 경쟁사 그룹에 속하는지 확인
-        group_name = _get_group_by_company_name(company_name)
+        company_name_normalized = company_name.lower().strip().replace(" ", "")
+        group_name = None
         
-        if group_name and group_name in COMPETITOR_GROUPS:
+        # COMPANY_GROUPS에서 매칭되는 그룹 찾기
+        for group_key, patterns in COMPANY_GROUPS.items():
+            # 그룹 키와 직접 매칭
+            group_key_normalized = group_key.lower().replace(" ", "")
+            if group_key_normalized == company_name_normalized:
+                group_name = group_key
+                break
+            
+            # 패턴과 매칭 (양방향 확인)
+            for pattern in patterns:
+                # % 제거하고 비교
+                clean_pattern = pattern.replace("%", "").replace("_", "").strip().lower()
+                if clean_pattern:
+                    # 양방향 매칭: 패턴이 입력에 포함되거나, 입력이 패턴에 포함되는 경우
+                    if clean_pattern in company_name_normalized or company_name_normalized in clean_pattern:
+                        group_name = group_key
+                        break
+            
+            if group_name:
+                break
+        
+        if group_name and group_name in COMPANY_GROUPS:
             # 그룹명인 경우: 해당 그룹의 모든 키워드로 OR 조건 생성
             # 예: "라인" 입력 시 → "LINE%", "라인%" 모두 검색 (LINE PAY, 라인프레쉬 등 포함)
-            keywords = COMPETITOR_GROUPS[group_name]
+            keywords = COMPANY_GROUPS[group_name]
             or_conditions = []
             for keyword in keywords:
                 # % 제거하고 시작 일치 패턴 생성
@@ -120,18 +139,18 @@ def get_posts_by_competitor_groups(
     Returns:
         List of Post objects with company and skills loaded
     """
-    from app.db.crud.db_competitors_skills import COMPETITOR_GROUPS
+    from app.config.company_groups import COMPANY_GROUPS
     
     # company_groups가 없으면 전체 그룹
     if company_groups is None:
-        company_groups = list(COMPETITOR_GROUPS.keys())
+        company_groups = list(COMPANY_GROUPS.keys())
     
     # 모든 그룹의 조건 생성
     or_conditions = []
     
     for group_name in company_groups:
-        if group_name in COMPETITOR_GROUPS:
-            keywords = COMPETITOR_GROUPS[group_name]
+        if group_name in COMPANY_GROUPS:
+            keywords = COMPANY_GROUPS[group_name]
             for keyword in keywords:
                 # % 제거하고 LIKE 패턴 생성
                 pattern = keyword.replace("%", "")

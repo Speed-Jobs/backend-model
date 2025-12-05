@@ -9,6 +9,7 @@ from typing import Optional, List
 from app.db.config.base import get_db,get_db_readonly
 from app.services.dashboard.competitor_recruit_counter import get_companies_recruitment_activity
 from app.schemas.schemas_recruit_counter import DashBoardResponse
+from app.config.company_groups import COMPANY_GROUPS
 
 
 router = APIRouter(
@@ -45,7 +46,7 @@ def get_companies_recruitment_activity_endpoint(
       - "Line" 검색 시: Line Pay, Line Taiwan 등 Line으로 시작하는 회사 포함
       - "한화" 검색 시: 한화생명, 한화손해보험 등 한화로 시작하는 회사 포함
     
-    company_keywords를 지정하지 않으면 기본 키워드 (토스, 한화, 라인, 네이버, 카카오, LG, 현대오토에버, 우아한)를 조회합니다.
+    company_keywords를 지정하지 않으면 기본 키워드 ({', '.join(COMPANY_GROUPS.keys())})를 조회합니다.
     
     날짜는 자동으로 계산됩니다:
     - daily: 오늘부터 30일 전까지 (1달)

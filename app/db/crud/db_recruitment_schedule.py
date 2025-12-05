@@ -1,11 +1,14 @@
 """
 CRUD operations for RecruitmentSchedule model
 """
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 from sqlalchemy.orm import Session, joinedload
+from sqlalchemy import or_
 
 from app.models.recruitment_schedule import RecruitmentSchedule
+from app.models.company import Company
+from app.config.company_groups import COMPANY_GROUPS, get_company_patterns
 
 def get_recruitment_schedules_by_company(
     db: Session,
@@ -70,3 +73,39 @@ def get_recruitment_schedules(
     
     return query.all()
 
+
+def get_competitor_companies(
+    db: Session,
+    company_keywords: Optional[List[str]] = None
+) -> List[Tuple[int, str]]:
+    """
+    경쟁사 회사 ID와 이름 조회
+    
+    Args:
+        db: Database session
+        company_keywords: 조회할 회사 키워드 리스트 (None이면 전체 경쟁사)
+        
+    Returns:
+        List of (company_id, company_name) tuples
+    """
+    like_conditions = []
+    
+    if company_keywords:
+        # 지정된 키워드만 조회
+        for keyword in company_keywords:
+            patterns = get_company_patterns(keyword)
+            for pattern in patterns:
+                like_conditions.append(Company.name.like(pattern))
+    else:
+        # 전체 경쟁사 조회
+        for patterns in COMPANY_GROUPS.values():
+            for pattern in patterns:
+                like_conditions.append(Company.name.like(pattern))
+    
+    if not like_conditions:
+        return []
+    
+    return db.query(Company.id, Company.name)\
+        .filter(or_(*like_conditions))\
+        .order_by(Company.id)\
+        .all()

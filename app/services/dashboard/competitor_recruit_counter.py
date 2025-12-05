@@ -12,19 +12,19 @@ from app.schemas.schemas_competitor_recruit_counter import (
     CompanyInfo,
     ActivityItem
 )
+from app.config.company_groups import COMPANY_GROUPS, get_company_patterns
 
-
-# 회사 키 → 표시명 매핑
-COMPANY_KEY_TO_NAME = {
+# 표시명 매핑 (로컬 정의)
+COMPANY_KEY_TO_DISPLAY_NAME = {
     "toss": "토스",
     "kakao": "카카오",
     "hanwha": "한화시스템",
-    "hyundai_autoever": "현대오토에버",
+    "hyundai autoever": "현대오토에버",
     "woowahan": "우아한형제들",
-    "lg": "LG_CNS",
-    "naver": "네이버",
     "coupang": "쿠팡",
-    "line": "LINE"
+    "line": "라인",
+    "naver": "네이버",
+    "lg cns": "LG CNS",
 }
 
 
@@ -43,48 +43,21 @@ def _calculate_period(timeframe: str) -> Tuple[date, date]:
 
 
 def _get_company_key(company_name: str) -> Optional[str]:
-    """회사명을 그룹 키로 매핑"""
+    """회사명을 그룹 키로 매핑 (COMPANY_GROUPS 패턴 기반)"""
     if not company_name:
         return None
     
-    name_upper = company_name.upper().strip()
-    company_name = company_name.strip()
+    company_name_upper = company_name.upper().strip()
+    company_name_stripped = company_name.strip()
     
-    # 토스 그룹
-    if "토스" in company_name or name_upper == "AICC" or "비바리퍼블리카" in company_name:
-        return "toss"
-    
-    # 카카오 그룹
-    if "카카오" in company_name:
-        return "kakao"
-    
-    # 한화 그룹 (한화시스템으로 고정, 한화손해보험 제외)
-    if "한화시스템" in company_name:
-        return "hanwha"
-    
-    # 현대오토에버 그룹
-    if "현대오토에버" in company_name:
-        return "hyundai_autoever"
-    
-    # 우아한 그룹
-    if "우아한" in company_name or company_name in ["배달의민족", "배민"]:
-        return "woowahan"
-    
-    # LG 그룹
-    if "LG" in name_upper:
-        return "lg"
-    
-    # 네이버 그룹
-    if "NAVER" in name_upper or "네이버" in company_name:
-        return "naver"
-    
-    # 쿠팡 그룹
-    if "COUPANG" in name_upper or "쿠팡" in company_name:
-        return "coupang"
-    
-    # LINE 그룹
-    if "LINE" in name_upper in name_upper:
-        return "line"
+    # COMPANY_GROUPS의 각 그룹과 패턴을 확인
+    for group_key, patterns in COMPANY_GROUPS.items():
+        for pattern in patterns:
+            # 패턴에서 % 제거
+            clean_pattern = pattern.replace("%", "").strip()
+            # 대소문자 무시 매칭
+            if clean_pattern.upper() in company_name_upper or clean_pattern in company_name_stripped:
+                return group_key
     
     return None
 
@@ -102,7 +75,7 @@ def _format_weekly(year: int, week: int) -> str:
 
 def _get_display_key(company_key: str) -> str:
     """그룹 키를 표시명 기반 키로 변환 (한글은 그대로, 영어는 소문자+언더스코어)"""
-    display_name = COMPANY_KEY_TO_NAME.get(company_key, company_key)
+    display_name = COMPANY_KEY_TO_DISPLAY_NAME.get(company_key, company_key)
     # 영어는 소문자로 변환하고 공백을 언더스코어로, 한글은 그대로
     if display_name.isascii():
         return display_name.lower().replace(' ', '_')
@@ -130,37 +103,31 @@ def get_companies_recruitment_activity(
     start_date, end_date = _calculate_period(timeframe)
     
     # 2. 조회할 회사 그룹 결정
-    all_groups = ["coupang", "hanwha", "hyundai_autoever", "kakao", "lg", "line", "naver", "toss", "woowahan"]
+    all_groups = list(COMPANY_GROUPS.keys())
     
     # company_keywords가 있으면 매칭되는 그룹만 선택
     target_groups = set()
     if company_keywords:
-        # 키워드로부터 그룹 키 찾기
+        # 키워드로부터 그룹 키 찾기 (get_company_patterns 사용)
         for keyword in company_keywords:
-            keyword_upper = keyword.upper().strip()
-            keyword_stripped = keyword.strip()
-            
-            # 각 키워드가 어떤 그룹에 매칭되는지 확인
-            if "토스" in keyword_stripped or keyword_upper == "AICC" or "비바리퍼블리카" in keyword_stripped:
-                target_groups.add("toss")
-            elif "카카오" in keyword_stripped:
-                target_groups.add("kakao")
-            elif "한화시스템" in keyword_stripped or "한화" in keyword_stripped:
-                target_groups.add("hanwha")
-            elif "현대오토에버" in keyword_stripped:
-                target_groups.add("hyundai_autoever")
-            elif "우아한" in keyword_stripped or keyword_stripped in ["배달의민족", "배민"]:
-                target_groups.add("woowahan")
-            elif "LG" in keyword_upper or "lg" in keyword_upper.lower():
-                target_groups.add("lg")
-            elif "NAVER" in keyword_upper or "네이버" in keyword_stripped:
-                target_groups.add("naver")
-            elif "COUPANG" in keyword_upper or "쿠팡" in keyword_stripped:
-                target_groups.add("coupang")
-            elif "LINE" in keyword_upper or "라인" in keyword_stripped or "IPX" in keyword_upper:
-                target_groups.add("line")
+            keyword_normalized = keyword.lower().strip()
+            # COMPANY_GROUPS에서 직접 매칭
+            if keyword_normalized in COMPANY_GROUPS:
+                target_groups.add(keyword_normalized)
+            else:
+                # 패턴 기반 매칭 시도
+                patterns = get_company_patterns(keyword)
+                for pattern in patterns:
+                    clean_pattern = pattern.replace("%", "").strip()
+                    # 키워드가 패턴에 포함되는지 확인
+                    if clean_pattern.lower() in keyword_normalized or keyword_normalized in clean_pattern.lower():
+                        # 패턴이 속한 그룹 찾기
+                        for group_key, group_patterns in COMPANY_GROUPS.items():
+                            if pattern in group_patterns:
+                                target_groups.add(group_key)
+                                break
     else:
-        # company_keywords가 없으면 전체 9개 그룹
+        # company_keywords가 없으면 전체 그룹
         target_groups = set(all_groups)
     
     # 3. DB에서 모든 회사 조회
@@ -188,7 +155,7 @@ def get_companies_recruitment_activity(
     for key in sorted(target_groups):  # all_groups 대신 target_groups 사용
         companies_list.append(CompanyInfo(
             id=key_to_company_id.get(key, 0),
-            name=COMPANY_KEY_TO_NAME[key],
+            name=COMPANY_KEY_TO_DISPLAY_NAME.get(key, key),
             key=key
         ))
     

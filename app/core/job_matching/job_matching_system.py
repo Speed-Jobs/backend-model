@@ -213,7 +213,13 @@ class SbertDescriptionMatcher:
         # 모델 서비스 클라이언트 또는 로컬 모델 초기화
         if USE_MODEL_SERVICE:
             print(f"[SBERT] 모델 서비스 클라이언트 초기화 중...")
-            self.model = SentenceTransformer()  # ModelServiceClient (base_url은 환경변수에서)
+            # Kubernetes 환경에서 명시적으로 URL 지정
+            import os
+            model_service_url = os.getenv(
+                "MODEL_SERVICE_URL",
+                "http://model-service.skala-practice.svc.cluster.local:8001"
+            )
+            self.model = SentenceTransformer(base_url=model_service_url)
         else:
             print(f"[SBERT] 로컬 모델 로딩 중... ({model_name})")
             self.model = SentenceTransformer(model_name)

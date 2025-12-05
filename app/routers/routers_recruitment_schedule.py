@@ -9,6 +9,7 @@ from app.services.dashboard.recruitment_schedule import (
     get_company_recruitment_schedule,
     get_all_recruitment_schedules
 )
+from app.config.company_groups import COMPANY_GROUPS
 
 router = APIRouter(
     prefix="/recruitment-schedule",

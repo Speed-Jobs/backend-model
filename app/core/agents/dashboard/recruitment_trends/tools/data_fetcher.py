@@ -9,19 +9,7 @@ import json
 
 from app.db.crud import db_recruit_counter, db_competitor_recruit_counter
 from app.db.config.base import SessionLocal
-
-# 경쟁사 고정 리스트
-COMPETITOR_KEYWORDS = [
-    "토스",
-    "카카오", 
-    "한화시스템",
-    "현대오토에버",
-    "우아한",
-    "LG CNS",
-    "네이버",
-    "쿠팡",
-    "라인"
-]
+from app.config.company_groups import COMPANY_GROUPS
 
 
 def _get_default_period(timeframe: str) -> tuple[date, date]:
@@ -119,9 +107,9 @@ def get_competitors_recruitment_data(
         else:
             start, end = _get_default_period(timeframe)
         
-        # 각 경쟁사별로 조회
+        # 각 경쟁사별로 조회 (COMPANY_GROUPS의 모든 키 사용)
         competitors = []
-        for keyword in COMPETITOR_KEYWORDS:
+        for keyword in COMPANY_GROUPS.keys():
             companies = db_recruit_counter.get_companies_by_keyword(db, keyword, start, end)
             
             if companies:

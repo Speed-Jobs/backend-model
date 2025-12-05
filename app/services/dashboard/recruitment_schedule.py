@@ -460,19 +460,8 @@ def get_predicted_schedules(
                 .all()
         else:
             # 경쟁사 전체 조회
-            from app.db.crud.db_competitors_skills import COMPETITOR_GROUPS
-            recruiting_companies = ["네이버", "카카오", "현대오토에버", "한화시스템", "LG CNS"]
-            like_conditions = []
-            
-            for company_name in recruiting_companies:
-                if company_name in COMPETITOR_GROUPS:
-                    for keyword in COMPETITOR_GROUPS[company_name]:
-                        like_conditions.append(Company.name.like(keyword))
-            
-            companies = db.query(Company.id, Company.name)\
-                .filter(or_(*like_conditions))\
-                .order_by(Company.id)\
-                .all()
+            from app.db.crud.db_recruitment_schedule import get_competitor_companies
+            companies = get_competitor_companies(db)
         
         # 패턴 추출 및 예측
         predictions = []
