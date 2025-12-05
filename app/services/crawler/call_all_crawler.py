@@ -27,6 +27,8 @@ from app.services.crawler.line.crawler_line import main as line_crawler
 from app.services.crawler.naver.crawler_naver import main as naver_crawler
 from app.services.crawler.toss.crawler_toss import main as toss_crawler
 from app.services.crawler.woowahan.crawler_woowahan import main as woowahan_crawler
+from app.services.crawler.skax.crawler_skax import main as skax_crawler
+
 
 import asyncio
 import inspect
@@ -104,15 +106,16 @@ def run_all_crawlers_sequentially():
     """9개 리팩토링된 크롤러를 순차적으로 실행"""
     
     crawlers = [
-        # (hyundai_crawler, "현대오토에버 (비동기)"),
-        (lg_crawler, "LG CNS (비동기)"),
-        # (hanwha_crawler, "한화시스템 (동기)"),
-        # (kakao_crawler, "카카오 (동기)"),
-        # (coupang_crawler, "Coupang (동기)"),
-        # (line_crawler, "Line (동기)"),
-        # (naver_crawler, "Naver (동기)"),
-        # (toss_crawler, "Toss (동기)"),
-        # (woowahan_crawler, "Woowahan/배달의민족 (동기)"),
+        (hyundai_crawler, "현대오토에버"),
+        (lg_crawler, "LG CNS"),
+        (hanwha_crawler, "한화시스템"),
+        (kakao_crawler, "카카오"),
+        (coupang_crawler, "Coupang"),
+        (line_crawler, "Line"),
+        (naver_crawler, "Naver"),
+        (toss_crawler, "Toss"),
+        (woowahan_crawler, "Woowahan/배달의민족"),
+        (skax_crawler, "SKAX")
     ]
     
     print(f"\n{'='*80}")

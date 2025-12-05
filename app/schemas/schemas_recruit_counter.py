@@ -2,7 +2,7 @@
 채용 공고 수 추이 API Schema
 """
 from pydantic import BaseModel, Field
-from typing import Any, List, Dict
+from typing import Any, List, Dict, Optional
 
 
 class DashBoardResponse(BaseModel):
@@ -25,11 +25,27 @@ class PeriodInfo(BaseModel):
     end_date: str = Field(..., description="종료일 (YYYY-MM-DD)")
 
 
+class TopCompanyInfo(BaseModel):
+    """상위 회사 정보"""
+    company_id: int = Field(..., description="회사 ID")
+    company_name: str = Field(..., description="회사명")
+    total_count: int = Field(..., description="해당 기간의 총 공고 수")
+
+
+class SelectedCompanyInfo(BaseModel):
+    """선택된 회사 정보"""
+    company_id: int = Field(..., description="회사 ID")
+    company_name: str = Field(..., description="회사명")
+    total_count: int = Field(..., description="해당 기간의 총 공고 수")
+
+
 class JobPostingsTrendData(BaseModel):
     """채용 공고 수 추이 데이터"""
     timeframe: str = Field(..., description="시간 단위 (daily/weekly/monthly)")
     period: PeriodInfo = Field(..., description="조회 기간")
     trends: List[TrendItem] = Field(..., description="추이 데이터 목록")
+    top_companies: List[TopCompanyInfo] = Field(default=[], description="상위 5개 경쟁사 정보 (전체 모드일 때만)")
+    selected_company: Optional[SelectedCompanyInfo] = Field(None, description="선택된 회사 정보 (특정 회사 모드일 때만)")
 
     class Config:
         json_schema_extra = {
@@ -42,7 +58,12 @@ class JobPostingsTrendData(BaseModel):
                 "trends": [
                     {"period": "11/1", "count": 180},
                     {"period": "11/2", "count": 195}
-                ]
+                ],
+                "top_companies": [
+                    {"company_id": 1, "company_name": "토스", "total_count": 450},
+                    {"company_id": 2, "company_name": "네이버", "total_count": 380}
+                ],
+                "selected_company": None
             }
         }
 

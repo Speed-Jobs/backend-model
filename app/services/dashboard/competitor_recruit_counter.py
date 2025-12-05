@@ -83,7 +83,7 @@ def _get_company_key(company_name: str) -> Optional[str]:
         return "coupang"
     
     # LINE 그룹
-    if "LINE" in name_upper or "IPX" in name_upper:
+    if "LINE" in name_upper in name_upper:
         return "line"
     
     return None

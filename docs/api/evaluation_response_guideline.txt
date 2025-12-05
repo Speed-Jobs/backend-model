@@ -1,0 +1,275 @@
+================================================================================
+EvaluationResponse 데이터 구조 가이드
+================================================================================
+
+API 엔드포인트: GET /api/v1/evaluation/compare
+응답 형식: Dict[str, EvaluationResponse]
+  - "sk_ax": SK AX 채용공고 평가 결과
+  - "competitor": 경쟁사 채용공고 평가 결과
+
+
+================================================================================
+1. EvaluationResponse 최상위 구조
+================================================================================
+
+EvaluationResponse는 3개의 모듈 평가 결과로 구성됩니다:
+{
+  "readability": ReadabilityModuleResult,      // 가독성 평가
+  "specificity": SpecificityModuleResult,      // 구체성 평가  
+  "attractiveness": AttractivenessModuleResult // 매력도 평가
+}
+
+
+================================================================================
+2. ReadabilityModuleResult (가독성 평가)
+================================================================================
+
+채용공고의 읽기 쉬움과 명확성을 평가하는 3개의 하위 평가로 구성:
+
+readability: {
+  "jargon": JargonResult,        // 사내 전문 용어 빈도수
+  "consistency": ConsistencyResult, // 문단 일관성
+  "grammar": GrammarResult        // 문법 정확성
+}
+
+
+2-1. jargon (사내 전문 용어 빈도수)
+────────────────────────────────────────────────
+{
+  "original_text": "CCS신뢰성개발팀은...",
+  "keywords": ["CCS신뢰성개발팀"],
+  "keyword_count": 1,
+  "reasoning": "\"CCS신뢰성개발팀\"은 현대오토에버 내 특정 팀명..."
+}
+
+- original_text: 사내 전문 용어가 포함된 원문
+- keywords: 사내 고유 용어, 시스템명, 특별한 프로그램명 리스트
+- keyword_count: 추출된 키워드 개수
+- reasoning: LLM이 해당 용어를 사내 전문 용어로 판단한 근거
+
+
+2-2. consistency (문단 일관성)
+────────────────────────────────────────────────
+{
+  "original_text": "",  // 일관성 문제가 없으면 빈 문자열
+  "keywords": [],       // 문제가 없으면 빈 리스트
+  "keyword_count": 0,
+  "reasoning": "주어진 채용 공고는 각 섹션이 명확하게 구분..."
+}
+
+- original_text: 불일치가 발견된 원문 (없으면 빈 문자열)
+- keywords: 불일치 문제가 있는 섹션명 또는 문제 키워드
+- keyword_count: 발견된 불일치 키워드 개수
+- reasoning: 각 섹션의 일관성 분석 결과
+
+
+2-3. grammar (문법 정확성)
+────────────────────────────────────────────────
+{
+  "original_text": "[채용 공고]\n[M&C] Solution Architect...",
+  "keywords": [
+    "CCS신뢰성개발팀은 → CCS 신뢰성 개발팀은",
+    "글로벌에 → 글로벌에 제공하는",
+    ...
+  ],
+  "keyword_count": 60,
+  "reasoning": "1. **띄어쓰기 오류**: 'CCS신뢰성개발팀'..."
+}
+
+- original_text: 문법 오류가 포함된 전체 원문
+- keywords: "잘못된 표현 → 올바른 표현" 형식의 수정 제안 리스트
+- keyword_count: 발견된 문법 오류 개수
+- reasoning: 문법 오류 유형별 설명 (띄어쓰기, 문장 구조, 맞춤법 등)
+
+
+================================================================================
+3. SpecificityModuleResult (구체성 평가)
+================================================================================
+
+채용공고 내용의 구체성과 명확성을 평가하는 4개의 하위 평가로 구성:
+
+specificity: {
+  "responsibility": ResponsibilityResult,        // 담당 업무 구체성
+  "qualification": QualificationResult,          // 자격요건 구체성
+  "keyword_relevance": KeywordRelevanceResult,   // 직군 키워드 적합성
+  "required_fields": RequiredFieldsResult        // 필수 항목 포함 여부
+}
+
+
+3-1. responsibility (담당 업무 구체성)
+────────────────────────────────────────────────
+{
+  "original_text": "글로벌 DevOps 커뮤니케이션...",
+  "keywords": [
+    "DevOps", "Kubernetes", "AWS", "EKS", 
+    "Spring Boot", "LGTM", "Observability"
+  ],
+  "keyword_count": 14,
+  "reasoning": "1. **DevOps**: 글로벌 DevOps 커뮤니케이션..."
+}
+
+- original_text: 담당 업무가 기술된 원문
+- keywords: 담당 업무의 기술 스택 및 주요 키워드
+- keyword_count: 추출된 기술 키워드 개수
+- reasoning: 각 키워드가 업무에서 어떻게 사용되는지 설명
+
+
+3-2. qualification (자격요건 구체성)
+────────────────────────────────────────────────
+{
+  "original_text": "🔍 이런 분과 함께 하고 싶어요...",
+  "keywords": [
+    "Kubernetes 클러스터 운영 및 구축 경험",
+    "Public/Private Cloud 환경에서의 DevOps 실무 경험",
+    ...
+  ],
+  "keyword_count": 9,
+  "reasoning": "1. **자격요건**: Kubernetes 클러스터 운영..."
+}
+
+- original_text: 자격요건과 우대사항이 기술된 원문
+- keywords: 필수 자격요건 및 우대사항 리스트
+- keyword_count: 명시된 자격요건 개수
+- reasoning: 자격요건의 구체성 및 명확성 분석
+
+
+3-3. keyword_relevance (직군 키워드 적합성)
+────────────────────────────────────────────────
+{
+  "original_text": "글로벌 DevOps 커뮤니케이션...",
+  "keywords": [
+    "글로벌 DevOps 커뮤니케이션 및 협업 리드",
+    "Kubernetes 클러스터 운영 관리",
+    ...
+  ],
+  "keyword_count": 19,
+  "reasoning": "1. **글로벌 DevOps 커뮤니케이션...**: DevOps는..."
+}
+
+- original_text: 주요 업무가 기술된 원문
+- keywords: 해당 직군과 관련된 주요 키워드 리스트
+- keyword_count: 직군 관련 키워드 개수
+- reasoning: 각 키워드가 해당 직군과 얼마나 관련있는지 분석
+
+
+3-4. required_fields (필수 항목 포함 여부)
+────────────────────────────────────────────────
+{
+  "original_text": "[채용 공고]\n[M&C] Solution Architect...",
+  "keywords": [
+    "직무명", "담당업무", "자격요건", 
+    "우대사항", "근무환경", "채용절차"
+  ],
+  "keyword_count": 6,
+  "reasoning": "1. **직무명**: 'Solution Architect...'..."
+}
+
+- original_text: 채용공고 전체 원문
+- keywords: 포함된 필수 항목명 리스트
+- keyword_count: 포함된 필수 항목 개수
+- reasoning: 각 필수 항목의 존재 여부 및 위치 설명
+
+※ 필수 항목: 직무명, 담당업무, 자격요건, 우대사항, 복리후생, 근무환경, 채용절차
+
+
+================================================================================
+4. AttractivenessModuleResult (매력도 평가)
+================================================================================
+
+채용공고의 매력을 높이는 특별 콘텐츠를 평가하는 2개의 하위 평가로 구성:
+
+attractiveness: {
+  "content_count": SpecialContentInclusionResult,  // 특별 콘텐츠 포함 여부
+  "content_quality": SpecialContentQualityResult   // 특별 콘텐츠 충실도
+}
+
+
+4-1. content_count (특별 콘텐츠 포함 여부)
+────────────────────────────────────────────────
+{
+  "original_text": "📣 동료의 한 마디...",
+  "keywords": [
+    "현직자 인터뷰/스토리",
+    "비전/가치 제시"
+  ],
+  "keyword_count": 2,
+  "reasoning": "1. **현직자 인터뷰/스토리**: '동료의 한 마디'..."
+}
+
+- original_text: 특별 콘텐츠가 포함된 원문
+- keywords: 포함된 특별 콘텐츠 유형 리스트
+- keyword_count: 포함된 특별 콘텐츠 유형 개수
+- reasoning: 각 특별 콘텐츠가 채용공고에 어떻게 포함되어 있는지 설명
+
+※ 특별 콘텐츠 유형:
+  - 현직자 인터뷰/스토리
+  - 비전/가치 제시
+  - 이력서 작성 가이드
+
+
+4-2. content_quality (특별 콘텐츠 충실도)
+────────────────────────────────────────────────
+{
+  "original_text": "[채용 공고] [M&C] Solution Architect...",
+  "keywords": [
+    "현직자 인터뷰",
+    "비전",
+    "가치 제시"
+  ],
+  "keyword_count": 3,
+  "reasoning": "1. **현직자 인터뷰/스토리**: \"동료의 한 마디\"..."
+}
+
+- original_text: 채용공고 전체 원문
+- keywords: 특별 콘텐츠 관련 키워드 또는 콘텐츠 유형
+- keyword_count: 추출된 특별 콘텐츠 키워드 개수
+- reasoning: 각 특별 콘텐츠의 품질과 충실도 분석
+
+
+================================================================================
+5. 공통 필드 구조 (BaseEvaluationResult)
+================================================================================
+
+모든 하위 평가 결과는 다음 4개 필드를 공통으로 포함합니다:
+
+{
+  "original_text": string,     // 평가 대상 원문 텍스트
+  "keywords": List[string],    // 추출된 키워드 리스트
+  "keyword_count": integer,    // 키워드 개수
+  "reasoning": string          // LLM의 판단 근거 및 상세 설명
+}
+
+
+================================================================================
+6. API 응답 전체 구조 예시
+================================================================================
+
+GET /api/v1/evaluation/compare?sk_ax_post=123&competitor_post=456
+
+Response:
+{
+  "sk_ax": {
+    "readability": {
+      "jargon": {...},
+      "consistency": {...},
+      "grammar": {...}
+    },
+    "specificity": {
+      "responsibility": {...},
+      "qualification": {...},
+      "keyword_relevance": {...},
+      "required_fields": {...}
+    },
+    "attractiveness": {
+      "content_count": {...},
+      "content_quality": {...}
+    }
+  },
+  "competitor": {
+    "readability": {...},
+    "specificity": {...},
+    "attractiveness": {...}
+  }
+}
+
+

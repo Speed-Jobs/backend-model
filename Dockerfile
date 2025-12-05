@@ -21,11 +21,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN playwright install chromium && \
     playwright install-deps chromium
 
+# data 디렉토리 복사 (직무 정의 파일 등)
+COPY data/ /app/data/
+
 # 애플리케이션 코드 복사
 COPY . .
 
 # 포트 노출
 EXPOSE 8000
 
-# Uvicorn으로 FastAPI 실행
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]
+# 두 프로세스를 안전하게 실행
+CMD ["/bin/bash", "-c", "uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1 & python -m app.core.schedular.schedular_skill_model & wait -n; kill $(jobs -p) 2>/dev/null || true"]
+
+
+#   python -m app.core.schedular.scheduler & 

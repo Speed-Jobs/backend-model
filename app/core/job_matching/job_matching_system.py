@@ -44,12 +44,20 @@ import sys
 from pathlib import Path
 from collections import defaultdict, Counter
 from typing import List, Dict, Tuple, Optional, Any
+from sqlalchemy.orm import Session
 from dataclasses import dataclass, field
 from datetime import datetime
 
 import numpy as np
 import networkx as nx
-from sentence_transformers import SentenceTransformer
+# 모델 서비스 클라이언트 import (HTTP 통신)
+try:
+    from app.utils.model import ModelServiceClient as SentenceTransformer
+    USE_MODEL_SERVICE = True
+except ImportError:
+    # Fallback: 로컬 모델 사용
+    from sentence_transformers import SentenceTransformer
+    USE_MODEL_SERVICE = False
 
 from app.config.job_matching.config import (
     JOB_DESCRIPTION_FILE,
@@ -202,8 +210,13 @@ class SbertDescriptionMatcher:
         if model_name is None:
             model_name = SBERT_MODEL_NAME
 
-        print(f"[SBERT] 모델 로딩 중... ({model_name})")
-        self.model = SentenceTransformer(model_name)
+        # 모델 서비스 클라이언트 또는 로컬 모델 초기화
+        if USE_MODEL_SERVICE:
+            print(f"[SBERT] 모델 서비스 클라이언트 초기화 중...")
+            self.model = SentenceTransformer()  # ModelServiceClient (base_url은 환경변수에서)
+        else:
+            print(f"[SBERT] 로컬 모델 로딩 중... ({model_name})")
+            self.model = SentenceTransformer(model_name)
 
         print(f"[SBERT] 직무 definition 임베딩 생성 중... (직무 정의 + industry + skill_set_description + 공통_skill_set_description)")
         corpus = []
@@ -367,14 +380,18 @@ class JobMatcher:
         
         print(f"  [OK] Final top {min(final_top_k, len(results))} returned")
         if results:
-            print(
-                "  - 1등: "
-                f"{results[0].job_name}/{results[0].industry}\n"
-                "         점수: "
-                f"{results[0].final_score:.4f} "
-                f"(Jacc:{results[0].jaccard_score:.4f}, "
-                f"SBERT:{results[0].sbert_score:.4f})"
-            )
+            # final_top_k 개수만큼 결과 출력
+            for i in range(min(final_top_k, len(results))):
+                rank = i + 1
+                result = results[i]
+                print(
+                    f"  - {rank}등: "
+                    f"{result.job_name}/{result.industry}\n"
+                    "         점수: "
+                    f"{result.final_score:.4f} "
+                    f"(Jacc:{result.jaccard_score:.4f}, "
+                    f"SBERT:{result.sbert_score:.4f})"
+                )
         else:
             print(f"  [WARNING] 매칭 가능한 직무 없음")
         
@@ -524,9 +541,9 @@ class JobMatchingSystem:
             sys.stdout = self.logger.terminal
             self.logger.close()
 
-    def load_job_descriptions(self, filepath: str = None):
+    def load_job_descriptions(self, filepath: Optional[str] = None):
         """
-        직무 정의 로드
+        직무 정의 로드 (JSON 파일)
         
         Args:
             filepath: 직무 정의 JSON 파일 경로 (None이면 config에서 가져옴)
@@ -534,8 +551,12 @@ class JobMatchingSystem:
         if filepath is None:
             filepath = str(JOB_DESCRIPTION_FILE)
         
-        with open(filepath, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        except FileNotFoundError:
+            print(f"[ERROR] Job description file not found: {filepath}")
+            raise
         
         for item in data:
             job_desc = JobDescription(
@@ -551,17 +572,73 @@ class JobMatchingSystem:
         
         print(f"[OK] Job descriptions loaded: {len(self.job_descriptions)}")
 
-    def load_training_data(self, job_files: List[str] = None):
+    def load_training_data(
+        self, 
+        db: Optional[Session] = None,
+        company_groups: Optional[List[str]] = None,
+        job_files: Optional[List[str]] = None
+    ):
         """
-        기존 채용공고 로드
+        기존 채용공고 로드 (DB 또는 JSON 파일)
         
         Args:
-            job_files: 학습 데이터 JSON 파일 경로 리스트 (None이면 config에서 가져옴)
+            db: Database session (DB에서 로드할 경우 필수)
+            company_groups: 회사 그룹 리스트 
+                           예: ["토스", "카카오", "네이버", "쿠팡", "라인"]
+                           None이면 전체 9개 그룹
+            job_files: JSON 파일 경로 리스트 (filepath가 None일 때 사용, 하위 호환성)
             
         Note:
-            TODO: 추후 DB에서 직접 가져오도록 수정 필요
-            데이터 파이프라인 구축 완료 후 DB 쿼리로 대체 예정
+            DB 세션이 제공되면 DB에서 로드, 없으면 JSON 파일에서 로드 (하위 호환)
         """
+        # DB에서 로드
+        if db is not None:
+            from app.db.crud.job_matching_post import get_posts_by_competitor_groups
+            from app.models.post import Post
+            from app.models.post_skill import PostSkill
+            
+            # 기본 9개 회사 그룹
+            if company_groups is None:
+                company_groups = [
+                    "토스", "카카오", "한화시스템", "현대오토에버", 
+                    "우아한형제들", "LG CNS", "네이버", "쿠팡", "라인"
+                ]
+            
+            # DB에서 Post 조회
+            posts = get_posts_by_competitor_groups(db, company_groups)
+            
+            if not posts:
+                print(f"[WARNING] {len(company_groups)}개 그룹에서 Post를 찾을 수 없습니다.")
+                return
+            
+            # Post → JobPosting 변환
+            loaded_count = 0
+            for post in posts:
+                # PostSkill에서 스킬 이름 추출
+                skills = []
+                if post.post_skills:
+                    skills = [ps.skill.name for ps in post.post_skills if ps.skill]
+                
+                if not skills:
+                    continue  # 스킬이 없으면 스킵
+                
+                company_name = post.company.name if post.company else "Unknown"
+                
+                posting = JobPosting(
+                    posting_id=str(post.id),
+                    company=company_name,
+                    title=post.title,
+                    url=post.source_url or "",
+                    skills=skills,
+                )
+                
+                self.graph.add_posting(posting)
+                loaded_count += 1
+            
+            print(f"[OK] {loaded_count} posts loaded from DB (companies: {', '.join(company_groups)})")
+            return
+        
+        # JSON 파일에서 로드 (하위 호환성)
         if job_files is None:
             job_files = TRAINING_DATA_FILES
         
