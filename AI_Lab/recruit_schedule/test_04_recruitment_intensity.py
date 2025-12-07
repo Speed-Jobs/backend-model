@@ -480,6 +480,239 @@ def print_analysis_result(result, debug_info, type_label):
     print(f"  분석 날짜: {debug_info['daily_intensity_count']}일")
 
 
+def analyze_rule_based(result: dict, type_label: str) -> dict:
+    """
+    Rule-Based 분석 - 경쟁 강도 데이터 기반 인사이트 생성
+
+    Args:
+        result: analyze_competition_intensity의 결과
+        type_label: 채용 유형 라벨 (신입/경력/전체)
+
+    Returns:
+        Rule-Based 분석 결과 딕셔너리
+        {
+            "statistics": {...},           # 통계 분석
+            "recommended_dates": {...},    # 추천 날짜
+            "company_patterns": {...},     # 경쟁사 패턴
+            "optimal_period": {...}        # 최적 시기 추천
+        }
+    """
+    from statistics import mean, median
+    from collections import Counter
+
+    daily_intensity = result["data"]["daily_intensity"]
+
+    if not daily_intensity:
+        return {
+            "statistics": {},
+            "recommended_dates": {},
+            "company_patterns": {},
+            "optimal_period": {}
+        }
+
+    # 1. 통계 분석
+    overlap_counts = [item["overlap_count"] for item in daily_intensity]
+    avg_overlap = mean(overlap_counts)
+    median_overlap = median(overlap_counts)
+    min_overlap = min(overlap_counts)
+    max_overlap = max(overlap_counts)
+
+    # 경쟁 강도 분포 계산 (낮음/보통/높음)
+    threshold_low = avg_overlap * 0.7
+    threshold_high = avg_overlap * 1.3
+
+    distribution = {
+        "low": len([x for x in overlap_counts if x <= threshold_low]),
+        "medium": len([x for x in overlap_counts if threshold_low < x < threshold_high]),
+        "high": len([x for x in overlap_counts if x >= threshold_high])
+    }
+
+    statistics = {
+        "average": round(avg_overlap, 2),
+        "median": median_overlap,
+        "min": min_overlap,
+        "max": max_overlap,
+        "distribution": distribution,
+        "threshold_low": round(threshold_low, 2),
+        "threshold_high": round(threshold_high, 2)
+    }
+
+    # 2. 추천 날짜 분석
+    # 경쟁 강도가 낮은 TOP 5 날짜
+    sorted_by_low = sorted(daily_intensity, key=lambda x: x["overlap_count"])
+    low_competition_dates = sorted_by_low[:5]
+
+    # 경쟁 강도가 높은 TOP 5 날짜 (피해야 할 날짜)
+    sorted_by_high = sorted(daily_intensity, key=lambda x: x["overlap_count"], reverse=True)
+    high_competition_dates = sorted_by_high[:5]
+
+    recommended_dates = {
+        "best_dates": [
+            {
+                "date": item["date"],
+                "overlap_count": item["overlap_count"],
+                "companies": [c["company_name"] for c in item["companies"]]
+            }
+            for item in low_competition_dates
+        ],
+        "worst_dates": [
+            {
+                "date": item["date"],
+                "overlap_count": item["overlap_count"],
+                "companies": [c["company_name"] for c in item["companies"]]
+            }
+            for item in high_competition_dates
+        ]
+    }
+
+    # 3. 경쟁사 패턴 분석
+    # 각 회사별 채용 일수 계산
+    company_counter = Counter()
+    for item in daily_intensity:
+        for company in item["companies"]:
+            company_counter[company["company_name"]] += 1
+
+    # 가장 많이 채용하는 회사 TOP 5
+    top_companies = company_counter.most_common(5)
+
+    company_patterns = {
+        "most_active_companies": [
+            {"company_name": name, "days": count}
+            for name, count in top_companies
+        ],
+        "total_unique_companies": len(company_counter)
+    }
+
+    # 4. 최적 시기 추천
+    # 연속으로 경쟁이 적은 기간 찾기 (3일 이상)
+    best_consecutive_period = None
+    current_period_start = None
+    current_period_days = []
+    max_period_length = 0
+    best_period_info = None
+
+    for i, item in enumerate(daily_intensity):
+        if item["overlap_count"] <= threshold_low:
+            # 경쟁 강도가 낮은 날
+            if current_period_start is None:
+                current_period_start = i
+                current_period_days = [item]
+            else:
+                current_period_days.append(item)
+        else:
+            # 경쟁 강도가 높아짐 - 현재 기간 종료
+            if current_period_days and len(current_period_days) >= 3:
+                if len(current_period_days) > max_period_length:
+                    max_period_length = len(current_period_days)
+                    best_consecutive_period = {
+                        "start_date": current_period_days[0]["date"],
+                        "end_date": current_period_days[-1]["date"],
+                        "days": len(current_period_days),
+                        "avg_overlap": round(mean([d["overlap_count"] for d in current_period_days]), 2)
+                    }
+            current_period_start = None
+            current_period_days = []
+
+    # 마지막 기간 체크
+    if current_period_days and len(current_period_days) >= 3:
+        if len(current_period_days) > max_period_length:
+            best_consecutive_period = {
+                "start_date": current_period_days[0]["date"],
+                "end_date": current_period_days[-1]["date"],
+                "days": len(current_period_days),
+                "avg_overlap": round(mean([d["overlap_count"] for d in current_period_days]), 2)
+            }
+
+    # 추천 이유 생성
+    recommendation_reason = []
+    if best_consecutive_period:
+        recommendation_reason.append(
+            f"{best_consecutive_period['days']}일 연속으로 경쟁 강도가 낮음 (평균 {best_consecutive_period['avg_overlap']}개)"
+        )
+
+    # 전체 평균보다 낮은 날이 많은 경우
+    below_avg_days = len([x for x in overlap_counts if x < avg_overlap])
+    if below_avg_days > len(overlap_counts) * 0.5:
+        recommendation_reason.append(
+            f"전체 기간 중 {below_avg_days}일이 평균 이하 경쟁 강도"
+        )
+
+    optimal_period = {
+        "best_consecutive_period": best_consecutive_period,
+        "recommendation_reason": recommendation_reason
+    }
+
+    return {
+        "statistics": statistics,
+        "recommended_dates": recommended_dates,
+        "company_patterns": company_patterns,
+        "optimal_period": optimal_period
+    }
+
+
+def print_rule_based_analysis(rule_analysis: dict, type_label: str):
+    """Rule-Based 분석 결과를 출력하는 헬퍼 함수"""
+    print(f"\n{'='*60}")
+    print(f"[{type_label}] Rule-Based 분석 결과")
+    print(f"{'='*60}")
+
+    # 1. 통계 분석
+    if rule_analysis["statistics"]:
+        stats = rule_analysis["statistics"]
+        print(f"\n[1. 통계 분석]")
+        print(f"  평균 경쟁 강도: {stats['average']}개")
+        print(f"  중앙값: {stats['median']}개")
+        print(f"  최소/최대: {stats['min']}개 / {stats['max']}개")
+        print(f"  분포:")
+        print(f"    - 낮음 (<= {stats['threshold_low']}): {stats['distribution']['low']}일")
+        print(f"    - 보통: {stats['distribution']['medium']}일")
+        print(f"    - 높음 (>= {stats['threshold_high']}): {stats['distribution']['high']}일")
+
+    # 2. 추천 날짜
+    if rule_analysis["recommended_dates"]:
+        rec_dates = rule_analysis["recommended_dates"]
+        print(f"\n[2. 채용 일정 추천]")
+        print(f"  [추천] 경쟁이 적은 추천 날짜 TOP 5:")
+        for i, date_info in enumerate(rec_dates["best_dates"][:5], 1):
+            companies_str = ", ".join(date_info["companies"][:3])
+            if len(date_info["companies"]) > 3:
+                companies_str += f" 외 {len(date_info['companies']) - 3}개"
+            print(f"    {i}. {date_info['date']} - {date_info['overlap_count']}개 ({companies_str})")
+
+        print(f"\n  [주의] 경쟁이 심한 피해야 할 날짜 TOP 5:")
+        for i, date_info in enumerate(rec_dates["worst_dates"][:5], 1):
+            companies_str = ", ".join(date_info["companies"][:3])
+            if len(date_info["companies"]) > 3:
+                companies_str += f" 외 {len(date_info['companies']) - 3}개"
+            print(f"    {i}. {date_info['date']} - {date_info['overlap_count']}개 ({companies_str})")
+
+    # 3. 경쟁사 패턴 분석
+    if rule_analysis["company_patterns"]:
+        patterns = rule_analysis["company_patterns"]
+        print(f"\n[3. 경쟁사 패턴 분석]")
+        print(f"  가장 활발한 경쟁사 TOP 5:")
+        for i, company_info in enumerate(patterns["most_active_companies"], 1):
+            print(f"    {i}. {company_info['company_name']} - {company_info['days']}일")
+        print(f"  총 경쟁사 수: {patterns['total_unique_companies']}개")
+
+    # 4. 최적 시기 추천
+    if rule_analysis["optimal_period"]:
+        optimal = rule_analysis["optimal_period"]
+        print(f"\n[4. 최적 채용 시기 추천]")
+        if optimal["best_consecutive_period"]:
+            period = optimal["best_consecutive_period"]
+            print(f"  추천 기간: {period['start_date']} ~ {period['end_date']}")
+            print(f"  기간: {period['days']}일")
+            print(f"  평균 경쟁 강도: {period['avg_overlap']}개")
+        else:
+            print(f"  (연속 3일 이상 경쟁이 적은 기간 없음)")
+
+        if optimal["recommendation_reason"]:
+            print(f"\n  추천 이유:")
+            for reason in optimal["recommendation_reason"]:
+                print(f"    - {reason}")
+
+
 def main():
     """
     메인 실행 함수
@@ -536,6 +769,10 @@ def main():
             )
             print_analysis_result(result_new, debug_new, "신입")
 
+            # Rule-Based 분석
+            rule_analysis_new = analyze_rule_based(result_new, "신입")
+            print_rule_based_analysis(rule_analysis_new, "신입")
+
             # 2. 경력
             result_career, debug_career = analyze_competition_intensity(
                 db=db,
@@ -545,6 +782,10 @@ def main():
             )
             print_analysis_result(result_career, debug_career, "경력")
 
+            # Rule-Based 분석
+            rule_analysis_career = analyze_rule_based(result_career, "경력")
+            print_rule_based_analysis(rule_analysis_career, "경력")
+
             # 3. 전체
             result_all, debug_all = analyze_competition_intensity(
                 db=db,
@@ -553,6 +794,10 @@ def main():
                 type_filter=None
             )
             print_analysis_result(result_all, debug_all, "전체")
+
+            # Rule-Based 분석
+            rule_analysis_all = analyze_rule_based(result_all, "전체")
+            print_rule_based_analysis(rule_analysis_all, "전체")
 
             # 비교 요약
             print(f"\n{'='*60}")
@@ -574,6 +819,10 @@ def main():
             )
 
             print_analysis_result(result, debug_info, mode)
+
+            # Rule-Based 분석
+            rule_analysis = analyze_rule_based(result, mode)
+            print_rule_based_analysis(rule_analysis, mode)
 
     except Exception as e:
         print(f"\n오류: {e}")
