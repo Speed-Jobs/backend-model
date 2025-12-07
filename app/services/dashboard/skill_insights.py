@@ -320,7 +320,7 @@ class SkillInsightsService:
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
         company: Optional[str] = None,
-        limit: int = 20
+        limit: int = 5
     ) -> schemas_skill_insights.SkillStatisticsData:
         """스킬 통계 조회 (스킬 클라우드용)
         
@@ -328,7 +328,7 @@ class SkillInsightsService:
             db: 데이터베이스 세션
             start_date: 시작 날짜 (YYYY-MM-DD, None일 경우 현재 연도 1월 1일)
             end_date: 종료 날짜 (YYYY-MM-DD, None일 경우 현재 날짜)
-            company: 회사 이름 (선택사항)
+            company: 회사 키워드 (선택사항, 예: "toss", "kakao") - COMPANY_GROUPS에서 패턴 매핑
             limit: 상위 N개 스킬
             
         Returns:
@@ -346,10 +346,15 @@ class SkillInsightsService:
         else:
             end_dt = datetime.strptime(end_date, '%Y-%m-%d').date()
         
+        # 회사 키워드를 패턴 리스트로 변환
+        company_patterns = None
+        if company:
+            company_patterns = get_company_patterns(company)
+        
         # 스킬 통계 조회 (관련 스킬을 포함하기 위해 limit를 더 크게 설정)
         # 유사 스킬이 상위 N개에 포함되지 않을 수 있으므로 limit * 3으로 조회
         df = db_skill_insights.get_skill_statistics(
-            db, start_dt, end_dt, company, limit * 3
+            db, start_dt, end_dt, company_patterns, limit * 3
         )
         
         if df.empty:
@@ -365,7 +370,7 @@ class SkillInsightsService:
         
         # 전체 공고 수 조회
         total_postings = db_skill_insights.get_total_job_postings(
-            db, start_dt, end_dt, company
+            db, start_dt, end_dt, company_patterns
         )
         
         # 스킬 연관성 모델 로드
@@ -394,12 +399,12 @@ class SkillInsightsService:
                     normalized_skill_name = skill_name.strip()
                     
                     # 유사 스킬을 더 많이 찾기 (상위 20개)
-                    similar_skills = get_similar_skills(model, normalized_skill_name, top_n=20)
+                    similar_skills = get_similar_skills(model, normalized_skill_name, top_n=5)
                     
                     if not similar_skills:
-                        print(f"⚠️ 유사 스킬을 찾을 수 없습니다: '{normalized_skill_name}' (모델에 존재하지 않을 수 있음)")
+                        print(f"유사 스킬을 찾을 수 없습니다: '{normalized_skill_name}' (모델에 존재하지 않을 수 있음)")
                     else:
-                        print(f"✅ '{normalized_skill_name}' 유사 스킬 {len(similar_skills)}개 찾음")
+                        print(f"'{normalized_skill_name}' 유사 스킬 {len(similar_skills)}개 찾음")
                     
                     # 관련 스킬의 통계 정보 조회 (유사 스킬을 찾았으면 무조건 포함)
                     for related_skill_name, similarity in similar_skills:

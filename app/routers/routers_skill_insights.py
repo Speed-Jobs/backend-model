@@ -220,8 +220,8 @@ async def get_skills_statistics(
     ),
     company: Optional[str] = Query(
         None,
-        description="회사 이름 필터 (선택사항, 전체 데이터 조회 시 생략)",
-        example="토스"
+        description="회사 키워드 필터 (선택사항, 예: 'toss', 'kakao', 'hanwha'). COMPANY_GROUPS에서 매핑된 여러 회사를 통합 집계",
+        example="toss"
     ),
     limit: int = Query(
         20,
@@ -237,7 +237,9 @@ async def get_skills_statistics(
     
     - **start_date**: 시작 날짜 (YYYY-MM-DD 형식). 미입력 시 현재 연도 1월 1일
     - **end_date**: 종료 날짜 (YYYY-MM-DD 형식). 미입력 시 현재 날짜
-    - **company**: 회사 이름 필터 (선택사항)
+    - **company**: 회사 키워드 필터 (선택사항, 예: 'toss', 'kakao', 'hanwha')
+      - COMPANY_GROUPS에서 매핑된 여러 회사를 통합 집계
+      - 예: 'toss' → "토스", "토스뱅크", "토스증권", "비바리퍼블리카" 등 모두 포함
     - **limit**: 반환할 상위 스킬 개수 (1-100)
     
     Returns:

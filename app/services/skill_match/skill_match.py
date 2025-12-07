@@ -25,7 +25,6 @@ def get_similar_skills(model, keywords, top_n=10):
         [(skill(str), score(float)), ...]
     """
 
-    print("keywords: ", keywords)
     if isinstance(keywords, str):
         keywords = [keywords]
     # 존재하는 것만으로 필터링

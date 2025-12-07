@@ -32,7 +32,7 @@ def get_top_skills_by_period(
     db: Session,
     start_date: Optional[date] = None,
     end_date: Optional[date] = None,
-    top_n: int = 10
+    top_n: int = 13
 ) -> List[str]:
     """특정 기간 동안의 상위 N개 스킬 조회"""
     effective_date = EFFECTIVE_POSTED_AT
@@ -63,7 +63,7 @@ def get_top_skills_by_period(
 def get_skill_frequencies_by_years(
     db: Session,
     years: List[int],
-    top_n: int = 10
+    top_n: int = 13
 ) -> pd.DataFrame:
     """연도별 스킬 빈도수 조회 (판다스 DataFrame 반환)"""
     # 먼저 최근 5년간 상위 N개 스킬 식별
@@ -129,7 +129,7 @@ def get_quarterly_skill_trends(
     db: Session,
     year: int,
     comparison_year: Optional[int] = None,
-    top_n: int = 10
+    top_n: int = 13
 ) -> pd.DataFrame:
     """연도별 분기별 스킬 트렌드 조회 (판다스 DataFrame 반환)"""
     if comparison_year is None:
@@ -257,7 +257,7 @@ def get_skill_frequencies_by_years_and_company(
     db: Session,
     company_patterns: List[str],
     years: List[int],
-    top_n: int = 10
+    top_n: int = 13
 ) -> pd.DataFrame:
     """회사별 연도별 스킬 빈도수 조회 (판다스 DataFrame 반환)"""
     if not company_patterns:
@@ -333,7 +333,7 @@ def get_quarterly_skill_trends_by_company(
     company_patterns: List[str],
     year: int,
     comparison_year: Optional[int] = None,
-    top_n: int = 10
+    top_n: int = 13
 ) -> pd.DataFrame:
     """회사별 연도별 분기별 스킬 트렌드 조회 (판다스 DataFrame 반환)"""
     if not company_patterns:
@@ -443,7 +443,7 @@ def get_skill_statistics(
     db: Session,
     start_date: date,
     end_date: date,
-    company_name: Optional[str] = None,
+    company_patterns: Optional[List[str]] = None,
     limit: int = 20
 ) -> pd.DataFrame:
     """
@@ -453,7 +453,7 @@ def get_skill_statistics(
         db: 데이터베이스 세션
         start_date: 시작 날짜
         end_date: 종료 날짜
-        company_name: 회사 이름 (선택사항)
+        company_patterns: 회사명 패턴 리스트 (선택사항, 예: ["토스%", "토스뱅크%"])
         limit: 상위 N개 스킬
     
     Returns:
@@ -470,11 +470,11 @@ def get_skill_statistics(
         Post, PostSkill.post_id == Post.id
     )
     
-    if company_name:
+    if company_patterns:
         current_query = current_query.join(
             Company, Post.company_id == Company.id
         ).filter(
-            Company.name == company_name
+            or_(*[Company.name.like(pattern) for pattern in company_patterns])
         )
     
     current_query = current_query.filter(
@@ -503,11 +503,11 @@ def get_skill_statistics(
         Post, PostSkill.post_id == Post.id
     )
     
-    if company_name:
+    if company_patterns:
         prev_query = prev_query.join(
             Company, Post.company_id == Company.id
         ).filter(
-            Company.name == company_name
+            or_(*[Company.name.like(pattern) for pattern in company_patterns])
         )
     
     prev_query = prev_query.filter(
@@ -545,7 +545,7 @@ def get_total_job_postings(
     db: Session,
     start_date: date,
     end_date: date,
-    company_name: Optional[str] = None
+    company_patterns: Optional[List[str]] = None
 ) -> int:
     """
     특정 기간의 전체 채용 공고 수 조회
@@ -554,18 +554,18 @@ def get_total_job_postings(
         db: 데이터베이스 세션
         start_date: 시작 날짜
         end_date: 종료 날짜
-        company_name: 회사 이름 (선택사항)
+        company_patterns: 회사명 패턴 리스트 (선택사항, 예: ["토스%", "토스뱅크%"])
     
     Returns:
         전체 채용 공고 수
     """
     query = db.query(func.count(func.distinct(Post.id)))
     
-    if company_name:
+    if company_patterns:
         query = query.join(
             Company, Post.company_id == Company.id
         ).filter(
-            Company.name == company_name
+            or_(*[Company.name.like(pattern) for pattern in company_patterns])
         )
     
     query = query.filter(
