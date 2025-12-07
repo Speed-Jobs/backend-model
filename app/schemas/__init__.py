@@ -8,13 +8,6 @@ from .schemas_skill_trends import (
     SkillTrendData,
     SkillTrendResponse,
 )
-from .schemas_skill_statistics import (
-    RelatedSkillStatistics,
-    SkillStatistics,
-    SkillStatisticsData,
-    SkillStatisticsPeriod,
-    SkillStatisticsResponse,
-)
 
 __all__ = [
     # skill match
@@ -25,10 +18,4 @@ __all__ = [
     "MonthlySkillTrend",
     "SkillTrendData",
     "SkillTrendResponse",
-    # skill statistics (skill cloud)
-    "RelatedSkillStatistics",
-    "SkillStatistics",
-    "SkillStatisticsData",
-    "SkillStatisticsPeriod",
-    "SkillStatisticsResponse",
 ]

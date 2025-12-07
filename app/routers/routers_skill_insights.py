@@ -13,7 +13,7 @@ from app.schemas import schemas_skill_insights
 
 router = APIRouter(
     prefix="/api/v1/dashboard",
-    tags=["Skill Trends"]
+    tags=["Skill Trends", "Skill Cloud"]
 )
 
 
@@ -191,5 +191,107 @@ async def get_company_skill_trends(
         raise HTTPException(
             status_code=500,
             detail=f"회사별 스킬 트렌드 조회 중 오류 발생: {str(e)}"
+        )
+
+
+@router.get(
+    "/skills/statistics",
+    response_model=schemas_skill_insights.SkillStatisticsResponse,
+    summary="스킬 클라우드 통계 조회",
+    description="""
+    지정된 기간과 회사에 대한 스킬 통계 데이터를 조회합니다.
+    스킬별 공고 수, 비율, 변화율, 관련 스킬 정보를 제공합니다.
+    스킬 클라우드 시각화에 사용됩니다.
+    start_date와 end_date를 지정하지 않으면 현재 연도 1월 1일부터 현재 날짜까지의 데이터를 반환합니다.
+    """
+)
+async def get_skills_statistics(
+    start_date: Optional[str] = Query(
+        None,
+        description="시작 날짜 (YYYY-MM-DD 형식). 미입력 시 현재 연도 1월 1일",
+        pattern=r"^\d{4}-\d{2}-\d{2}$",
+        example="2024-01-01"
+    ),
+    end_date: Optional[str] = Query(
+        None,
+        description="종료 날짜 (YYYY-MM-DD 형식). 미입력 시 현재 날짜",
+        pattern=r"^\d{4}-\d{2}-\d{2}$",
+        example="2024-12-31"
+    ),
+    company: Optional[str] = Query(
+        None,
+        description="회사 이름 필터 (선택사항, 전체 데이터 조회 시 생략)",
+        example="토스"
+    ),
+    limit: int = Query(
+        20,
+        description="반환할 상위 스킬 개수 (기본값: 20)",
+        ge=1,
+        le=100,
+        example=20
+    ),
+    db: Session = Depends(get_db_readonly)
+):
+    """
+    스킬 클라우드 통계 조회
+    
+    - **start_date**: 시작 날짜 (YYYY-MM-DD 형식). 미입력 시 현재 연도 1월 1일
+    - **end_date**: 종료 날짜 (YYYY-MM-DD 형식). 미입력 시 현재 날짜
+    - **company**: 회사 이름 필터 (선택사항)
+    - **limit**: 반환할 상위 스킬 개수 (1-100)
+    
+    Returns:
+        SkillStatisticsResponse: 스킬 통계 데이터 (관련 스킬 및 유사도 포함)
+    """
+    try:
+        # 날짜 검증
+        if start_date:
+            try:
+                datetime.strptime(start_date, '%Y-%m-%d')
+            except ValueError:
+                raise HTTPException(
+                    status_code=400,
+                    detail="날짜 형식이 올바르지 않습니다. YYYY-MM-DD 형식을 사용해주세요."
+                )
+        
+        if end_date:
+            try:
+                datetime.strptime(end_date, '%Y-%m-%d')
+            except ValueError:
+                raise HTTPException(
+                    status_code=400,
+                    detail="날짜 형식이 올바르지 않습니다. YYYY-MM-DD 형식을 사용해주세요."
+                )
+        
+        # 서비스 호출
+        data = skill_insights_service.get_skill_statistics(
+            db=db,
+            start_date=start_date,
+            end_date=end_date,
+            company=company,
+            limit=limit
+        )
+        
+        # 응답 메시지 생성
+        if start_date and end_date:
+            message = "스킬 통계 조회 성공"
+        else:
+            message = "스킬 통계 조회 성공 (현재 연도 1월 1일 ~ 현재 날짜)"
+        
+        return schemas_skill_insights.SkillStatisticsResponse(
+            status=200,
+            code="SUCCESS",
+            message=message,
+            data=data
+        )
+    
+    except HTTPException:
+        raise
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"스킬 통계 조회 중 오류 발생: {str(e)}"
         )
 

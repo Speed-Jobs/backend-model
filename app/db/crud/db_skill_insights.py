@@ -2,7 +2,7 @@
 스킬 트렌드 관련 DB CRUD
 """
 from sqlalchemy.orm import Session
-from sqlalchemy import func, text, or_
+from sqlalchemy import func, text, or_, distinct
 from datetime import datetime, date, timedelta
 from typing import List, Dict, Optional, Tuple
 import pandas as pd
@@ -437,3 +437,140 @@ def get_quarterly_skill_trends_by_company(
     
     df = pd.DataFrame(rows)
     return df
+
+
+def get_skill_statistics(
+    db: Session,
+    start_date: date,
+    end_date: date,
+    company_name: Optional[str] = None,
+    limit: int = 20
+) -> pd.DataFrame:
+    """
+    특정 기간의 스킬 통계 조회 (스킬 클라우드용)
+    
+    Args:
+        db: 데이터베이스 세션
+        start_date: 시작 날짜
+        end_date: 종료 날짜
+        company_name: 회사 이름 (선택사항)
+        limit: 상위 N개 스킬
+    
+    Returns:
+        DataFrame with columns: skill_id, skill_name, count, prev_count, change
+    """
+    # 현재 기간 통계
+    current_query = db.query(
+        Skill.id.label('skill_id'),
+        Skill.name.label('skill_name'),
+        func.count(func.distinct(Post.id)).label('count')
+    ).join(
+        PostSkill, Skill.id == PostSkill.skill_id
+    ).join(
+        Post, PostSkill.post_id == Post.id
+    )
+    
+    if company_name:
+        current_query = current_query.join(
+            Company, Post.company_id == Company.id
+        ).filter(
+            Company.name == company_name
+        )
+    
+    current_query = current_query.filter(
+        Post.is_deleted.is_(False),
+        EFFECTIVE_POSTED_AT.between(start_date, end_date)
+    ).group_by(
+        Skill.id, Skill.name
+    ).order_by(
+        func.count(func.distinct(Post.id)).desc()
+    ).limit(limit)
+    
+    current_results = current_query.all()
+    
+    # 이전 기간 계산 (동일한 기간 길이만큼 이전)
+    period_days = (end_date - start_date).days
+    prev_end_date = start_date - timedelta(days=1)
+    prev_start_date = prev_end_date - timedelta(days=period_days)
+    
+    # 이전 기간 통계
+    prev_query = db.query(
+        Skill.id.label('skill_id'),
+        func.count(func.distinct(Post.id)).label('prev_count')
+    ).join(
+        PostSkill, Skill.id == PostSkill.skill_id
+    ).join(
+        Post, PostSkill.post_id == Post.id
+    )
+    
+    if company_name:
+        prev_query = prev_query.join(
+            Company, Post.company_id == Company.id
+        ).filter(
+            Company.name == company_name
+        )
+    
+    prev_query = prev_query.filter(
+        Post.is_deleted.is_(False),
+        EFFECTIVE_POSTED_AT.between(prev_start_date, prev_end_date)
+    ).group_by(
+        Skill.id
+    )
+    
+    prev_results = {row.skill_id: row.prev_count for row in prev_query.all()}
+    
+    # 결과 조합
+    rows = []
+    for row in current_results:
+        prev_count = prev_results.get(row.skill_id, 0)
+        count_diff = row.count - prev_count
+        
+        if prev_count > 0:
+            change_percentage = round((count_diff * 100.0 / prev_count), 1)
+        else:
+            change_percentage = 0.0
+        
+        rows.append({
+            'skill_id': row.skill_id,
+            'skill_name': row.skill_name,
+            'count': row.count,
+            'prev_count': prev_count,
+            'change': change_percentage
+        })
+    
+    return pd.DataFrame(rows)
+
+
+def get_total_job_postings(
+    db: Session,
+    start_date: date,
+    end_date: date,
+    company_name: Optional[str] = None
+) -> int:
+    """
+    특정 기간의 전체 채용 공고 수 조회
+    
+    Args:
+        db: 데이터베이스 세션
+        start_date: 시작 날짜
+        end_date: 종료 날짜
+        company_name: 회사 이름 (선택사항)
+    
+    Returns:
+        전체 채용 공고 수
+    """
+    query = db.query(func.count(func.distinct(Post.id)))
+    
+    if company_name:
+        query = query.join(
+            Company, Post.company_id == Company.id
+        ).filter(
+            Company.name == company_name
+        )
+    
+    query = query.filter(
+        Post.is_deleted.is_(False),
+        EFFECTIVE_POSTED_AT.between(start_date, end_date)
+    )
+    
+    return query.scalar() or 0
