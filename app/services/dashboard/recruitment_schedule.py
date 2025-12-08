@@ -120,28 +120,30 @@ def filter_and_convert_schedules(
     schedules: List[RecruitmentSchedule],
     type_filter: str,
     start_date: str,
-    end_date: str
+    end_date: str,
+    position_ids: Optional[List[int]] = None
 ) -> List[Dict[str, Any]]:
     """
     채용 일정을 필터링하고 Swagger 형식으로 변환합니다.
     각 schedule은 별도로 반환됩니다 (다른 공고는 분리).
-    
+
     Args:
         schedules: RecruitmentSchedule 객체 리스트
         type_filter: "신입" 또는 "경력"
         start_date: 조회 시작일 (YYYY-MM-DD)
         end_date: 조회 종료일 (YYYY-MM-DD)
-        
+        position_ids: 직군 ID 리스트 (None이면 전체)
+
     Returns:
         변환된 일정 리스트 (각 schedule별로 분리됨)
     """
     result_schedules = []
-    
+
     for schedule in schedules:
         # post가 없거나 experience가 null이면 제외
         if not schedule.post or not schedule.post.experience:
             continue
-        
+
         # 신입 필터: 정확히 "신입"만 통과
         if type_filter == "신입":
             if schedule.post.experience != "신입":
@@ -150,34 +152,42 @@ def filter_and_convert_schedules(
         elif type_filter == "경력":
             if schedule.post.experience == "신입":
                 continue
-        
+
+        # position_ids 필터 (메모리 필터 - 쿼리에서 못 거른 경우 대비)
+        position_id = None
+        if schedule.post and schedule.post.industry:
+            position_id = schedule.post.industry.position_id
+            if position_ids and position_id not in position_ids:
+                continue
+
         # application_date가 없으면 제외
         if not schedule.application_date or len(schedule.application_date) == 0:
             continue
-        
+
         # stages 변환
         stages = convert_to_stages(schedule, start_date, end_date)
-        
+
         # stages가 비어있으면 제외
         if not stages:
             continue
-        
+
         # 회사 정보
         company_id = schedule.company_id
         company_name = schedule.company.name if schedule.company else "Unknown"
-        
+
         # 각 schedule을 별도로 추가 (병합 없음)
         schedule_data = {
             "id": str(company_id),
             "company_id": company_id,
             "company_name": company_name,
             "type": type_filter,
+            "position_id": position_id,
             "data_type": "actual",
             "stages": stages
         }
-        
+
         result_schedules.append(schedule_data)
-    
+
     return result_schedules
 
 
@@ -522,11 +532,12 @@ def get_company_recruitment_schedule(
     type_filter: str,
     start_date: str,
     end_date: str,
-    data_type: str = "actual"
+    data_type: str = "actual",
+    position_ids: Optional[List[int]] = None
 ) -> Dict[str, Any]:
     """
     특정 회사의 채용 일정을 조회합니다.
-    
+
     Args:
         db: Database session
         company_id: 회사 ID
@@ -534,27 +545,30 @@ def get_company_recruitment_schedule(
         start_date: 조회 시작일 (YYYY-MM-DD)
         end_date: 조회 종료일 (YYYY-MM-DD)
         data_type: "actual", "predicted", "all"
-        
+        position_ids: 직군 ID 리스트 (None이면 전체)
+
     Returns:
         Swagger 형식의 응답 딕셔너리
     """
     try:
         result_schedules = []
-        
+
         # actual 데이터 조회
         if data_type in ["actual", "all"]:
             schedules = get_recruitment_schedules_by_company(
                 db=db,
-                company_id=company_id
+                company_id=company_id,
+                position_ids=position_ids
             )
-            
+
             actual_schedules = filter_and_convert_schedules(
                 schedules=schedules,
                 type_filter=type_filter,
                 start_date=start_date,
-                end_date=end_date
+                end_date=end_date,
+                position_ids=position_ids
             )
-            
+
             if data_type == "actual":
                 result_schedules = actual_schedules
             else:
@@ -603,7 +617,8 @@ def get_all_recruitment_schedules(
     start_date: str,
     end_date: str,
     company_ids: Optional[List[int]] = None,
-    data_type: str = "actual"
+    data_type: str = "actual",
+    position_ids: Optional[List[int]] = None
 ) -> Dict[str, Any]:
     """
     전체 또는 특정 회사들의 채용 일정을 조회합니다.
@@ -615,6 +630,7 @@ def get_all_recruitment_schedules(
         end_date: 조회 종료일 (YYYY-MM-DD)
         company_ids: 회사 ID 리스트 (None이면 전체)
         data_type: "actual", "predicted", "all"
+        position_ids: 직군 ID 리스트 (None이면 전체)
 
     Returns:
         Swagger 형식의 응답 딕셔너리
@@ -626,14 +642,16 @@ def get_all_recruitment_schedules(
         if data_type in ["actual", "all"]:
             schedules = get_recruitment_schedules(
                 db=db,
-                company_ids=company_ids
+                company_ids=company_ids,
+                position_ids=position_ids
             )
 
             actual_schedules = filter_and_convert_schedules(
                 schedules=schedules,
                 type_filter=type_filter,
                 start_date=start_date,
-                end_date=end_date
+                end_date=end_date,
+                position_ids=position_ids
             )
 
             if data_type == "actual":

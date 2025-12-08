@@ -25,6 +25,7 @@ def get_recruitment_schedule_by_company(
     data_type: str = Query(default="actual", description="데이터 유형 (actual: 실제 공고, predicted: 예측치, all: 전체)", example="actual"),
     start_date: str = Query(..., description="시작일 (YYYY-MM-DD 형식)", example="2025-01-01"),
     end_date: str = Query(..., description="종료일 (YYYY-MM-DD 형식)", example="2025-12-31"),
+    position_ids: Optional[str] = Query(None, description="직군 ID 리스트 (쉼표로 구분)", example="1,2,3"),
     db: Session = Depends(get_db)
 ):
     """
@@ -49,7 +50,18 @@ def get_recruitment_schedule_by_company(
             status_code=400,
             detail="data_type은 'actual', 'predicted', 'all' 중 하나여야 합니다."
         )
-    
+
+    # position_ids 파싱
+    parsed_position_ids = None
+    if position_ids:
+        try:
+            parsed_position_ids = [int(id.strip()) for id in position_ids.split(",")]
+        except ValueError:
+            raise HTTPException(
+                status_code=400,
+                detail="position_ids는 숫자를 쉼표로 구분한 형식이어야 합니다. (예: 1,2,3)"
+            )
+
     # 서비스 호출
     result = get_company_recruitment_schedule(
         db=db,
@@ -57,7 +69,8 @@ def get_recruitment_schedule_by_company(
         type_filter=type,
         start_date=start_date,
         end_date=end_date,
-        data_type=data_type
+        data_type=data_type,
+        position_ids=parsed_position_ids
     )
     
     # 에러 처리
@@ -77,6 +90,7 @@ def get_recruitment_schedules(
     start_date: str = Query(..., description="시작일 (YYYY-MM-DD 형식)", example="2025-01-01"),
     end_date: str = Query(..., description="종료일 (YYYY-MM-DD 형식)", example="2025-12-31"),
     company_ids: Optional[str] = Query(None, description="회사 ID 리스트 (쉼표로 구분)", example="1,2,3"),
+    position_ids: Optional[str] = Query(None, description="직군 ID 리스트 (쉼표로 구분)", example="1,2,3"),
     db: Session = Depends(get_db)
 ):
     """
@@ -112,7 +126,18 @@ def get_recruitment_schedules(
                 status_code=400,
                 detail="company_ids는 숫자를 쉼표로 구분한 형식이어야 합니다. (예: 1,2,3)"
             )
-    
+
+    # position_ids 파싱
+    parsed_position_ids = None
+    if position_ids:
+        try:
+            parsed_position_ids = [int(id.strip()) for id in position_ids.split(",")]
+        except ValueError:
+            raise HTTPException(
+                status_code=400,
+                detail="position_ids는 숫자를 쉼표로 구분한 형식이어야 합니다. (예: 1,2,3)"
+            )
+
     # 서비스 호출
     result = get_all_recruitment_schedules(
         db=db,
@@ -120,7 +145,8 @@ def get_recruitment_schedules(
         start_date=start_date,
         end_date=end_date,
         company_ids=parsed_company_ids,
-        data_type=data_type
+        data_type=data_type,
+        position_ids=parsed_position_ids
     )
 
     # 에러 처리

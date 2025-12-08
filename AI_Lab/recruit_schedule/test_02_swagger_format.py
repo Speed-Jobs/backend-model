@@ -163,18 +163,20 @@ def test_swagger_format(
     data_type_filter: str = "actual",
     start_date: str = "2025-01-01",
     end_date: str = "2025-12-31",
-    company_ids: list = None
+    company_ids: list = None,
+    position_ids: list = None
 ):
     """
     DB 데이터를 Swagger 형식으로 변환하여 출력합니다.
-    
+
     Args:
         type_filter: "신입" 또는 "경력"
         data_type_filter: "actual", "predicted", "all" (현재는 actual만 지원)
         start_date: 조회 시작일 (YYYY-MM-DD)
         end_date: 조회 종료일 (YYYY-MM-DD)
         company_ids: 회사 ID 리스트 (None이면 전체)
-        
+        position_ids: 직군 ID 리스트 (None이면 전체)
+
     Returns:
         Swagger 형식의 응답 딕셔너리
     """
@@ -187,6 +189,7 @@ def test_swagger_format(
     print(f"   - start_date: {start_date}")
     print(f"   - end_date: {end_date}")
     print(f"   - company_ids: {company_ids if company_ids else '전체'}")
+    print(f"   - position_ids: {position_ids if position_ids else '전체'}")
 
     db = next(get_db())
 
@@ -201,11 +204,17 @@ def test_swagger_format(
                 joinedload(RecruitmentSchedule.company),
                 joinedload(RecruitmentSchedule.post)
             )
-        
+
         # company_ids 필터 적용
         if company_ids:
             query = query.filter(RecruitmentSchedule.company_id.in_(company_ids))
-        
+
+        # position_ids 필터 적용
+        if position_ids:
+            query = query.join(Post, RecruitmentSchedule.post_id == Post.id)\
+                .join(Industry, Post.industry_id == Industry.id)\
+                .filter(Industry.position_id.in_(position_ids))
+
         schedules = query.all()
         print(f"   - 조회된 일정 수: {len(schedules)}")
 
@@ -214,15 +223,16 @@ def test_swagger_format(
         result_schedules = []
         skipped_no_application = 0  # application_date 없어서 제외된 개수
         skipped_type = 0  # type 필터로 제외된 개수
+        skipped_position = 0  # position 필터로 제외된 개수
         skipped_no_stages = 0  # stages 없어서 제외된 개수
-        
+
         for schedule in schedules:
             # type 필터 (post.experience)
             # post가 없거나 experience가 null이면 제외
             if not schedule.post or not schedule.post.experience:
                 skipped_type += 1
                 continue
-            
+
             # 신입 필터: 정확히 "신입"만 통과
             if type_filter == "신입":
                 if schedule.post.experience != "신입":
@@ -232,6 +242,12 @@ def test_swagger_format(
             elif type_filter == "경력":
                 if schedule.post.experience == "신입":
                     skipped_type += 1
+                    continue
+
+            # position 필터 (메모리 필터 - 쿼리에서 못 거른 경우 대비)
+            if position_ids and schedule.post.industry:
+                if schedule.post.industry.position_id not in position_ids:
+                    skipped_position += 1
                     continue
             
             # application_date가 없으면 제외 (미구현으로 간주)
@@ -249,13 +265,19 @@ def test_swagger_format(
             
             # 회사 정보 가져오기
             company_name = schedule.company.name if schedule.company else "Unknown"
-            
+
+            # 직군 정보 가져오기
+            position_id = None
+            if schedule.post and schedule.post.industry:
+                position_id = schedule.post.industry.position_id
+
             # Swagger 형식으로 변환
             schedule_data = {
                 "id": str(schedule.schedule_id),
                 "company_id": schedule.company_id,
                 "company_name": company_name,
                 "type": type_filter,
+                "position_id": position_id,
                 "data_type": data_type_filter,
                 "stages": stages
             }
@@ -278,6 +300,7 @@ def test_swagger_format(
         print(f"   - 총 stages 수: {sum(len(s['stages']) for s in result_schedules)}")
         print(f"\n[제외된 일정 통계]")
         print(f"   - type 필터: {skipped_type}개")
+        print(f"   - position 필터: {skipped_position}개")
         print(f"   - application_date 없음: {skipped_no_application}개")
         print(f"   - stages 없음 (날짜 범위 외): {skipped_no_stages}개")
         
@@ -305,16 +328,18 @@ def test_company_schedule(
     company_id: int,
     type_filter: str = "신입",
     start_date: str = "2025-01-01",
-    end_date: str = "2025-12-31"
+    end_date: str = "2025-12-31",
+    position_ids: list = None
 ):
     """
     특정 회사의 채용 일정을 조회합니다.
-    
+
     Args:
         company_id: 회사 ID
         type_filter: "신입" 또는 "경력"
         start_date: 조회 시작일 (YYYY-MM-DD)
         end_date: 조회 종료일 (YYYY-MM-DD)
+        position_ids: 직군 ID 리스트 (None이면 전체)
     """
     print("=" * 60)
     print(f"특정 회사 채용 일정 조회 (Company ID: {company_id})")
@@ -324,14 +349,16 @@ def test_company_schedule(
     print(f"   - type: {type_filter}")
     print(f"   - start_date: {start_date}")
     print(f"   - end_date: {end_date}")
+    print(f"   - position_ids: {position_ids if position_ids else '전체'}")
 
-    # test_swagger_format 함수 재사용 (company_ids만 추가)
+    # test_swagger_format 함수 재사용
     return test_swagger_format(
         type_filter=type_filter,
         data_type_filter="actual",
         start_date=start_date,
         end_date=end_date,
-        company_ids=[company_id]
+        company_ids=[company_id],
+        position_ids=position_ids
     )
 
 

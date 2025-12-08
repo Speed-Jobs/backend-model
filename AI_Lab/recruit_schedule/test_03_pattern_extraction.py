@@ -282,11 +282,11 @@ def predict_schedule(patterns, target_year, target_semester):
 def format_swagger_response(predictions):
     """Swagger UI 응답 형식 변환"""
     schedules = []
-    
+
     for pred in predictions:
         stages = []
         stage_id_counter = 1
-        
+
         for stage, dates in pred["stages"].items():
             stages.append({
                 "id": f"{pred['company_id']}-{stage_id_counter}",
@@ -295,7 +295,7 @@ def format_swagger_response(predictions):
                 "end_date": dates["end_date"]
             })
             stage_id_counter += 1
-        
+
         schedules.append({
             "id": str(pred["company_id"]),
             "company_id": pred["company_id"],
@@ -318,16 +318,17 @@ def format_swagger_response(predictions):
 # ==================== 경쟁사 조회 ====================
 def get_competitors(db):
     """경쟁사 목록 조회"""
-    from app.db.crud.db_competitors_skills import COMPETITOR_GROUPS
-    
-    recruiting_companies = ["네이버", "카카오", "현대오토에버", "한화시스템", "LG CNS"]
+    from app.config.company_groups import COMPANY_GROUPS
+
+    # COMPANY_GROUPS의 모든 그룹 패턴 사용
     like_conditions = []
-    
-    for company_name in recruiting_companies:
-        if company_name in COMPETITOR_GROUPS:
-            for keyword in COMPETITOR_GROUPS[company_name]:
-                like_conditions.append(Company.name.like(keyword))
-    
+    for patterns in COMPANY_GROUPS.values():
+        for pattern in patterns:
+            like_conditions.append(Company.name.like(pattern))
+
+    if not like_conditions:
+        return []
+
     return db.query(Company.id, Company.name)\
         .filter(or_(*like_conditions))\
         .order_by(Company.id)\
@@ -346,15 +347,15 @@ def main():
         # 인자 파싱
         target_year = int(sys.argv[1]) if len(sys.argv) > 1 else 2026
         target_semester = sys.argv[2] if len(sys.argv) > 2 else "상반기"
-        
+
         print(f"\n[설정]")
         print(f"  - 예측 연도: {target_year}")
         print(f"  - 예측 학기: {target_semester}")
-        
+
         # 경쟁사 조회
         companies = get_competitors(db)
         print(f"\n[경쟁사 조회] 총 {len(companies)}개 회사")
-        
+
         # 패턴 추출 및 예측
         predictions = []
         for company_id, company_name in companies:
@@ -364,7 +365,7 @@ def main():
                 if prediction:
                     predictions.append(prediction)
                     print(f"  - {company_name}: {len(prediction['stages'])}개 단계 예측")
-        
+
         # Swagger 형식으로 결과 반환
         result = format_swagger_response(predictions)
         
