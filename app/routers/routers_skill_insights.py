@@ -13,7 +13,7 @@ from app.schemas import schemas_skill_insights
 
 router = APIRouter(
     prefix="/api/v1/dashboard",
-    tags=["Skill Trends", "Skill Cloud"]
+    tags=["Skill Trends"]
 )
 
 
