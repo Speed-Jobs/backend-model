@@ -88,7 +88,7 @@ class TableInitializer:
                 category ENUM('TECH', 'BIZ', 'BIZ_SUPPORTING') COMMENT 'Position category',
                 is_deleted BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'Soft delete flag',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Created timestamp',
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Updated timestamp',
+                modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Modified timestamp',
                 INDEX idx_name (name(191))
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Job positions';
         """)
@@ -109,7 +109,7 @@ class TableInitializer:
                 is_competitor BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'Competitor flag',
                 is_deleted BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'Soft delete flag',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Created timestamp',
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Updated timestamp',
+                modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Modified timestamp',
                 INDEX idx_name (name(191)),
                 INDEX idx_domain (domain(191))
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Companies';
@@ -127,7 +127,7 @@ class TableInitializer:
                 position_id INT COMMENT 'Related position ID',
                 is_deleted BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'Soft delete flag',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Created timestamp',
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Updated timestamp',
+                modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Modified timestamp',
                 INDEX idx_name (name(191)),
                 INDEX idx_position_id (position_id),
                 FOREIGN KEY (position_id) REFERENCES `position`(id) ON DELETE SET NULL
@@ -143,7 +143,7 @@ class TableInitializer:
                 name VARCHAR(255) NOT NULL UNIQUE COMMENT 'Skill name',
                 is_deleted BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'Soft delete flag',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Created timestamp',
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Updated timestamp',
+                modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Modified timestamp',
                 INDEX idx_name (name(191))
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Skills and technologies';
         """)
@@ -164,20 +164,20 @@ class TableInitializer:
                 close_at DATETIME COMMENT 'Closing date',
                 crawled_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Crawled timestamp',
                 source_url VARCHAR(1000) NOT NULL COMMENT 'Original URL',
-                source_url_hash CHAR(64) GENERATED ALWAYS AS (SHA2(source_url, 256)) STORED COMMENT 'SHA256 hash of source_url for duplicate detection',
+                url_hash VARCHAR(255) COMMENT 'URL hash',
                 screenshot_url VARCHAR(1000) COMMENT 'Screenshot URL',
                 company_id INT NOT NULL COMMENT 'Company ID',
                 industry_id INT COMMENT 'Industry ID',
                 is_deleted BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'Soft delete flag',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Created timestamp',
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Updated timestamp',
+                modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Modified timestamp',
                 INDEX idx_title (title(191)),
                 INDEX idx_posted_at (posted_at),
                 INDEX idx_crawled_at (crawled_at),
                 INDEX idx_company_id (company_id),
                 INDEX idx_industry_id (industry_id),
-                INDEX idx_source_url_prefix (source_url(255)),
-                UNIQUE KEY idx_source_url_hash (source_url_hash),
+                UNIQUE KEY idx_source_url (source_url(768)),
+                INDEX idx_url_hash (url_hash),
                 FULLTEXT INDEX ft_idx_title_description (title, description),
                 FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE CASCADE,
                 FOREIGN KEY (industry_id) REFERENCES industry(id) ON DELETE SET NULL
@@ -244,7 +244,7 @@ class TableInitializer:
             CREATE TABLE IF NOT EXISTS dashboard_stat (
                 id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Stat ID',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Created timestamp',
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Updated timestamp'
+                modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Modified timestamp'
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Dashboard statistics';
         """)
     

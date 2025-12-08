@@ -110,6 +110,7 @@ def create_post(db: Session, job_data: Dict[str, Any], company: Company) -> tupl
         close_at=parse_date(job_data.get("expired_date")),
         crawled_at=parse_date(job_data.get("crawl_date")) or datetime.now(),
         source_url=job_data.get("url", ""),
+        url_hash=None,  # 일단 null로 설정
         screenshot_url=job_data.get("screenshots", {}).get("combined"),
         company_id=company.id,
         industry_id=industry_id  # 매칭된 Industry ID 할당
@@ -147,7 +148,73 @@ def create_post_skills(db: Session, post: Post, skill_names: List[str]) -> int:
             db.add(post_skill)
             print(f"  - 스킬 연결: {skill_name} -> Post #{post.id}")
             added_count += 1
-    
+
+    return added_count
+
+
+def create_industry_skills(db: Session, industry_id: int, skill_names: List[str]) -> int:
+    """
+    산업과 스킬의 관계 생성
+    Returns: 새로 추가된 스킬 연결 개수
+    """
+    if not industry_id:
+        return 0
+
+    added_count = 0
+    for skill_name in skill_names:
+        if not skill_name or skill_name.strip() == "":
+            continue
+
+        skill = get_or_create_skill(db, skill_name.strip())
+
+        # 이미 관계가 존재하는지 확인
+        existing_relation = db.query(IndustrySkill).filter(
+            IndustrySkill.industry_id == industry_id,
+            IndustrySkill.skill_id == skill.id
+        ).first()
+
+        if not existing_relation:
+            industry_skill = IndustrySkill(
+                industry_id=industry_id,
+                skill_id=skill.id
+            )
+            db.add(industry_skill)
+            print(f"  - 스킬 연결: {skill_name} -> Industry #{industry_id}")
+            added_count += 1
+
+    return added_count
+
+
+def create_position_skills(db: Session, position_id: int, skill_names: List[str]) -> int:
+    """
+    직무와 스킬의 관계 생성
+    Returns: 새로 추가된 스킬 연결 개수
+    """
+    if not position_id:
+        return 0
+
+    added_count = 0
+    for skill_name in skill_names:
+        if not skill_name or skill_name.strip() == "":
+            continue
+
+        skill = get_or_create_skill(db, skill_name.strip())
+
+        # 이미 관계가 존재하는지 확인
+        existing_relation = db.query(PositionSkill).filter(
+            PositionSkill.position_id == position_id,
+            PositionSkill.skill_id == skill.id
+        ).first()
+
+        if not existing_relation:
+            position_skill = PositionSkill(
+                position_id=position_id,
+                skill_id=skill.id
+            )
+            db.add(position_skill)
+            print(f"  - 스킬 연결: {skill_name} -> Position #{position_id}")
+            added_count += 1
+
     return added_count
 
 
@@ -186,9 +253,23 @@ def process_single_job(db: Session, job_data: Dict[str, Any], idx: int) -> bool:
 
             # 스킬 연결 (기존 공고여도 새로운 스킬은 추가)
             if skill_names:
+                # 1. PostSkill 관계 생성
                 added = create_post_skills(db, post, skill_names)
                 if not is_new and added > 0:
                     print(f"  기존 공고에 {added}개 스킬 추가됨")
+
+                # 2. IndustrySkill 관계 생성
+                if post.industry_id:
+                    industry_added = create_industry_skills(db, post.industry_id, skill_names)
+                    if industry_added > 0:
+                        print(f"  Industry #{post.industry_id}에 {industry_added}개 스킬 추가됨")
+
+                    # 3. PositionSkill 관계 생성
+                    industry = db.query(Industry).filter(Industry.id == post.industry_id).first()
+                    if industry and industry.position_id:
+                        position_added = create_position_skills(db, industry.position_id, skill_names)
+                        if position_added > 0:
+                            print(f"  Position #{industry.position_id}에 {position_added}개 스킬 추가됨")
 
             # Savepoint 커밋
             savepoint.commit()
