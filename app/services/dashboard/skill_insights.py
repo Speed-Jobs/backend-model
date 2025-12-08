@@ -22,7 +22,6 @@ class SkillInsightsService:
         top_n: int = 10
     ) -> schemas_skill_insights.SkillTrendData:
         """스킬 트렌드 조회
-        
         Args:
             db: 데이터베이스 세션
             year: 조회 연도 (None일 경우 최근 5개년)
