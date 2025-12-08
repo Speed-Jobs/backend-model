@@ -6,8 +6,30 @@
 주요 기능:
 1. 9개 주요 경쟁사 그룹의 채용 일정 조회
 2. 각 날짜별로 동시에 채용 중인 경쟁사 수 계산 (회사 단위 중복 제거)
-3. 신입/경력 필터링 지원
-4. Raw SQL을 사용하여 DB 쿼리와 완전히 동일한 결과 보장
+3. 각 날짜별 채용 중인 회사 목록 제공 (company_id, company_name)
+4. 신입/경력 필터링 지원
+5. Raw SQL을 사용하여 DB 쿼리와 완전히 동일한 결과 보장
+
+출력 형식:
+{
+    "status": 200,
+    "code": "SUCCESS",
+    "message": "경쟁 강도 분석 성공",
+    "data": {
+        "period": {"start_date": "2025-11-01", "end_date": "2025-11-30"},
+        "max_overlaps": 5,
+        "daily_intensity": [
+            {
+                "date": "2025-11-01",
+                "overlap_count": 2,
+                "companies": [
+                    {"company_id": 3, "company_name": "삼성전자"},
+                    {"company_id": 4, "company_name": "LG전자"}
+                ]
+            }
+        ]
+    }
+}
 
 사용법:
     python test_04_recruitment_intensity.py [시작일] [종료일] [채용유형]
@@ -216,11 +238,17 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
             "message": "경쟁 강도 분석 성공",
             "data": {
                 "period": {"start_date": "2025-11-01", "end_date": "2025-11-30"},
-                "type": "전체",
                 "max_overlaps": 14,
                 "daily_intensity": [
-                    {"date": "2025-11-01", "overlap_count": 11},
-                    {"date": "2025-11-02", "overlap_count": 11},
+                    {
+                        "date": "2025-11-01",
+                        "overlap_count": 11,
+                        "companies": [
+                            {"company_id": 3, "company_name": "삼성전자"},
+                            {"company_id": 4, "company_name": "LG전자"},
+                            ...
+                        ]
+                    },
                     ...
                 ]
             }
@@ -228,9 +256,10 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
 
         디버깅 정보:
         {
-            "competitor_count": 47,  # 찾은 경쟁사 회사 수
-            "max_overlaps": 14,      # 최대 겹침 수
-            "daily_intensity_count": 30  # 분석된 날짜 수
+            "competitor_count": 47,        # 찾은 경쟁사 회사 수
+            "max_overlaps": 14,            # 최대 겹침 수
+            "daily_intensity_count": 30,   # 분석된 날짜 수
+            "type_filter": "전체"          # 채용 유형 필터 (디버깅용)
         }
 
     Example:
@@ -264,11 +293,10 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
             "message": "경쟁 강도 분석 성공",
             "data": {
                 "period": {"start_date": start_date, "end_date": end_date},
-                "type": type_filter if type_filter else "전체",
                 "max_overlaps": 0,
                 "daily_intensity": []
             }
-        }, {"competitor_count": 0, "max_overlaps": 0}
+        }, {"competitor_count": 0, "max_overlaps": 0, "type_filter": type_filter if type_filter else "전체"}
 
     company_where = " OR ".join(company_conditions)
 
@@ -294,18 +322,18 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
     #    - p.experience IS NOT NULL로 experience가 있는 공고만 포함
     #    - experience_filter로 신입/경력 필터링 (옵션)
     #
-    # 3) LEFT JOIN
+    # 3) INNER JOIN
     #    - 날짜 시퀀스와 채용 일정을 날짜 범위로 조인
     #    - dr.date BETWEEN rs.start_date AND rs.end_date
     #
-    # 4) GROUP BY & COUNT(DISTINCT)
-    #    - 날짜별로 그룹화
-    #    - COUNT(DISTINCT rs.company_id)로 회사 단위 중복 제거
-    #    - HAVING overlap_count > 0으로 채용 중인 날짜만 반환
+    # 4) SELECT
+    #    - 날짜, company_id, company_name을 모두 반환
+    #    - Python에서 날짜별로 그룹화하여 처리
     sql_query = text(f"""
         SELECT
             dr.date,
-            COUNT(DISTINCT rs.company_id) AS overlap_count
+            rs.company_id,
+            rs.company_name
         FROM (
             SELECT DATE_ADD(:start_date, INTERVAL n DAY) AS date
             FROM (
@@ -318,7 +346,7 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
             ) numbers
             WHERE DATE_ADD(:start_date, INTERVAL n DAY) <= :end_date
         ) dr
-        LEFT JOIN (
+        INNER JOIN (
             SELECT
                 rs.schedule_id,
                 rs.company_id,
@@ -350,9 +378,7 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
             AND rs.end_date != '0000-01-01'
             AND rs.end_date >= :start_date
             AND rs.start_date <= :end_date
-        GROUP BY dr.date
-        HAVING overlap_count > 0
-        ORDER BY dr.date
+        ORDER BY dr.date, rs.company_id
     """)
 
     # 4. SQL 실행
@@ -360,16 +386,41 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
     rows = result.fetchall()
 
     # 5. 결과 변환
-    # SQL 결과를 Python 딕셔너리 리스트로 변환하고 최대값 계산
+    # SQL 결과를 날짜별로 그룹화하여 회사 리스트 생성
+    from collections import defaultdict
+
+    daily_companies = defaultdict(set)  # 날짜별 고유 company_id 집합
+    company_info = {}  # company_id -> company_name 매핑
+
+    for row in rows:
+        date_str = str(row.date)
+        company_id = row.company_id
+        company_name = row.company_name
+
+        daily_companies[date_str].add(company_id)
+        company_info[company_id] = company_name
+
+    # 날짜별 결과 리스트 생성
     daily_intensity = []
     max_overlaps = 0
 
-    for row in rows:
-        overlap_count = row.overlap_count
+    for date_str in sorted(daily_companies.keys()):
+        company_ids = sorted(daily_companies[date_str])
+        overlap_count = len(company_ids)
         max_overlaps = max(max_overlaps, overlap_count)
+
+        companies = [
+            {
+                "company_id": company_id,
+                "company_name": company_info[company_id]
+            }
+            for company_id in company_ids
+        ]
+
         daily_intensity.append({
-            "date": str(row.date),
-            "overlap_count": overlap_count
+            "date": date_str,
+            "overlap_count": overlap_count,
+            "companies": companies
         })
 
     # 6. 디버깅 정보 수집
@@ -388,18 +439,280 @@ def analyze_competition_intensity(db, start_date, end_date, type_filter=None):
         "message": "경쟁 강도 분석 성공",
         "data": {
             "period": {"start_date": start_date, "end_date": end_date},
-            "type": type_filter if type_filter else "전체",
             "max_overlaps": max_overlaps,
             "daily_intensity": daily_intensity
         }
     }, {
         "competitor_count": competitor_count,
         "max_overlaps": max_overlaps,
-        "daily_intensity_count": len(daily_intensity)
+        "daily_intensity_count": len(daily_intensity),
+        "type_filter": type_filter if type_filter else "전체"
     }
 
 
 # ==================== 메인 ====================
+def print_analysis_result(result, debug_info, type_label):
+    """분석 결과를 출력하는 헬퍼 함수"""
+    print(f"\n{'='*60}")
+    print(f"[{type_label}] 경쟁 강도 분석 결과")
+    print(f"{'='*60}")
+
+    # 날짜별 결과 출력
+    print(f"\n[날짜별 경쟁 강도]")
+    if result["data"]["daily_intensity"]:
+        for item in result["data"]["daily_intensity"]:  # 전체 출력
+            companies_str = ", ".join([
+                f"{c['company_name']}(ID:{c['company_id']})"
+                for c in item['companies'][:3]  # 처음 3개만 출력
+            ])
+            if len(item['companies']) > 3:
+                companies_str += f" 외 {len(item['companies']) - 3}개"
+            print(f"{item['date']}\t{item['overlap_count']}개\t{companies_str}")
+
+        print(f"\n총 {len(result['data']['daily_intensity'])}일")
+    else:
+        print("  (결과 없음)")
+
+    # 통계 출력
+    print(f"\n[통계]")
+    print(f"  경쟁사 수: {debug_info['competitor_count']}개")
+    print(f"  최대 겹침: {debug_info['max_overlaps']}개")
+    print(f"  분석 날짜: {debug_info['daily_intensity_count']}일")
+
+
+def analyze_rule_based(result: dict, type_label: str) -> dict:
+    """
+    Rule-Based 분석 - 경쟁 강도 데이터 기반 인사이트 생성
+
+    Args:
+        result: analyze_competition_intensity의 결과
+        type_label: 채용 유형 라벨 (신입/경력/전체)
+
+    Returns:
+        Rule-Based 분석 결과 딕셔너리
+        {
+            "statistics": {...},           # 통계 분석
+            "recommended_dates": {...},    # 추천 날짜
+            "company_patterns": {...},     # 경쟁사 패턴
+            "optimal_period": {...}        # 최적 시기 추천
+        }
+    """
+    from statistics import mean, median
+    from collections import Counter
+
+    daily_intensity = result["data"]["daily_intensity"]
+
+    if not daily_intensity:
+        return {
+            "statistics": {},
+            "recommended_dates": {},
+            "company_patterns": {},
+            "optimal_period": {}
+        }
+
+    # 1. 통계 분석
+    overlap_counts = [item["overlap_count"] for item in daily_intensity]
+    avg_overlap = mean(overlap_counts)
+    median_overlap = median(overlap_counts)
+    min_overlap = min(overlap_counts)
+    max_overlap = max(overlap_counts)
+
+    # 경쟁 강도 분포 계산 (낮음/보통/높음)
+    threshold_low = avg_overlap * 0.7
+    threshold_high = avg_overlap * 1.3
+
+    distribution = {
+        "low": len([x for x in overlap_counts if x <= threshold_low]),
+        "medium": len([x for x in overlap_counts if threshold_low < x < threshold_high]),
+        "high": len([x for x in overlap_counts if x >= threshold_high])
+    }
+
+    statistics = {
+        "average": round(avg_overlap, 2),
+        "median": median_overlap,
+        "min": min_overlap,
+        "max": max_overlap,
+        "distribution": distribution,
+        "threshold_low": round(threshold_low, 2),
+        "threshold_high": round(threshold_high, 2)
+    }
+
+    # 2. 추천 날짜 분석
+    # 경쟁 강도가 낮은 TOP 5 날짜
+    sorted_by_low = sorted(daily_intensity, key=lambda x: x["overlap_count"])
+    low_competition_dates = sorted_by_low[:5]
+
+    # 경쟁 강도가 높은 TOP 5 날짜 (피해야 할 날짜)
+    sorted_by_high = sorted(daily_intensity, key=lambda x: x["overlap_count"], reverse=True)
+    high_competition_dates = sorted_by_high[:5]
+
+    recommended_dates = {
+        "best_dates": [
+            {
+                "date": item["date"],
+                "overlap_count": item["overlap_count"],
+                "companies": [c["company_name"] for c in item["companies"]]
+            }
+            for item in low_competition_dates
+        ],
+        "worst_dates": [
+            {
+                "date": item["date"],
+                "overlap_count": item["overlap_count"],
+                "companies": [c["company_name"] for c in item["companies"]]
+            }
+            for item in high_competition_dates
+        ]
+    }
+
+    # 3. 경쟁사 패턴 분석
+    # 각 회사별 채용 일수 계산
+    company_counter = Counter()
+    for item in daily_intensity:
+        for company in item["companies"]:
+            company_counter[company["company_name"]] += 1
+
+    # 가장 많이 채용하는 회사 TOP 5
+    top_companies = company_counter.most_common(5)
+
+    company_patterns = {
+        "most_active_companies": [
+            {"company_name": name, "days": count}
+            for name, count in top_companies
+        ],
+        "total_unique_companies": len(company_counter)
+    }
+
+    # 4. 최적 시기 추천
+    # 연속으로 경쟁이 적은 기간 찾기 (3일 이상)
+    best_consecutive_period = None
+    current_period_start = None
+    current_period_days = []
+    max_period_length = 0
+    best_period_info = None
+
+    for i, item in enumerate(daily_intensity):
+        if item["overlap_count"] <= threshold_low:
+            # 경쟁 강도가 낮은 날
+            if current_period_start is None:
+                current_period_start = i
+                current_period_days = [item]
+            else:
+                current_period_days.append(item)
+        else:
+            # 경쟁 강도가 높아짐 - 현재 기간 종료
+            if current_period_days and len(current_period_days) >= 3:
+                if len(current_period_days) > max_period_length:
+                    max_period_length = len(current_period_days)
+                    best_consecutive_period = {
+                        "start_date": current_period_days[0]["date"],
+                        "end_date": current_period_days[-1]["date"],
+                        "days": len(current_period_days),
+                        "avg_overlap": round(mean([d["overlap_count"] for d in current_period_days]), 2)
+                    }
+            current_period_start = None
+            current_period_days = []
+
+    # 마지막 기간 체크
+    if current_period_days and len(current_period_days) >= 3:
+        if len(current_period_days) > max_period_length:
+            best_consecutive_period = {
+                "start_date": current_period_days[0]["date"],
+                "end_date": current_period_days[-1]["date"],
+                "days": len(current_period_days),
+                "avg_overlap": round(mean([d["overlap_count"] for d in current_period_days]), 2)
+            }
+
+    # 추천 이유 생성
+    recommendation_reason = []
+    if best_consecutive_period:
+        recommendation_reason.append(
+            f"{best_consecutive_period['days']}일 연속으로 경쟁 강도가 낮음 (평균 {best_consecutive_period['avg_overlap']}개)"
+        )
+
+    # 전체 평균보다 낮은 날이 많은 경우
+    below_avg_days = len([x for x in overlap_counts if x < avg_overlap])
+    if below_avg_days > len(overlap_counts) * 0.5:
+        recommendation_reason.append(
+            f"전체 기간 중 {below_avg_days}일이 평균 이하 경쟁 강도"
+        )
+
+    optimal_period = {
+        "best_consecutive_period": best_consecutive_period,
+        "recommendation_reason": recommendation_reason
+    }
+
+    return {
+        "statistics": statistics,
+        "recommended_dates": recommended_dates,
+        "company_patterns": company_patterns,
+        "optimal_period": optimal_period
+    }
+
+
+def print_rule_based_analysis(rule_analysis: dict, type_label: str):
+    """Rule-Based 분석 결과를 출력하는 헬퍼 함수"""
+    print(f"\n{'='*60}")
+    print(f"[{type_label}] Rule-Based 분석 결과")
+    print(f"{'='*60}")
+
+    # 1. 통계 분석
+    if rule_analysis["statistics"]:
+        stats = rule_analysis["statistics"]
+        print(f"\n[1. 통계 분석]")
+        print(f"  평균 경쟁 강도: {stats['average']}개")
+        print(f"  중앙값: {stats['median']}개")
+        print(f"  최소/최대: {stats['min']}개 / {stats['max']}개")
+        print(f"  분포:")
+        print(f"    - 낮음 (<= {stats['threshold_low']}): {stats['distribution']['low']}일")
+        print(f"    - 보통: {stats['distribution']['medium']}일")
+        print(f"    - 높음 (>= {stats['threshold_high']}): {stats['distribution']['high']}일")
+
+    # 2. 추천 날짜
+    if rule_analysis["recommended_dates"]:
+        rec_dates = rule_analysis["recommended_dates"]
+        print(f"\n[2. 채용 일정 추천]")
+        print(f"  [추천] 경쟁이 적은 추천 날짜 TOP 5:")
+        for i, date_info in enumerate(rec_dates["best_dates"][:5], 1):
+            companies_str = ", ".join(date_info["companies"][:3])
+            if len(date_info["companies"]) > 3:
+                companies_str += f" 외 {len(date_info['companies']) - 3}개"
+            print(f"    {i}. {date_info['date']} - {date_info['overlap_count']}개 ({companies_str})")
+
+        print(f"\n  [주의] 경쟁이 심한 피해야 할 날짜 TOP 5:")
+        for i, date_info in enumerate(rec_dates["worst_dates"][:5], 1):
+            companies_str = ", ".join(date_info["companies"][:3])
+            if len(date_info["companies"]) > 3:
+                companies_str += f" 외 {len(date_info['companies']) - 3}개"
+            print(f"    {i}. {date_info['date']} - {date_info['overlap_count']}개 ({companies_str})")
+
+    # 3. 경쟁사 패턴 분석
+    if rule_analysis["company_patterns"]:
+        patterns = rule_analysis["company_patterns"]
+        print(f"\n[3. 경쟁사 패턴 분석]")
+        print(f"  가장 활발한 경쟁사 TOP 5:")
+        for i, company_info in enumerate(patterns["most_active_companies"], 1):
+            print(f"    {i}. {company_info['company_name']} - {company_info['days']}일")
+        print(f"  총 경쟁사 수: {patterns['total_unique_companies']}개")
+
+    # 4. 최적 시기 추천
+    if rule_analysis["optimal_period"]:
+        optimal = rule_analysis["optimal_period"]
+        print(f"\n[4. 최적 채용 시기 추천]")
+        if optimal["best_consecutive_period"]:
+            period = optimal["best_consecutive_period"]
+            print(f"  추천 기간: {period['start_date']} ~ {period['end_date']}")
+            print(f"  기간: {period['days']}일")
+            print(f"  평균 경쟁 강도: {period['avg_overlap']}개")
+        else:
+            print(f"  (연속 3일 이상 경쟁이 적은 기간 없음)")
+
+        if optimal["recommendation_reason"]:
+            print(f"\n  추천 이유:")
+            for reason in optimal["recommendation_reason"]:
+                print(f"    - {reason}")
+
+
 def main():
     """
     메인 실행 함수
@@ -407,39 +720,20 @@ def main():
     커맨드라인 인자를 파싱하여 경쟁 강도 분석을 실행하고 결과를 출력합니다.
 
     실행 방법:
-        python test_04_recruitment_intensity.py [시작일] [종료일] [채용유형]
+        python test_04_recruitment_intensity.py [시작일] [종료일] [모드]
 
     인자:
         시작일: 분석 시작 날짜 (YYYY-MM-DD), 기본값: 2025-11-01
         종료일: 분석 종료 날짜 (YYYY-MM-DD), 기본값: 2025-11-30
-        채용유형: "신입" 또는 "경력", 기본값: 전체
+        모드: "신입", "경력", "전체", "비교" (기본값: 비교)
+             - "비교": 신입/경력/전체를 모두 분석하여 비교
 
     출력:
-        1. 설정 정보 (시작일, 종료일, 채용 유형)
-        2. 날짜별 경쟁 강도 (날짜 \t 겹침 수)
-        3. 통계 (경쟁사 수, 최대 겹침, 분석 날짜 수)
+        1. 설정 정보 (시작일, 종료일)
+        2. 각 채용 유형별 결과 (날짜별 경쟁 강도, 통계)
 
     Example:
-        $ python test_04_recruitment_intensity.py 2025-11-01 2025-11-30 신입
-
-        ============================================================
-        경쟁 강도 분석 (Company 단위)
-        ============================================================
-
-        [설정]
-          시작일: 2025-11-01
-          종료일: 2025-11-30
-          채용 유형: 신입
-
-        [날짜별 경쟁 강도]
-        2025-11-01      11
-        2025-11-02      11
-        ...
-
-        [통계]
-          경쟁사 수: 47개
-          최대 겹침: 14개
-          분석 날짜: 30일
+        $ python test_04_recruitment_intensity.py 2025-11-01 2025-11-30 비교
     """
     print("\n" + "=" * 60)
     print("경쟁 강도 분석 (Company 단위)")
@@ -451,32 +745,84 @@ def main():
         # 커맨드라인 인자 파싱
         start_date = sys.argv[1] if len(sys.argv) > 1 else "2025-11-01"
         end_date = sys.argv[2] if len(sys.argv) > 2 else "2025-11-30"
-        type_filter = sys.argv[3] if len(sys.argv) > 3 else None
+        mode = sys.argv[3] if len(sys.argv) > 3 else "비교"
 
         # 설정 출력
         print(f"\n[설정]")
         print(f"  시작일: {start_date}")
         print(f"  종료일: {end_date}")
-        print(f"  채용 유형: {type_filter if type_filter else '전체'}")
+        print(f"  모드: {mode}")
 
-        # 경쟁 강도 분석 실행
-        result, debug_info = analyze_competition_intensity(
-            db=db,
-            start_date=start_date,
-            end_date=end_date,
-            type_filter=type_filter
-        )
+        # 모드에 따라 분석 실행
+        if mode == "비교":
+            # 신입, 경력, 전체를 모두 분석
+            print(f"\n{'*'*60}")
+            print("신입/경력/전체를 모두 분석하여 비교합니다.")
+            print(f"{'*'*60}")
 
-        # 날짜별 결과 출력
-        print(f"\n[날짜별 경쟁 강도]")
-        for item in result["data"]["daily_intensity"]:
-            print(f"{item['date']}\t{item['overlap_count']}")
+            # 1. 신입
+            result_new, debug_new = analyze_competition_intensity(
+                db=db,
+                start_date=start_date,
+                end_date=end_date,
+                type_filter="신입"
+            )
+            print_analysis_result(result_new, debug_new, "신입")
 
-        # 통계 출력
-        print(f"\n[통계]")
-        print(f"  경쟁사 수: {debug_info['competitor_count']}개")
-        print(f"  최대 겹침: {debug_info['max_overlaps']}개")
-        print(f"  분석 날짜: {debug_info['daily_intensity_count']}일")
+            # Rule-Based 분석
+            rule_analysis_new = analyze_rule_based(result_new, "신입")
+            print_rule_based_analysis(rule_analysis_new, "신입")
+
+            # 2. 경력
+            result_career, debug_career = analyze_competition_intensity(
+                db=db,
+                start_date=start_date,
+                end_date=end_date,
+                type_filter="경력"
+            )
+            print_analysis_result(result_career, debug_career, "경력")
+
+            # Rule-Based 분석
+            rule_analysis_career = analyze_rule_based(result_career, "경력")
+            print_rule_based_analysis(rule_analysis_career, "경력")
+
+            # 3. 전체
+            result_all, debug_all = analyze_competition_intensity(
+                db=db,
+                start_date=start_date,
+                end_date=end_date,
+                type_filter=None
+            )
+            print_analysis_result(result_all, debug_all, "전체")
+
+            # Rule-Based 분석
+            rule_analysis_all = analyze_rule_based(result_all, "전체")
+            print_rule_based_analysis(rule_analysis_all, "전체")
+
+            # 비교 요약
+            print(f"\n{'='*60}")
+            print("[비교 요약]")
+            print(f"{'='*60}")
+            print(f"신입 최대 겹침: {debug_new['max_overlaps']}개")
+            print(f"경력 최대 겹침: {debug_career['max_overlaps']}개")
+            print(f"전체 최대 겹침: {debug_all['max_overlaps']}개")
+
+        else:
+            # 단일 모드 분석
+            type_filter = None if mode == "전체" else mode
+
+            result, debug_info = analyze_competition_intensity(
+                db=db,
+                start_date=start_date,
+                end_date=end_date,
+                type_filter=type_filter
+            )
+
+            print_analysis_result(result, debug_info, mode)
+
+            # Rule-Based 분석
+            rule_analysis = analyze_rule_based(result, mode)
+            print_rule_based_analysis(rule_analysis, mode)
 
     except Exception as e:
         print(f"\n오류: {e}")

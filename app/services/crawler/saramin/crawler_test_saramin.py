@@ -356,11 +356,12 @@ def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Pa
                                 continue
 
                         # 전체 페이지 스크린샷도 저장
+                        screenshot_path_full = None
                         try:
                             screenshot_filename = f"saramin_job_{job_id}_full.png"
-                            screenshot_path = screenshot_dir / screenshot_filename
-                            page.screenshot(path=str(screenshot_path), full_page=True)
-                            job_info["screenshots"]["combined"] = str(screenshot_path)
+                            screenshot_path_full = screenshot_dir / screenshot_filename
+                            page.screenshot(path=str(screenshot_path_full), full_page=True)
+                            job_info["screenshots"]["combined"] = screenshot_filename
                             print(f"  [{job_index}] 전체 스크린샷 저장: {screenshot_filename}")
                         except Exception as e:
                             print(f"  [{job_index}] 전체 스크린샷 저장 실패: {e}")
@@ -372,9 +373,9 @@ def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Pa
                     else:
                         # OCR 실패 시 폴백: 전체 페이지 스크린샷으로 OCR
                         print(f"  [{job_index}] 개별 이미지 OCR 실패, 전체 페이지로 재시도...")
-                        if screenshot_dir and "combined" in job_info["screenshots"]:
+                        if screenshot_dir and screenshot_path_full:
                             try:
-                                ocr_text = ocr_with_vision(job_info["screenshots"]["combined"])
+                                ocr_text = ocr_with_vision(str(screenshot_path_full))
                                 if ocr_text:
                                     description_text = ocr_text
                                     print(f"  [{job_index}] 전체 페이지 OCR 완료 ({len(ocr_text)} 글자)")
@@ -400,7 +401,7 @@ def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Pa
                     screenshot_path = screenshot_dir / screenshot_filename
 
                     page.screenshot(path=str(screenshot_path), full_page=True)
-                    job_info["screenshots"]["combined"] = str(screenshot_path)
+                    job_info["screenshots"]["combined"] = screenshot_filename
                     print(f"  [{job_index}] 스크린샷 저장: {screenshot_filename}")
                 except Exception as e:
                     print(f"  [{job_index}] 스크린샷 저장 실패: {e}")

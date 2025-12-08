@@ -76,11 +76,12 @@ def get_companies_by_keyword(
     
     Returns:
         List[Tuple[int, str, int]]: (company_id, company_name, total_count)
+                                     company_name은 입력받은 keyword로 반환됨
                                      공고 수가 많은 순으로 정렬
     
     Examples:
-        >>> get_companies_by_keyword(db, "네이버", start, end)
-        [(25, "NAVER Cloud", 24), (30, "NAVER", 8), ...]
+        >>> get_companies_by_keyword(db, "line", start, end)
+        [(25, "line", 24), (30, "line", 8), ...]
     """
     from app.config.company_groups import COMPANY_GROUPS
     from sqlalchemy import or_
@@ -101,7 +102,8 @@ def get_companies_by_keyword(
         # 단일 키워드 검색
         filter_condition = func.upper(Company.name).like(f'%{keyword.upper()}%')
     
-    return db.query(
+    # 쿼리 실행
+    results = db.query(
         Company.id,
         Company.name,
         func.count(Post.id).label('total_count')
@@ -117,6 +119,9 @@ def get_companies_by_keyword(
     ).order_by(
         func.count(Post.id).desc()
     ).all()
+    
+    # company_name을 입력받은 keyword로 변환하여 반환
+    return [(row[0], keyword, row[2]) for row in results]
 
 
 def get_company_by_keyword(

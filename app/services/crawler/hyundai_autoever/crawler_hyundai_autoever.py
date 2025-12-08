@@ -209,7 +209,7 @@ async def crawl_single_job(
                     screenshot_path = screenshot_dir / screenshot_filename
 
                     await page.screenshot(path=str(screenshot_path), full_page=True)
-                    job_info["screenshots"]["combined"] = str(screenshot_path)
+                    job_info["screenshots"]["combined"] = screenshot_filename
                     print(f"  [{index}/{total}] 스크린샷 저장: {screenshot_filename}")
                 except Exception as e:
                     print(f"  [{index}/{total}] 스크린샷 저장 실패: {e}")

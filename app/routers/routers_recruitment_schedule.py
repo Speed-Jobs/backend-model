@@ -7,7 +7,8 @@ from typing import Optional
 from app.db.config.base import get_db
 from app.services.dashboard.recruitment_schedule import (
     get_company_recruitment_schedule,
-    get_all_recruitment_schedules
+    get_all_recruitment_schedules,
+    get_competition_intensity
 )
 from app.config.company_groups import COMPANY_GROUPS
 
@@ -121,13 +122,62 @@ def get_recruitment_schedules(
         company_ids=parsed_company_ids,
         data_type=data_type
     )
-    
+
     # 에러 처리
     if result["status"] != 200:
         raise HTTPException(
             status_code=result["status"],
             detail=result["message"]
         )
-    
+
+    return result
+
+
+@router.get("/competition-intensity")
+def get_recruitment_competition_intensity(
+    start_date: str = Query(..., description="시작일 (YYYY-MM-DD 형식)", example="2025-01-01"),
+    end_date: str = Query(..., description="종료일 (YYYY-MM-DD 형식)", example="2025-01-31"),
+    type: Optional[str] = Query(None, description="채용 유형 (신입/경력)", example="신입"),
+    db: Session = Depends(get_db)
+):
+    """
+    날짜별 경쟁 강도 분석
+
+    특정 기간 내에 각 날짜별로 동시에 채용 중인 경쟁사 수를 계산합니다.
+
+    - **start_date**: 분석 시작일
+    - **end_date**: 분석 종료일
+    - **type**: (선택) 신입 또는 경력 (미지정 시 전체)
+
+    Returns:
+        - **period**: 분석 기간
+        - **max_overlaps**: 최대 겹침 수
+        - **daily_intensity**: 날짜별 경쟁 강도
+            - **date**: 날짜
+            - **overlap_count**: 겹침 수
+            - **companies**: 채용 중인 회사 목록
+    """
+    # type 검증
+    if type and type not in ["신입", "경력"]:
+        raise HTTPException(
+            status_code=400,
+            detail="type은 '신입' 또는 '경력'이어야 합니다."
+        )
+
+    # 서비스 호출
+    result = get_competition_intensity(
+        db=db,
+        start_date=start_date,
+        end_date=end_date,
+        type_filter=type
+    )
+
+    # 에러 처리
+    if result["status"] != 200:
+        raise HTTPException(
+            status_code=result["status"],
+            detail=result["message"]
+        )
+
     return result
 

@@ -200,7 +200,7 @@ def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Pa
                     screenshot_path = screenshot_dir / screenshot_filename
 
                     page.screenshot(path=str(screenshot_path), full_page=True)
-                    job_info["screenshots"]["combined"] = str(screenshot_path)
+                    job_info["screenshots"]["combined"] = screenshot_filename
                     print(f"  [{job_index}] 스크린샷 저장: {screenshot_filename}")
                 except Exception as e:
                     print(f"  [{job_index}] 스크린샷 저장 실패: {e}")
