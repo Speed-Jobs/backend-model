@@ -1,6 +1,13 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, Enum
 from sqlalchemy.orm import relationship
 from app.db.config.base import Base
+import enum
+
+
+class PositionCategory(enum.Enum):
+    TECH = "TECH"
+    BIZ = "BIZ"
+    BIZ_SUPPORTING = "BIZ_SUPPORTING"
 
 
 class Position(Base):
@@ -10,6 +17,12 @@ class Position(Base):
     name = Column(String(255), nullable=False, index=True, comment="이름")
     description = Column(Text, nullable=True, comment="설명")
     skillset = Column(Text, nullable=True, comment="스킬셋")
+    category = Column(Enum(PositionCategory), nullable=True, comment="직무 카테고리")
+
+    # ERD 기반 필드
+    is_deleted = Column(Boolean, nullable=False, default=False, comment="삭제 여부")
+    created_at = Column(DateTime, nullable=True, comment="생성일시")
+    modified_at = Column(DateTime, nullable=True, comment="수정일시")
 
     # Relationships
     industries = relationship("Industry", back_populates="position")
