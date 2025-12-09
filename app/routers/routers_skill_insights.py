@@ -164,7 +164,27 @@ async def get_company_skill_trends(
         )
         
         # 데이터가 없는 경우 확인
-        if (data.years and len(data.years) == 0) or (data.skills and len(data.skills) == 0):
+        # 분기별 조회인 경우 quarterly_trends 확인, 연도별 조회인 경우 yearly_trends 확인
+        has_data = False
+        if year:
+            # 분기별 조회: quarterly_trends 확인
+            if data.quarterly_trends:
+                for year_data in data.quarterly_trends.values():
+                    for quarter_data in [year_data.Q1, year_data.Q2, year_data.Q3, year_data.Q4]:
+                        if quarter_data.skills and len(quarter_data.skills) > 0:
+                            has_data = True
+                            break
+                    if has_data:
+                        break
+        else:
+            # 연도별 조회: yearly_trends 확인
+            if data.yearly_trends:
+                for year_data in data.yearly_trends.values():
+                    if year_data.skills and len(year_data.skills) > 0:
+                        has_data = True
+                        break
+        
+        if not has_data:
             raise HTTPException(
                 status_code=404,
                 detail=f"'{company_name}' 회사의 스킬 트렌드 데이터를 찾을 수 없습니다."

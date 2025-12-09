@@ -10,6 +10,7 @@ from typing import Dict, List, Optional, Tuple
 from sqlalchemy.orm import Session
 
 from app.db.crud import db_competitor_industry_trend
+from app.config.company_groups import get_company_patterns
 from app.schemas.schemas_competitor_industry_trend import (
     JobRoleStatisticsData,
     JobRoleStatistic,
@@ -213,18 +214,23 @@ def get_job_role_statistics(
 
     periods = _calculate_periods(timeframe, start_date, end_date)
 
+    # 회사 키워드를 패턴 리스트로 변환
+    company_patterns = None
+    if company:
+        company_patterns = get_company_patterns(company)
+
     # DB 조회 (현재/이전 기간)
     current_rows = db_competitor_industry_trend.get_job_role_counts(
         db=db,
         start_date=periods.current_start,
         end_date=periods.current_end,
-        company_name=company,
+        company_patterns=company_patterns,
     )
     previous_rows = db_competitor_industry_trend.get_job_role_counts(
         db=db,
         start_date=periods.previous_start,
         end_date=periods.previous_end,
-        company_name=company,
+        company_patterns=company_patterns,
     )
 
     current_map_raw, current_total = _aggregate_period_result(current_rows, category)
