@@ -1,4 +1,4 @@
-from sqlalchemy import Column, BigInteger, String, ForeignKey, JSON
+from sqlalchemy import Column, Integer, String, ForeignKey, JSON
 from sqlalchemy.orm import relationship
 
 from app.db.config.base import Base
@@ -8,27 +8,27 @@ class RecruitSchedule(Base):
     __tablename__ = "recruit_schedule"
 
     schedule_id = Column(
-        BigInteger,
+        Integer,
         primary_key=True,
         autoincrement=True,
         comment="채용 일정 ID",
     )
     post_id = Column(
-        BigInteger,
+        Integer,
         ForeignKey("post.id"),
         index=True,
         nullable=False,
         comment="공고 ID",
     )
     company_id = Column(
-        BigInteger,
+        Integer,
         ForeignKey("company.id"),
         index=True,
         nullable=True,
         comment="회사 ID",
     )
     industry_id = Column(
-        BigInteger,
+        Integer,
         ForeignKey("industry.id"),
         index=True,
         nullable=True,

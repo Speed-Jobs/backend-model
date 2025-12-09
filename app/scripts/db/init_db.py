@@ -67,6 +67,7 @@ class TableInitializer:
                 self._create_post_skill_table(cursor)
                 self._create_industry_skill_table(cursor)
                 self._create_position_skill_table(cursor)
+                self._create_recruit_schedule_table(cursor)
                 self._create_dashboard_stat_table(cursor)
                 
                 logger.info("✓ All tables created successfully!")
@@ -236,6 +237,30 @@ class TableInitializer:
                 FOREIGN KEY (skill_id) REFERENCES skill(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Position-Skill mapping';
         """)
+
+    def _create_recruit_schedule_table(self, cursor):
+        """Create recruit_schedule table"""
+        logger.info("Creating recruit_schedule table...")
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS recruit_schedule (
+                schedule_id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Recruitment schedule ID',
+                post_id INT NOT NULL COMMENT 'Post ID',
+                company_id INT COMMENT 'Company ID',
+                industry_id INT COMMENT 'Industry ID',
+                semester VARCHAR(20) COMMENT 'Semester (first/second half)',
+                application_date JSON COMMENT 'Application period (JSON, [[start, end], ...])',
+                document_screening_date JSON COMMENT 'Document screening period (JSON, [[start, end], ...])',
+                first_interview JSON COMMENT 'First interview dates (JSON, [[date, date], ...])',
+                second_interview JSON COMMENT 'Second interview dates (JSON, [[date, date], ...])',
+                join_date JSON COMMENT 'Join date period (JSON, [[start, end], ...])',
+                INDEX idx_post_id (post_id),
+                INDEX idx_company_id (company_id),
+                INDEX idx_industry_id (industry_id),
+                FOREIGN KEY (post_id) REFERENCES post(id) ON DELETE CASCADE,
+                FOREIGN KEY (company_id) REFERENCES company(id) ON DELETE SET NULL,
+                FOREIGN KEY (industry_id) REFERENCES industry(id) ON DELETE SET NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Recruitment schedules';
+        """)
     
     def _create_dashboard_stat_table(self, cursor):
         """Create dashboard_stat table"""
@@ -263,6 +288,7 @@ class TableInitializer:
                     'position_skill',
                     'industry_skill',
                     'post_skill',
+                    'recruit_schedule',
                     'post',
                     'skill',
                     'industry',
