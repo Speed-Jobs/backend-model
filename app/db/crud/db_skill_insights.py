@@ -131,7 +131,11 @@ def get_quarterly_skill_trends(
     comparison_year: Optional[int] = None,
     top_n: int = 13
 ) -> pd.DataFrame:
-    """연도별 분기별 스킬 트렌드 조회 (판다스 DataFrame 반환)"""
+    """연도별 분기별 스킬 트렌드 조회 (판다스 DataFrame 반환)
+    
+    각 분기별로 실제로 많이 나타나는 스킬을 동적으로 선택하여
+    특정 분기에만 많이 나타나는 스킬도 포함되도록 함
+    """
     if comparison_year is None:
         comparison_year = year - 1
     
@@ -140,34 +144,8 @@ def get_quarterly_skill_trends(
     current_year = current_date.year
     current_quarter = (current_date.month - 1) // 3 + 1
     
-    # 현재 연도의 상위 N개 스킬 식별 (전체 연도 데이터 기준)
-    year_start = date(year, 1, 1)
-    year_end = date(year, 12, 31)
-    
-    top_skills_query = db.query(
-        Skill.name,
-        func.count(PostSkill.id).label('total_count')
-    ).join(
-        PostSkill, Skill.id == PostSkill.skill_id
-    ).join(
-        Post, PostSkill.post_id == Post.id
-    ).filter(
-        EFFECTIVE_POSTED_AT >= year_start,
-        EFFECTIVE_POSTED_AT <= year_end,
-        Post.is_deleted.is_(False)
-    ).group_by(
-        Skill.name
-    ).order_by(
-        func.count(PostSkill.id).desc()
-    ).limit(top_n)
-    
-    top_skills = [row.name for row in top_skills_query.all()]
-    
-    if not top_skills:
-        return pd.DataFrame(columns=['year', 'quarter', 'skill_name', 'count'])
-    
-    # 분기별 데이터 조회
-    rows = []
+    # 1단계: 모든 분기의 데이터를 스킬 필터 없이 조회
+    all_rows = []
     for y in [year, comparison_year]:
         for quarter in [1, 2, 3, 4]:
             # 현재 분기보다 미래 분기는 제외
@@ -205,8 +183,7 @@ def get_quarterly_skill_trends(
             ).filter(
                 EFFECTIVE_POSTED_AT >= quarter_start,
                 EFFECTIVE_POSTED_AT <= quarter_end,
-                Post.is_deleted.is_(False),
-                Skill.name.in_(top_skills) if top_skills else True
+                Post.is_deleted.is_(False)
             ).group_by(
                 func.extract('year', EFFECTIVE_POSTED_AT),
                 func.extract('quarter', EFFECTIVE_POSTED_AT),
@@ -215,15 +192,43 @@ def get_quarterly_skill_trends(
             
             result = query.all()
             for row in result:
-                rows.append({
+                all_rows.append({
                     'year': int(row.year),
                     'quarter': int(row.quarter),
                     'skill_name': row.skill_name,
                     'count': row.count
                 })
     
-    df = pd.DataFrame(rows)
-    return df
+    if not all_rows:
+        return pd.DataFrame(columns=['year', 'quarter', 'skill_name', 'count'])
+    
+    # 2단계: 각 분기별로 상위 N개 스킬을 선택하고 통합
+    all_df = pd.DataFrame(all_rows)
+    top_skills_set = set()
+    
+    # 각 분기별로 상위 N개 스킬 추출
+    for y in [year, comparison_year]:
+        for quarter in [1, 2, 3, 4]:
+            if y == current_year and quarter > current_quarter:
+                continue
+            if y == comparison_year and current_year == year and quarter > current_quarter:
+                continue
+            
+            quarter_df = all_df[(all_df['year'] == y) & (all_df['quarter'] == quarter)]
+            if not quarter_df.empty:
+                # 각 분기별 상위 N개 스킬 선택
+                quarter_top = quarter_df.nlargest(top_n, 'count')['skill_name'].tolist()
+                top_skills_set.update(quarter_top)
+    
+    # 3단계: 통합된 스킬 세트를 사용하여 결과 필터링
+    # 각 분기별로 추출된 스킬만 포함 (데이터가 없는 분기는 스킬 추출하지 않음)
+    if top_skills_set:
+        # 통합된 스킬 세트의 모든 스킬을 포함 (실제 데이터가 있는 것만)
+        filtered_df = all_df[all_df['skill_name'].isin(top_skills_set)].copy()
+    else:
+        filtered_df = all_df
+    
+    return filtered_df
 
 def get_recent_years_by_company(
     db: Session,
@@ -335,7 +340,11 @@ def get_quarterly_skill_trends_by_company(
     comparison_year: Optional[int] = None,
     top_n: int = 13
 ) -> pd.DataFrame:
-    """회사별 연도별 분기별 스킬 트렌드 조회 (판다스 DataFrame 반환)"""
+    """회사별 연도별 분기별 스킬 트렌드 조회 (판다스 DataFrame 반환)
+    
+    각 분기별로 실제로 많이 나타나는 스킬을 동적으로 선택하여
+    특정 분기에만 많이 나타나는 스킬도 포함되도록 함
+    """
     if not company_patterns:
         return pd.DataFrame(columns=['year', 'quarter', 'skill_name', 'count'])
     
@@ -347,37 +356,8 @@ def get_quarterly_skill_trends_by_company(
     current_year = current_date.year
     current_quarter = (current_date.month - 1) // 3 + 1
     
-    # 현재 연도의 상위 N개 스킬 식별 (전체 연도 데이터 기준)
-    year_start = date(year, 1, 1)
-    year_end = date(year, 12, 31)
-    
-    top_skills_query = db.query(
-        Skill.name,
-        func.count(PostSkill.id).label('total_count')
-    ).join(
-        PostSkill, Skill.id == PostSkill.skill_id
-    ).join(
-        Post, PostSkill.post_id == Post.id
-    ).join(
-        Company, Post.company_id == Company.id
-    ).filter(
-        EFFECTIVE_POSTED_AT >= year_start,
-        EFFECTIVE_POSTED_AT <= year_end,
-        Post.is_deleted.is_(False),
-        or_(*[Company.name.like(pattern) for pattern in company_patterns])
-    ).group_by(
-        Skill.name
-    ).order_by(
-        func.count(PostSkill.id).desc()
-    ).limit(top_n)
-    
-    top_skills = [row.name for row in top_skills_query.all()]
-    
-    if not top_skills:
-        return pd.DataFrame(columns=['year', 'quarter', 'skill_name', 'count'])
-    
-    # 분기별 데이터 조회
-    rows = []
+    # 1단계: 모든 분기의 데이터를 스킬 필터 없이 조회
+    all_rows = []
     for y in [year, comparison_year]:
         for quarter in [1, 2, 3, 4]:
             # 현재 분기보다 미래 분기는 제외
@@ -418,8 +398,7 @@ def get_quarterly_skill_trends_by_company(
                 EFFECTIVE_POSTED_AT >= quarter_start,
                 EFFECTIVE_POSTED_AT <= quarter_end,
                 Post.is_deleted.is_(False),
-                or_(*[Company.name.like(pattern) for pattern in company_patterns]),
-                Skill.name.in_(top_skills) if top_skills else True
+                or_(*[Company.name.like(pattern) for pattern in company_patterns])
             ).group_by(
                 func.extract('year', EFFECTIVE_POSTED_AT),
                 func.extract('quarter', EFFECTIVE_POSTED_AT),
@@ -428,15 +407,42 @@ def get_quarterly_skill_trends_by_company(
             
             result = query.all()
             for row in result:
-                rows.append({
+                all_rows.append({
                     'year': int(row.year),
                     'quarter': int(row.quarter),
                     'skill_name': row.skill_name,
                     'count': row.count
                 })
     
-    df = pd.DataFrame(rows)
-    return df
+    if not all_rows:
+        return pd.DataFrame(columns=['year', 'quarter', 'skill_name', 'count'])
+    
+    # 2단계: 각 분기별로 상위 N개 스킬을 선택하고 통합
+    all_df = pd.DataFrame(all_rows)
+    top_skills_set = set()
+    
+    for y in [year, comparison_year]:
+        for quarter in [1, 2, 3, 4]:
+            if y == current_year and quarter > current_quarter:
+                continue
+            if y == comparison_year and current_year == year and quarter > current_quarter:
+                continue
+            
+            quarter_df = all_df[(all_df['year'] == y) & (all_df['quarter'] == quarter)]
+            if not quarter_df.empty:
+                # 각 분기별 상위 N개 스킬 선택
+                quarter_top = quarter_df.nlargest(top_n, 'count')['skill_name'].tolist()
+                top_skills_set.update(quarter_top)
+    
+    # 3단계: 통합된 스킬 세트를 사용하여 결과 필터링
+    # 각 분기별로 추출된 스킬만 포함 (데이터가 없는 분기는 스킬 추출하지 않음)
+    if top_skills_set:
+        # 통합된 스킬 세트의 모든 스킬을 포함 (실제 데이터가 있는 것만)
+        filtered_df = all_df[all_df['skill_name'].isin(top_skills_set)].copy()
+    else:
+        filtered_df = all_df
+    
+    return filtered_df
 
 
 def get_skill_statistics(

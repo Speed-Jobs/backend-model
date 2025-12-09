@@ -50,8 +50,7 @@ class SkillInsightsService:
         if not years:
             return schemas_skill_insights.SkillTrendData(
                 years=[],
-                skills=[],
-                skill_frequencies={}
+                yearly_trends={}
             )
         
         # 연도별 스킬 빈도수 조회
@@ -60,31 +59,31 @@ class SkillInsightsService:
         if df.empty:
             return schemas_skill_insights.SkillTrendData(
                 years=[str(y) for y in years],
-                skills=[],
-                skill_frequencies={str(y): {} for y in years}
+                yearly_trends={str(y): schemas_skill_insights.YearlySkillData(skills=[], counts={}) for y in years}
             )
         
-        # 스킬 목록 추출 (전체 기간 합계 기준 정렬)
-        skill_totals = df.groupby('skill_name')['frequency'].sum().sort_values(ascending=False)
-        skills = skill_totals.head(top_n).index.tolist()
-        
-        # 연도별 스킬 빈도수 딕셔너리 생성
-        skill_frequencies = {}
+        # 연도별 스킬 데이터 생성 (각 연도마다 독립적으로 상위 N개 선정)
+        yearly_trends = {}
         for y in years:
             year_df = df[df['year'] == y]
-            year_skill_dict = {}
-            for skill in skills:
-                skill_data = year_df[year_df['skill_name'] == skill]
-                if not skill_data.empty:
-                    year_skill_dict[skill] = int(skill_data.iloc[0]['frequency'])
-                else:
-                    year_skill_dict[skill] = 0
-            skill_frequencies[str(y)] = year_skill_dict
+            
+            if not year_df.empty:
+                # 빈도순으로 정렬하여 상위 스킬 추출
+                year_df_sorted = year_df.sort_values('frequency', ascending=False).head(top_n)
+                skills_list = year_df_sorted['skill_name'].tolist()
+                counts_dict = {row['skill_name']: int(row['frequency']) for _, row in year_df_sorted.iterrows()}
+            else:
+                skills_list = []
+                counts_dict = {}
+            
+            yearly_trends[str(y)] = schemas_skill_insights.YearlySkillData(
+                skills=skills_list,
+                counts=counts_dict
+            )
         
         return schemas_skill_insights.SkillTrendData(
             years=[str(y) for y in years],
-            skills=skills,
-            skill_frequencies=skill_frequencies
+            yearly_trends=yearly_trends
         )
     
     def _get_single_year_trends(
@@ -102,56 +101,63 @@ class SkillInsightsService:
         )
         
         if df.empty:
+            empty_quarter_data = schemas_skill_insights.QuarterlySkillData(skills=[], counts={})
             return schemas_skill_insights.SkillTrendData(
                 year=str(year),
                 comparison_year=str(comparison_year),
-                skills=[],
                 quarterly_trends={
                     str(year): schemas_skill_insights.QuarterlyTrend(
-                        Q1={}, Q2={}, Q3={}, Q4={}
+                        Q1=empty_quarter_data,
+                        Q2=empty_quarter_data,
+                        Q3=empty_quarter_data,
+                        Q4=empty_quarter_data
                     ),
                     str(comparison_year): schemas_skill_insights.QuarterlyTrend(
-                        Q1={}, Q2={}, Q3={}, Q4={}
+                        Q1=empty_quarter_data,
+                        Q2=empty_quarter_data,
+                        Q3=empty_quarter_data,
+                        Q4=empty_quarter_data
                     )
                 }
             )
         
-        # 스킬 목록 추출 (해당 연도 전체 합계 기준 정렬)
-        year_df = df[df['year'] == year]
-        skill_totals = year_df.groupby('skill_name')['count'].sum().sort_values(ascending=False)
-        skills = skill_totals.head(top_n).index.tolist()
-        
         # 연도별 분기별 데이터 구성
+        # 각 분기별로 실제 데이터가 있는 스킬만 포함
         quarterly_trends = {}
         
         for y in [year, comparison_year]:
             year_str = str(y)
             year_data = df[df['year'] == y]
             
-            # 각 분기별 데이터 딕셔너리 생성
-            quarters = {}
+            # 각 분기별 데이터 생성
+            quarter_data = {}
             for quarter in [1, 2, 3, 4]:
                 quarter_df = year_data[year_data['quarter'] == quarter]
-                quarter_dict = {}
-                for skill in skills:
-                    skill_data = quarter_df[quarter_df['skill_name'] == skill]
-                    if not skill_data.empty:
-                        quarter_dict[skill] = int(skill_data.iloc[0]['count'])
-                    else:
-                        quarter_dict[skill] = 0
-                quarters[f'Q{quarter}'] = quarter_dict
+                
+                if not quarter_df.empty:
+                    # 빈도순으로 정렬하여 상위 스킬 추출
+                    quarter_df_sorted = quarter_df.sort_values('count', ascending=False)
+                    skills_list = quarter_df_sorted['skill_name'].tolist()
+                    counts_dict = {row['skill_name']: int(row['count']) for _, row in quarter_df_sorted.iterrows()}
+                else:
+                    skills_list = []
+                    counts_dict = {}
+                
+                quarter_data[f'Q{quarter}'] = schemas_skill_insights.QuarterlySkillData(
+                    skills=skills_list,
+                    counts=counts_dict
+                )
             
             quarterly_trends[year_str] = schemas_skill_insights.QuarterlyTrend(
-                Q1=quarters['Q1'],
-                Q2=quarters['Q2'],
-                Q3=quarters['Q3'],
-                Q4=quarters['Q4']
+                Q1=quarter_data['Q1'],
+                Q2=quarter_data['Q2'],
+                Q3=quarter_data['Q3'],
+                Q4=quarter_data['Q4']
             )
         
         return schemas_skill_insights.SkillTrendData(
             year=str(year),
             comparison_year=str(comparison_year),
-            skills=skills,
             quarterly_trends=quarterly_trends
         )
     
@@ -199,8 +205,7 @@ class SkillInsightsService:
             return schemas_skill_insights.SkillTrendData(
                 company_name=company_keyword,
                 years=[],
-                skills=[],
-                skill_frequencies={}
+                yearly_trends={}
             )
         
         # 연도별 스킬 빈도수 조회
@@ -212,32 +217,32 @@ class SkillInsightsService:
             return schemas_skill_insights.SkillTrendData(
                 company_name=company_keyword,
                 years=[str(y) for y in years],
-                skills=[],
-                skill_frequencies={str(y): {} for y in years}
+                yearly_trends={str(y): schemas_skill_insights.YearlySkillData(skills=[], counts={}) for y in years}
             )
         
-        # 스킬 목록 추출 (전체 기간 합계 기준 정렬)
-        skill_totals = df.groupby('skill_name')['frequency'].sum().sort_values(ascending=False)
-        skills = skill_totals.head(top_n).index.tolist()
-        
-        # 연도별 스킬 빈도수 딕셔너리 생성
-        skill_frequencies = {}
+        # 연도별 스킬 데이터 생성 (각 연도마다 독립적으로 상위 N개 선정)
+        yearly_trends = {}
         for y in years:
             year_df = df[df['year'] == y]
-            year_skill_dict = {}
-            for skill in skills:
-                skill_data = year_df[year_df['skill_name'] == skill]
-                if not skill_data.empty:
-                    year_skill_dict[skill] = int(skill_data.iloc[0]['frequency'])
-                else:
-                    year_skill_dict[skill] = 0
-            skill_frequencies[str(y)] = year_skill_dict
+            
+            if not year_df.empty:
+                # 빈도순으로 정렬하여 상위 스킬 추출
+                year_df_sorted = year_df.sort_values('frequency', ascending=False).head(top_n)
+                skills_list = year_df_sorted['skill_name'].tolist()
+                counts_dict = {row['skill_name']: int(row['frequency']) for _, row in year_df_sorted.iterrows()}
+            else:
+                skills_list = []
+                counts_dict = {}
+            
+            yearly_trends[str(y)] = schemas_skill_insights.YearlySkillData(
+                skills=skills_list,
+                counts=counts_dict
+            )
         
         return schemas_skill_insights.SkillTrendData(
             company_name=company_keyword,
             years=[str(y) for y in years],
-            skills=skills,
-            skill_frequencies=skill_frequencies
+            yearly_trends=yearly_trends
         )
     
     def _get_company_single_year_trends(
@@ -257,58 +262,65 @@ class SkillInsightsService:
         )
         
         if df.empty:
+            empty_quarter_data = schemas_skill_insights.QuarterlySkillData(skills=[], counts={})
             return schemas_skill_insights.SkillTrendData(
                 company_name=company_keyword,
                 year=str(year),
                 comparison_year=str(comparison_year),
-                skills=[],
                 quarterly_trends={
                     str(year): schemas_skill_insights.QuarterlyTrend(
-                        Q1={}, Q2={}, Q3={}, Q4={}
+                        Q1=empty_quarter_data,
+                        Q2=empty_quarter_data,
+                        Q3=empty_quarter_data,
+                        Q4=empty_quarter_data
                     ),
                     str(comparison_year): schemas_skill_insights.QuarterlyTrend(
-                        Q1={}, Q2={}, Q3={}, Q4={}
+                        Q1=empty_quarter_data,
+                        Q2=empty_quarter_data,
+                        Q3=empty_quarter_data,
+                        Q4=empty_quarter_data
                     )
                 }
             )
         
-        # 스킬 목록 추출 (해당 연도 전체 합계 기준 정렬)
-        year_df = df[df['year'] == year]
-        skill_totals = year_df.groupby('skill_name')['count'].sum().sort_values(ascending=False)
-        skills = skill_totals.head(top_n).index.tolist()
-        
         # 연도별 분기별 데이터 구성
+        # 각 분기별로 실제 데이터가 있는 스킬만 포함
         quarterly_trends = {}
         
         for y in [year, comparison_year]:
             year_str = str(y)
             year_data = df[df['year'] == y]
             
-            # 각 분기별 데이터 딕셔너리 생성
-            quarters = {}
+            # 각 분기별 데이터 생성
+            quarter_data = {}
             for quarter in [1, 2, 3, 4]:
                 quarter_df = year_data[year_data['quarter'] == quarter]
-                quarter_dict = {}
-                for skill in skills:
-                    skill_data = quarter_df[quarter_df['skill_name'] == skill]
-                    if not skill_data.empty:
-                        quarter_dict[skill] = int(skill_data.iloc[0]['count'])
-                    else:
-                        quarter_dict[skill] = 0
-                quarters[f'Q{quarter}'] = quarter_dict
+                
+                if not quarter_df.empty:
+                    # 빈도순으로 정렬하여 상위 스킬 추출
+                    quarter_df_sorted = quarter_df.sort_values('count', ascending=False)
+                    skills_list = quarter_df_sorted['skill_name'].tolist()
+                    counts_dict = {row['skill_name']: int(row['count']) for _, row in quarter_df_sorted.iterrows()}
+                else:
+                    skills_list = []
+                    counts_dict = {}
+                
+                quarter_data[f'Q{quarter}'] = schemas_skill_insights.QuarterlySkillData(
+                    skills=skills_list,
+                    counts=counts_dict
+                )
             
             quarterly_trends[year_str] = schemas_skill_insights.QuarterlyTrend(
-                Q1=quarters['Q1'],
-                Q2=quarters['Q2'],
-                Q3=quarters['Q3'],
-                Q4=quarters['Q4']
+                Q1=quarter_data['Q1'],
+                Q2=quarter_data['Q2'],
+                Q3=quarter_data['Q3'],
+                Q4=quarter_data['Q4']
             )
         
         return schemas_skill_insights.SkillTrendData(
             company_name=company_keyword,
             year=str(year),
             comparison_year=str(comparison_year),
-            skills=skills,
             quarterly_trends=quarterly_trends
         )
 
