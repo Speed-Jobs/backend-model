@@ -14,16 +14,16 @@ from app.config.company_groups import COMPANY_GROUPS, get_company_patterns
 
 def get_recruitment_schedules_by_company(
     db: Session,
-    company_id: int,
+    company_patterns: List[str],
     experience: Optional[str] = None,
     position_ids: Optional[List[int]] = None
 ) -> List[RecruitmentSchedule]:
     """
-    특정 회사의 채용 일정을 조회합니다.
+    특정 회사 패턴의 채용 일정을 조회합니다.
 
     Args:
         db: Database session
-        company_id: 회사 ID
+        company_patterns: 회사명 패턴 리스트 (예: ["토스%", "토스뱅크%"])
         experience: 경험 유형 ("신입" 또는 "경력", None이면 전체)
         position_ids: 직군 ID 리스트 (None이면 전체)
 
@@ -35,7 +35,8 @@ def get_recruitment_schedules_by_company(
             joinedload(RecruitmentSchedule.company),
             joinedload(RecruitmentSchedule.post)
         )\
-        .filter(RecruitmentSchedule.company_id == company_id)
+        .join(Company, RecruitmentSchedule.company_id == Company.id)\
+        .filter(or_(*[Company.name.like(pattern) for pattern in company_patterns]))
 
     # experience 필터 추가
     if experience:
@@ -52,7 +53,7 @@ def get_recruitment_schedules_by_company(
 
 def get_recruitment_schedules(
     db: Session,
-    company_ids: Optional[List[int]] = None,
+    company_patterns: Optional[List[str]] = None,
     experience: Optional[str] = None,
     position_ids: Optional[List[int]] = None
 ) -> List[RecruitmentSchedule]:
@@ -61,7 +62,7 @@ def get_recruitment_schedules(
 
     Args:
         db: Database session
-        company_ids: 회사 ID 리스트 (None이면 전체)
+        company_patterns: 회사명 패턴 리스트 (None이면 전체, 예: ["토스%", "카카오%"])
         experience: 경험 유형 ("신입" 또는 "경력", None이면 전체)
         position_ids: 직군 ID 리스트 (None이면 전체)
 
@@ -74,9 +75,10 @@ def get_recruitment_schedules(
             joinedload(RecruitmentSchedule.post)
         )
 
-    # company_ids 필터 추가
-    if company_ids:
-        query = query.filter(RecruitmentSchedule.company_id.in_(company_ids))
+    # company_patterns 필터 추가
+    if company_patterns:
+        query = query.join(Company, RecruitmentSchedule.company_id == Company.id)\
+            .filter(or_(*[Company.name.like(pattern) for pattern in company_patterns]))
 
     # experience 필터 추가
     if experience:
