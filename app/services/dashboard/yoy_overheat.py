@@ -1,19 +1,18 @@
 """
 YoY Overheat Index Service
 """
-from datetime import date
-from typing import Dict, List, Optional
-from collections import defaultdict
+from typing import List, Optional
 
 from sqlalchemy.orm import Session
 
 from app.db.crud import db_yoy_overheat
-from app.config.company_groups import get_company_patterns
 from app.schemas.schemas_yoy_overheat import (
-    YoYOverheatData,
-    YoYScoreByPosition,
-    YoYScoreByIndustry,
+    OverallYoYData,
+    PositionYoYData,
+    IndustryYoYData,
+    CombinedYoYData,
 )
+from app.utils.date_calculator import calculate_3month_period, calculate_previous_year_period
 
 
 def _calculate_yoy_score(current_count: int, previous_count: int) -> float:
@@ -63,148 +62,245 @@ def _get_trend(yoy_score: float) -> str:
         return "냉각"
 
 
-def calculate_yoy_overheat(
+def analyze_overall_yoy(
     db: Session,
-    year: int,
-    month: int,
-    window_type: str,
-    company: Optional[str],
-) -> YoYOverheatData:
+    start_date_str: str,
+) -> OverallYoYData:
     """
-    YoY Overheat 점수 계산
+    전체 시장 YoY 분석
 
     Args:
         db: DB 세션
-        year: 조회 연도
-        month: 조회 월 (1~12)
-        window_type: "1month" (단일월) 또는 "3month" (3개월 평균)
-        company: 회사명 키워드 (None이면 전체)
+        start_date_str: 종료일 (YYYY-MM-DD)
 
     Returns:
-        YoYOverheatData
+        OverallYoYData
     """
-    if window_type not in ["1month", "3month"]:
-        raise ValueError("window_type은 '1month' 또는 '3month'여야 합니다.")
+    # 기간 계산 (3개월 고정, 과거 3개월)
+    start_date, end_date = calculate_3month_period(start_date_str)
 
-    window_months = 1 if window_type == "1month" else 3
-
-    # 회사 패턴 변환
-    company_patterns = None
-    if company:
-        company_patterns = get_company_patterns(company)
+    # 작년 동기 기간 계산 (정확히 1년 전)
+    previous_start_date, previous_end_date = calculate_previous_year_period(start_date, end_date)
 
     # 현재 기간 데이터 조회
-    current_rows = db_yoy_overheat.get_monthly_recruit_counts(
+    current_rows = db_yoy_overheat.get_recruit_counts_for_period(
         db=db,
-        year=year,
-        month=month,
-        window_months=window_months,
-        company_patterns=company_patterns,
+        start_date=start_date,
+        end_date=end_date,
+        company_patterns=None,
     )
 
     # 이전 기간 (작년 동기) 데이터 조회
-    previous_year = year - 1
-    previous_rows = db_yoy_overheat.get_monthly_recruit_counts(
+    previous_rows = db_yoy_overheat.get_recruit_counts_for_period(
         db=db,
-        year=previous_year,
-        month=month,
-        window_months=window_months,
-        company_patterns=company_patterns,
+        start_date=previous_start_date,
+        end_date=previous_end_date,
+        company_patterns=None,
     )
 
-    # 데이터 집계 (position_id, industry_id 기준)
-    current_data: Dict[tuple, int] = defaultdict(int)
-    previous_data: Dict[tuple, int] = defaultdict(int)
-
-    position_names: Dict[int, str] = {}
-    industry_names: Dict[int, str] = {}
-
-    for year_val, month_val, pos_id, pos_name, ind_id, ind_name, count in current_rows:
-        key = (pos_id, ind_id)
-        current_data[key] += count
-        position_names[pos_id] = pos_name
-        industry_names[ind_id] = ind_name
-
-    for year_val, month_val, pos_id, pos_name, ind_id, ind_name, count in previous_rows:
-        key = (pos_id, ind_id)
-        previous_data[key] += count
-        position_names[pos_id] = pos_name
-        industry_names[ind_id] = ind_name
-
-    # 전체 키 합집합
-    all_keys = set(current_data.keys()) | set(previous_data.keys())
-
-    # Position별 집계
-    position_totals_current: Dict[int, int] = defaultdict(int)
-    position_totals_previous: Dict[int, int] = defaultdict(int)
-
-    # Industry별 집계
-    industry_totals_current: Dict[int, int] = defaultdict(int)
-    industry_totals_previous: Dict[int, int] = defaultdict(int)
-
-    for pos_id, ind_id in all_keys:
-        curr = current_data.get((pos_id, ind_id), 0)
-        prev = previous_data.get((pos_id, ind_id), 0)
-
-        position_totals_current[pos_id] += curr
-        position_totals_previous[pos_id] += prev
-
-        industry_totals_current[ind_id] += curr
-        industry_totals_previous[ind_id] += prev
-
-    # 전체 합계
-    overall_current = sum(position_totals_current.values())
-    overall_previous = sum(position_totals_previous.values())
+    # 전체 합계 계산
+    overall_current = sum(count for _, _, _, _, count in current_rows)
+    overall_previous = sum(count for _, _, _, _, count in previous_rows)
     overall_yoy_score = _calculate_yoy_score(overall_current, overall_previous)
 
-    # Position별 YoY 점수 계산
-    by_position: List[YoYScoreByPosition] = []
-    for pos_id in set(position_totals_current.keys()) | set(position_totals_previous.keys()):
-        curr = position_totals_current.get(pos_id, 0)
-        prev = position_totals_previous.get(pos_id, 0)
-        yoy = _calculate_yoy_score(curr, prev)
-        trend = _get_trend(yoy)
-
-        by_position.append(
-            YoYScoreByPosition(
-                position_id=pos_id,
-                position_name=position_names.get(pos_id, "Unknown"),
-                yoy_score=round(yoy, 2),
-                current_count=curr,
-                previous_year_count=prev,
-                trend=trend,
-            )
-        )
-
-    # Industry별 YoY 점수 계산
-    by_industry: List[YoYScoreByIndustry] = []
-    for ind_id in set(industry_totals_current.keys()) | set(industry_totals_previous.keys()):
-        curr = industry_totals_current.get(ind_id, 0)
-        prev = industry_totals_previous.get(ind_id, 0)
-        yoy = _calculate_yoy_score(curr, prev)
-        trend = _get_trend(yoy)
-
-        by_industry.append(
-            YoYScoreByIndustry(
-                industry_id=ind_id,
-                industry_name=industry_names.get(ind_id, "Unknown"),
-                yoy_score=round(yoy, 2),
-                current_count=curr,
-                previous_year_count=prev,
-                trend=trend,
-            )
-        )
-
-    # 점수 높은 순 정렬
-    by_position.sort(key=lambda x: x.yoy_score, reverse=True)
-    by_industry.sort(key=lambda x: x.yoy_score, reverse=True)
-
-    return YoYOverheatData(
-        year=year,
-        month=month,
-        window_type=window_type,
+    return OverallYoYData(
+        analysis_type="overall",
         overall_yoy_score=round(overall_yoy_score, 2),
         overall_trend=_get_trend(overall_yoy_score),
-        by_position=by_position,
-        by_industry=by_industry,
+        overall_current_count=overall_current,
+        overall_previous_count=overall_previous,
+    )
+
+
+def analyze_position_yoy(
+    db: Session,
+    start_date_str: str,
+    position_id: int,
+) -> PositionYoYData:
+    """
+    특정 직군 YoY 분석
+
+    Args:
+        db: DB 세션
+        start_date_str: 종료일 (YYYY-MM-DD)
+        position_id: 직군 ID
+
+    Returns:
+        PositionYoYData
+    """
+    from app.models.position import Position
+
+    # 기간 계산 (3개월 고정, 과거 3개월)
+    start_date, end_date = calculate_3month_period(start_date_str)
+
+    # 작년 동기 기간 계산 (정확히 1년 전)
+    previous_start_date, previous_end_date = calculate_previous_year_period(start_date, end_date)
+
+    # 직군 정보 조회
+    position = db.query(Position).filter(Position.id == position_id).first()
+    if not position:
+        raise ValueError(f"직군 ID {position_id}를 찾을 수 없습니다")
+
+    # 현재 기간 데이터 조회
+    current_rows = db_yoy_overheat.get_recruit_counts_for_period(
+        db=db,
+        start_date=start_date,
+        end_date=end_date,
+        company_patterns=None,
+    )
+
+    # 이전 기간 (작년 동기) 데이터 조회
+    previous_rows = db_yoy_overheat.get_recruit_counts_for_period(
+        db=db,
+        start_date=previous_start_date,
+        end_date=previous_end_date,
+        company_patterns=None,
+    )
+
+    # 해당 직군 데이터만 필터링
+    position_current = sum(
+        count for pos_id, _, _, _, count in current_rows
+        if pos_id == position_id
+    )
+    position_previous = sum(
+        count for pos_id, _, _, _, count in previous_rows
+        if pos_id == position_id
+    )
+
+    position_yoy_score = _calculate_yoy_score(position_current, position_previous)
+
+    return PositionYoYData(
+        analysis_type="position",
+        position_id=position_id,
+        position_name=position.name,
+        position_yoy_score=round(position_yoy_score, 2),
+        position_trend=_get_trend(position_yoy_score),
+        position_current_count=position_current,
+        position_previous_count=position_previous,
+    )
+
+
+def analyze_industry_yoy(
+    db: Session,
+    start_date_str: str,
+    position_id: int,
+    industry_id: int,
+) -> IndustryYoYData:
+    """
+    특정 산업 YoY 분석
+
+    Args:
+        db: DB 세션
+        start_date_str: 종료일 (YYYY-MM-DD)
+        position_id: 직군 ID
+        industry_id: 산업 ID
+
+    Returns:
+        IndustryYoYData
+    """
+    from app.models.industry import Industry
+
+    # 기간 계산 (3개월 고정, 과거 3개월)
+    start_date, end_date = calculate_3month_period(start_date_str)
+
+    # 작년 동기 기간 계산 (정확히 1년 전)
+    previous_start_date, previous_end_date = calculate_previous_year_period(start_date, end_date)
+
+    # 산업 정보 조회
+    industry = db.query(Industry).filter(Industry.id == industry_id).first()
+    if not industry:
+        raise ValueError(f"산업 ID {industry_id}를 찾을 수 없습니다")
+
+    if industry.position_id != position_id:
+        raise ValueError(f"산업 '{industry.name}'은 직군 ID {position_id}에 속하지 않습니다")
+
+    # 현재 기간 데이터 조회
+    current_rows = db_yoy_overheat.get_recruit_counts_for_period(
+        db=db,
+        start_date=start_date,
+        end_date=end_date,
+        company_patterns=None,
+    )
+
+    # 이전 기간 (작년 동기) 데이터 조회
+    previous_rows = db_yoy_overheat.get_recruit_counts_for_period(
+        db=db,
+        start_date=previous_start_date,
+        end_date=previous_end_date,
+        company_patterns=None,
+    )
+
+    # 해당 산업 데이터만 필터링
+    industry_current = sum(
+        count for _, _, ind_id, _, count in current_rows
+        if ind_id == industry_id
+    )
+    industry_previous = sum(
+        count for _, _, ind_id, _, count in previous_rows
+        if ind_id == industry_id
+    )
+
+    industry_yoy_score = _calculate_yoy_score(industry_current, industry_previous)
+
+    return IndustryYoYData(
+        analysis_type="industry",
+        industry_id=industry_id,
+        industry_name=industry.name,
+        industry_yoy_score=round(industry_yoy_score, 2),
+        industry_trend=_get_trend(industry_yoy_score),
+        industry_current_count=industry_current,
+        industry_previous_count=industry_previous,
+    )
+
+
+def analyze_combined_yoy_insights(
+    db: Session,
+    start_date_str: str,
+    position_id: Optional[int] = None,
+    industry_id: Optional[int] = None,
+) -> CombinedYoYData:
+    """
+    통합 YoY 인사이트 분석 (Total + Position + Industry)
+
+    항상 Total 인사이트를 포함하고, position_id와 industry_id가 있으면 해당 인사이트도 포함합니다.
+
+    Args:
+        db: DB 세션
+        start_date_str: 종료일 (YYYY-MM-DD)
+        position_id: 직군 ID (선택)
+        industry_id: 산업 ID (선택, position_id가 필수)
+
+    Returns:
+        CombinedYoYData
+    """
+    # 1. Total 시장 분석 (항상 포함)
+    total_insight = analyze_overall_yoy(
+        db=db,
+        start_date_str=start_date_str,
+    )
+
+    # 2. Position 분석 (position_id가 있으면 포함)
+    position_insight = None
+    if position_id:
+        position_insight = analyze_position_yoy(
+            db=db,
+            start_date_str=start_date_str,
+            position_id=position_id,
+        )
+
+    # 3. Industry 분석 (industry_id가 있으면 포함)
+    industry_insight = None
+    if industry_id and position_id:
+        industry_insight = analyze_industry_yoy(
+            db=db,
+            start_date_str=start_date_str,
+            position_id=position_id,
+            industry_id=industry_id,
+        )
+
+    return CombinedYoYData(
+        analysis_type="combined",
+        total_insight=total_insight,
+        position_insight=position_insight,
+        industry_insight=industry_insight,
     )

@@ -11,108 +11,20 @@ YoY (Year-over-Year) Overheat Index:
   * 100: 2배 이상 증가 (극심한 과열)
   * 0: 채용 없음 (극심한 냉각)
 """
-from typing import List
+from typing import List, Optional, Literal, Union
 from pydantic import BaseModel, Field
 
-
-class YoYScoreByPosition(BaseModel):
-    """직무별 YoY 과열도 점수"""
-
-    position_id: int = Field(..., description="직무 ID")
-    position_name: str = Field(..., description="직무명 (예: Software Development)")
-    yoy_score: float = Field(
-        ...,
-        description=(
-            "YoY 과열도 점수 (0~100)\n"
-            "- 0: 채용 없음 (극심한 냉각)\n"
-            "- 25: 작년 대비 절반 (냉각)\n"
-            "- 50: 작년과 동일 (기준선)\n"
-            "- 75: 작년 대비 1.5배 (과열)\n"
-            "- 100: 작년 대비 2배 이상 (극심한 과열)"
-        ),
-        ge=0.0,
-        le=100.0,
-    )
-    current_count: int = Field(..., description="현재 기간 채용 공고 수", ge=0)
-    previous_year_count: int = Field(..., description="작년 동기간 채용 공고 수", ge=0)
-    trend: str = Field(
-        ...,
-        description=(
-            "트렌드 해석\n"
-            "- 과열: YoY > 50 (채용 확대)\n"
-            "- 기준: YoY = 50 (작년 동일)\n"
-            "- 냉각: YoY < 50 (채용 축소)"
-        ),
-    )
-
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "position_id": 1,
-                "position_name": "Software Development",
-                "yoy_score": 75.0,
-                "current_count": 150,
-                "previous_year_count": 100,
-                "trend": "과열",
-            }
-        }
+# 레거시 스키마 제거됨 (더 이상 사용되지 않음)
+# - YoYScoreByPosition: PositionYoYData로 대체됨
+# - YoYScoreByIndustry: IndustryYoYData로 대체됨
 
 
-class YoYScoreByIndustry(BaseModel):
-    """산업별 YoY 과열도 점수"""
+class OverallYoYData(BaseModel):
+    """전체 시장 YoY 분석 데이터"""
 
-    industry_id: int = Field(..., description="산업 ID")
-    industry_name: str = Field(..., description="산업명 (예: Front-end Development)")
-    yoy_score: float = Field(
-        ...,
-        description=(
-            "YoY 과열도 점수 (0~100)\n"
-            "- 0: 채용 없음 (극심한 냉각)\n"
-            "- 25: 작년 대비 절반 (냉각)\n"
-            "- 50: 작년과 동일 (기준선)\n"
-            "- 75: 작년 대비 1.5배 (과열)\n"
-            "- 100: 작년 대비 2배 이상 (극심한 과열)"
-        ),
-        ge=0.0,
-        le=100.0,
-    )
-    current_count: int = Field(..., description="현재 기간 채용 공고 수", ge=0)
-    previous_year_count: int = Field(..., description="작년 동기간 채용 공고 수", ge=0)
-    trend: str = Field(
-        ...,
-        description=(
-            "트렌드 해석\n"
-            "- 과열: YoY > 50 (채용 확대)\n"
-            "- 기준: YoY = 50 (작년 동일)\n"
-            "- 냉각: YoY < 50 (채용 축소)"
-        ),
-    )
-
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "industry_id": 10,
-                "industry_name": "Front-end Development",
-                "yoy_score": 82.5,
-                "current_count": 65,
-                "previous_year_count": 40,
-                "trend": "과열",
-            }
-        }
-
-
-class YoYOverheatData(BaseModel):
-    """YoY Overheat 분석 데이터"""
-
-    year: int = Field(..., description="조회 연도", ge=2020)
-    month: int = Field(..., description="조회 월 (1~12)", ge=1, le=12)
-    window_type: str = Field(
-        ...,
-        description=(
-            "분석 기간 윈도우 타입\n"
-            "- 1month: 단일 월 분석\n"
-            "- 3month: 3개월 이동평균 (현재월, -1개월, -2개월)"
-        ),
+    analysis_type: Literal["overall"] = Field(
+        default="overall",
+        description="분석 유형"
     )
     overall_yoy_score: float = Field(
         ...,
@@ -130,45 +42,89 @@ class YoYOverheatData(BaseModel):
         ...,
         description="전체 시장 트렌드 (과열/기준/냉각)",
     )
-    by_position: List[YoYScoreByPosition] = Field(
-        default_factory=list,
-        description="직무별 YoY 점수 목록 (점수 높은 순 정렬)",
+    overall_current_count: int = Field(..., description="현재 기간 전체 채용 공고 수", ge=0)
+    overall_previous_count: int = Field(..., description="작년 동기간 전체 채용 공고 수", ge=0)
+
+
+class PositionYoYData(BaseModel):
+    """직군별 YoY 분석 데이터"""
+
+    analysis_type: Literal["position"] = Field(
+        default="position",
+        description="분석 유형"
     )
-    by_industry: List[YoYScoreByIndustry] = Field(
-        default_factory=list,
-        description="산업별 YoY 점수 목록 (점수 높은 순 정렬)",
+    position_id: int = Field(..., description="직군 ID")
+    position_name: str = Field(..., description="직군명")
+    position_yoy_score: float = Field(
+        ...,
+        description="직군별 YoY 점수 (0~100)",
+        ge=0.0,
+        le=100.0,
+    )
+    position_trend: str = Field(..., description="직군 트렌드 (과열/기준/냉각)")
+    position_current_count: int = Field(..., description="현재 기간 직군 채용 공고 수", ge=0)
+    position_previous_count: int = Field(..., description="작년 동기간 직군 채용 공고 수", ge=0)
+
+
+class IndustryYoYData(BaseModel):
+    """산업별 YoY 분석 데이터"""
+
+    analysis_type: Literal["industry"] = Field(
+        default="industry",
+        description="분석 유형"
+    )
+    industry_id: int = Field(..., description="산업 ID")
+    industry_name: str = Field(..., description="산업명")
+    industry_yoy_score: float = Field(
+        ...,
+        description="산업별 YoY 점수 (0~100)",
+        ge=0.0,
+        le=100.0,
+    )
+    industry_trend: str = Field(..., description="산업 트렌드 (과열/기준/냉각)")
+    industry_current_count: int = Field(..., description="현재 기간 산업 채용 공고 수", ge=0)
+    industry_previous_count: int = Field(..., description="작년 동기간 산업 채용 공고 수", ge=0)
+
+
+class CombinedYoYData(BaseModel):
+    """통합 YoY 인사이트 분석 데이터 (Total + Position + Industry)"""
+
+    analysis_type: Literal["combined"] = Field(
+        default="combined",
+        description="분석 유형"
+    )
+    
+    # Total 인사이트 (항상 포함)
+    total_insight: OverallYoYData = Field(
+        ...,
+        description="전체 시장 YoY 인사이트"
+    )
+    
+    # Position 인사이트 (position_name 지정 시)
+    position_insight: Optional[PositionYoYData] = Field(
+        None,
+        description="직군별 YoY 인사이트 (position_name 지정 시)"
+    )
+    
+    # Industry 인사이트 (position_name + industry_name 지정 시)
+    industry_insight: Optional[IndustryYoYData] = Field(
+        None,
+        description="산업별 YoY 인사이트 (position_name + industry_name 지정 시)"
     )
 
-    class Config:
-        json_schema_extra = {
-            "example": {
-                "year": 2024,
-                "month": 12,
-                "window_type": "3month",
-                "overall_yoy_score": 68.5,
-                "overall_trend": "과열",
-                "by_position": [
-                    {
-                        "position_id": 1,
-                        "position_name": "Software Development",
-                        "yoy_score": 75.0,
-                        "current_count": 150,
-                        "previous_year_count": 100,
-                        "trend": "과열",
-                    }
-                ],
-                "by_industry": [
-                    {
-                        "industry_id": 10,
-                        "industry_name": "Front-end Development",
-                        "yoy_score": 82.5,
-                        "current_count": 65,
-                        "previous_year_count": 40,
-                        "trend": "과열",
-                    }
-                ],
-            }
-        }
+
+# 레거시 스키마 제거됨 (더 이상 사용되지 않음)
+# - YoYOverheatData: analyze_combined_yoy_insights()로 대체됨
+# - YoYScoreByPosition, YoYScoreByIndustry: CombinedYoYData로 대체됨
+
+
+# 통합 인사이트용 Union 타입
+YoYAnalysisData = Union[
+    OverallYoYData,
+    PositionYoYData,
+    IndustryYoYData,
+    CombinedYoYData,
+]
 
 
 class YoYOverheatResponse(BaseModel):
@@ -177,4 +133,4 @@ class YoYOverheatResponse(BaseModel):
     status: int = Field(200, description="HTTP 상태 코드")
     code: str = Field("SUCCESS", description="응답 코드")
     message: str = Field(..., description="응답 메시지")
-    data: YoYOverheatData = Field(..., description="YoY 과열도 분석 데이터")
+    data: YoYAnalysisData = Field(..., description="YoY 과열도 분석 데이터")

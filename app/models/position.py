@@ -16,7 +16,7 @@ class Position(Base):
     id = Column(Integer, primary_key=True, index=True, comment="아이디")
     name = Column(String(255), nullable=False, index=True, comment="이름")
     description = Column(Text, nullable=True, comment="설명")
-    skillset = Column(Text, nullable=True, comment="스킬셋")
+    # skillset 컬럼 제거 (ERD에 없음, DB에도 없음)
     category = Column(Enum(PositionCategory), nullable=True, comment="직무 카테고리")
 
     # ERD 기반 필드
