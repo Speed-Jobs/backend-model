@@ -8,7 +8,6 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 import calendar
 from app.db.crud.db_recruitment_schedule import (
-    get_recruitment_schedules_by_company,
     get_recruitment_schedules,
     get_competition_intensity_analysis
 )
@@ -533,103 +532,13 @@ def merge_actual_and_predicted(
     
     return result
 
-
-def get_company_recruitment_schedule(
-    db: Session,
-    company_keyword: str,
-    type_filter: str,
-    start_date: str,
-    end_date: str,
-    data_type: str = "actual",
-    position_ids: Optional[List[int]] = None
-) -> Dict[str, Any]:
-    """
-    특정 회사의 채용 일정을 조회합니다.
-
-    Args:
-        db: Database session
-        company_keyword: 회사 키워드 (예: "toss", "kakao", "hanwha")
-        type_filter: "신입" 또는 "경력"
-        start_date: 조회 시작일 (YYYY-MM-DD)
-        end_date: 조회 종료일 (YYYY-MM-DD)
-        data_type: "actual", "predicted", "all"
-        position_ids: 직군 ID 리스트 (None이면 전체)
-
-    Returns:
-        Swagger 형식의 응답 딕셔너리
-    """
-    try:
-        result_schedules = []
-
-        # 키워드를 패턴으로 변환
-        company_patterns = get_company_patterns(company_keyword)
-
-        # actual 데이터 조회
-        if data_type in ["actual", "all"]:
-            schedules = get_recruitment_schedules_by_company(
-                db=db,
-                company_patterns=company_patterns,
-                position_ids=position_ids
-            )
-
-            actual_schedules = filter_and_convert_schedules(
-                schedules=schedules,
-                type_filter=type_filter,
-                start_date=start_date,
-                end_date=end_date,
-                position_ids=position_ids
-            )
-
-            if data_type == "actual":
-                result_schedules = actual_schedules
-            else:
-                result_schedules = actual_schedules
-        
-        # predicted 데이터 조회 (경력은 예측 불가)
-        if data_type in ["predicted", "all"] and type_filter == "신입":
-            predicted_schedules = get_predicted_schedules(
-                db=db,
-                type_filter=type_filter,
-                start_date=start_date,
-                end_date=end_date,
-                company_keywords=[company_keyword]
-            )
-            
-            if data_type == "predicted":
-                result_schedules = predicted_schedules
-            else:
-                # all인 경우 병합
-                result_schedules = merge_actual_and_predicted(
-                    result_schedules,
-                    predicted_schedules
-                )
-        
-        return {
-            "status": 200,
-            "code": "SUCCESS",
-            "message": "회사별 채용 일정 조회 성공",
-            "data": {
-                "schedules": result_schedules
-            }
-        }
-    
-    except Exception as e:
-        return {
-            "status": 500,
-            "code": "INTERNAL_ERROR",
-            "message": f"오류 발생: {str(e)}",
-            "data": None
-        }
-
-
 def get_all_recruitment_schedules(
     db: Session,
     type_filter: str,
     start_date: str,
     end_date: str,
     company_keywords: Optional[List[str]] = None,
-    data_type: str = "actual",
-    position_ids: Optional[List[int]] = None
+    data_type: str = "actual"
 ) -> Dict[str, Any]:
     """
     전체 또는 특정 회사들의 채용 일정을 조회합니다.
@@ -641,7 +550,6 @@ def get_all_recruitment_schedules(
         end_date: 조회 종료일 (YYYY-MM-DD)
         company_keywords: 회사 키워드 리스트 (None이면 전체, 예: ["toss", "kakao"])
         data_type: "actual", "predicted", "all"
-        position_ids: 직군 ID 리스트 (None이면 전체)
 
     Returns:
         Swagger 형식의 응답 딕셔너리
@@ -661,16 +569,14 @@ def get_all_recruitment_schedules(
         if data_type in ["actual", "all"]:
             schedules = get_recruitment_schedules(
                 db=db,
-                company_patterns=company_patterns,
-                position_ids=position_ids
+                company_patterns=company_patterns
             )
 
             actual_schedules = filter_and_convert_schedules(
                 schedules=schedules,
                 type_filter=type_filter,
                 start_date=start_date,
-                end_date=end_date,
-                position_ids=position_ids
+                end_date=end_date
             )
 
             if data_type == "actual":
