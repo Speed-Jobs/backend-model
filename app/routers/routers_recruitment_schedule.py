@@ -19,7 +19,11 @@ router = APIRouter(
 
 @router.get("/companies")
 def get_recruitment_schedules(
-    type: str = Query(..., description="채용 유형 (신입/경력)", example="신입"),
+    type: str = Query(
+        ...,
+        description="채용 유형 (Entry-level/Experienced, 신입/경력)",
+        example="Entry-level",
+    ),
     data_type: str = Query(default="actual", description="데이터 유형 (actual: 실제 공고, predicted: 예측치, all: 전체)", example="actual"),
     start_date: str = Query(..., description="시작일 (YYYY-MM-DD 형식)", example="2025-01-01"),
     end_date: str = Query(..., description="종료일 (YYYY-MM-DD 형식)", example="2025-12-31"),
@@ -35,12 +39,20 @@ def get_recruitment_schedules(
     - **end_date**: 조회 종료일
     - **company_keywords**: (선택) 특정 회사들만 조회 (쉼표로 구분, 예: "toss,kakao")
     """
-    # type 검증
-    if type not in ["신입", "경력"]:
+    # type 검증 + 노멀라이즈 (영어만 허용 → 내부 한글로 매핑)
+    allowed_types = ["entry-level", "experienced", "Entry-level", "Experienced"]
+    if type not in allowed_types:
         raise HTTPException(
             status_code=400,
-            detail="type은 '신입' 또는 '경력'이어야 합니다."
+            detail="type은 Entry-level 또는 Experienced여야 합니다."
         )
+    type_map = {
+        "entry-level": "신입",
+        "experienced": "경력",
+        "Entry-level": "신입",
+        "Experienced": "경력",
+    }
+    normalized_type = type_map.get(type, type)
 
     # data_type 검증
     if data_type not in ["actual", "predicted", "all"]:
@@ -57,7 +69,7 @@ def get_recruitment_schedules(
     # 서비스 호출
     result = get_all_recruitment_schedules(
         db=db,
-        type_filter=type,
+        type_filter=normalized_type,
         start_date=start_date,
         end_date=end_date,
         company_keywords=parsed_company_keywords,
@@ -78,7 +90,11 @@ def get_recruitment_schedules(
 def get_recruitment_competition_intensity(
     start_date: str = Query(..., description="시작일 (YYYY-MM-DD 형식)", example="2025-01-01"),
     end_date: str = Query(..., description="종료일 (YYYY-MM-DD 형식)", example="2025-01-31"),
-    type: Optional[str] = Query(None, description="채용 유형 (신입/경력)", example="신입"),
+    type: Optional[str] = Query(
+        None,
+        description="채용 유형 (Entry-level/Experienced, 신입/경력)",
+        example="Entry-level",
+    ),
     db: Session = Depends(get_db)
 ):
     """
@@ -98,12 +114,21 @@ def get_recruitment_competition_intensity(
             - **overlap_count**: 겹침 수
             - **companies**: 채용 중인 회사 목록
     """
-    # type 검증
-    if type and type not in ["신입", "경력"]:
-        raise HTTPException(
-            status_code=400,
-            detail="type은 '신입' 또는 '경력'이어야 합니다."
-        )
+    # type 검증 + 노멀라이즈 (영어만 허용 → 내부 한글로 매핑)
+    if type:
+        allowed_types = ["entry-level", "experienced", "Entry-level", "Experienced"]
+        if type not in allowed_types:
+            raise HTTPException(
+                status_code=400,
+                detail="type은 Entry-level 또는 Experienced여야 합니다."
+            )
+        type_map = {
+            "entry-level": "신입",
+            "experienced": "경력",
+            "Entry-level": "신입",
+            "Experienced": "경력",
+        }
+        type = type_map.get(type, type)
 
     # 서비스 호출
     result = get_competition_intensity(
