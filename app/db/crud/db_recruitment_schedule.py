@@ -12,50 +12,10 @@ from app.models.post import Post
 from app.models.industry import Industry
 from app.config.company_groups import COMPANY_GROUPS, get_company_patterns
 
-def get_recruitment_schedules_by_company(
-    db: Session,
-    company_patterns: List[str],
-    experience: Optional[str] = None,
-    position_ids: Optional[List[int]] = None
-) -> List[RecruitmentSchedule]:
-    """
-    특정 회사 패턴의 채용 일정을 조회합니다.
-
-    Args:
-        db: Database session
-        company_patterns: 회사명 패턴 리스트 (예: ["토스%", "토스뱅크%"])
-        experience: 경험 유형 ("신입" 또는 "경력", None이면 전체)
-        position_ids: 직군 ID 리스트 (None이면 전체)
-
-    Returns:
-        List of RecruitmentSchedule objects
-    """
-    query = db.query(RecruitmentSchedule)\
-        .options(
-            joinedload(RecruitmentSchedule.company),
-            joinedload(RecruitmentSchedule.post)
-        )\
-        .join(Company, RecruitmentSchedule.company_id == Company.id)\
-        .filter(or_(*[Company.name.like(pattern) for pattern in company_patterns]))
-
-    # experience 필터 추가
-    if experience:
-        query = query.join(RecruitmentSchedule.post)\
-            .filter(RecruitmentSchedule.post.has(experience=experience))
-
-    # position_ids 필터 추가
-    if position_ids:
-        query = query.join(Post, RecruitmentSchedule.post_id == Post.id)\
-            .join(Industry, Post.industry_id == Industry.id)\
-            .filter(Industry.position_id.in_(position_ids))
-
-    return query.all()
-
 def get_recruitment_schedules(
     db: Session,
     company_patterns: Optional[List[str]] = None,
-    experience: Optional[str] = None,
-    position_ids: Optional[List[int]] = None
+    experience: Optional[str] = None
 ) -> List[RecruitmentSchedule]:
     """
     채용 일정을 조회합니다.
@@ -64,7 +24,6 @@ def get_recruitment_schedules(
         db: Database session
         company_patterns: 회사명 패턴 리스트 (None이면 전체, 예: ["토스%", "카카오%"])
         experience: 경험 유형 ("신입" 또는 "경력", None이면 전체)
-        position_ids: 직군 ID 리스트 (None이면 전체)
 
     Returns:
         List of RecruitmentSchedule objects
@@ -84,12 +43,6 @@ def get_recruitment_schedules(
     if experience:
         query = query.join(RecruitmentSchedule.post)\
             .filter(RecruitmentSchedule.post.has(experience=experience))
-
-    # position_ids 필터 추가
-    if position_ids:
-        query = query.join(Post, RecruitmentSchedule.post_id == Post.id)\
-            .join(Industry, Post.industry_id == Industry.id)\
-            .filter(Industry.position_id.in_(position_ids))
 
     return query.all()
 

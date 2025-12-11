@@ -164,7 +164,7 @@ class AlternativeIndustry(BaseModel):
 # ===== 시나리오별 데이터 모델 =====
 
 class OverallAnalysisData(BaseModel):
-    """전체 시장 분석 데이터 (시나리오 1)"""
+    """전체 시장 분석 데이터 (HHI + YoY 통합)"""
 
     analysis_type: Literal["overall"] = Field(
         default="overall",
@@ -173,6 +173,7 @@ class OverallAnalysisData(BaseModel):
     period: PeriodInfo = Field(..., description="분석 기간 (3개월 고정)")
     total_posts: int = Field(..., description="전체 채용 공고 수", ge=0)
 
+    # HHI 분석
     hhi: float = Field(
         ...,
         description="HHI 지수 (0~1, 시각화용)",
@@ -186,9 +187,21 @@ class OverallAnalysisData(BaseModel):
         description="점유율 상위 직군 목록 (최대 5개)"
     )
 
+    # YoY Overheat 분석
+    yoy_overheat_score: float = Field(
+        ...,
+        description="전년 대비 과열도 지수 (0~100)",
+        ge=0.0,
+        le=100.0
+    )
+    yoy_trend: str = Field(..., description="YoY 트렌드: 과열/기준/냉각")
+    yoy_current_count: int = Field(..., description="현재 기간 채용 공고 수", ge=0)
+    yoy_previous_count: int = Field(..., description="작년 동기간 채용 공고 수", ge=0)
+
+    # 통합 인사이트
     insights: List[str] = Field(
         default_factory=list,
-        description="종합 인사이트 (HHI, CR₂, Entropy 기반 생성)"
+        description="통합 인사이트 (HHI, CR₂, Entropy, YoY 기반). include_insights=false면 빈 배열"
     )
 
     class Config:
@@ -224,7 +237,7 @@ class OverallAnalysisData(BaseModel):
 
 
 class PositionAnalysisData(BaseModel):
-    """특정 직군 내 산업별 분석 데이터 (시나리오 2)"""
+    """특정 직군 내 산업별 분석 데이터 (HHI + YoY 통합)"""
 
     analysis_type: Literal["position"] = Field(
         default="position",
@@ -236,6 +249,7 @@ class PositionAnalysisData(BaseModel):
     position_name: str = Field(..., description="분석 대상 직군명")
     total_posts: int = Field(..., description="해당 직군 채용 공고 수", ge=0)
 
+    # HHI 분석
     hhi: float = Field(
         ...,
         description="해당 직군 내 산업별 HHI 지수 (0~1, 시각화용)",
@@ -249,9 +263,21 @@ class PositionAnalysisData(BaseModel):
         description="해당 직군 내 점유율 상위 산업 목록 (최대 5개)"
     )
 
+    # YoY Overheat 분석
+    yoy_overheat_score: float = Field(
+        ...,
+        description="전년 대비 과열도 지수 (0~100)",
+        ge=0.0,
+        le=100.0
+    )
+    yoy_trend: str = Field(..., description="YoY 트렌드: 과열/기준/냉각")
+    yoy_current_count: int = Field(..., description="현재 기간 채용 공고 수", ge=0)
+    yoy_previous_count: int = Field(..., description="작년 동기간 채용 공고 수", ge=0)
+
+    # 통합 인사이트
     insights: List[str] = Field(
         default_factory=list,
-        description="직군별 인사이트 (HHI, CR₂, Entropy 기반 생성)"
+        description="통합 인사이트 (HHI, CR₂, Entropy, YoY 기반). include_insights=false면 빈 배열"
     )
 
     class Config:
@@ -289,7 +315,7 @@ class PositionAnalysisData(BaseModel):
 
 
 class IndustryAnalysisData(BaseModel):
-    """특정 산업 분석 데이터 (시나리오 3)"""
+    """특정 산업 분석 데이터 (HHI + YoY 통합)"""
 
     analysis_type: Literal["industry"] = Field(
         default="industry",
@@ -316,9 +342,21 @@ class IndustryAnalysisData(BaseModel):
         description="스킬 유사도 기반 대안 산업 추천 (최대 3개)"
     )
 
+    # YoY Overheat 분석
+    yoy_overheat_score: float = Field(
+        ...,
+        description="전년 대비 과열도 지수 (0~100)",
+        ge=0.0,
+        le=100.0
+    )
+    yoy_trend: str = Field(..., description="YoY 트렌드: 과열/기준/냉각")
+    yoy_current_count: int = Field(..., description="현재 기간 채용 공고 수", ge=0)
+    yoy_previous_count: int = Field(..., description="작년 동기간 채용 공고 수", ge=0)
+
+    # 통합 인사이트
     insights: List[str] = Field(
         default_factory=list,
-        description="산업별 인사이트 (순위, 점유율, 경쟁 난이도, 대안 추천)"
+        description="통합 인사이트 (순위, 점유율, 경쟁 난이도, 대안 추천, YoY 기반). include_insights=false면 빈 배열"
     )
 
     class Config:

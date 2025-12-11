@@ -20,7 +20,10 @@ from app.schemas.schemas_hhi_concentration import (
     HHIInterpretation,
     AlternativeIndustry,
 )
-from app.utils.date_calculator import calculate_3month_period
+from app.utils.date_calculator import calculate_3month_period, calculate_previous_year_period
+# YoY Overheat 계산 함수 import
+from app.services.dashboard.yoy_overheat import _calculate_yoy_score, _get_trend
+from app.db.crud import db_yoy_overheat
 # Models are imported lazily to avoid circular dependencies
 
 
@@ -291,37 +294,35 @@ def _get_skill_similarity_industries(
 def analyze_overall_market(
     db: Session,
     start_date_str: str,
+    include_insights: bool = False,
 ) -> OverallAnalysisData:
     """
-    시나리오 1: 전체 시장 HHI 분석 (직군별)
+    전체 시장 HHI + YoY 분석
 
     Args:
         db: DB 세션
-        start_date_str: 시작일 (YYYY-MM-DD)
+        start_date_str: 종료일 (YYYY-MM-DD)
+        include_insights: 인사이트 생성 여부 (default: False)
 
     Returns:
         OverallAnalysisData
     """
     # 기간 계산 (3개월 고정, 과거 3개월)
-    # start_date_str은 실제로는 end_date (분석 종료일)
     start_date, end_date = calculate_3month_period(start_date_str)
+    previous_start_date, previous_end_date = calculate_previous_year_period(start_date, end_date)
 
-    # 직군별 데이터 조회
+    # === HHI 계산 ===
     position_data = _get_position_data(db, start_date, end_date)
 
     if not position_data:
         raise ValueError("해당 기간에 데이터가 없습니다")
 
-    # 데이터 추출
     counts = [count for _, _, count in position_data]
     total_posts = sum(counts)
 
-    # 지표 계산
     hhi_value = _calculate_hhi(counts)
     cr2_value = _calculate_cr2(counts)
     entropy_value = _calculate_entropy(counts)
-
-    # 해석
     level, difficulty = _interpret_hhi_new(hhi_value)
 
     # 상위 직군 (최대 5개)
@@ -337,50 +338,93 @@ def analyze_overall_market(
         for idx, (pos_id, pos_name, count) in enumerate(position_data_sorted)
     ]
 
-    # 인사이트 생성 (HHI, CR₂, Entropy 활용)
+    # === YoY 계산 ===
+    current_rows = db_yoy_overheat.get_recruit_counts_for_period(
+        db=db,
+        start_date=start_date,
+        end_date=end_date,
+        company_patterns=None,
+    )
+    previous_rows = db_yoy_overheat.get_recruit_counts_for_period(
+        db=db,
+        start_date=previous_start_date,
+        end_date=previous_end_date,
+        company_patterns=None,
+    )
+
+    overall_current = sum(count for _, _, _, _, count in current_rows)
+    overall_previous = sum(count for _, _, _, _, count in previous_rows)
+    yoy_score = _calculate_yoy_score(overall_current, overall_previous)
+    yoy_trend = _get_trend(yoy_score)
+
+    # === 인사이트 생성 (include_insights=true일 때만) ===
     insights = []
+    if include_insights:
+        # HHI 인사이트 (숫자 앞에 배치)
+        if hhi_value < 0.15:
+            insights.append(
+                f"집중도 지수가 {hhi_value:.2f}로 나타나 다양한 직군에서 고르게 채용이 진행되고 있어 "
+                f"시장 경쟁이 분산되어 있습니다"
+            )
+        elif hhi_value < 0.25:
+            insights.append(
+                f"집중도 지수가 {hhi_value:.2f}로 나타나 일부 직군에 수요가 몰리는 경향은 있으나, "
+                f"전체적으로는 채용이 다양한 직군으로 분산되는 흐름입니다"
+            )
+        else:
+            insights.append(
+                f"집중도 지수가 {hhi_value:.2f}로 나타나 특정 직군에 채용이 과도하게 집중되어 있어 "
+                f"포트폴리오 다양화가 필요합니다"
+            )
 
-    # HHI 기반 인사이트
-    if hhi_value < 0.15:
-        insights.append(
-            f"다양한 직군에서 고르게 채용이 진행되고 있어 시장 경쟁이 분산되어 있습니다 (HHI {hhi_value:.2f})"
-        )
-    elif hhi_value < 0.25:
-        insights.append(
-            f"일부 직군에 채용이 집중되는 경향이 있으나, 전반적으로 다양화가 진행 중입니다 (HHI {hhi_value:.2f})"
-        )
-    else:
-        insights.append(
-            f"특정 직군에 채용이 과도하게 집중되어 있어 포트폴리오 다양화가 필요합니다 (HHI {hhi_value:.2f})"
-        )
+        # CR₂ 인사이트
+        cr2_percentage = cr2_value * 100
+        if cr2_value > 0.5:
+            insights.append(
+                f"상위 2개 직군이 전체의 {cr2_percentage:.1f}%를 차지하고 있어 높은 집중도를 보이고 있습니다"
+            )
+        else:
+            insights.append(
+                f"상위 2개 직군이 전체의 {cr2_percentage:.1f}%를 차지하고 있어 일부 집중 경향이 있습니다"
+            )
 
-    # CR₂ 기반 인사이트
-    cr2_percentage = cr2_value * 100
-    if cr2_value > 0.5:
-        insights.append(
-            f"상위 2개 직군이 전체의 {cr2_percentage:.1f}%를 차지하고 있어 높은 집중도를 보이고 있습니다"
-        )
-    else:
-        insights.append(
-            f"상위 2개 직군이 전체의 {cr2_percentage:.1f}%를 차지하고 있어 일부 집중 경향이 있습니다"
-        )
+        # Entropy 인사이트 (다양성 지수로 표현)
+        max_entropy = math.log2(len(position_data)) if len(position_data) > 0 else 1
+        normalized_entropy = entropy_value / max_entropy if max_entropy > 0 else 0
 
-    # Entropy 기반 인사이트
-    max_entropy = math.log2(len(position_data)) if len(position_data) > 0 else 1
-    normalized_entropy = entropy_value / max_entropy if max_entropy > 0 else 0
+        if normalized_entropy > 0.8:
+            insights.append(
+                f"다양성 지수가 {normalized_entropy:.2f}로 나타나 직군 구성이 매우 다양하여 "
+                f"지원자 입장에서 다양한 선택지를 확보할 수 있습니다"
+            )
+        elif normalized_entropy > 0.6:
+            insights.append(
+                f"다양성 지수가 {normalized_entropy:.2f}로 나타나 직군 구성이 비교적 다양하나, "
+                f"일부 직군 간 격차가 존재합니다"
+            )
+        else:
+            insights.append(
+                f"다양성 지수가 {normalized_entropy:.2f}로 나타나 직군 구성이 특정 분야에 치우쳐 있어 "
+                f"다양성 확보가 필요합니다"
+            )
 
-    if normalized_entropy > 0.8:
-        insights.append(
-            "직군 구성이 매우 다양하여 지원자 입장에서 다양한 선택지를 확보할 수 있습니다"
-        )
-    elif normalized_entropy > 0.6:
-        insights.append(
-            "직군 구성이 비교적 다양하나, 일부 직군 간 격차가 존재합니다"
-        )
-    else:
-        insights.append(
-            "직군 구성이 특정 분야에 치우쳐 있어 다양성 확보가 필요합니다"
-        )
+        # YoY 인사이트
+        if yoy_score > 50:
+            change_percentage = ((overall_current / overall_previous) - 1) * 100 if overall_previous > 0 else 0
+            insights.append(
+                f"전년 대비 과열도 지수가 {yoy_score:.2f}로, 작년보다 {change_percentage:.1f}% 증가하여 "
+                f"채용 시장이 확대되는 추세입니다"
+            )
+        elif yoy_score == 50:
+            insights.append(
+                f"전년 대비 과열도 지수가 {yoy_score:.2f}로, 작년과 동일한 수준을 유지하고 있습니다"
+            )
+        else:
+            change_percentage = (1 - (overall_current / overall_previous)) * 100 if overall_previous > 0 else 0
+            insights.append(
+                f"전년 대비 과열도 지수가 {yoy_score:.2f}로, 작년보다 {change_percentage:.1f}% 감소하여 "
+                f"채용 시장이 냉각되는 추세입니다"
+            )
 
     return OverallAnalysisData(
         analysis_type="overall",
@@ -389,6 +433,10 @@ def analyze_overall_market(
         hhi=round(hhi_value, 4),
         interpretation=HHIInterpretation(level=level, difficulty=difficulty),
         top_positions=top_positions,
+        yoy_overheat_score=round(yoy_score, 2),
+        yoy_trend=yoy_trend,
+        yoy_current_count=overall_current,
+        yoy_previous_count=overall_previous,
         insights=insights,
     )
 
@@ -397,14 +445,16 @@ def analyze_position_industries(
     db: Session,
     start_date_str: str,
     position_id: int,
+    include_insights: bool = False,
 ) -> PositionAnalysisData:
     """
-    시나리오 2: 특정 직군 내 산업별 HHI 분석
+    특정 직군 내 산업별 HHI + YoY 분석
 
     Args:
         db: DB 세션
-        start_date_str: 시작일 (YYYY-MM-DD)
+        start_date_str: 종료일 (YYYY-MM-DD)
         position_id: 직군 ID
+        include_insights: 인사이트 생성 여부 (default: False)
 
     Returns:
         PositionAnalysisData
@@ -412,30 +462,26 @@ def analyze_position_industries(
     from app.models.position import Position
 
     # 기간 계산 (3개월 고정, 과거 3개월)
-    # start_date_str은 실제로는 end_date (분석 종료일)
     start_date, end_date = calculate_3month_period(start_date_str)
+    previous_start_date, previous_end_date = calculate_previous_year_period(start_date, end_date)
 
     # 직군 정보 조회
     position = db.query(Position).filter(Position.id == position_id).first()
     if not position:
         raise ValueError(f"직군 ID {position_id}를 찾을 수 없습니다")
 
-    # 산업별 데이터 조회
+    # === HHI 계산 ===
     industry_data = _get_industry_data_for_position(db, start_date, end_date, position_id)
 
     if not industry_data:
         raise ValueError(f"해당 직군({position.name})에 데이터가 없습니다")
 
-    # 데이터 추출
     counts = [count for _, _, count in industry_data]
     total_posts = sum(counts)
 
-    # 지표 계산
     hhi_value = _calculate_hhi(counts)
     cr2_value = _calculate_cr2(counts)
     entropy_value = _calculate_entropy(counts)
-
-    # 해석
     level, difficulty = _interpret_hhi_new(hhi_value)
 
     # 상위 산업 (최대 5개)
@@ -451,46 +497,89 @@ def analyze_position_industries(
         for idx, (ind_id, ind_name, count) in enumerate(industry_data_sorted)
     ]
 
-    # 인사이트 생성 (HHI, CR₂, Entropy 활용)
+    # === YoY 계산 ===
+    current_rows = db_yoy_overheat.get_recruit_counts_for_period(
+        db=db,
+        start_date=start_date,
+        end_date=end_date,
+        company_patterns=None,
+    )
+    previous_rows = db_yoy_overheat.get_recruit_counts_for_period(
+        db=db,
+        start_date=previous_start_date,
+        end_date=previous_end_date,
+        company_patterns=None,
+    )
+
+    # 해당 직군 데이터만 필터링
+    position_current = sum(
+        count for pos_id, _, _, _, count in current_rows
+        if pos_id == position_id
+    )
+    position_previous = sum(
+        count for pos_id, _, _, _, count in previous_rows
+        if pos_id == position_id
+    )
+
+    yoy_score = _calculate_yoy_score(position_current, position_previous)
+    yoy_trend = _get_trend(yoy_score)
+
+    # === 인사이트 생성 (include_insights=true일 때만) ===
     insights = []
-
-    # HHI 기반 인사이트
-    if hhi_value < 0.15:
-        insights.append(
-            f"'{position.name}' 직군 내에서 산업별 채용이 다양하게 분포되어 있습니다 (HHI {hhi_value:.2f})"
-        )
-    elif hhi_value < 0.25:
-        insights.append(
-            f"'{position.name}' 직군 내에서 산업별 채용이 일부 집중되어 있습니다 (HHI {hhi_value:.2f})"
-        )
-    else:
-        insights.append(
-            f"'{position.name}' 직군 내에서 특정 산업에 채용이 과도하게 집중되어 있습니다 (HHI {hhi_value:.2f})"
-        )
-
-    # CR₂ 기반 인사이트
-    cr2_percentage = cr2_value * 100
-    if industry_data_sorted and len(industry_data_sorted) >= 2:
-        top1_name = industry_data_sorted[0][1]
-        top2_name = industry_data_sorted[1][1]
-        insights.append(
-            f"상위 2개 산업({top1_name}, {top2_name})이 전체의 {cr2_percentage:.1f}%를 차지하며 주류를 이루고 있습니다"
-        )
-
-    # Entropy 기반 인사이트
-    max_entropy = math.log2(len(industry_data)) if len(industry_data) > 0 else 1
-    normalized_entropy = entropy_value / max_entropy if max_entropy > 0 else 0
-
-    if normalized_entropy > 0.7:
-        if len(industry_data_sorted) > 2:
-            other_industries = ", ".join([ind[1] for ind in industry_data_sorted[2:4]])
+    if include_insights:
+        # HHI 인사이트 (숫자 앞에 배치)
+        if hhi_value < 0.15:
             insights.append(
-                f"{other_industries} 등의 분야로 다양화가 진행 중입니다"
+                f"집중도 지수가 {hhi_value:.2f}로 나타나 '{position.name}' 직군 내에서 산업별 채용이 다양하게 분포되어 있습니다"
             )
-    else:
-        insights.append(
-            "산업 다양성이 낮아 일부 산업에 집중되어 있습니다"
-        )
+        elif hhi_value < 0.25:
+            insights.append(
+                f"집중도 지수가 {hhi_value:.2f}로 나타나 '{position.name}' 직군 내에서 산업별 채용이 일부 집중되어 있습니다"
+            )
+        else:
+            insights.append(
+                f"집중도 지수가 {hhi_value:.2f}로 나타나 '{position.name}' 직군 내에서 특정 산업에 채용이 과도하게 집중되어 있습니다"
+            )
+
+        # CR₂ 인사이트
+        cr2_percentage = cr2_value * 100
+        if industry_data_sorted and len(industry_data_sorted) >= 2:
+            top1_name = industry_data_sorted[0][1]
+            top2_name = industry_data_sorted[1][1]
+            insights.append(
+                f"상위 2개 산업({top1_name}, {top2_name})이 전체의 {cr2_percentage:.1f}%를 차지하며 주류를 이루고 있습니다"
+            )
+
+        # Entropy 인사이트 (다양성 지수로 표현)
+        max_entropy = math.log2(len(industry_data)) if len(industry_data) > 0 else 1
+        normalized_entropy = entropy_value / max_entropy if max_entropy > 0 else 0
+
+        if normalized_entropy > 0.7:
+            if len(industry_data_sorted) > 2:
+                other_industries = ", ".join([ind[1] for ind in industry_data_sorted[2:4]])
+                insights.append(
+                    f"다양성 지수가 {normalized_entropy:.2f}로 나타나 {other_industries} 등의 분야로 다양화가 진행 중입니다"
+                )
+        else:
+            insights.append(
+                f"다양성 지수가 {normalized_entropy:.2f}로 나타나 산업 다양성이 낮아 일부 산업에 집중되어 있습니다"
+            )
+
+        # YoY 인사이트
+        if yoy_score > 50:
+            change_percentage = ((position_current / position_previous) - 1) * 100 if position_previous > 0 else 0
+            insights.append(
+                f"전년 대비 과열도 지수가 {yoy_score:.2f}로, '{position.name}' 직군의 채용이 작년보다 {change_percentage:.1f}% 증가하여 확대되는 추세입니다"
+            )
+        elif yoy_score == 50:
+            insights.append(
+                f"전년 대비 과열도 지수가 {yoy_score:.2f}로, '{position.name}' 직군의 채용이 작년과 동일한 수준을 유지하고 있습니다"
+            )
+        else:
+            change_percentage = (1 - (position_current / position_previous)) * 100 if position_previous > 0 else 0
+            insights.append(
+                f"전년 대비 과열도 지수가 {yoy_score:.2f}로, '{position.name}' 직군의 채용이 작년보다 {change_percentage:.1f}% 감소하여 냉각되는 추세입니다"
+            )
 
     return PositionAnalysisData(
         analysis_type="position",
@@ -501,6 +590,10 @@ def analyze_position_industries(
         hhi=round(hhi_value, 4),
         interpretation=HHIInterpretation(level=level, difficulty=difficulty),
         top_industries=top_industries,
+        yoy_overheat_score=round(yoy_score, 2),
+        yoy_trend=yoy_trend,
+        yoy_current_count=position_current,
+        yoy_previous_count=position_previous,
         insights=insights,
     )
 
@@ -510,15 +603,17 @@ def analyze_specific_industry(
     start_date_str: str,
     position_id: int,
     industry_id: int,
+    include_insights: bool = False,
 ) -> IndustryAnalysisData:
     """
-    시나리오 3: 특정 산업 분석 (순위, 점유율, 대안 추천)
+    시나리오 3: 특정 산업 분석 (순위, 점유율, 대안 추천, HHI + YoY 통합)
 
     Args:
         db: DB 세션
         start_date_str: 시작일 (YYYY-MM-DD)
         position_id: 직군 ID
         industry_id: 산업 ID
+        include_insights: 인사이트 생성 여부 (default: False)
 
     Returns:
         IndustryAnalysisData
@@ -529,6 +624,7 @@ def analyze_specific_industry(
     # 기간 계산 (3개월 고정, 과거 3개월)
     # start_date_str은 실제로는 end_date (분석 종료일)
     start_date, end_date = calculate_3month_period(start_date_str)
+    previous_start_date, previous_end_date = calculate_previous_year_period(start_date, end_date)
 
     # 직군/산업 정보 조회
     position = db.query(Position).filter(Position.id == position_id).first()
@@ -574,34 +670,77 @@ def analyze_specific_industry(
         limit=3,
     )
 
-    # 인사이트 생성
-    insights = []
-
-    # 순위 및 점유율 인사이트
-    insights.append(
-        f"'{position.name}' 직군 내에서 '{industry.name}' 산업은 {target_rank}위로 {target_share:.1f}%의 점유율을 차지하고 있습니다"
+    # === YoY 계산 ===
+    current_rows = db_yoy_overheat.get_recruit_counts_for_period(
+        db=db,
+        start_date=start_date,
+        end_date=end_date,
+        company_patterns=None,
+    )
+    previous_rows = db_yoy_overheat.get_recruit_counts_for_period(
+        db=db,
+        start_date=previous_start_date,
+        end_date=previous_end_date,
+        company_patterns=None,
     )
 
-    # 경쟁 난이도 인사이트
-    if target_share > 30:
+    # 해당 산업 데이터만 필터링
+    industry_current = sum(
+        count for _, _, ind_id, _, count in current_rows
+        if ind_id == industry_id
+    )
+    industry_previous = sum(
+        count for _, _, ind_id, _, count in previous_rows
+        if ind_id == industry_id
+    )
+
+    yoy_score = _calculate_yoy_score(industry_current, industry_previous)
+    yoy_trend = _get_trend(yoy_score)
+
+    # === 인사이트 생성 (include_insights=true일 때만) ===
+    insights = []
+    if include_insights:
+        # 순위 및 점유율 인사이트
         insights.append(
-            "높은 점유율로 인해 경쟁이 매우 치열할 수 있습니다"
-        )
-    elif target_share > 20:
-        insights.append(
-            "중간 수준의 점유율로 적절한 경쟁 환경입니다"
-        )
-    else:
-        insights.append(
-            "상대적으로 낮은 점유율로 경쟁 강도가 낮을 수 있습니다"
+            f"'{position.name}' 직군 내에서 '{industry.name}' 산업은 {target_rank}위로 {target_share:.1f}%의 점유율을 차지하고 있습니다"
         )
 
-    # 대안 추천 인사이트
-    if alternatives:
-        top_alt = alternatives[0]
-        insights.append(
-            f"대안으로 '{top_alt.industry_name}' (유사도 {top_alt.skill_similarity * 100:.0f}%, 점유율 {top_alt.share_percentage:.1f}%) 산업을 고려해보세요"
-        )
+        # 경쟁 난이도 인사이트
+        if target_share > 30:
+            insights.append(
+                "높은 점유율로 인해 경쟁이 매우 치열할 수 있습니다"
+            )
+        elif target_share > 20:
+            insights.append(
+                "중간 수준의 점유율로 적절한 경쟁 환경입니다"
+            )
+        else:
+            insights.append(
+                "상대적으로 낮은 점유율로 경쟁 강도가 낮을 수 있습니다"
+            )
+
+        # 대안 추천 인사이트
+        if alternatives:
+            top_alt = alternatives[0]
+            insights.append(
+                f"대안으로 '{top_alt.industry_name}' (유사도 {top_alt.skill_similarity * 100:.0f}%, 점유율 {top_alt.share_percentage:.1f}%) 산업을 고려해보세요"
+            )
+
+        # YoY 인사이트
+        if yoy_score > 50:
+            change_percentage = ((industry_current / industry_previous) - 1) * 100 if industry_previous > 0 else 0
+            insights.append(
+                f"전년 대비 과열도 지수가 {yoy_score:.2f}로, '{industry.name}' 산업의 채용이 작년보다 {change_percentage:.1f}% 증가하여 확대되는 추세입니다"
+            )
+        elif yoy_score == 50:
+            insights.append(
+                f"전년 대비 과열도 지수가 {yoy_score:.2f}로, '{industry.name}' 산업의 채용이 작년과 동일한 수준을 유지하고 있습니다"
+            )
+        else:
+            change_percentage = (1 - (industry_current / industry_previous)) * 100 if industry_previous > 0 else 0
+            insights.append(
+                f"전년 대비 과열도 지수가 {yoy_score:.2f}로, '{industry.name}' 산업의 채용이 작년보다 {change_percentage:.1f}% 감소하여 냉각되는 추세입니다"
+            )
 
     return IndustryAnalysisData(
         analysis_type="industry",
@@ -614,6 +753,10 @@ def analyze_specific_industry(
         rank=target_rank,
         share_percentage=round(target_share, 2),
         alternative_industries=alternatives,
+        yoy_overheat_score=round(yoy_score, 2),
+        yoy_trend=yoy_trend,
+        yoy_current_count=industry_current,
+        yoy_previous_count=industry_previous,
         insights=insights,
     )
 
@@ -623,6 +766,7 @@ def analyze_combined_insights(
     start_date_str: str,
     position_id: Optional[int] = None,
     industry_id: Optional[int] = None,
+    include_insights: bool = False,
 ) -> CombinedIndustryAnalysisData:
     """
     통합 인사이트 분석 (Total + Position + Industry)
@@ -634,6 +778,7 @@ def analyze_combined_insights(
         start_date_str: 시작일 (YYYY-MM-DD)
         position_id: 직군 ID (선택)
         industry_id: 산업 ID (선택, position_id가 필수)
+        include_insights: 인사이트 생성 여부 (default: False)
 
     Returns:
         CombinedIndustryAnalysisData
@@ -642,6 +787,7 @@ def analyze_combined_insights(
     total_insight = analyze_overall_market(
         db=db,
         start_date_str=start_date_str,
+        include_insights=include_insights,
     )
 
     # 2. Position 분석 (position_id가 있으면 포함)
@@ -651,6 +797,7 @@ def analyze_combined_insights(
             db=db,
             start_date_str=start_date_str,
             position_id=position_id,
+            include_insights=include_insights,
         )
 
     # 3. Industry 분석 (industry_id가 있으면 포함)
@@ -661,6 +808,7 @@ def analyze_combined_insights(
             start_date_str=start_date_str,
             position_id=position_id,
             industry_id=industry_id,
+            include_insights=include_insights,
         )
 
     return CombinedIndustryAnalysisData(
