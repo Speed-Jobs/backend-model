@@ -13,6 +13,7 @@ from app.models import (
     position_skill,
     industry_skill,
     dashboard_stat,
+    recruitment_schedule,
 )
 
 from app.routers import (
@@ -24,6 +25,8 @@ from app.routers import (
     routers_skill_insights,
     job_matching,
     routers_recruitment_schedule,
+    routers_yoy_overheat,
+    routers_hhi_concentration,
 )
 from app.routers.v1.agent import evaluation
 
@@ -51,6 +54,8 @@ app.include_router(routers_competitor_industry_trend.router)
 app.include_router(routers_skill_insights.router)
 app.include_router(job_matching.router)
 app.include_router(routers_recruitment_schedule.router)
+app.include_router(routers_yoy_overheat.router)
+app.include_router(routers_hhi_concentration.router)
 app.include_router(evaluation.router, prefix="/api/v1") 
 
  

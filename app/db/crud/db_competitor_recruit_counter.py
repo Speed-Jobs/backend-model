@@ -10,26 +10,6 @@ from app.models.post import Post
 from app.models.company import Company
 
 
-def get_companies_by_keywords(
-    db: Session,
-    keywords: List[str]
-) -> List[Tuple[int, str]]:
-    """키워드로 회사 검색 (id, name 반환)"""
-    keyword_filters = [
-        Company.name.like(f'{keyword}%') 
-        for keyword in keywords
-    ]
-    
-    companies_query = db.query(
-        Company.id,
-        Company.name
-    ).filter(
-        or_(*keyword_filters)
-    ).all()
-    
-    return companies_query
-
-
 def get_companies_recruitment_daily(
     db: Session,
     company_ids: List[int],

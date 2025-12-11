@@ -4,7 +4,7 @@
 from datetime import date
 from typing import List, Tuple, Optional
 
-from sqlalchemy import func
+from sqlalchemy import func, or_
 from sqlalchemy.orm import Session
 
 from app.models.post import Post
@@ -17,10 +17,14 @@ def get_job_role_counts(
     db: Session,
     start_date: date,
     end_date: date,
-    company_name: Optional[str] = None,
+    company_patterns: Optional[List[str]] = None,
 ) -> List[Tuple[int, str, int, str, int]]:
     """
     기간 내 직군(포지션) / 산업(Industry)별 공고 수 집계
+
+    Args:
+        company_patterns: 회사명 패턴 리스트 (예: ["토스%", "토스뱅크%", ...])
+                         COMPANY_GROUPS에서 변환된 패턴 리스트 사용
 
     Returns:
         List of (position_id, position_name, industry_id, industry_name, count)
@@ -44,9 +48,9 @@ def get_job_role_counts(
         )
     )
 
-    if company_name:
-        like_pattern = f"%{company_name}%"
-        query = query.filter(Company.name.like(like_pattern))
+    if company_patterns:
+        # 여러 패턴을 OR 조건으로 검색
+        query = query.filter(or_(*[Company.name.like(pattern) for pattern in company_patterns]))
 
     query = query.group_by(
         Position.id,

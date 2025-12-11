@@ -196,7 +196,7 @@ class SkillSetMatcher:
         self, 
         input_path: str, 
         output_path: str, 
-        batch_size: int = 30,
+        batch_size: int = 5,
         show_progress: bool = True
     ):
         """

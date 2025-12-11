@@ -43,12 +43,24 @@ class SkillStatisticsResponse(BaseModel):
     data: SkillStatisticsData
 
 
+class QuarterlySkillData(BaseModel):
+    """분기별 스킬 데이터"""
+    skills: List[str] = Field(..., description="해당 분기의 상위 N개 스킬 목록 (빈도순)")
+    counts: Dict[str, int] = Field(..., description="각 스킬별 공고 수")
+
+
 class QuarterlyTrend(BaseModel):
     """분기별 스킬 트렌드 데이터"""
-    Q1: Dict[str, int] = Field(..., description="Q1 분기 스킬별 공고 수")
-    Q2: Dict[str, int] = Field(..., description="Q2 분기 스킬별 공고 수")
-    Q3: Dict[str, int] = Field(..., description="Q3 분기 스킬별 공고 수")
-    Q4: Dict[str, int] = Field(..., description="Q4 분기 스킬별 공고 수")
+    Q1: QuarterlySkillData = Field(..., description="Q1 분기 스킬 데이터")
+    Q2: QuarterlySkillData = Field(..., description="Q2 분기 스킬 데이터")
+    Q3: QuarterlySkillData = Field(..., description="Q3 분기 스킬 데이터")
+    Q4: QuarterlySkillData = Field(..., description="Q4 분기 스킬 데이터")
+
+
+class YearlySkillData(BaseModel):
+    """연도별 스킬 데이터"""
+    skills: List[str] = Field(..., description="해당 연도의 상위 N개 스킬 목록 (빈도순)")
+    counts: Dict[str, int] = Field(..., description="각 스킬별 공고 수")
 
 class SkillTrendYearData(BaseModel):
     """연도별 스킬 트렌드 데이터 (분기별)"""
@@ -69,9 +81,8 @@ class SkillTrendData(BaseModel):
     year: Optional[str] = Field(None, description="조회 연도 (단일 연도 조회 시)")
     comparison_year: Optional[str] = Field(None, description="비교 연도 (단일 연도 조회 시)")
     years: Optional[List[str]] = Field(None, description="조회 연도 목록 (다년도 조회 시)")
-    skills: Optional[List[str]] = Field(None, description="상위 스킬 목록")
     quarterly_trends: Optional[Dict[str, QuarterlyTrend]] = Field(None, description="연도별 분기별 트렌드 데이터 (단일 연도 조회 시)")
-    skill_frequencies: Optional[Dict[str, Dict[str, int]]] = Field(None, description="연도별 스킬 빈도수 (다년도 조회 시)")
+    yearly_trends: Optional[Dict[str, YearlySkillData]] = Field(None, description="연도별 스킬 트렌드 데이터 (다년도 조회 시)")
 
 class SkillTrendResponse(BaseModel):
     """스킬 트렌드 조회 응답"""

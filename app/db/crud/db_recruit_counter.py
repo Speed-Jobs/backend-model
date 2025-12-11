@@ -112,7 +112,8 @@ def get_companies_by_keyword(
     ).filter(
         filter_condition,
         effective_date >= start_date,
-        effective_date <= end_date
+        effective_date <= end_date,
+        Post.is_deleted == False  # 삭제되지 않은 공고만
     ).group_by(
         Company.id,
         Company.name
@@ -131,27 +132,66 @@ def get_company_by_keyword(
     end_date: date
 ) -> Optional[Tuple[int, str, int]]:
     """
-    [DEPRECATED] 키워드로 회사 조회 및 기간 내 공고 수 반환
-    대신 get_companies_by_keyword 사용 권장
+    키워드로 회사 조회 및 기간 내 공고 수 반환 (합산)
+    
+    get_companies_by_keyword()를 사용하여 여러 회사를 합산합니다.
+    company_groups.py를 사용하여 정확한 패턴 매칭을 수행합니다.
+    
+    Args:
+        db: 데이터베이스 세션
+        keyword: 회사명 키워드 (대소문자 무시)
+        start_date: 시작일
+        end_date: 종료일
+    
+    Returns:
+        Optional[Tuple[int, str, int]]: (company_id, company_name, total_count)
+                                        여러 회사가 매칭되면 합산된 total_count 반환
+                                        첫 번째 회사의 id와 name 사용
     """
+    from app.config.company_groups import COMPANY_GROUPS
+    from sqlalchemy import or_
+    
     effective_date = func.coalesce(Post.posted_at, Post.crawled_at)
     
-    query = db.query(
+    # 그룹명인지 확인
+    if keyword in COMPANY_GROUPS:
+        # 그룹의 모든 키워드로 검색
+        keywords = COMPANY_GROUPS[keyword]
+        keyword_filters = []
+        for kw in keywords:
+            # % 제거하고 앞뒤에 % 추가
+            clean_kw = kw.rstrip('%').lstrip('%')
+            keyword_filters.append(func.upper(Company.name).like(f'%{clean_kw.upper()}%'))
+        filter_condition = or_(*keyword_filters)
+    else:
+        # 단일 키워드 검색
+        filter_condition = func.upper(Company.name).like(f'%{keyword.upper()}%')
+    
+    # 쿼리 실행 (여러 회사 합산)
+    results = db.query(
         Company.id,
         Company.name,
         func.count(Post.id).label('total_count')
     ).join(
         Post, Company.id == Post.company_id
     ).filter(
-        Company.name.like(f'{keyword}%'),
+        filter_condition,
         effective_date >= start_date,
-        effective_date <= end_date
+        effective_date <= end_date,
+        Post.is_deleted == False  # 삭제되지 않은 공고만
     ).group_by(
         Company.id,
         Company.name
     ).order_by(
         func.count(Post.id).desc()
-    ).limit(1)
+    ).all()
     
-    result = query.first()
-    return result
+    if not results:
+        return None
+    
+    # 여러 회사 합산
+    total_count = sum(count for _, _, count in results)
+    # 첫 번째 회사 정보 반환 (가장 많은 공고를 가진 회사)
+    company_id, company_name, _ = results[0]
+    
+    return (company_id, keyword, total_count)

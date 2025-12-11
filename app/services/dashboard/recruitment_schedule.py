@@ -12,6 +12,7 @@ from app.db.crud.db_recruitment_schedule import (
     get_recruitment_schedules,
     get_competition_intensity_analysis
 )
+from app.config.company_groups import get_company_patterns
 from app.models.recruitment_schedule import RecruitmentSchedule
 from app.models.company import Company
 from app.models.post import Post
@@ -444,29 +445,36 @@ def get_predicted_schedules(
     type_filter: str,
     start_date: str,
     end_date: str,
-    company_ids: Optional[List[int]] = None
+    company_keywords: Optional[List[str]] = None
 ) -> List[Dict[str, Any]]:
     """
     예측된 채용 일정을 조회합니다.
-    
+
     Args:
         db: Database session
         type_filter: "신입" 또는 "경력"
         start_date: 조회 시작일 (YYYY-MM-DD) - 예측 연도 결정에 사용
         end_date: 조회 종료일 (YYYY-MM-DD) - 예측 연도 결정에 사용
-        company_ids: 회사 ID 리스트 (None이면 경쟁사 전체)
-        
+        company_keywords: 회사 키워드 리스트 (None이면 경쟁사 전체, 예: ["toss", "kakao"])
+
     Returns:
         예측된 일정 리스트
     """
     try:
         # 예측 연도 결정 (start_date의 연도 사용)
         target_year = datetime.strptime(start_date, "%Y-%m-%d").year
-        
+
         # 조회할 회사 결정
-        if company_ids:
+        if company_keywords:
+            # 키워드를 패턴으로 변환
+            all_patterns = []
+            for keyword in company_keywords:
+                patterns = get_company_patterns(keyword)
+                all_patterns.extend(patterns)
+
+            # 패턴으로 회사 조회
             companies = db.query(Company.id, Company.name)\
-                .filter(Company.id.in_(company_ids))\
+                .filter(or_(*[Company.name.like(pattern) for pattern in all_patterns]))\
                 .order_by(Company.id)\
                 .all()
         else:
@@ -528,7 +536,7 @@ def merge_actual_and_predicted(
 
 def get_company_recruitment_schedule(
     db: Session,
-    company_id: int,
+    company_keyword: str,
     type_filter: str,
     start_date: str,
     end_date: str,
@@ -540,7 +548,7 @@ def get_company_recruitment_schedule(
 
     Args:
         db: Database session
-        company_id: 회사 ID
+        company_keyword: 회사 키워드 (예: "toss", "kakao", "hanwha")
         type_filter: "신입" 또는 "경력"
         start_date: 조회 시작일 (YYYY-MM-DD)
         end_date: 조회 종료일 (YYYY-MM-DD)
@@ -553,11 +561,14 @@ def get_company_recruitment_schedule(
     try:
         result_schedules = []
 
+        # 키워드를 패턴으로 변환
+        company_patterns = get_company_patterns(company_keyword)
+
         # actual 데이터 조회
         if data_type in ["actual", "all"]:
             schedules = get_recruitment_schedules_by_company(
                 db=db,
-                company_id=company_id,
+                company_patterns=company_patterns,
                 position_ids=position_ids
             )
 
@@ -581,7 +592,7 @@ def get_company_recruitment_schedule(
                 type_filter=type_filter,
                 start_date=start_date,
                 end_date=end_date,
-                company_ids=[company_id]
+                company_keywords=[company_keyword]
             )
             
             if data_type == "predicted":
@@ -616,7 +627,7 @@ def get_all_recruitment_schedules(
     type_filter: str,
     start_date: str,
     end_date: str,
-    company_ids: Optional[List[int]] = None,
+    company_keywords: Optional[List[str]] = None,
     data_type: str = "actual",
     position_ids: Optional[List[int]] = None
 ) -> Dict[str, Any]:
@@ -628,7 +639,7 @@ def get_all_recruitment_schedules(
         type_filter: "신입" 또는 "경력"
         start_date: 조회 시작일 (YYYY-MM-DD)
         end_date: 조회 종료일 (YYYY-MM-DD)
-        company_ids: 회사 ID 리스트 (None이면 전체)
+        company_keywords: 회사 키워드 리스트 (None이면 전체, 예: ["toss", "kakao"])
         data_type: "actual", "predicted", "all"
         position_ids: 직군 ID 리스트 (None이면 전체)
 
@@ -638,11 +649,19 @@ def get_all_recruitment_schedules(
     try:
         result_schedules = []
 
+        # 키워드를 패턴으로 변환
+        company_patterns = None
+        if company_keywords:
+            company_patterns = []
+            for keyword in company_keywords:
+                patterns = get_company_patterns(keyword)
+                company_patterns.extend(patterns)
+
         # actual 데이터 조회
         if data_type in ["actual", "all"]:
             schedules = get_recruitment_schedules(
                 db=db,
-                company_ids=company_ids,
+                company_patterns=company_patterns,
                 position_ids=position_ids
             )
 
@@ -666,7 +685,7 @@ def get_all_recruitment_schedules(
                 type_filter=type_filter,
                 start_date=start_date,
                 end_date=end_date,
-                company_ids=company_ids
+                company_keywords=company_keywords
             )
 
             if data_type == "predicted":

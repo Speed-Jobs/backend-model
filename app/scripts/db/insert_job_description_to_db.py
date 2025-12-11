@@ -36,7 +36,7 @@ def get_or_create_position(
     db: Session,
     name: str,
     description: Optional[str] = None,
-    skillset: Optional[str] = None
+    skillset: Optional[str] = None  # 파라미터는 유지하되 사용하지 않음 (하위 호환성)
 ) -> Position:
     """Get or create a position"""
     position = db.query(Position).filter(Position.name == name).first()
@@ -44,17 +44,16 @@ def get_or_create_position(
         position = Position(
             name=name,
             description=description,
-            skillset=skillset
+            # skillset 컬럼 제거됨 (ERD에 없음)
         )
         db.add(position)
         db.flush()
         print(f"  Created new position: {name} (ID: {position.id})")
     else:
-        # Update description and skillset if they don't exist (first occurrence takes priority)
+        # Update description if it doesn't exist (first occurrence takes priority)
         if description and not position.description:
             position.description = description
-        if skillset and not position.skillset:
-            position.skillset = skillset
+        # skillset 컬럼 제거됨
         db.flush()
     return position
 

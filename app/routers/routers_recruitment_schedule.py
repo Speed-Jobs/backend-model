@@ -18,9 +18,9 @@ router = APIRouter(
 )
 
 
-@router.get("/companies/{companyId}")
+@router.get("/companies/{company_keyword}")
 def get_recruitment_schedule_by_company(
-    companyId: int,
+    company_keyword: str,
     type: str = Query(..., description="채용 유형 (신입/경력)", example="신입"),
     data_type: str = Query(default="actual", description="데이터 유형 (actual: 실제 공고, predicted: 예측치, all: 전체)", example="actual"),
     start_date: str = Query(..., description="시작일 (YYYY-MM-DD 형식)", example="2025-01-01"),
@@ -30,8 +30,8 @@ def get_recruitment_schedule_by_company(
 ):
     """
     특정 회사의 채용 일정을 상세 조회합니다.
-    
-    - **companyId**: 회사 ID
+
+    - **company_keyword**: 회사 키워드 (예: 'toss', 'kakao', 'hanwha')
     - **type**: 신입 또는 경력
     - **data_type**: actual(실제 공고), predicted(예측치), all(전체)
     - **start_date**: 조회 시작일
@@ -43,7 +43,7 @@ def get_recruitment_schedule_by_company(
             status_code=400,
             detail="type은 '신입' 또는 '경력'이어야 합니다."
         )
-    
+
     # data_type 검증
     if data_type not in ["actual", "predicted", "all"]:
         raise HTTPException(
@@ -65,7 +65,7 @@ def get_recruitment_schedule_by_company(
     # 서비스 호출
     result = get_company_recruitment_schedule(
         db=db,
-        company_id=companyId,
+        company_keyword=company_keyword,
         type_filter=type,
         start_date=start_date,
         end_date=end_date,
@@ -89,18 +89,18 @@ def get_recruitment_schedules(
     data_type: str = Query(default="actual", description="데이터 유형 (actual: 실제 공고, predicted: 예측치, all: 전체)", example="actual"),
     start_date: str = Query(..., description="시작일 (YYYY-MM-DD 형식)", example="2025-01-01"),
     end_date: str = Query(..., description="종료일 (YYYY-MM-DD 형식)", example="2025-12-31"),
-    company_ids: Optional[str] = Query(None, description="회사 ID 리스트 (쉼표로 구분)", example="1,2,3"),
+    company_keywords: Optional[str] = Query(None, description="회사 키워드 리스트 (쉼표로 구분, 예: 'toss,kakao,hanwha')", example="toss,kakao"),
     position_ids: Optional[str] = Query(None, description="직군 ID 리스트 (쉼표로 구분)", example="1,2,3"),
     db: Session = Depends(get_db)
 ):
     """
     전체 회사의 채용 일정을 조회합니다.
-    
+
     - **type**: 신입 또는 경력
     - **data_type**: actual(실제 공고), predicted(예측치), all(전체)
     - **start_date**: 조회 시작일
     - **end_date**: 조회 종료일
-    - **company_ids**: (선택) 특정 회사들만 조회 (쉼표로 구분, 예: "1,2,3")
+    - **company_keywords**: (선택) 특정 회사들만 조회 (쉼표로 구분, 예: "toss,kakao")
     """
     # type 검증
     if type not in ["신입", "경력"]:
@@ -108,24 +108,18 @@ def get_recruitment_schedules(
             status_code=400,
             detail="type은 '신입' 또는 '경력'이어야 합니다."
         )
-    
+
     # data_type 검증
     if data_type not in ["actual", "predicted", "all"]:
         raise HTTPException(
             status_code=400,
             detail="data_type은 'actual', 'predicted', 'all' 중 하나여야 합니다."
         )
-    
-    # company_ids 파싱
-    parsed_company_ids = None
-    if company_ids:
-        try:
-            parsed_company_ids = [int(id.strip()) for id in company_ids.split(",")]
-        except ValueError:
-            raise HTTPException(
-                status_code=400,
-                detail="company_ids는 숫자를 쉼표로 구분한 형식이어야 합니다. (예: 1,2,3)"
-            )
+
+    # company_keywords 파싱
+    parsed_company_keywords = None
+    if company_keywords:
+        parsed_company_keywords = [keyword.strip() for keyword in company_keywords.split(",")]
 
     # position_ids 파싱
     parsed_position_ids = None
@@ -144,7 +138,7 @@ def get_recruitment_schedules(
         type_filter=type,
         start_date=start_date,
         end_date=end_date,
-        company_ids=parsed_company_ids,
+        company_keywords=parsed_company_keywords,
         data_type=data_type,
         position_ids=parsed_position_ids
     )
