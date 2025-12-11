@@ -4,8 +4,8 @@ Searches the VectorDB for relevant documents.
 """
 
 from typing import Dict, Any
-from app.agents.base_agent import BaseAgent
-from app.tools.vector_search import VectorSearchTool
+from app.core.agents.vectordb_agents.base_agent import BaseAgent
+from app.core.agents.vectordb_agents.tools.vector_search import VectorSearchTool
 
 
 class VectorSearchAgent(BaseAgent):

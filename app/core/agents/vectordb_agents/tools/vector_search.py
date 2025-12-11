@@ -4,7 +4,7 @@ Tool for searching the VectorDB (Qdrant).
 """
 
 from typing import List, Dict, Any, Optional
-from app.utils.retrieval import Retriever
+from app.core.agents.vectordb_agents.retriever import Retriever
 
 
 class VectorSearchTool:

@@ -23,3 +23,6 @@ numpy
 scikit-learn
 gensim
 node2vec
+
+# HTTP client for proxying RAG requests to vectorDB-server
+httpx>=0.24.0

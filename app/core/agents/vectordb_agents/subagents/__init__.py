@@ -8,11 +8,11 @@ This module contains specialized agents for different tasks:
 - GeneratorAgent: Generates final answers
 """
 
-from app.agents.subagents.router_agent import RouterAgent
-from app.agents.subagents.vector_search_agent import VectorSearchAgent
-from app.agents.subagents.web_search_agent import WebSearchAgent
-from app.agents.subagents.sql_analysis_agent import SQLAnalysisAgent
-from app.agents.subagents.generator_agent import GeneratorAgent
+from app.core.agents.vectordb_agents.subagents.router_agent import RouterAgent
+from app.core.agents.vectordb_agents.subagents.vector_search_agent import VectorSearchAgent
+from app.core.agents.vectordb_agents.subagents.web_search_agent import WebSearchAgent
+from app.core.agents.vectordb_agents.subagents.sql_analysis_agent import SQLAnalysisAgent
+from app.core.agents.vectordb_agents.subagents.generator_agent import GeneratorAgent
 
 __all__ = [
     "RouterAgent",

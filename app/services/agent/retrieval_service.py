@@ -2,7 +2,7 @@ from typing import Dict, Any, Optional
 from sqlalchemy.orm import Session
 from app.utils.retrieval import Retriever
 from app.schemas.retrieval import SearchResult
-from app.schemas.ingestion import PostData
+from app.schemas.agent.schemas_retrieval import PostData
 from app.models.post import Post
 
 

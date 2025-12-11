@@ -4,8 +4,8 @@ Searches the web for relevant information using Tavily.
 """
 
 from typing import Dict, Any
-from app.agents.base_agent import BaseAgent
-from app.tools.web_search import WebSearchTool
+from app.core.agents.vectordb_agents.base_agent import BaseAgent
+from app.core.agents.vectordb_agents.tools.web_search import WebSearchTool
 
 
 class WebSearchAgent(BaseAgent):

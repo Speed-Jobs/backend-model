@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.agents.orchestrator import AgenticRAGOrchestrator
 from app.schemas.retrieval import AgenticRAGResponse, SourceDocument
-from app.schemas.ingestion import PostData
+from app.schemas.agent.schemas_retrieval import PostData
 from app.models.company import Company
 from app.models.post import Post
 

@@ -7,10 +7,10 @@ import json
 from typing import Dict, Any
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from app.agents.base_agent import BaseAgent
-from app.prompts.system_prompts import SQL_GENERATION_PROMPT_TEMPLATE, INSIGHT_GENERATION_PROMPT_TEMPLATE
-from app.tools.database_query import DatabaseQueryTool
-from app.tools.helpers import extract_json_from_response
+from app.core.agents.vectordb_agents.base_agent import BaseAgent
+from app.core.agents.vectordb_agents.prompts.system_prompts import SQL_GENERATION_PROMPT_TEMPLATE, INSIGHT_GENERATION_PROMPT_TEMPLATE
+from app.core.agents.vectordb_agents.tools.database_query import DatabaseQueryTool
+from app.core.agents.vectordb_agents.tools.helpers import extract_json_from_response
 
 
 class SQLAnalysisAgent(BaseAgent):
