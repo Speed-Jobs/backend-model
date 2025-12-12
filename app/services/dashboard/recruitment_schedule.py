@@ -644,10 +644,33 @@ def analyze_rule_based_insights(competition_result: Dict[str, Any]) -> Dict[str,
 
     if not daily_intensity:
         return {
-            "statistics": {},
-            "recommended_dates": {},
-            "company_patterns": {},
-            "optimal_period": {}
+            "statistics_analysis": {
+                "title": "통계 분석",
+                "content": []
+            },
+            "recruitment_schedule_recommendation": {
+                "title": "채용 일정 추천",
+                "recommended": {
+                    "summary": "",
+                    "dates": []
+                },
+                "warning": {
+                    "summary": "",
+                    "dates": []
+                }
+            },
+            "competitor_pattern_analysis": {
+                "title": "경쟁사 패턴 분석",
+                "content": []
+            },
+            "optimal_recruitment_period": {
+                "title": "최적 채용 시기 분석",
+                "content": []
+            },
+            "summary": {
+                "title": "종합 인사이트",
+                "content": "분석할 데이터가 없습니다."
+            }
         }
 
     # 날짜 순서로 정렬
@@ -805,73 +828,124 @@ def analyze_rule_based_insights(competition_result: Dict[str, Any]) -> Dict[str,
         "recommendation_reason": recommendation_reason
     }
 
-    # 인사이트를 줄글로 포맷팅 (test 파일과 동일한 형식)
-    formatted_lines = []
+    # 구조화된 인사이트 생성
+    insights = {}
     
     # 1. 통계 분석
-    if statistics:
-        formatted_lines.append("[1. 통계 분석]")
-        formatted_lines.append(f"  평균 경쟁 강도: {statistics['average']}개")
-        formatted_lines.append(f"  중앙값: {statistics['median']}개")
-        formatted_lines.append(f"  최소/최대: {statistics['min']}개 / {statistics['max']}개")
-        formatted_lines.append(f"  분포:")
-        formatted_lines.append(f"    - 낮음 (<= {statistics['threshold_low']}): {statistics['distribution']['low']}일")
-        formatted_lines.append(f"    - 보통: {statistics['distribution']['medium']}일")
-        formatted_lines.append(f"    - 높음 (>= {statistics['threshold_high']}): {statistics['distribution']['high']}일")
+    statistics_content = []
+    statistics_content.append(f"평균 경쟁 강도는 {statistics['average']}개입니다.")
+    statistics_content.append(f"중앙값은 {statistics['median']}개이며, 최소 {statistics['min']}개부터 최대 {statistics['max']}개까지 분포합니다.")
     
-    # 2. 추천 날짜
-    if recommended_dates:
-        formatted_lines.append("")
-        formatted_lines.append("[2. 채용 일정 추천]")
-        formatted_lines.append("  [추천] 경쟁이 적은 추천 날짜 TOP 5:")
-        for i, date_info in enumerate(recommended_dates["best_dates"][:5], 1):
-            companies_str = ", ".join(date_info["companies"][:3])
-            if len(date_info["companies"]) > 3:
-                companies_str += f" 외 {len(date_info['companies']) - 3}개"
-            formatted_lines.append(f"    {i}. {date_info['date']} - {date_info['overlap_count']}개 ({companies_str})")
-        
-        formatted_lines.append("")
-        formatted_lines.append("  [주의] 경쟁이 심한 피해야 할 날짜 TOP 5:")
-        for i, date_info in enumerate(recommended_dates["worst_dates"][:5], 1):
-            companies_str = ", ".join(date_info["companies"][:3])
-            if len(date_info["companies"]) > 3:
-                companies_str += f" 외 {len(date_info['companies']) - 3}개"
-            formatted_lines.append(f"    {i}. {date_info['date']} - {date_info['overlap_count']}개 ({companies_str})")
+    dist_text = ""
+    if distribution['low'] == 0:
+        dist_text = "경쟁 강도가 낮은 날은 없었고"
+    else:
+        dist_text = f"경쟁 강도가 낮은 날은 {distribution['low']}일이었고"
+    dist_text += f", 보통 수준의 날은 {distribution['medium']}일, 높은 날은 {distribution['high']}일로 나타났습니다."
+    statistics_content.append(dist_text)
+    
+    insights["statistics_analysis"] = {
+        "title": "통계 분석",
+        "content": statistics_content
+    }
+    
+    # 2. 채용 일정 추천
+    recommended_dates_list = []
+    if recommended_dates.get("best_dates"):
+        for date_info in recommended_dates["best_dates"][:5]:
+            companies_str = ", ".join(date_info["companies"])
+            recommended_dates_list.append(f"{date_info['date']} ({companies_str}, 경쟁 {date_info['overlap_count']}개)")
+    
+    warning_dates_list = []
+    if recommended_dates.get("worst_dates"):
+        for date_info in recommended_dates["worst_dates"][:5]:
+            companies_str = ", ".join(date_info["companies"])
+            warning_dates_list.append(f"{date_info['date']} ({companies_str})")
+    
+    # 추천 요약 생성
+    recommended_summary = ""
+    if recommended_dates.get("best_dates"):
+        best_companies = set()
+        for date_info in recommended_dates["best_dates"][:5]:
+            best_companies.update(date_info["companies"])
+        if len(best_companies) == 1:
+            recommended_summary = f"경쟁이 적은 날짜 TOP 5는 모두 {list(best_companies)[0]} 단독 채용 일정입니다."
+        else:
+            companies_list = list(best_companies)[:2]
+            recommended_summary = f"경쟁이 적은 날짜 TOP 5는 {', '.join(companies_list)} 등의 채용 일정입니다."
+    
+    # 경고 요약 생성
+    warning_summary = ""
+    if recommended_dates.get("worst_dates"):
+        worst_companies = set()
+        for date_info in recommended_dates["worst_dates"][:5]:
+            worst_companies.update(date_info["companies"])
+        if len(worst_companies) >= 2:
+            companies_list = list(worst_companies)[:2]
+            warning_summary = f"아래 날짜들은 {companies_list[0]}와 {companies_list[1]}의 일정이 겹쳐 경쟁이 가장 치열합니다."
+        else:
+            warning_summary = "아래 날짜들은 경쟁이 가장 치열합니다."
+    
+    insights["recruitment_schedule_recommendation"] = {
+        "title": "채용 일정 추천",
+        "recommended": {
+            "summary": recommended_summary,
+            "dates": recommended_dates_list
+        },
+        "warning": {
+            "summary": warning_summary,
+            "dates": warning_dates_list
+        }
+    }
     
     # 3. 경쟁사 패턴 분석
-    if company_patterns:
-        formatted_lines.append("")
-        formatted_lines.append("[3. 경쟁사 패턴 분석]")
-        formatted_lines.append("  가장 활발한 경쟁사 TOP 5:")
-        for i, company_info in enumerate(company_patterns["most_active_companies"], 1):
-            formatted_lines.append(f"    {i}. {company_info['company_name']} - {company_info['days']}일")
-        formatted_lines.append(f"  총 경쟁사 수: {company_patterns['total_unique_companies']}개")
-    
-    # 4. 최적 시기 추천
-    if optimal_period:
-        formatted_lines.append("")
-        formatted_lines.append("[4. 최적 채용 시기 추천]")
-        if optimal_period["best_consecutive_period"]:
-            period = optimal_period["best_consecutive_period"]
-            formatted_lines.append(f"  추천 기간: {period['start_date']} ~ {period['end_date']}")
-            formatted_lines.append(f"  기간: {period['days']}일")
-            formatted_lines.append(f"  평균 경쟁 강도: {period['avg_overlap']}개")
-        else:
-            formatted_lines.append("  (연속 3일 이상 경쟁이 적은 기간 없음)")
+    pattern_content = []
+    if company_patterns.get("most_active_companies"):
+        top_company = company_patterns["most_active_companies"][0]
+        pattern_content.append(f"가장 활발한 경쟁사는 {top_company['company_name']}로 총 {top_company['days']}일 동안 채용 일정을 진행했습니다.")
         
-        if optimal_period["recommendation_reason"]:
-            formatted_lines.append("")
-            formatted_lines.append("  추천 이유:")
-            for reason in optimal_period["recommendation_reason"]:
-                formatted_lines.append(f"    - {reason}")
-
-    return {
-        "statistics": statistics,
-        "recommended_dates": recommended_dates,
-        "company_patterns": company_patterns,
-        "optimal_period": optimal_period,
-        "formatted_text": "\n".join(formatted_lines)  # test 파일과 동일한 형식의 줄글
+        if len(company_patterns["most_active_companies"]) > 1:
+            second_company = company_patterns["most_active_companies"][1]
+            pattern_content.append(f"{second_company['company_name']}는 {second_company['days']}일로 그 뒤를 이었습니다.")
+        
+        pattern_content.append(f"전체 분석 기간 동안 주요 경쟁사는 총 {company_patterns['total_unique_companies']}곳입니다.")
+    
+    insights["competitor_pattern_analysis"] = {
+        "title": "경쟁사 패턴 분석",
+        "content": pattern_content
     }
+    
+    # 4. 최적 채용 시기 분석
+    optimal_content = []
+    if best_consecutive_period:
+        period = best_consecutive_period
+        optimal_content.append(f"{period['start_date']}부터 {period['end_date']}까지 {period['days']}일 연속으로 경쟁이 낮은 구간이 발견되었습니다.")
+        optimal_content.append(f"해당 기간의 평균 경쟁 강도는 {period['avg_overlap']}개로 매우 낮은 수준입니다.")
+    else:
+        optimal_content.append("연속 3일 이상 경쟁이 낮은 구간은 발견되지 않았습니다.")
+        optimal_content.append("따라서 특정 기간을 묶은 최적 채용 시기 추천은 제공되지 않습니다.")
+    
+    insights["optimal_recruitment_period"] = {
+        "title": "최적 채용 시기 분석",
+        "content": optimal_content
+    }
+    
+    # 5. 종합 인사이트
+    summary_text = ""
+    below_avg_days = len([x for x in overlap_counts if x < avg_overlap])
+    if below_avg_days > len(overlap_counts) * 0.5:
+        summary_text = f"전체 기간 중 {below_avg_days}일이 평균 이하 경쟁 강도로 나타나, 전반적인 채용 경쟁 수준은 '보통'으로 판단됩니다."
+    elif avg_overlap <= 1.5:
+        summary_text = f"평균 경쟁 강도가 {avg_overlap}개로 낮은 수준이며, 전반적으로 채용 경쟁이 완화된 시장 상황입니다."
+    else:
+        summary_text = f"평균 경쟁 강도가 {avg_overlap}개로 나타나, 일정 수준의 경쟁이 지속되는 구조입니다."
+    
+    insights["summary"] = {
+        "title": "종합 인사이트",
+        "content": summary_text
+    }
+
+    return insights
 
 
 def get_competition_intensity(
@@ -905,7 +979,7 @@ def get_competition_intensity(
         # include_insights가 True이면 인사이트 추가
         if include_insights and result.get("status") == 200:
             insights = analyze_rule_based_insights(result)
-            result["data"]["insights"] = insights.get("formatted_text", "") if insights else ""
+            result["data"]["insights"] = insights if insights else {}
 
         return result
     except Exception as e:
