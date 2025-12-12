@@ -4,8 +4,8 @@ Handles embedding generation and vector similarity search.
 """
 
 from typing import List, Dict, Any, Optional
-from app.core.agents.vectordb_agents.embedder import Embedder
-from app.core.agents.vectordb_agents.vectordb import QdrantClientWrapper
+from app.core.agents.chatbot.embedder import Embedder
+from app.core.agents.chatbot.vectordb import QdrantClientWrapper
 
 
 class Retriever:

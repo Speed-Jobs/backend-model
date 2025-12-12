@@ -5,12 +5,12 @@ Coordinates multiple specialized agents using LangGraph workflow.
 
 from langgraph.graph import StateGraph, END
 
-from app.core.agents.vectordb_agents.memory.states import AgenticRAGState
-from app.core.agents.vectordb_agents.subagents.router_agent import RouterAgent
-from app.core.agents.vectordb_agents.subagents.vector_search_agent import VectorSearchAgent
-from app.core.agents.vectordb_agents.subagents.web_search_agent import WebSearchAgent
-from app.core.agents.vectordb_agents.subagents.sql_analysis_agent import SQLAnalysisAgent
-from app.core.agents.vectordb_agents.subagents.generator_agent import GeneratorAgent
+from app.core.agents.chatbot.memory.states import AgenticRAGState
+from app.core.agents.chatbot.subagents.router_agent import RouterAgent
+from app.core.agents.chatbot.subagents.vector_search_agent import VectorSearchAgent
+from app.core.agents.chatbot.subagents.web_search_agent import WebSearchAgent
+from app.core.agents.chatbot.subagents.sql_analysis_agent import SQLAnalysisAgent
+from app.core.agents.chatbot.subagents.generator_agent import GeneratorAgent
 
 
 class AgenticRAGOrchestrator:

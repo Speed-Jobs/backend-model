@@ -6,9 +6,9 @@ Analyzes user queries to extract entities and determine optimal search strategy.
 from typing import Dict, Any, Literal
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from app.core.agents.vectordb_agents.base_agent import BaseAgent
-from app.core.agents.vectordb_agents.prompts.system_prompts import ROUTER_SYSTEM_PROMPT
-from app.core.agents.vectordb_agents.tools.helpers import extract_json_from_response
+from app.core.agents.chatbot.base_agent import BaseAgent
+from app.core.agents.chatbot.prompts.system_prompts import ROUTER_SYSTEM_PROMPT
+from app.core.agents.chatbot.tools.helpers import extract_json_from_response
 
 
 class RouterAgent(BaseAgent):

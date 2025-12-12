@@ -7,8 +7,8 @@ from fastapi import APIRouter, HTTPException
 from typing import Optional
 from pydantic import BaseModel
 import os
-from app.core.agents.vectordb_agents.orchestrator import AgenticRAGOrchestrator
-from app.core.agents.vectordb_agents.memory.states import AgenticRAGState
+from app.core.agents.chatbot.orchestrator import AgenticRAGOrchestrator
+from app.core.agents.chatbot.memory.states import AgenticRAGState
 
 
 # Request/Response Schemas
@@ -49,14 +49,12 @@ router = APIRouter(prefix="/rag", tags=["RAG"])
 # Initialize Agentic RAG Orchestrator (singleton)
 _orchestrator: Optional[AgenticRAGOrchestrator] = None
 
-
 def get_orchestrator() -> AgenticRAGOrchestrator:
     """Get or create orchestrator instance"""
     global _orchestrator
     if _orchestrator is None:
         _orchestrator = AgenticRAGOrchestrator()
     return _orchestrator
-
 
 @router.post("/search", response_model=AgenticRAGResponse)
 async def agentic_rag_search(query: AgenticRAGQuery):
@@ -132,7 +130,7 @@ async def rag_health_check():
     Checks local orchestrator and Qdrant connection
     """
     try:
-        from app.core.agents.vectordb_agents.vectordb import QdrantClientWrapper
+        from app.core.agents.chatbot.vectordb import QdrantClientWrapper
         from app.core.config import settings
         
         # Check Qdrant connection

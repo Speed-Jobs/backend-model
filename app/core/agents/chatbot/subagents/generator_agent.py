@@ -7,8 +7,8 @@ import json
 from typing import Dict, Any
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from app.core.agents.vectordb_agents.base_agent import BaseAgent
-from app.core.agents.vectordb_agents.prompts.system_prompts import GENERATOR_STATS_ONLY_PROMPT, GENERATOR_HYBRID_PROMPT
+from app.core.agents.chatbot.base_agent import BaseAgent
+from app.core.agents.chatbot.prompts.system_prompts import GENERATOR_STATS_ONLY_PROMPT, GENERATOR_HYBRID_PROMPT
 
 
 class GeneratorAgent(BaseAgent):

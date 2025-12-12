@@ -3,7 +3,7 @@
 System prompts and templates for AI agents.
 """
 
-from app.core.agents.vectordb_agents.prompts.system_prompts import (
+from app.core.agents.chatbot.prompts.system_prompts import (
     ROUTER_SYSTEM_PROMPT,
     SQL_GENERATION_PROMPT_TEMPLATE,
     INSIGHT_GENERATION_PROMPT_TEMPLATE,
