@@ -30,10 +30,11 @@ class Post(Base):
 
     # 소프트 삭제 및 생성/수정 시간 (ERD 반영)
     is_deleted = Column(Boolean, nullable=False, default=False, comment="삭제 여부")
+    is_vectored = Column(Boolean, nullable=False, default=False, comment="벡터DB 적재여부")
     created_at = Column(DateTime, nullable=True, comment="생성일시")
     modified_at = Column(DateTime, nullable=True, comment="수정일시")
 
-    # Relationships
+    # Relationships여부부
     company = relationship("Company", back_populates="posts")
     industry = relationship("Industry", back_populates="posts")
     post_skills = relationship("PostSkill", back_populates="post", cascade="all, delete-orphan")
