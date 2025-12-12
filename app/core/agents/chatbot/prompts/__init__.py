@@ -1,0 +1,20 @@
+"""Prompts Module
+
+System prompts and templates for AI agents.
+"""
+
+from app.core.agents.chatbot.prompts.system_prompts import (
+    ROUTER_SYSTEM_PROMPT,
+    SQL_GENERATION_PROMPT_TEMPLATE,
+    INSIGHT_GENERATION_PROMPT_TEMPLATE,
+    GENERATOR_STATS_ONLY_PROMPT,
+    GENERATOR_HYBRID_PROMPT
+)
+
+__all__ = [
+    "ROUTER_SYSTEM_PROMPT",
+    "SQL_GENERATION_PROMPT_TEMPLATE",
+    "INSIGHT_GENERATION_PROMPT_TEMPLATE",
+    "GENERATOR_STATS_ONLY_PROMPT",
+    "GENERATOR_HYBRID_PROMPT"
+]
