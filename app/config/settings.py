@@ -29,7 +29,7 @@ class Settings:
     TAVILY_API_KEY: str = os.getenv("TAVILY_API_KEY", "")
 
     # Qdrant (VectorDB)
-    QDRANT_URL: str = os.getenv("QDRANT_URL", "http://localhost:6333")
+    QDRANT_URL: str = os.getenv("QDRANT_URL", "http://speedjobs-vectordb.skala-practice.svc.cluster.local:6333")
     QDRANT_API_KEY: str = os.getenv("QDRANT_API_KEY", "")
     QDRANT_COLLECTION_NAME: str = os.getenv("QDRANT_COLLECTION_NAME", "speedjobs_vectors")
     

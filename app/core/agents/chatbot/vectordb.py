@@ -37,7 +37,7 @@ class QdrantClientWrapper:
             return parsed.hostname or ""
 
         primary_url = settings.QDRANT_URL
-        fallback_url = "http://localhost:6333"
+        fallback_url = "http://speedjobs-vectordb.skala-practice.svc.cluster.local:6333"
         tried_fallback = False
 
         try_urls = [primary_url]

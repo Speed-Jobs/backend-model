@@ -23,6 +23,7 @@ spec:
           name: http
           protocol: TCP
         env:
+        # Database
         - name: DB_HOST
           value: "speedjobs-mysql.skala-practice.svc.cluster.local"
         - name: DB_PORT
@@ -39,11 +40,40 @@ spec:
               key: password
         - name: DB_NAME
           value: "speedjobs"
+        
+        # OpenAI
         - name: OPENAI_API_KEY
           valueFrom:
             secretKeyRef:
               name: speedjobs-backend-secret
               key: openai-api-key
+        
+        # Qdrant VectorDB
+        - name: QDRANT_URL
+          value: "http://speedjobs-vectordb.skala-practice.svc.cluster.local:6333"
+        - name: QDRANT_API_KEY
+          value: ""  # 필요시 secret으로 변경
+        - name: QDRANT_COLLECTION_NAME
+          value: "speedjobs_vectors"
+        
+        # Embedding 설정
+        - name: EMBEDDING_MODEL
+          value: "BAAI/bge-m3"
+        - name: EMBEDDING_DIM
+          value: "1024"
+        - name: CHUNK_SIZE
+          value: "500"
+        - name: CHUNK_OVERLAP
+          value: "50"
+        
+        # Tavily (옵션)
+        - name: TAVILY_API_KEY
+          value: ""  # 필요시 추가
+        
+        # Debug
+        - name: DEBUG
+          value: "false"
+        
         resources:
           requests:
             cpu: 250m
