@@ -905,7 +905,7 @@ def get_competition_intensity(
         # include_insights가 True이면 인사이트 추가
         if include_insights and result.get("status") == 200:
             insights = analyze_rule_based_insights(result)
-            result["data"]["insights"] = insights
+            result["data"]["insights"] = insights.get("formatted_text", "") if insights else ""
 
         return result
     except Exception as e:
