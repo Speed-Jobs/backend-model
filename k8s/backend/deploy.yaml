@@ -66,10 +66,12 @@ spec:
         - name: CHUNK_OVERLAP
           value: "50"
         
-        # Tavily (옵션)
         - name: TAVILY_API_KEY
-          value: ""  # 필요시 추가
-        
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-backend-secret
+              key: tavily-api-key
+
         # Debug
         - name: DEBUG
           value: "false"
