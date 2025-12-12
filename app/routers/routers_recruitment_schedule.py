@@ -95,6 +95,11 @@ def get_recruitment_competition_intensity(
         description="채용 유형 (Entry-level/Experienced, 신입/경력)",
         example="Entry-level",
     ),
+    include_insights: bool = Query(
+        False,
+        description="Rule-Based 인사이트 포함 여부 (true일 경우 통계 분석, 추천 날짜, 경쟁사 패턴, 최적 시기 포함)",
+        example=False,
+    ),
     db: Session = Depends(get_db)
 ):
     """
@@ -105,6 +110,7 @@ def get_recruitment_competition_intensity(
     - **start_date**: 분석 시작일
     - **end_date**: 분석 종료일
     - **type**: (선택) 신입 또는 경력 (미지정 시 전체)
+    - **include_insights**: (선택) Rule-Based 인사이트 포함 여부 (기본값: false)
 
     Returns:
         - **period**: 분석 기간
@@ -113,6 +119,11 @@ def get_recruitment_competition_intensity(
             - **date**: 날짜
             - **overlap_count**: 겹침 수
             - **companies**: 채용 중인 회사 목록
+        - **insights**: (include_insights=true일 때만) Rule-Based 분석 결과
+            - **statistics**: 통계 분석 (평균, 중앙값, 분포 등)
+            - **recommended_dates**: 추천 날짜 (best_dates, worst_dates)
+            - **company_patterns**: 경쟁사 패턴 (가장 활발한 회사 TOP 5)
+            - **optimal_period**: 최적 시기 추천 (연속 저경쟁 기간)
     """
     # type 검증 + 노멀라이즈 (영어만 허용 → 내부 한글로 매핑)
     if type:
@@ -135,7 +146,8 @@ def get_recruitment_competition_intensity(
         db=db,
         start_date=start_date,
         end_date=end_date,
-        type_filter=type
+        type_filter=type,
+        include_insights=include_insights
     )
 
     # 에러 처리
