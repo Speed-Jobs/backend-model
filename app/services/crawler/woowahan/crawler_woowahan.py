@@ -75,23 +75,60 @@ def summarize_with_llm(raw_text: str, model: str = "gpt-4o-mini") -> List[Dict[s
     if client is None:
         return []
 
-    system_prompt = (
-        "당신은 채용 공고 웹페이지에서 구조화된 정보를 추출하는 전문가입니다.\n"
-        "주어진 HTML 콘텐츠에서 다음 필드들을 정확하게 추출하여 JSON 형식으로 반환하세요.\n\n"
-        "# 추출할 필드\n"
-        "- title: 공고 제목\n"
-        "- company: 회사 이름\n"
-        "- location: 근무 위치\n"
-        "- employment_type: 고용 형태\n"
-        "- experience: 경력 요구사항\n"
-        "- crawl_date: 크롤링 날짜 (YYYY-MM-DD)\n"
-        "- posted_date: 공고 게시일 (YYYY-MM-DD)\n"
-        "- expired_date: 공고 마감일 (YYYY-MM-DD, 없으면 null)\n"
-        "- description: 채용공고 전문 텍스트\n"
-        "- meta_data: 추가 정보 (JSON 객체)\n\n"
-        "# 출력 형식\n"
-        "반드시 JSON 리스트 형식으로 반환하세요.\n"
-    )
+    system_prompt = """
+당신은 채용 공고 웹페이지에서 구조화된 정보를 추출하는 전문가입니다.
+주어진 HTML 콘텐츠에서 다음 필드들을 정확하게 추출하여 JSON 형식으로 반환하세요.
+
+# 추출할 필드
+- title: 공고 제목
+- company: 회사 이름
+- location: 근무 위치
+- employment_type: 고용 형태 (정규직, 계약직, 파트타임 등)
+- experience: 경력 요구사항 (신입, 경력, 경력무관, 인턴 등)
+- crawl_date: 크롤링 날짜 (YYYY-MM-DD)
+- posted_date: 공고 게시일 (YYYY-MM-DD)
+- expired_date: 공고 마감일 (YYYY-MM-DD, 없으면 null)
+- description: 채용공고 전문 텍스트
+- meta_data: 위 필드 외 추가 정보를 담은 JSON 객체
+
+# 중요 지침
+1. 날짜는 반드시 YYYY-MM-DD 형식으로 통일
+2. 정보가 없는 경우 null 반환 (빈 문자열 X)
+3. ⭐ **meta_data는 반드시 한국어 키로만 구성** (예: "직무분야", "우대사항", "복리후생")
+4. ⭐ **meta_data에는 위의 기본 필드(title, company, location, employment_type, experience, crawl_date, posted_date, expired_date, description)와 중복되는 정보를 절대 포함하지 말 것**
+5. ⭐ meta_data에는 오직 추가적인 보조 정보만 포함 (예: 자격요건, 우대사항, 복리후생, 담당업무, 학력요건, 전형절차 등)
+6. ⭐ meta_data에는 기술스택/소프트스킬을 넣지 않는다 (예: Python, Django, AWS, Docker 등 제외)
+7. ⭐ meta_data 키는 절대 영어를 사용하지 말고 반드시 한국어만 사용할 것
+
+---
+# Example (한국어 키 필수!)
+{
+    "title": "백엔드 개발자 (Python/Django)",
+    "company": "Woowahan",
+    "location": "서울 강남구",
+    "employment_type": "정규직",
+    "experience": "경력 3~5년",
+    "crawl_date": "2025-12-13",
+    "posted_date": "2025-11-28",
+    "expired_date": "2025-12-31",
+    "description": "주요업무...",
+    "meta_data": {
+        "직무분야": "IT/개발",
+        "우대사항": ["AWS 경험", "Docker/K8s 사용 경험"],
+        "복리후생": ["건강검진", "자기계발비 지원"],
+        "학력요건": "학사 이상",
+        "전형절차": "서류전형 > 1차 면접 > 2차 면접 > 최종합격"
+    }
+}
+---
+
+⚠️ 경고: meta_data의 키는 반드시 한국어여야 합니다!
+❌ 잘못된 예: "job_category", "tech_stack", "benefits"
+✅ 올바른 예: "직무분야", "우대사항", "복리후생"
+
+# 출력 형식
+반드시 JSON 리스트 형식으로 반환하세요.
+"""
     
     user_prompt = (
         f"오늘 날짜는 {datetime.now().strftime('%Y-%m-%d')}이고, 이 날짜를 crawl_date로 사용해. "
@@ -106,7 +143,7 @@ def summarize_with_llm(raw_text: str, model: str = "gpt-4o-mini") -> List[Dict[s
                 {"role": "user", "content": user_prompt},
             ],
             temperature=0.2,
-            max_tokens=4000,
+            max_tokens=8000,
         )
         content = response.choices[0].message.content if response and response.choices else "[]"
 
