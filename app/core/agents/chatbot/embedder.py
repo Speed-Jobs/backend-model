@@ -6,9 +6,9 @@ class Embedder:
     """텍스트 임베딩 생성 (API 호출 방식)"""
     
     def __init__(
-        self, 
+        self,
         model_name: str = None,
-        api_url: str = "http://model-service.skala-practice.svc.cluster.local:8001",
+        api_url: str = "http://speedjobs-model-service.skala-practice.svc.cluster.local:8001",
         endpoint: str = "/embed_bge_m3"
     ):
         self.model_name = model_name or "BAAI/bge-m3"

@@ -217,7 +217,7 @@ class SbertDescriptionMatcher:
             import os
             model_service_url = os.getenv(
                 "MODEL_SERVICE_URL",
-                "http://model-service.skala-practice.svc.cluster.local:8001"
+                "http://speedjobs-model-service.skala-practice.svc.cluster.local:8001"
             )
             self.model = SentenceTransformer(base_url=model_service_url)
         else:
