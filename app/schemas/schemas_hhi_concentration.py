@@ -201,7 +201,7 @@ class OverallAnalysisData(BaseModel):
     # 통합 인사이트
     insights: List[str] = Field(
         default_factory=list,
-        description="통합 인사이트 (HHI, CR₂, Entropy, YoY 기반). include_insights=false면 빈 배열"
+        description="통합 인사이트 (HHI, YoY 기반). include_insights=false면 빈 배열"
     )
 
     class Config:
@@ -277,7 +277,7 @@ class PositionAnalysisData(BaseModel):
     # 통합 인사이트
     insights: List[str] = Field(
         default_factory=list,
-        description="통합 인사이트 (HHI, CR₂, Entropy, YoY 기반). include_insights=false면 빈 배열"
+        description="통합 인사이트 (HHI, YoY 기반). include_insights=false면 빈 배열"
     )
 
     class Config:
