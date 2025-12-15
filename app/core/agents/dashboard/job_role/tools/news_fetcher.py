@@ -179,14 +179,14 @@ async def search_job_role_news(
 ) -> str:
     """
     네이버 뉴스에서 특정 직군 관련 뉴스를 검색합니다.
-    
+
     Args:
         job_role_name: 직군 이름 (예: "AI", "Software Development", "Data Science")
         start_date: 시작일 (YYYY-MM-DD 형식, None이면 최근 30일)
         end_date: 종료일 (YYYY-MM-DD 형식, None이면 오늘)
-        max_results: 최대 검색 결과 수 (기본값: 30, 최종 반환 개수)
+        max_results: 최대 검색 결과 수 (기본값: 30, LLM 필터링 없이 그대로 반환)
         keywords: 추가 검색 키워드 (예: "채용", "인재", "시장")
-    
+
     Returns:
         JSON 형식의 뉴스 검색 결과
     """
@@ -194,52 +194,35 @@ async def search_job_role_news(
         return json.dumps({
             "error": "네이버 뉴스 API 인증 정보가 설정되지 않았습니다. NAVER_CLIENT_ID와 NAVER_CLIENT_SECRET 환경 변수를 설정해주세요."
         }, ensure_ascii=False)
-    
+
     # 검색어 구성
     search_query = job_role_name
     if keywords:
         search_query = f"{job_role_name} {keywords}"
-    
+
     try:
         logger.info(f"[Naver News] 검색 시작 - 직군: {job_role_name}, 검색어: {search_query}, max_results: {max_results}")
-        
-        # API를 100개씩 5번 호출하여 총 500개 수집
-        display_per_call = 100
-        num_calls = 5
-        all_items = []
-        
-        # 여러 번 API 호출하여 뉴스 수집
-        for call_num in range(num_calls):
-            start_pos = call_num * display_per_call + 1
-            
-            logger.info(f"[Naver News] API 호출 {call_num + 1}/{num_calls} - start: {start_pos}")
-            
-            result = _news_api.search_news(
-                query=search_query,
-                display=display_per_call,
-                start=start_pos,
-                sort="sim"
-            )
-            
-            if not result or "items" not in result:
-                logger.warning(f"[Naver News] API 호출 {call_num + 1} 실패 또는 결과 없음")
-                break
-            
-            items = result.get("items", [])
-            if not items:
-                logger.info(f"[Naver News] API 호출 {call_num + 1} - 결과 없음, 중단")
-                break
-            
-            logger.info(f"[Naver News] API 호출 {call_num + 1} 성공 - {len(items)}개 뉴스 수집")
-            all_items.extend(items)
-            
-            # API 호출 제한 고려
-            import time
-            if call_num < num_calls - 1:
-                time.sleep(0.1)
-        
-        logger.info(f"[Naver News] 총 {len(all_items)}개 뉴스 수집 완료")
-        
+
+        # API를 한 번만 호출하여 max_results 개수만 수집 (LLM 필터링 없이 원본 반환)
+        result = _news_api.search_news(
+            query=search_query,
+            display=max_results,
+            start=1,
+            sort="sim"
+        )
+
+        if not result or "items" not in result:
+            logger.warning(f"[Naver News] API 호출 실패 또는 결과 없음")
+            return json.dumps({
+                "job_role_name": job_role_name,
+                "query": search_query,
+                "news_count": 0,
+                "news": []
+            }, ensure_ascii=False)
+
+        all_items = result.get("items", [])
+        logger.info(f"[Naver News] {len(all_items)}개 뉴스 수집 완료")
+
         if not all_items:
             logger.warning(f"[Naver News] 수집된 뉴스 없음 - 직군: {job_role_name}")
             return json.dumps({
@@ -248,13 +231,13 @@ async def search_job_role_news(
                 "news_count": 0,
                 "news": []
             }, ensure_ascii=False)
-        
+
         # 날짜 필터링 (필요한 경우)
         filtered_items = []
         if start_date or end_date:
             start_dt = datetime.strptime(start_date, "%Y-%m-%d") if start_date else None
             end_dt = datetime.strptime(end_date, "%Y-%m-%d") if end_date else datetime.now()
-            
+
             for item in all_items:
                 try:
                     pub_date_str = item.get("pubDate", "")
@@ -269,20 +252,10 @@ async def search_job_role_news(
                 filtered_items.append(item)
         else:
             filtered_items = all_items
-        
+
         logger.info(f"[Naver News] 날짜 필터링 완료 - {len(filtered_items)}개 뉴스")
-        
-        # LLM을 사용한 직군 및 채용 관련성 필터링
-        if filtered_items and job_role_name:
-            logger.info(f"[Naver News] LLM 필터링 시작 - 직군: {job_role_name}, 뉴스 수: {len(filtered_items)}")
-            filtered_items = await _filter_news_by_relevance(
-                news_items=filtered_items,
-                job_role_name=job_role_name,
-                max_results=max_results
-            )
-            logger.info(f"[Naver News] LLM 필터링 완료 - {len(filtered_items)}개 뉴스")
-        
-        # 결과 포맷팅
+
+        # 결과 포맷팅 (LLM 필터링 없이 그대로 반환)
         news_list = []
         for item in filtered_items[:max_results]:
             news_list.append({
@@ -291,16 +264,16 @@ async def search_job_role_news(
                 "description": item.get("description", "").replace("<b>", "").replace("</b>", ""),
                 "pub_date": item.get("pubDate", "")
             })
-        
-        logger.info(f"[Naver News] 최종 반환 - {len(news_list)}개 뉴스")
-        
+
+        logger.info(f"[Naver News] 최종 반환 - {len(news_list)}개 뉴스 (LLM 필터링 없음)")
+
         result_json = json.dumps({
             "job_role_name": job_role_name,
             "query": search_query,
             "news_count": len(news_list),
             "news": news_list
         }, ensure_ascii=False)
-        
+
         return result_json
     except Exception as e:
         logger.error(f"[Naver News] 뉴스 검색 중 오류 발생: {str(e)}")

@@ -89,19 +89,32 @@ async def generate_company_insight_async(
         )
         news_data = json.loads(news_data_str)
         logger.info(f"✓ 뉴스 검색 완료 - {news_data.get('news_count', 0)}개")
-        
+
+        # 뉴스 데이터만 간소화 (상위 10개, 제목과 링크만)
+        news_for_llm = {
+            "company_name": news_data.get("company_name"),
+            "news_count": news_data.get("news_count", 0),
+            "news": [
+                {
+                    "title": n.get("title"),
+                    "link": n.get("link")
+                }
+                for n in news_data.get("news", [])[:10]
+            ]
+        }
+
         # 2. LLM으로 분석 (with_structured_output 사용)
         logger.info("LLM 분석 시작...")
         llm = ChatOpenAI(
             model=llm_model,
             temperature=0.3,
-            max_tokens=16384,
+            max_tokens=8192,
             api_key=os.getenv("OPENAI_API_KEY")
         )
-        
+
         # structured_output을 사용하여 스키마에 맞는 출력 보장
         structured_llm = llm.with_structured_output(CompanyInsightData)
-        
+
         # 분석 프롬프트
         analysis_prompt = f"""당신은 채용 시장 분석 전문가입니다. 다음 데이터를 분석하여 인사이트를 제공하세요.
 
@@ -116,8 +129,8 @@ async def generate_company_insight_async(
 ### 전체 시장 데이터
 {json.dumps(total_data, ensure_ascii=False, indent=2)}
 
-### 뉴스 데이터
-{json.dumps(news_data, ensure_ascii=False, indent=2)}
+### 뉴스 데이터 (상위 10개, 제목과 링크만)
+{json.dumps(news_for_llm, ensure_ascii=False, indent=2)}
 
 ## 필수 필드
 - company_name: "{company_data.get('company_name')}"  ← 반드시 이 값 사용
