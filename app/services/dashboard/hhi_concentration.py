@@ -49,54 +49,6 @@ def _calculate_hhi(counts: List[int]) -> float:
 
 # ===== 새로운 서비스 함수 =====
 
-def _calculate_cr2(counts: List[int]) -> float:
-    """
-    CR₂ (Concentration Ratio) 계산 - 상위 2개 항목 점유율
-
-    Args:
-        counts: 항목별 건수 리스트
-
-    Returns:
-        CR₂ 지수 (0~1)
-    """
-    if not counts:
-        return 0.0
-
-    total = sum(counts)
-    if total == 0:
-        return 0.0
-
-    sorted_counts = sorted(counts, reverse=True)
-    top2_sum = sum(sorted_counts[:2])
-    return top2_sum / total
-
-
-def _calculate_entropy(counts: List[int]) -> float:
-    """
-    Shannon Entropy 계산 - 다양성 지수
-
-    Args:
-        counts: 항목별 건수 리스트
-
-    Returns:
-        Shannon Entropy 값 (높을수록 다양)
-    """
-    if not counts:
-        return 0.0
-
-    total = sum(counts)
-    if total == 0:
-        return 0.0
-
-    entropy = 0.0
-    for count in counts:
-        if count > 0:
-            p = count / total
-            entropy -= p * math.log2(p)
-
-    return entropy
-
-
 def _interpret_hhi_new(hhi_value: float) -> Tuple[str, str]:
     """
     HHI 값을 수준과 난이도로 해석 (신규)
@@ -321,8 +273,6 @@ def analyze_overall_market(
     total_posts = sum(counts)
 
     hhi_value = _calculate_hhi(counts)
-    cr2_value = _calculate_cr2(counts)
-    entropy_value = _calculate_entropy(counts)
     level, difficulty = _interpret_hhi_new(hhi_value)
 
     # 상위 직군 (최대 5개)
@@ -375,37 +325,6 @@ def analyze_overall_market(
             insights.append(
                 f"집중도 지수가 {hhi_value:.2f}로 나타나 특정 직군에 채용이 과도하게 집중되어 있어 "
                 f"포트폴리오 다양화가 필요합니다"
-            )
-
-        # CR₂ 인사이트
-        cr2_percentage = cr2_value * 100
-        if cr2_value > 0.5:
-            insights.append(
-                f"상위 2개 직군이 전체의 {cr2_percentage:.1f}%를 차지하고 있어 높은 집중도를 보이고 있습니다"
-            )
-        else:
-            insights.append(
-                f"상위 2개 직군이 전체의 {cr2_percentage:.1f}%를 차지하고 있어 일부 집중 경향이 있습니다"
-            )
-
-        # Entropy 인사이트 (다양성 지수로 표현)
-        max_entropy = math.log2(len(position_data)) if len(position_data) > 0 else 1
-        normalized_entropy = entropy_value / max_entropy if max_entropy > 0 else 0
-
-        if normalized_entropy > 0.8:
-            insights.append(
-                f"다양성 지수가 {normalized_entropy:.2f}로 나타나 직군 구성이 매우 다양하여 "
-                f"지원자 입장에서 다양한 선택지를 확보할 수 있습니다"
-            )
-        elif normalized_entropy > 0.6:
-            insights.append(
-                f"다양성 지수가 {normalized_entropy:.2f}로 나타나 직군 구성이 비교적 다양하나, "
-                f"일부 직군 간 격차가 존재합니다"
-            )
-        else:
-            insights.append(
-                f"다양성 지수가 {normalized_entropy:.2f}로 나타나 직군 구성이 특정 분야에 치우쳐 있어 "
-                f"다양성 확보가 필요합니다"
             )
 
         # YoY 인사이트
@@ -480,8 +399,6 @@ def analyze_position_industries(
     total_posts = sum(counts)
 
     hhi_value = _calculate_hhi(counts)
-    cr2_value = _calculate_cr2(counts)
-    entropy_value = _calculate_entropy(counts)
     level, difficulty = _interpret_hhi_new(hhi_value)
 
     # 상위 산업 (최대 5개)
@@ -539,30 +456,6 @@ def analyze_position_industries(
         else:
             insights.append(
                 f"집중도 지수가 {hhi_value:.2f}로 나타나 '{position.name}' 직군 내에서 특정 산업에 채용이 과도하게 집중되어 있습니다"
-            )
-
-        # CR₂ 인사이트
-        cr2_percentage = cr2_value * 100
-        if industry_data_sorted and len(industry_data_sorted) >= 2:
-            top1_name = industry_data_sorted[0][1]
-            top2_name = industry_data_sorted[1][1]
-            insights.append(
-                f"상위 2개 산업({top1_name}, {top2_name})이 전체의 {cr2_percentage:.1f}%를 차지하며 주류를 이루고 있습니다"
-            )
-
-        # Entropy 인사이트 (다양성 지수로 표현)
-        max_entropy = math.log2(len(industry_data)) if len(industry_data) > 0 else 1
-        normalized_entropy = entropy_value / max_entropy if max_entropy > 0 else 0
-
-        if normalized_entropy > 0.7:
-            if len(industry_data_sorted) > 2:
-                other_industries = ", ".join([ind[1] for ind in industry_data_sorted[2:4]])
-                insights.append(
-                    f"다양성 지수가 {normalized_entropy:.2f}로 나타나 {other_industries} 등의 분야로 다양화가 진행 중입니다"
-                )
-        else:
-            insights.append(
-                f"다양성 지수가 {normalized_entropy:.2f}로 나타나 산업 다양성이 낮아 일부 산업에 집중되어 있습니다"
             )
 
         # YoY 인사이트

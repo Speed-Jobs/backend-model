@@ -19,7 +19,6 @@ from app.models.industry_skill import IndustrySkill
 from app.models.skill import Skill
 from datetime import datetime, timedelta
 from collections import defaultdict
-import calendar
 import json
 
 
@@ -50,13 +49,6 @@ STAGE_NAMES = {
     "second_interview": "2차면접",
     "join_date": "입사일"
 }
-DURATIONS = {
-    "application_date": 7,
-    "document_screening_date": 3,
-    "first_interview": 2,
-    "second_interview": 2,
-    "join_date": 0
-}
 
 
 # ==================== 유틸리티 함수 ====================
@@ -86,20 +78,26 @@ def get_dates_from_json(date_json):
 
 
 def to_pattern(date_str):
-    """날짜 → 패턴 (월, 주차, 요일)"""
+    """
+    날짜 → 패턴 (월, N번째 해당 요일, 요일)
+
+    예: 2024.07.01 (월) → {month: 7, nth: 1, weekday: 0} (7월의 1번째 월요일)
+    """
     if not date_str:
         return None
-    
+
     try:
         normalized = normalize_date(date_str)
         date_obj = datetime.strptime(normalized, "%Y-%m-%d")
-        
-        cal = calendar.monthcalendar(date_obj.year, date_obj.month)
-        week = next((i for i, w in enumerate(cal, 1) if date_obj.day in w), 1)
-        
+
+        # 해당 월의 해당 요일이 몇 번째인지 계산
+        # 예: 7월 1일(월) → (1-1)//7 + 1 = 1번째 월요일
+        #     7월 8일(월) → (8-1)//7 + 1 = 2번째 월요일
+        nth = (date_obj.day - 1) // 7 + 1
+
         return {
             "month": date_obj.month,
-            "week": week,
+            "nth": nth,  # N번째 해당 요일
             "weekday": date_obj.weekday()
         }
     except:
@@ -107,117 +105,263 @@ def to_pattern(date_str):
 
 
 def to_date(pattern, year):
-    """패턴 → 날짜"""
+    """
+    패턴 → 날짜 (N번째 해당 요일 방식)
+
+    예: {month: 7, nth: 1, weekday: 0} + year=2026
+        → 2026년 7월의 1번째 월요일 = 2026-07-06
+    """
     if not pattern:
         return None
-    
+
     try:
-        cal = calendar.monthcalendar(year, pattern["month"])
-        week_idx = min(pattern["week"] - 1, len(cal) - 1)
-        day = cal[week_idx][pattern["weekday"]]
-        
-        if day == 0:
-            for week in cal:
-                if week[pattern["weekday"]] != 0:
-                    day = week[pattern["weekday"]]
-                    break
-        
-        if day == 0:
+        month = pattern["month"]
+        nth = pattern["nth"]
+        weekday = pattern["weekday"]
+
+        # 해당 월의 첫 날
+        first_day = datetime(year, month, 1)
+
+        # 첫 번째 해당 요일까지의 일수 계산
+        days_until_weekday = (weekday - first_day.weekday()) % 7
+
+        # 첫 번째 해당 요일
+        first_occurrence = first_day + timedelta(days=days_until_weekday)
+
+        # N번째 해당 요일
+        target_date = first_occurrence + timedelta(weeks=nth - 1)
+
+        # 월을 넘어가면 None (5번째 월요일이 없는 경우 등)
+        if target_date.month != month:
             return None
-        
-        return f"{year}-{pattern['month']:02d}-{day:02d}"
+
+        return target_date.strftime("%Y-%m-%d")
     except:
         return None
 
 
 def avg_pattern(patterns):
-    """패턴 평균 계산"""
+    """패턴 평균 계산 (N번째 해당 요일 방식)"""
     if not patterns:
         return None
-    
+
     return {
         "month": round(sum(p["month"] for p in patterns) / len(patterns)),
-        "week": round(sum(p["week"] for p in patterns) / len(patterns)),
+        "nth": round(sum(p["nth"] for p in patterns) / len(patterns)),  # N번째 해당 요일
         "weekday": round(sum(p["weekday"] for p in patterns) / len(patterns))
     }
 
 
+def avg_semester_patterns(pattern_list):
+    """
+    동일 반기 내 여러 공고의 패턴 평균 계산
+
+    Args:
+        pattern_list: [{"start_pattern": {...}, "end_pattern": {...}}, ...]
+
+    Returns:
+        {"start_pattern": {...}, "end_pattern": {...}}
+    """
+    if not pattern_list:
+        return None
+
+    # start_pattern 평균
+    start_patterns = [p["start_pattern"] for p in pattern_list]
+    avg_start = avg_pattern(start_patterns)
+
+    # end_pattern 평균
+    end_patterns = [p["end_pattern"] for p in pattern_list]
+    avg_end = avg_pattern(end_patterns)
+
+    return {
+        "start_pattern": avg_start,
+        "end_pattern": avg_end
+    }
+
+
+def determine_semester(date_str):
+    """
+    날짜로부터 반기 결정
+
+    Args:
+        date_str: "YYYY-MM-DD" 형식 날짜
+
+    Returns:
+        "YYYY_상반기" or "YYYY_하반기"
+    """
+    if not date_str:
+        return None
+
+    try:
+        date_obj = datetime.strptime(normalize_date(date_str), "%Y-%m-%d")
+        year = date_obj.year
+        semester = "상반기" if date_obj.month <= 6 else "하반기"
+        return f"{year}_{semester}"
+    except:
+        return None
+
+
+def has_all_required_stages(schedule):
+    """
+    필수 단계가 모두 있는지 확인
+
+    필수 단계: application, document_screening, first_interview, second_interview
+    (join_date는 선택)
+
+    Args:
+        schedule: RecruitmentSchedule 객체
+
+    Returns:
+        bool
+    """
+    required_stages = [
+        "application_date",
+        "document_screening_date",
+        "first_interview",
+        "second_interview"
+    ]
+
+    for stage in required_stages:
+        date_json = getattr(schedule, stage, None)
+        if not date_json or len(date_json) == 0:
+            return False
+
+    return True
+
+
+def find_latest_complete_semester(semester_data, target_semester):
+    """
+    target_semester와 동일한 반기 중 가장 최근의 완전한 데이터 찾기
+
+    Args:
+        semester_data: 전체 반기 데이터 {"2024_하반기": {...}, ...}
+        target_semester: "상반기" or "하반기"
+
+    Returns:
+        (semester_key, patterns) or (None, None)
+    """
+    # 해당 반기만 필터링
+    matching_semesters = {
+        key: value
+        for key, value in semester_data.items()
+        if key.endswith(target_semester)
+    }
+
+    if not matching_semesters:
+        return None, None
+
+    # 연도 내림차순 정렬 (2024 → 2023 → 2022)
+    sorted_keys = sorted(matching_semesters.keys(), reverse=True)
+
+    required_stages = [
+        "application_date",
+        "document_screening_date",
+        "first_interview",
+        "second_interview"
+    ]
+
+    # 최신부터 확인하며 완전한 데이터 찾기
+    for key in sorted_keys:
+        patterns = matching_semesters[key]
+
+        # 모든 필수 단계가 있는지 확인
+        if all(stage in patterns and patterns[stage] is not None for stage in required_stages):
+            return key, patterns
+
+    return None, None
+
+
 # ==================== 패턴 추출 ====================
 def extract_company_patterns(company_id, db):
-    """특정 회사의 과거 채용 패턴 추출"""
-    posts = db.query(Post)\
-        .options(joinedload(Post.company))\
-        .filter(Post.company_id == company_id, Post.experience == "신입")\
+    """
+    특정 회사의 과거 채용 패턴 추출 (반기별 그룹화)
+
+    수정 사항:
+    - 반기별 그룹화 (상반기/하반기 구분)
+    - 필수 단계 null 체크 (application, document, first, second 모두 필수)
+    - start_pattern과 end_pattern 각각 패턴화
+
+    Returns:
+        {
+            "company_id": int,
+            "company_name": str,
+            "patterns": {
+                "2024_하반기": {
+                    "application_date": {"start_pattern": {...}, "end_pattern": {...}},
+                    ...
+                },
+                ...
+            }
+        }
+    """
+    # RecruitmentSchedule에서 직접 조회 (application_date 필수)
+    schedules = db.query(RecruitmentSchedule)\
+        .options(joinedload(RecruitmentSchedule.company))\
+        .filter(
+            RecruitmentSchedule.company_id == company_id,
+            RecruitmentSchedule.application_date.isnot(None)
+        )\
         .all()
-    
-    if not posts:
+
+    if not schedules:
         return None
-    
-    company_name = posts[0].company.name if posts[0].company else "Unknown"
-    
-    # Schedule 조회
-    post_ids = [p.id for p in posts]
-    schedules = {
-        s.post_id: s 
-        for s in db.query(RecruitmentSchedule).filter(RecruitmentSchedule.post_id.in_(post_ids)).all()
-    }
-    
-    # 연도별 그룹화
-    yearly = defaultdict(lambda: {"patterns": defaultdict(list)})
-    
-    for post in posts:
-        schedule = schedules.get(post.id)
-        year = None
-        
-        # 연도 추출
-        if schedule and schedule.application_date:
-            start, _ = get_dates_from_json(schedule.application_date)
-            if start:
-                try:
-                    year = datetime.strptime(normalize_date(start), "%Y-%m-%d").year
-                except:
-                    pass
-        
-        if not year and post.posted_at:
-            year = post.posted_at.year
-        
-        if not year:
+
+    # 회사명 조회
+    company_name = schedules[0].company.name if schedules[0].company else "Unknown"
+
+    # 반기별 그룹화
+    semester_data = defaultdict(lambda: {"patterns": defaultdict(list)})
+
+    for schedule in schedules:
+        # 필수 단계 null 체크
+        if not has_all_required_stages(schedule):
             continue
-        
-        # 각 단계별 패턴 추출
+
+        # 반기 결정
+        start, _ = get_dates_from_json(schedule.application_date)
+        semester_key = determine_semester(start)
+
+        if not semester_key:
+            continue
+
+        # 각 단계별 start/end 패턴 추출
         for stage in STAGES:
-            if schedule:
-                date_json = getattr(schedule, stage, None)
-                if date_json:
-                    start, _ = get_dates_from_json(date_json)
-                    if start:
-                        pattern = to_pattern(start)
-                        if pattern:
-                            yearly[year]["patterns"][stage].append(pattern)
-            
-            # Schedule 없으면 Post에서
-            if stage == "application_date" and post.posted_at and not yearly[year]["patterns"][stage]:
-                pattern = to_pattern(post.posted_at.strftime("%Y-%m-%d"))
-                if pattern:
-                    yearly[year]["patterns"][stage].append(pattern)
-    
-    if not yearly:
+            date_json = getattr(schedule, stage, None)
+            if not date_json:
+                continue
+
+            start, end = get_dates_from_json(date_json)
+            if not start or not end:
+                continue
+
+            start_pattern = to_pattern(start)
+            end_pattern = to_pattern(end)
+
+            if not start_pattern or not end_pattern:
+                continue
+
+            semester_data[semester_key]["patterns"][stage].append({
+                "start_pattern": start_pattern,
+                "end_pattern": end_pattern
+            })
+
+    if not semester_data:
         return None
-    
-    # 연도별 평균 패턴 계산
+
+    # 반기별 평균 패턴 계산
     result = {}
-    for year, data in yearly.items():
+    for semester_key, data in semester_data.items():
         avg_patterns = {}
-        for stage, patterns in data["patterns"].items():
-            if patterns:
-                avg_patterns[stage] = avg_pattern(patterns)
-        
+        for stage, pattern_list in data["patterns"].items():
+            if pattern_list:
+                avg_patterns[stage] = avg_semester_patterns(pattern_list)
+
         if avg_patterns:
-            result[year] = avg_patterns
-    
+            result[semester_key] = avg_patterns
+
     if not result:
         return None
-    
+
     return {
         "company_id": company_id,
         "company_name": company_name,
@@ -227,50 +371,73 @@ def extract_company_patterns(company_id, db):
 
 # ==================== 일정 예측 ====================
 def predict_schedule(patterns, target_year, target_semester):
-    """패턴 기반 채용 일정 예측"""
+    """
+    패턴 기반 채용 일정 예측 (반기별)
+
+    Args:
+        patterns: extract_company_patterns의 결과
+        target_year: 예측 대상 연도 (2026)
+        target_semester: "상반기" or "하반기"
+
+    Returns:
+        {
+            "company_id": int,
+            "company_name": str,
+            "stages": {
+                "application_date": {"start_date": "2026-03-03", "end_date": "2026-03-10"},
+                ...
+            }
+        }
+    """
     if not patterns or not patterns.get("patterns"):
         return None
-    
-    # 최신 연도 패턴 사용
-    latest_year = max(patterns["patterns"].keys())
-    latest_patterns = patterns["patterns"][latest_year]
-    
+
+    # 최신 완전한 반기 찾기
+    semester_key, semester_patterns = find_latest_complete_semester(
+        patterns["patterns"],
+        target_semester
+    )
+
+    if not semester_key or not semester_patterns:
+        return None
+
     predicted = {}
-    prev_date = None
-    
+
     for stage in STAGES:
-        if stage not in latest_patterns:
+        if stage not in semester_patterns:
             continue
-        
-        pattern = latest_patterns[stage]
-        date_str = to_date(pattern, target_year)
-        
-        if not date_str:
+
+        pattern_data = semester_patterns[stage]
+        if not pattern_data:
             continue
-        
-        # 날짜 순서 검증
+
+        # start_pattern, end_pattern 각각 예측
+        start_date = to_date(pattern_data["start_pattern"], target_year)
+        end_date = to_date(pattern_data["end_pattern"], target_year)
+
+        if not start_date or not end_date:
+            continue
+
+        # 날짜 순서 검증 및 조정 (단순)
         try:
-            curr_date = datetime.strptime(date_str, "%Y-%m-%d")
-            if prev_date and curr_date < prev_date:
-                continue
-            prev_date = curr_date
+            start_dt = datetime.strptime(start_date, "%Y-%m-%d")
+            end_dt = datetime.strptime(end_date, "%Y-%m-%d")
+
+            # 종료일이 시작일보다 빠르면 다음 주로 조정
+            if end_dt < start_dt:
+                end_dt = end_dt + timedelta(weeks=1)
+                end_date = end_dt.strftime("%Y-%m-%d")
         except:
-            continue
-        
-        # 종료일 계산
-        try:
-            end_date = (curr_date + timedelta(days=DURATIONS.get(stage, 1))).strftime("%Y-%m-%d")
-        except:
-            end_date = date_str
-        
+            pass
+
         predicted[stage] = {
-            "start_date": date_str,
+            "start_date": start_date,
             "end_date": end_date
         }
-    
+
     if not predicted:
         return None
-    
+
     return {
         "company_id": patterns["company_id"],
         "company_name": patterns["company_name"],
@@ -361,7 +528,7 @@ def main():
         for company_id, company_name in companies:
             patterns = extract_company_patterns(company_id, db)
             if patterns:
-                prediction = predict_schedule(patterns, target_year, target_semester)
+                prediction = predict_schedule(patterns, target_year, target_semester, include_sources=True)
                 if prediction:
                     predictions.append(prediction)
                     print(f"  - {company_name}: {len(prediction['stages'])}개 단계 예측")
