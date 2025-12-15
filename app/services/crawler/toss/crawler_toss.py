@@ -172,8 +172,9 @@ def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Pa
         page = context.new_page()
 
         print(f"  [{job_index}] 상세 페이지 로딩...")
-        page.goto(job_url, timeout=30000)
-        page.wait_for_timeout(1500)
+        # 타임아웃 60초로 증가, domcontentloaded로 빠르게 로딩
+        page.goto(job_url, timeout=60000, wait_until='domcontentloaded')
+        page.wait_for_timeout(3000)  # 대기 시간 증가
 
         today = datetime.now().strftime('%Y-%m-%d')
 
@@ -384,11 +385,11 @@ def run_scrape(
         print(f"[6/10] 전체 수집된 URL: {len(all_job_urls)}개")
         print(f"[7/10] 병렬로 {len(all_job_urls)}개 공고 상세 정보 크롤링 시작...")
 
-        # 병렬 크롤링
+        # 병렬 크롤링 (동시 실행 수를 10개로 줄여 안정성 향상)
         if all_job_urls:
             executor = None
             try:
-                executor = concurrent.futures.ThreadPoolExecutor(max_workers=20)
+                executor = concurrent.futures.ThreadPoolExecutor(max_workers=10)
                 futures = []
                 for idx, job_url in enumerate(all_job_urls, 1):
                     future = executor.submit(extract_job_detail_from_url, job_url, idx, screenshot_dir)

@@ -177,8 +177,9 @@ async def crawl_single_job(
             page = await context.new_page()
 
             print(f"  [{index}/{total}] 상세 페이지 로딩 중...")
-            await page.goto(job_url, timeout=30000)
-            await page.wait_for_timeout(2000)
+            # 타임아웃 60초로 증가, domcontentloaded로 빠르게 로딩
+            await page.goto(job_url, timeout=60000, wait_until='domcontentloaded')
+            await page.wait_for_timeout(3000)  # 추가 대기 시간 증가
 
             today = datetime.now().strftime('%Y-%m-%d')
 
@@ -257,12 +258,12 @@ async def crawl_single_job(
 
 
 class HyundaiAutoeverCrawler:
-    def __init__(self, max_concurrent: int = 30):
+    def __init__(self, max_concurrent: int = 10):
         """
         크롤러 초기화
-        
+
         Args:
-            max_concurrent: 동시 크롤링 최대 개수 (기본: 30)
+            max_concurrent: 동시 크롤링 최대 개수 (기본: 10, 안정성을 위해 30에서 감소)
         """
         load_dotenv()
         
@@ -428,7 +429,7 @@ def main():
     
     parser = argparse.ArgumentParser(description="현대오토에버 채용공고 크롤러 (Refactored)")
     parser.add_argument("--max-jobs", type=int, help="최대 크롤링 개수 (테스트용)")
-    parser.add_argument("--max-concurrent", type=int, default=30, help="최대 동시 크롤링 개수 (기본: 30)")
+    parser.add_argument("--max-concurrent", type=int, default=10, help="최대 동시 크롤링 개수 (기본: 10)")
     parser.add_argument("--output-dir", default="../../output", help="출력 폴더 (기본: ../../output)")
     parser.add_argument("--screenshot-dir", default="../../img", help="스크린샷 폴더 (기본: ../../img)")
     args = parser.parse_args()
