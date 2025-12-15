@@ -83,6 +83,21 @@ def is_date_in_range(date_str: str, start_filter: str, end_filter: str) -> bool:
     except:
         return False
 
+# === 예측 스테이지 필터링 유틸 ===
+def _parse_date_safe(date_str: str) -> datetime:
+    return datetime.strptime(date_str, "%Y-%m-%d")
+
+def _is_stage_in_range(stage_dates: dict, start_filter: str, end_filter: str) -> bool:
+    """예측 스테이지가 요청 구간과 겹치는지 확인"""
+    try:
+        s = _parse_date_safe(stage_dates["start_date"])
+        e = _parse_date_safe(stage_dates["end_date"]) if stage_dates.get("end_date") else s
+        start_f = _parse_date_safe(start_filter)
+        end_f = _parse_date_safe(end_filter)
+        return not (e < start_f or s > end_f)
+    except Exception:
+        return False
+
 
 def convert_to_stages(
     schedule: RecruitmentSchedule,
@@ -276,80 +291,91 @@ def avg_pattern(patterns: List[Dict[str, int]]) -> Optional[Dict[str, int]]:
 
 # ==================== 패턴 추출 ====================
 def extract_company_patterns(company_id: int, db: Session, type_filter: str) -> Optional[Dict[str, Any]]:
-    """특정 회사의 과거 채용 패턴 추출"""
-    posts = db.query(Post)\
-        .options(joinedload(Post.company))\
-        .filter(Post.company_id == company_id, Post.experience == type_filter)\
+    """특정 회사의 과거 채용 패턴 추출 (RecruitmentSchedule만 사용)"""
+
+    schedules = db.query(RecruitmentSchedule)\
+        .options(joinedload(RecruitmentSchedule.company))\
+        .filter(
+            RecruitmentSchedule.company_id == company_id,
+            RecruitmentSchedule.application_date.isnot(None)
+        )\
         .all()
-    
-    if not posts:
+
+    if not schedules:
         return None
-    
-    company_name = posts[0].company.name if posts[0].company else "Unknown"
-    
-    # Schedule 조회
-    post_ids = [p.id for p in posts]
-    schedules = {
-        s.post_id: s 
-        for s in db.query(RecruitmentSchedule).filter(RecruitmentSchedule.post_id.in_(post_ids)).all()
-    }
-    
+
+    company_name = schedules[0].company.name if schedules[0].company else "Unknown"
+
     # 연도별 그룹화
     yearly = defaultdict(lambda: {"patterns": defaultdict(list)})
-    
-    for post in posts:
-        schedule = schedules.get(post.id)
+
+    for schedule in schedules:
         year = None
-        
-        # 연도 추출
-        if schedule and schedule.application_date:
+
+        # 연도 추출: application_date 기반
+        if schedule.application_date:
             start, _ = get_dates_from_json_for_prediction(schedule.application_date)
             if start:
                 try:
                     year = datetime.strptime(normalize_date(start), "%Y-%m-%d").year
                 except:
                     pass
-        
-        if not year and post.posted_at:
-            year = post.posted_at.year
-        
+
         if not year:
             continue
-        
-        # 각 단계별 패턴 추출
+
+        # 각 단계별 패턴 추출 (start/end 모두)
         for stage in PREDICTION_STAGES:
-            if schedule:
-                date_json = getattr(schedule, stage, None)
-                if date_json:
-                    start, _ = get_dates_from_json_for_prediction(date_json)
-                    if start:
-                        pattern = to_pattern(start)
-                        if pattern:
-                            yearly[year]["patterns"][stage].append(pattern)
-            
-            # Schedule 없으면 Post에서
-            if stage == "application_date" and post.posted_at and not yearly[year]["patterns"][stage]:
-                pattern = to_pattern(post.posted_at.strftime("%Y-%m-%d"))
-                if pattern:
-                    yearly[year]["patterns"][stage].append(pattern)
-    
+            date_json = getattr(schedule, stage, None)
+            if not date_json:
+                continue
+
+            start, end = get_dates_from_json_for_prediction(date_json)
+            if not start or not end:
+                continue
+
+            start_pattern = to_pattern(start)
+            end_pattern = to_pattern(end)
+
+            if start_pattern and end_pattern:
+                yearly[year]["patterns"][stage].append({
+                    "start_pattern": start_pattern,
+                    "end_pattern": end_pattern
+                })
+
     if not yearly:
         return None
-    
-    # 연도별 평균 패턴 계산
+
+    # start/end 패턴 평균 계산
+    def avg_pattern_obj(pattern_list: List[Dict[str, Dict[str, int]]]) -> Optional[Dict[str, Dict[str, int]]]:
+        if not pattern_list:
+            return None
+        def avg_patterns(lst: List[Dict[str, int]]) -> Dict[str, int]:
+            return {
+                "month": round(sum(p["month"] for p in lst) / len(lst)),
+                "week": round(sum(p["week"] for p in lst) / len(lst)),
+                "weekday": round(sum(p["weekday"] for p in lst) / len(lst))
+            }
+        starts = [p["start_pattern"] for p in pattern_list]
+        ends = [p["end_pattern"] for p in pattern_list]
+        return {
+            "start_pattern": avg_patterns(starts),
+            "end_pattern": avg_patterns(ends)
+        }
+
     result = {}
     for year, data in yearly.items():
         avg_patterns = {}
-        for stage, patterns in data["patterns"].items():
-            if patterns:
-                avg_patterns[stage] = avg_pattern(patterns)
-        
+        for stage, pattern_list in data["patterns"].items():
+            avg_obj = avg_pattern_obj(pattern_list)
+            if avg_obj:
+                avg_patterns[stage] = avg_obj
         if avg_patterns:
             result[year] = avg_patterns
-    
+
     if not result:
         return None
-    
+
     return {
         "company_id": company_id,
         "company_name": company_name,
@@ -363,46 +389,51 @@ def predict_schedule(patterns: Dict[str, Any], target_year: int) -> Optional[Dic
     if not patterns or not patterns.get("patterns"):
         return None
     
-    # 최신 연도 패턴 사용
-    latest_year = max(patterns["patterns"].keys())
+    # 타겟 연도 이전의 최신 연도만 사용
+    candidate_years = [y for y in patterns["patterns"].keys() if y < target_year]
+    if not candidate_years:
+        return None  # 이전 데이터가 없으면 예측하지 않음
+    latest_year = max(candidate_years)
     latest_patterns = patterns["patterns"][latest_year]
     
     predicted = {}
     prev_date = None
-    
+
     for stage in PREDICTION_STAGES:
         if stage not in latest_patterns:
             continue
-        
-        pattern = latest_patterns[stage]
-        date_str = to_date(pattern, target_year)
-        
-        if not date_str:
+
+        pattern_obj = latest_patterns[stage]
+        start_pattern = pattern_obj.get("start_pattern")
+        end_pattern = pattern_obj.get("end_pattern")
+
+        start_date = to_date(start_pattern, target_year) if start_pattern else None
+        end_date = to_date(end_pattern, target_year) if end_pattern else None
+
+        if not start_date or not end_date:
             continue
-        
-        # 날짜 순서 검증
+
+        # 날짜 순서 검증 및 조정
         try:
-            curr_date = datetime.strptime(date_str, "%Y-%m-%d")
-            if prev_date and curr_date < prev_date:
+            start_dt = datetime.strptime(start_date, "%Y-%m-%d")
+            end_dt = datetime.strptime(end_date, "%Y-%m-%d")
+            if end_dt < start_dt:
+                end_dt = end_dt + timedelta(weeks=1)
+                end_date = end_dt.strftime("%Y-%m-%d")
+            if prev_date and start_dt < prev_date:
                 continue
-            prev_date = curr_date
+            prev_date = start_dt
         except:
             continue
-        
-        # 종료일 계산
-        try:
-            end_date = (curr_date + timedelta(days=PREDICTION_DURATIONS.get(stage, 1))).strftime("%Y-%m-%d")
-        except:
-            end_date = date_str
-        
+
         predicted[stage] = {
-            "start_date": date_str,
+            "start_date": start_date,
             "end_date": end_date
         }
-    
+
     if not predicted:
         return None
-    
+
     return {
         "company_id": patterns["company_id"],
         "company_name": patterns["company_name"],
@@ -488,19 +519,34 @@ def get_predicted_schedules(
             if patterns:
                 prediction = predict_schedule(patterns, target_year)
                 if prediction:
-                    # 날짜 필터링 (start_date ~ end_date 범위 내의 예측만 포함)
-                    filtered_stages = {}
-                    for stage, dates in prediction["stages"].items():
-                        pred_start = dates["start_date"]
-                        if is_date_in_range(pred_start, start_date, end_date):
-                            filtered_stages[stage] = dates
-                    
-                    if filtered_stages:
-                        prediction["stages"] = filtered_stages
-                        predictions.append(prediction)
-        
-        # Swagger 형식으로 변환
-        return format_predicted_response(predictions, type_filter)
+                    predictions.append(prediction)
+
+        # 요청 구간으로 예측 스테이지 필터링 + Swagger 변환
+        filtered_predictions = []
+        for pred in predictions:
+            stages = []
+            stage_id_counter = 1
+            for stage_key, dates in pred["stages"].items():
+                if _is_stage_in_range(dates, start_date, end_date):
+                    stages.append({
+                        "id": f"{pred['company_id']}-{stage_id_counter}",
+                        "stage": PREDICTION_STAGE_NAMES[stage_key],
+                        "start_date": dates["start_date"],
+                        "end_date": dates["end_date"]
+                    })
+                    stage_id_counter += 1
+
+            if stages:
+                filtered_predictions.append({
+                    "id": str(pred["company_id"]),
+                    "company_id": pred["company_id"],
+                    "company_name": pred["company_name"],
+                    "type": type_filter,
+                    "data_type": "predicted",
+                    "stages": stages
+                })
+
+        return filtered_predictions
     
     except Exception as e:
         return []

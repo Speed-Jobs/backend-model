@@ -41,9 +41,8 @@ router = APIRouter(
         "- HHI 지수 (시각화용)\\n"
         "- YoY Overheat 지수 (0~100)\\n"
         "- 해석 (집중도 수준, 경쟁 난이도, YoY 트렌드)\\n"
-        "- 인사이트 (HHI, CR₂, Entropy, YoY 기반 생성, include_insights=true일 때만)\\n\\n"
+        "- 인사이트 (HHI, YoY 기반 생성, include_insights=true일 때만)\\n\\n"
         "**참고:**\\n"
-        "- CR₂와 Entropy는 내부적으로 계산되어 인사이트 생성에 활용되며, 응답에는 포함되지 않습니다.\\n"
         "- position_name, industry_name만 사용 가능합니다 (ID는 사용 불가).\\n"
         "- industry_name을 지정하려면 position_name이 필수입니다.\\n"
         "- include_insights=false면 인사이트 배열이 빈 배열로 반환됩니다 (성능 최적화)."
@@ -100,7 +99,7 @@ def get_job_talent_difficulty_index(
     - Total 시장, Position, Industry 인사이트를 모두 제공
 
     **인사이트 생성:**
-    - include_insights=true: 모든 인사이트 생성 (HHI, CR₂, Entropy, YoY)
+    - include_insights=true: 모든 인사이트 생성 (HHI, YoY)
     - include_insights=false: 인사이트 배열이 빈 배열로 반환 (성능 최적화)
     """
     try:
