@@ -30,3 +30,4 @@ qdrant-client
 portalocker
 tavily
 pymysql
+boto3

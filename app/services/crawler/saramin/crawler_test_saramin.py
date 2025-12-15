@@ -34,6 +34,15 @@ try:
 except Exception:
     OpenAI = None  # type: ignore
 
+try:
+    from app.utils.s3_uploader import upload_screenshot_to_s3
+except ModuleNotFoundError:
+    import sys
+    _p = Path(__file__).resolve().parents[4]
+    if str(_p) not in sys.path:
+        sys.path.append(str(_p))
+    from app.utils.s3_uploader import upload_screenshot_to_s3
+
 
 def load_env() -> None:
     """Load environment variables from .env with fallbacks."""
@@ -355,16 +364,28 @@ def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Pa
                                 print(f"  [{job_index}] 이미지 {img_idx} 처리 실패: {e}")
                                 continue
 
-                        # 전체 페이지 스크린샷도 저장
+                        # 전체 페이지 스크린샷 S3 업로드 (OCR 폴백용 로컬 저장도 유지)
                         screenshot_path_full = None
                         try:
                             screenshot_filename = f"saramin_job_{job_id}_full.png"
                             screenshot_path_full = screenshot_dir / screenshot_filename
-                            page.screenshot(path=str(screenshot_path_full), full_page=True)
-                            job_info["screenshots"]["combined"] = screenshot_filename
-                            print(f"  [{job_index}] 전체 스크린샷 저장: {screenshot_filename}")
+
+                            # 스크린샷 촬영
+                            screenshot_bytes = page.screenshot(full_page=True)
+
+                            # 로컬에도 저장 (OCR 폴백용)
+                            screenshot_path_full.write_bytes(screenshot_bytes)
+
+                            # S3에 업로드
+                            s3_url = upload_screenshot_to_s3(screenshot_bytes, screenshot_filename)
+
+                            if s3_url:
+                                job_info["screenshots"]["combined"] = s3_url
+                                print(f"  [{job_index}] S3 업로드 성공: {s3_url}")
+                            else:
+                                print(f"  [{job_index}] S3 업로드 실패")
                         except Exception as e:
-                            print(f"  [{job_index}] 전체 스크린샷 저장 실패: {e}")
+                            print(f"  [{job_index}] 스크린샷 처리 실패: {e}")
 
                     # OCR 결과 결합
                     if ocr_results:
@@ -391,20 +412,25 @@ def extract_job_detail_from_url(job_url: str, job_index: int, screenshot_dir: Pa
 
             job_info["description"] = description_text if description_text else full_text
 
-            # 이미지 기반이 아닌 경우에만 스크린샷 저장
+            # 이미지 기반이 아닌 경우에만 스크린샷 S3 업로드
             if screenshot_dir and not is_image_based:
                 try:
                     job_id_match = re.search(r'rec_idx=(\d+)', job_url)
                     job_id = job_id_match.group(1) if job_id_match else f"job_{job_index}"
 
                     screenshot_filename = f"saramin_job_{job_id}.png"
-                    screenshot_path = screenshot_dir / screenshot_filename
 
-                    page.screenshot(path=str(screenshot_path), full_page=True)
-                    job_info["screenshots"]["combined"] = screenshot_filename
-                    print(f"  [{job_index}] 스크린샷 저장: {screenshot_filename}")
+                    # S3에 직접 업로드
+                    screenshot_bytes = page.screenshot(full_page=True)
+                    s3_url = upload_screenshot_to_s3(screenshot_bytes, screenshot_filename)
+
+                    if s3_url:
+                        job_info["screenshots"]["combined"] = s3_url
+                        print(f"  [{job_index}] S3 업로드 성공: {s3_url}")
+                    else:
+                        print(f"  [{job_index}] S3 업로드 실패")
                 except Exception as e:
-                    print(f"  [{job_index}] 스크린샷 저장 실패: {e}")
+                    print(f"  [{job_index}] 스크린샷 처리 실패: {e}")
 
         except Exception as e:
             print(f"  [{job_index}] wrap_jv_cont 추출 실패, body 전체 사용: {e}")
