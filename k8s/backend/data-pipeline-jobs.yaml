@@ -1,0 +1,198 @@
+# 데이터 파이프라인 Job (수동 실행용 - 파일 등록 시 바로 실행)
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: data-pipeline-job
+  namespace: skala-practice
+spec:
+  # Job 완료 후 자동 정리 (24시간 후)
+  ttlSecondsAfterFinished: 86400
+  backoffLimit: 3
+  template:
+    metadata:
+      labels:
+        app: data-pipeline
+    spec:
+      restartPolicy: OnFailure
+      serviceAccountName: default
+      containers:
+      - name: data-pipeline
+        image: amdp-registry.skala-ai.com/skala25a/speedjobs-backend:1.0.0
+        imagePullPolicy: Always
+        command:
+        - "python"
+        - "-m"
+        - "app.scripts.pipeline.data_pipeline"
+        env:
+        # Database
+        - name: DB_HOST
+          value: "speedjobs-mysql.skala-practice.svc.cluster.local"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-mysql-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-mysql-secret
+              key: password
+        - name: DB_NAME
+          value: "speedjobs"
+
+        # OpenAI
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-backend-secret
+              key: openai-api-key
+
+        # Qdrant VectorDB
+        - name: QDRANT_URL
+          value: "http://speedjobs-vectordb.skala-practice.svc.cluster.local:6333"
+        - name: QDRANT_API_KEY
+          value: ""
+        - name: QDRANT_COLLECTION_NAME
+          value: "speedjobs_vectors"
+
+        # Embedding 설정
+        - name: EMBEDDING_MODEL
+          value: "BAAI/bge-m3"
+        - name: EMBEDDING_DIM
+          value: "1024"
+        - name: CHUNK_SIZE
+          value: "500"
+        - name: CHUNK_OVERLAP
+          value: "50"
+
+        - name: TAVILY_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: speedjobs-backend-secret
+              key: tavily-api-key
+
+        # Debug
+        - name: DEBUG
+          value: "false"
+
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 2000m
+            memory: 4Gi
+        volumeMounts:
+        - name: app-data
+          mountPath: /app/data/output
+      volumes:
+      - name: app-data
+        emptyDir: {}
+
+---
+# 데이터 파이프라인 CronJob (3일마다 자동 실행)
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: data-pipeline-cronjob
+  namespace: skala-practice
+spec:
+  # 3일마다 자정에 실행 (0시 0분, 3일 간격)
+  schedule: "0 0 */3 * *"
+  # 동시 실행 방지 (이전 Job이 완료될 때까지 새 Job 시작 안 함)
+  concurrencyPolicy: Forbid
+  # 실패한 Job 기록 보관 개수
+  failedJobsHistoryLimit: 3
+  # 성공한 Job 기록 보관 개수
+  successfulJobsHistoryLimit: 3
+  # Job 시작 기한 (초과 시 실패 처리)
+  startingDeadlineSeconds: 300
+  jobTemplate:
+    spec:
+      # Job 완료 후 자동 정리 (24시간 후)
+      ttlSecondsAfterFinished: 86400
+      backoffLimit: 3
+      template:
+        metadata:
+          labels:
+            app: data-pipeline-cron
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: default
+          containers:
+          - name: data-pipeline
+            image: amdp-registry.skala-ai.com/skala25a/speedjobs-backend:1.0.0
+            imagePullPolicy: Always
+            command:
+            - "python"
+            - "-m"
+            - "app.scripts.pipeline.data_pipeline"
+            env:
+            # Database
+            - name: DB_HOST
+              value: "speedjobs-mysql.skala-practice.svc.cluster.local"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: speedjobs-mysql-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: speedjobs-mysql-secret
+                  key: password
+            - name: DB_NAME
+              value: "speedjobs"
+
+            # OpenAI
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: speedjobs-backend-secret
+                  key: openai-api-key
+
+            # Qdrant VectorDB
+            - name: QDRANT_URL
+              value: "http://speedjobs-vectordb.skala-practice.svc.cluster.local:6333"
+            - name: QDRANT_API_KEY
+              value: ""
+            - name: QDRANT_COLLECTION_NAME
+              value: "speedjobs_vectors"
+
+            # Embedding 설정
+            - name: EMBEDDING_MODEL
+              value: "BAAI/bge-m3"
+            - name: EMBEDDING_DIM
+              value: "1024"
+            - name: CHUNK_SIZE
+              value: "500"
+            - name: CHUNK_OVERLAP
+              value: "50"
+
+            - name: TAVILY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: speedjobs-backend-secret
+                  key: tavily-api-key
+
+            # Debug
+            - name: DEBUG
+              value: "false"
+
+            resources:
+              requests:
+                cpu: 500m
+                memory: 1Gi
+              limits:
+                cpu: 2000m
+                memory: 4Gi
+            volumeMounts:
+            - name: app-data
+              mountPath: /app/data/output
+          volumes:
+          - name: app-data
+            emptyDir: {}

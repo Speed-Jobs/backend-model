@@ -5,6 +5,8 @@
 1. 크롤러 실행 (call_all_crawler.py) → data/output/*_jobs.json 생성
 2. 스킬셋 추출 (extract_skillsets_async.py) → skill_set_info 추가 (비동기)
 3. 직무 매칭 (job_matching_system.py) → 매칭 결과 생성
+4. 채용공고 DB 삽입 (insert_post_to_db.py) → DB에 데이터 저장
+5. 채용 일정 추출 (schedule_parser.py) → 채용 일정 정보 추출 및 DB 저장
 
 각 단계는 순차적으로 실행되며, 이전 단계의 출력이 다음 단계의 입력이 됩니다.
 에러 발생 시 즉시 중단됩니다.
@@ -31,6 +33,7 @@ from app.services.crawler.call_all_crawler import run_all_crawlers_sequentially
 from app.utils.parser.extract_skillsets import main as extract_skillsets_main_async
 from app.core.job_matching.job_matching_system import JobMatchingSystem
 from app.scripts.db.insert_post_to_db import main as insert_post_main
+from app.utils.parser.schedule_parser import ScheduleParserProcessor
 
 
 # 로깅 설정
@@ -51,19 +54,22 @@ class DataPipeline:
         self,
         skip_crawler: bool = False,
         skip_skillset: bool = False,
-        skip_post_insert: bool = False
+        skip_post_insert: bool = False,
+        skip_schedule_parser: bool = False
     ):
         """
         파이프라인 초기화
-        
+
         Args:
             skip_crawler: True면 크롤링 단계 건너뛰기 (테스트용)
             skip_skillset: True면 스킬셋 추출 단계 건너뛰기 (테스트용)
             skip_post_insert: True면 채용공고 DB 삽입 단계 건너뛰기
+            skip_schedule_parser: True면 채용 일정 추출 단계 건너뛰기
         """
         self.skip_crawler = skip_crawler
         self.skip_skillset = skip_skillset
         self.skip_post_insert = skip_post_insert
+        self.skip_schedule_parser = skip_schedule_parser
         self.backend_root = Path(__file__).resolve().parents[3]
         self.data_output_dir = self.backend_root / 'data' / 'output'
         self.data_dir = self.backend_root / 'data'
@@ -78,6 +84,7 @@ class DataPipeline:
             'skillset_extraction': None,
             'job_matching': None,
             'post_insert': None,
+            'schedule_parser': None,
         }
     
     def _check_prerequisites(self) -> bool:
@@ -242,7 +249,18 @@ class DataPipeline:
             else:
                 logger.info("\n[Step 4] 채용공고 DB 삽입 - SKIPPED")
                 self.pipeline_results['post_insert'] = {'status': 'skipped'}
-            
+
+            # Step 5: 채용 일정 추출 (옵션)
+            if not self.skip_schedule_parser:
+                success = self._run_schedule_parser()
+                if not success:
+                    logger.error("\n❌ 채용 일정 추출 실패. 파이프라인을 중단합니다.")
+                    self.pipeline_results['status'] = 'failed'
+                    return self.pipeline_results
+            else:
+                logger.info("\n[Step 5] 채용 일정 추출 - SKIPPED")
+                self.pipeline_results['schedule_parser'] = {'status': 'skipped'}
+
             # 총 실행 시간
             duration = time.time() - start_time
             self.pipeline_results['total_duration_minutes'] = round(duration / 60, 2)
@@ -584,7 +602,78 @@ class DataPipeline:
             }
             
             return False
-    
+
+    def _run_schedule_parser(self) -> bool:
+        """
+        Step 5: 채용 일정 추출
+
+        Returns:
+            True: 성공
+            False: 실패
+        """
+        logger.info("\n" + "="*80)
+        logger.info("[Step 5/5] 채용 일정 추출 (LLM 기반)")
+        logger.info("="*80)
+
+        step_start = time.time()
+
+        try:
+            # OPENAI_API_KEY 확인
+            api_key = os.getenv("OPENAI_API_KEY")
+            if not api_key:
+                logger.error("❌ OPENAI_API_KEY 환경변수가 설정되지 않았습니다.")
+                self.pipeline_results['schedule_parser'] = {
+                    'status': 'failed',
+                    'error': 'OPENAI_API_KEY 미설정'
+                }
+                return False
+
+            # ScheduleParserProcessor 초기화
+            processor = ScheduleParserProcessor(api_key=api_key, model="gpt-4o-mini")
+
+            logger.info("주요 경쟁사 채용 일정 추출 시작")
+            logger.info("대상 경쟁사: LINE, NAVER, 토스, 우아한형제들, 현대오토에버, Coupang, 카카오, 한화시스템, 한화손해보험")
+
+            # 주요 경쟁사 그룹의 채용 공고 처리
+            processor.process_posts(
+                batch_size=10,
+                limit=None,  # 전체 처리
+                competitor_only=True  # 주요 경쟁사만 필터링
+            )
+
+            duration = time.time() - step_start
+
+            self.pipeline_results['schedule_parser'] = {
+                'status': 'success',
+                'duration_minutes': round(duration / 60, 2),
+            }
+
+            logger.info(f"\n✅ 채용 일정 추출 완료 ({duration/60:.1f}분)")
+
+            return True
+
+        except Exception as e:
+            duration = time.time() - step_start
+            logger.error(f"\n{'='*80}")
+            logger.error(f"❌ 채용 일정 추출 중 오류 발생")
+            logger.error(f"{'='*80}")
+            logger.error(f"오류 타입: {type(e).__name__}")
+            logger.error(f"오류 메시지: {e}")
+            logger.error(f"소요 시간: {duration/60:.1f}분")
+            logger.error(f"{'='*80}\n")
+
+            import traceback
+            traceback.print_exc()
+
+            self.pipeline_results['schedule_parser'] = {
+                'status': 'failed',
+                'error': str(e),
+                'error_type': type(e).__name__,
+                'duration_minutes': round(duration / 60, 2),
+            }
+
+            return False
+
     def _merge_matching_results_to_original(self, job_file: Path, results: List[Dict]) -> None:
         """
         매칭 결과를 원본 파일에 병합
@@ -729,30 +818,33 @@ class DataPipeline:
 def main():
     """
     메인 실행 함수
-    
+
     명령줄 인자:
         --skip-crawler: 크롤링 단계 건너뛰기
         --skip-skillset: 스킬셋 추출 단계 건너뛰기
         --skip-post-insert: 채용공고 DB 삽입 단계 건너뛰기
-    
+        --skip-schedule-parser: 채용 일정 추출 단계 건너뛰기
+
     Note:
         직무 정의 DB 삽입(insert_job_description_to_db)은 별도로 실행하세요:
         python -m app.scripts.db.insert_job_description_to_db
     """
     import argparse
-    
+
     parser = argparse.ArgumentParser(description='통합 데이터 파이프라인 실행')
     parser.add_argument('--skip-crawler', action='store_true', help='크롤링 단계 건너뛰기')
     parser.add_argument('--skip-skillset', action='store_true', help='스킬셋 추출 단계 건너뛰기')
     parser.add_argument('--skip-post-insert', action='store_true', help='채용공고 DB 삽입 단계 건너뛰기')
-    
+    parser.add_argument('--skip-schedule-parser', action='store_true', help='채용 일정 추출 단계 건너뛰기')
+
     args = parser.parse_args()
-    
+
     # 파이프라인 실행
     pipeline = DataPipeline(
         skip_crawler=args.skip_crawler,
         skip_skillset=args.skip_skillset,
         skip_post_insert=args.skip_post_insert,
+        skip_schedule_parser=args.skip_schedule_parser,
     )
     
     results = pipeline.run()
