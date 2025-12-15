@@ -31,7 +31,7 @@ COPY . .
 EXPOSE 8000
 
 # 두 프로세스를 안전하게 실행
-CMD ["/bin/bash", "-c", "uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1 & python -m app.core.schedular.schedular_skill_model & wait -n; kill $(jobs -p) 2>/dev/null || true"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
 
 
 #   python -m app.core.schedular.scheduler & 
