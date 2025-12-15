@@ -29,7 +29,7 @@ from app.models.post_skill import PostSkill
 from app.models.position import Position
 from app.models.position_skill import PositionSkill
 from app.models.industry_skill import IndustrySkill
-from app.models.recruit_schedule import RecruitSchedule
+from app.models.recruitment_schedule import RecruitmentSchedule
 from app.schemas.schemas_recruit_schedule import RecruitScheduleData
 
 
@@ -310,7 +310,7 @@ class ScheduleParserExtractor:
 class ScheduleParserProcessor:
     """채용 일정 추출 및 저장을 처리하는 클래스"""
 
-    def __init__(self, api_key: str, model: str = "gpt-4o"):
+    def __init__(self, api_key: str, model: str = "gpt-4o-mini"):
         self.extractor = ScheduleParserExtractor(api_key=api_key, model=model)
         self.SessionLocal = SessionLocal
 
@@ -363,10 +363,10 @@ class ScheduleParserProcessor:
             # "아직 일정이 추출되지 않은 포스트"로 한정
             elif not company_keyword:
                 query = query.outerjoin(
-                    RecruitSchedule,
-                    Post.id == RecruitSchedule.post_id
+                    RecruitmentSchedule,
+                    Post.id == RecruitmentSchedule.post_id
                 ).filter(
-                    RecruitSchedule.schedule_id.is_(None)
+                    RecruitmentSchedule.schedule_id.is_(None)
                 )
 
             if company_keyword and not competitor_only:
@@ -442,8 +442,8 @@ class ScheduleParserProcessor:
         """추출된 일정 정보를 DB에 저장"""
 
         # 기존 일정 레코드 조회
-        existing = session.query(RecruitSchedule).filter(
-            RecruitSchedule.post_id == post.id
+        existing = session.query(RecruitmentSchedule).filter(
+            RecruitmentSchedule.post_id == post.id
         ).first()
 
         if existing:
@@ -465,7 +465,7 @@ class ScheduleParserProcessor:
             return
 
         # 없으면 새로 생성
-        recruit_schedule = RecruitSchedule(
+        recruit_schedule = RecruitmentSchedule(
             post_id=post.id,
             company_id=post.company_id,
             industry_id=post.industry_id,
@@ -492,8 +492,8 @@ class ScheduleParserProcessor:
         session = self.SessionLocal()
 
         try:
-            schedule = session.query(RecruitSchedule).filter(
-                RecruitSchedule.post_id == post_id
+            schedule = session.query(RecruitmentSchedule).filter(
+                RecruitmentSchedule.post_id == post_id
             ).first()
 
             if not schedule:
@@ -519,7 +519,7 @@ class ScheduleParserProcessor:
         session = self.SessionLocal()
 
         try:
-            schedules = session.query(RecruitSchedule).limit(limit).all()
+            schedules = session.query(RecruitmentSchedule).limit(limit).all()
 
             return [
                 {
