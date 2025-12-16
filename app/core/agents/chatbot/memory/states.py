@@ -3,7 +3,7 @@
 Defines the state structures used across the agent workflows.
 """
 
-from typing import TypedDict, Optional, List, Literal, Any
+from typing import TypedDict, Optional, List, Literal
 
 
 class AgenticRAGState(TypedDict):
@@ -20,4 +20,3 @@ class AgenticRAGState(TypedDict):
     answer: Optional[str]
     sources: Optional[List[dict]]
     error: Optional[str]
-    db: Optional[Any]  # Database session for entity resolution

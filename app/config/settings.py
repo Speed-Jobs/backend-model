@@ -34,7 +34,6 @@ class Settings:
     QDRANT_COLLECTION_NAME: str = os.getenv("QDRANT_COLLECTION_NAME", "speedjobs_vectors")
     
     # Embedding
-    EMBEDDING_API_URL: str = os.getenv("EMBEDDING_API_URL", "http://speedjobs-model-service.skala-practice.svc.cluster.local:8001")
     EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "BAAI/bge-m3")
     EMBEDDING_DIM: int = int(os.getenv("EMBEDDING_DIM", "1024"))
     CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", "500"))

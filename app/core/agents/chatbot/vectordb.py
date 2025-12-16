@@ -37,13 +37,14 @@ class QdrantClientWrapper:
             return parsed.hostname or ""
 
         primary_url = settings.QDRANT_URL
-        localhost_url = "http://localhost:6333"
-        
-        # 클러스터 URL인 경우 localhost를 fallback으로 시도 (kubectl port-forward 사용 시)
+        fallback_url = "http://speedjobs-vectordb.skala-practice.svc.cluster.local:6333"
+        tried_fallback = False
+
         try_urls = [primary_url]
-        if "cluster.local" in primary_url or normalize_host(primary_url) == "qdrant":
-            try_urls.append(localhost_url)
-            print(f"클러스터 URL 감지. kubectl port-forward 사용 시를 위해 localhost도 시도합니다.")
+        # 개발 환경에서 qdrant 호스트가 해석되지 않으면 로컬호스트로 자동 대체
+        if normalize_host(primary_url) == "qdrant":
+            try_urls.append(fallback_url)
+            tried_fallback = True
 
         last_error = None
         for url in try_urls:
@@ -80,9 +81,10 @@ class QdrantClientWrapper:
 
         error_msg = (
             f"Qdrant 연결 실패. 시도한 URL: {try_urls}. "
-            "Qdrant 서버가 실행 중인지 확인하세요.\n"
-            "로컬 개발 시: kubectl port-forward -n skala-practice svc/speedjobs-vectordb 6333:6333"
+            "QDRANT_URL을 확인하고 Qdrant 서버가 실행 중인지 확인하세요."
         )
+        if tried_fallback:
+            error_msg += " (로컬 개발 시 QDRANT_URL을 http://localhost:6333 으로 설정하세요)"
         raise RuntimeError(f"{error_msg} | last_error={last_error}")
     
     def _create_collection(self):
@@ -220,16 +222,8 @@ class QdrantClientWrapper:
                         match=MatchValue(value=filters['post_id'])
                     )
                 )
-            if 'company_id' in filters:
-                conditions.append(
-                    FieldCondition(
-                        key="company_id",
-                        match=MatchValue(value=filters['company_id'])
-                    )
-                )
             if conditions:
                 qdrant_filter = Filter(must=conditions)
-                print(f"[Qdrant] Applying filters: {filters}")
         
         # 검색 - qdrant-client API 사용
         try:

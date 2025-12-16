@@ -49,8 +49,7 @@ class AgenticRAGService:
             "sql_analysis": None,
             "answer": None,
             "sources": None,
-            "error": None,
-            "db": db  # DB session for entity resolution (company_name -> company_id)
+            "error": None
         }
 
         # Orchestrator 실행 (LLM이 자동으로 엔티티 추출, 라우팅, top_k 결정)
