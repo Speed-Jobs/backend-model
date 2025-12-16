@@ -87,10 +87,6 @@ class RouterAgent(BaseAgent):
             state["needs_stats"] = needs_stats
             state["top_k"] = top_k
 
-            # Initialize filters
-            filters = state.get("filters") or {}
-            state["filters"] = filters
-
             self.log(f"Decision: {route} (stats: {needs_stats}, top_k: {top_k})")
             self.log(f"Entities: {entities}")
             self.log(f"Reason: {result.get('reason', 'N/A')}")
