@@ -37,6 +37,15 @@ try:
 except Exception:
     AsyncOpenAI = None
 
+try:
+    from app.utils.s3_uploader import upload_screenshot_to_s3
+except ModuleNotFoundError:
+    import sys
+    _p = Path(__file__).resolve().parents[4]
+    if str(_p) not in sys.path:
+        sys.path.append(str(_p))
+    from app.utils.s3_uploader import upload_screenshot_to_s3
+
 
 def load_env() -> None:
     """Load environment variables from .env with fallbacks."""
@@ -214,18 +223,23 @@ async def crawl_single_job(
                 print(f"  [{index}/{total}] description 추출 실패, body 전체 사용: {e}")
                 job_info["description"] = await page.inner_text("body")
 
-            # 전체 페이지 스크린샷 저장
+            # 스크린샷 S3 업로드
             if screenshot_dir:
                 try:
                     job_id = job.get('id', f"job_{index}")
                     screenshot_filename = f"hyundai_autoever_job_{job_id}.png"
-                    screenshot_path = screenshot_dir / screenshot_filename
 
-                    await page.screenshot(path=str(screenshot_path), full_page=True)
-                    job_info["screenshots"]["combined"] = screenshot_filename
-                    print(f"  [{index}/{total}] 스크린샷 저장: {screenshot_filename}")
+                    # S3에 직접 업로드
+                    screenshot_bytes = await page.screenshot(full_page=True)
+                    s3_url = upload_screenshot_to_s3(screenshot_bytes, screenshot_filename)
+
+                    if s3_url:
+                        job_info["screenshots"]["combined"] = s3_url
+                        print(f"  [{index}/{total}] S3 업로드 성공: {s3_url}")
+                    else:
+                        print(f"  [{index}/{total}] S3 업로드 실패")
                 except Exception as e:
-                    print(f"  [{index}/{total}] 스크린샷 저장 실패: {e}")
+                    print(f"  [{index}/{total}] 스크린샷 처리 실패: {e}")
 
             # LLM으로 나머지 필드 파싱 (description 제외)
             try:

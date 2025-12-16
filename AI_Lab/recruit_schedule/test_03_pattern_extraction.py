@@ -229,30 +229,22 @@ def has_all_required_stages(schedule):
     return True
 
 
-def find_latest_complete_semester(semester_data, target_semester):
+def aggregate_all_matching_semesters(semester_data, target_semester):
     """
-    target_semester와 동일한 반기 중 가장 최근의 완전한 데이터 찾기
+    target_semester와 동일한 반기의 모든 완전한 데이터를 평균화
+
+    수정 사항:
+    - 모든 과거 동일 반기 데이터를 사용 (최신 하나가 아님)
+    - 각 stage별로 모든 년도의 start_pattern과 end_pattern을 모아서 평균화
 
     Args:
-        semester_data: 전체 반기 데이터 {"2024_하반기": {...}, ...}
+        semester_data: 전체 반기 데이터 {"2024_하반기": {...}, "2023_하반기": {...}, ...}
         target_semester: "상반기" or "하반기"
 
     Returns:
-        (semester_key, patterns) or (None, None)
+        평균화된 패턴 dict or None
     """
-    # 해당 반기만 필터링
-    matching_semesters = {
-        key: value
-        for key, value in semester_data.items()
-        if key.endswith(target_semester)
-    }
-
-    if not matching_semesters:
-        return None, None
-
-    # 연도 내림차순 정렬 (2024 → 2023 → 2022)
-    sorted_keys = sorted(matching_semesters.keys(), reverse=True)
-
+    # 해당 반기만 필터링 (필수 단계 검증)
     required_stages = [
         "application_date",
         "document_screening_date",
@@ -260,15 +252,34 @@ def find_latest_complete_semester(semester_data, target_semester):
         "second_interview"
     ]
 
-    # 최신부터 확인하며 완전한 데이터 찾기
-    for key in sorted_keys:
-        patterns = matching_semesters[key]
+    matching_patterns = []
+    for key, patterns in semester_data.items():
+        if key.endswith(target_semester):
+            # 모든 필수 단계가 있는지 확인
+            if all(stage in patterns and patterns[stage] is not None for stage in required_stages):
+                matching_patterns.append(patterns)
 
-        # 모든 필수 단계가 있는지 확인
-        if all(stage in patterns and patterns[stage] is not None for stage in required_stages):
-            return key, patterns
+    if not matching_patterns:
+        return None
 
-    return None, None
+    # 모든 년도의 패턴을 stage별로 평균화
+    result = {}
+    for stage in STAGES:
+        all_start_patterns = []
+        all_end_patterns = []
+
+        for pattern_dict in matching_patterns:
+            if stage in pattern_dict and pattern_dict[stage]:
+                all_start_patterns.append(pattern_dict[stage]["start_pattern"])
+                all_end_patterns.append(pattern_dict[stage]["end_pattern"])
+
+        if all_start_patterns and all_end_patterns:
+            result[stage] = {
+                "start_pattern": avg_pattern(all_start_patterns),
+                "end_pattern": avg_pattern(all_end_patterns)
+            }
+
+    return result if result else None
 
 
 # ==================== 패턴 추출 ====================
