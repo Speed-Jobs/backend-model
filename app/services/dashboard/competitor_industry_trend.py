@@ -198,43 +198,6 @@ def _aggregate_period_result(
     return job_roles_clean, total
 
 
-def _aggregate_optimized_result(
-    rows: List[Tuple[str, str, int]],
-) -> Tuple[Dict[str, Dict[str, int]], int]:
-    """
-    최적화된 쿼리 결과 집계 (카테고리 필터링은 SQL에서 완료됨)
-    
-    Args:
-        rows: List of (position_name, industry_name, count)
-    
-    Returns:
-        (job_role_map, total_count)
-        job_role_map: {job_role_name: {"total": int, "industries": {industry_name: int}}}
-    """
-    job_roles: Dict[str, Dict[str, object]] = {}
-    total = 0
-
-    for position_name, industry_name, count in rows:
-        job = job_roles.setdefault(
-            position_name,
-            {"total": 0, "industries": {}},
-        )
-        job["total"] = int(job["total"]) + int(count)
-        industries: Dict[str, int] = job["industries"]  # type: ignore
-        industries[industry_name] = industries.get(industry_name, 0) + int(count)
-        total += int(count)
-
-    # 타입 정리
-    job_roles_clean: Dict[str, Dict[str, int]] = {}
-    for name, data in job_roles.items():
-        job_roles_clean[name] = {
-            "total": int(data["total"]),  # type: ignore
-        }
-        job_roles_clean[name + "::__industries__"] = data["industries"]  # type: ignore
-
-    return job_roles_clean, total
-
-
 def get_job_role_statistics(
     db: Session,
     timeframe: str,
@@ -244,9 +207,7 @@ def get_job_role_statistics(
     company: Optional[str],
 ) -> JobRoleStatisticsData:
     """
-    직군별 통계 조회 서비스 (최적화됨)
-    - 단일 쿼리로 현재/이전 기간 동시 조회
-    - SQL에서 카테고리 필터링 수행
+    직군별 통계 조회 서비스
     """
     if category not in {"Tech", "Biz", "BizSupporting"}:
         raise ValueError("category 는 Tech, Biz, BizSupporting 중 하나여야 합니다.")
@@ -258,19 +219,22 @@ def get_job_role_statistics(
     if company:
         company_patterns = get_company_patterns(company)
 
-    # 최적화된 단일 쿼리로 현재/이전 기간 동시 조회
-    current_rows, previous_rows = db_competitor_industry_trend.get_job_role_counts_optimized(
+    # DB 조회 (현재/이전 기간)
+    current_rows = db_competitor_industry_trend.get_job_role_counts(
         db=db,
-        current_start=periods.current_start,
-        current_end=periods.current_end,
-        previous_start=periods.previous_start,
-        previous_end=periods.previous_end,
-        category=category,
+        start_date=periods.current_start,
+        end_date=periods.current_end,
+        company_patterns=company_patterns,
+    )
+    previous_rows = db_competitor_industry_trend.get_job_role_counts(
+        db=db,
+        start_date=periods.previous_start,
+        end_date=periods.previous_end,
         company_patterns=company_patterns,
     )
 
-    current_map_raw, current_total = _aggregate_optimized_result(current_rows)
-    previous_map_raw, previous_total = _aggregate_optimized_result(previous_rows)
+    current_map_raw, current_total = _aggregate_period_result(current_rows, category)
+    previous_map_raw, previous_total = _aggregate_period_result(previous_rows, category)
 
     # job_role 별 union
     job_role_names = set()
