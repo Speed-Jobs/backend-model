@@ -119,6 +119,13 @@ class GeneratorAgent(BaseAgent):
                     context_parts.append(f"경력: {meta['experience']}")
                 if meta.get('work_type'):
                     context_parts.append(f"근무형태: {meta['work_type']}")
+                # 날짜 정보 추가
+                if meta.get('posted_at'):
+                    context_parts.append(f"게시일: {meta['posted_at']}")
+                if meta.get('crawled_at'):
+                    context_parts.append(f"크롤링일: {meta['crawled_at']}")
+                if meta.get('created_at'):
+                    context_parts.append(f"생성일: {meta['created_at']}")
                 context_parts.append(f"내용: {doc['text'][:300]}...")
                 context_parts.append(f"유사도: {doc['score']:.3f}")
 

@@ -87,12 +87,26 @@ class RouterAgent(BaseAgent):
             state["needs_stats"] = needs_stats
             state["top_k"] = top_k
 
-            # Initialize filters
+            # Initialize filters and resolve entities
             filters = state.get("filters") or {}
+            
+            # Convert company_name to company_id if available
+            if entities.get("company_name") and state.get("db"):
+                company_id = self._resolve_company_id(
+                    entities["company_name"], 
+                    state["db"]
+                )
+                if company_id:
+                    filters["company_id"] = company_id
+                    self.log(f"Resolved company '{entities['company_name']}' to company_id: {company_id}")
+                else:
+                    self.log(f"Warning: Company '{entities['company_name']}' not found in database", "WARNING")
+            
             state["filters"] = filters
 
             self.log(f"Decision: {route} (stats: {needs_stats}, top_k: {top_k})")
             self.log(f"Entities: {entities}")
+            self.log(f"Filters: {filters}")
             self.log(f"Reason: {result.get('reason', 'N/A')}")
 
             # 라우팅 결정 로그 저장
@@ -136,3 +150,47 @@ class RouterAgent(BaseAgent):
 
         q_lower = question.lower()
         return any(kw in question or kw.lower() in q_lower for kw in stats_keywords)
+    
+    def _resolve_company_id(self, company_name: str, db) -> int:
+        """
+        Resolve company name to company_id using database
+        
+        Args:
+            company_name: Company name extracted from query
+            db: Database session
+            
+        Returns:
+            company_id if found, None otherwise
+        """
+        if not company_name or not db:
+            return None
+        
+        try:
+            from app.models.company import Company
+            
+            # Normalize company name for better matching
+            normalized_name = company_name.lower().strip()
+            
+            # Try exact match first (case-insensitive)
+            company = db.query(Company).filter(
+                Company.name.ilike(normalized_name),
+                Company.is_deleted == False
+            ).first()
+            
+            if company:
+                return company.id
+            
+            # Try partial match (contains)
+            company = db.query(Company).filter(
+                Company.name.ilike(f"%{normalized_name}%"),
+                Company.is_deleted == False
+            ).first()
+            
+            if company:
+                return company.id
+            
+            return None
+            
+        except Exception as e:
+            self.log(f"Error resolving company_id: {e}", "ERROR")
+            return None
