@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, JSON, Boolean, Index
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, JSON, Boolean
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db.config.base import Base
@@ -6,11 +6,6 @@ from app.db.config.base import Base
 
 class Post(Base):
     __tablename__ = "post"
-    __table_args__ = (
-        # 복합 인덱스: 통계 조회 쿼리 최적화
-        Index('idx_post_dates_company_industry', 'posted_at', 'crawled_at', 'company_id', 'industry_id'),
-        Index('idx_post_industry_dates', 'industry_id', 'posted_at', 'crawled_at'),
-    )
 
     id = Column(Integer, primary_key=True, index=True, comment="아이디")
     title = Column(String(500), nullable=False, index=True, comment="제목")
