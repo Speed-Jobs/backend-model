@@ -17,7 +17,7 @@ class Position(Base):
     name = Column(String(255), nullable=False, index=True, comment="이름")
     description = Column(Text, nullable=True, comment="설명")
     # skillset 컬럼 제거 (ERD에 없음, DB에도 없음)
-    category = Column(Enum(PositionCategory), nullable=True, comment="직무 카테고리")
+    category = Column(Enum(PositionCategory), nullable=True, index=True, comment="직무 카테고리")
 
     # ERD 기반 필드
     is_deleted = Column(Boolean, nullable=False, default=False, comment="삭제 여부")
